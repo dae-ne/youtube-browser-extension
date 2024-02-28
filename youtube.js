@@ -25,7 +25,13 @@
 
         button = document.createElement('button');
         button.id = 'yt-shorts-to-video-btn';
-        button.textContent = 'Video';
+        button.textContent = 'vid';
+        button.classList.add(
+          'yt-spec-button-shape-next',
+          'yt-spec-button-shape-next--tonal',
+          'yt-spec-button-shape-next--mono',
+          'yt-spec-button-shape-next--size-l',
+          'yt-spec-button-shape-next--icon-button');
         actions.insertBefore(button, actions.firstChild);
 
         button.addEventListener('click', () => {
