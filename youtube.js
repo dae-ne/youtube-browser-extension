@@ -16,7 +16,7 @@
 
         clearInterval(interval);
 
-        const video = renderer.querySelector('video');
+        const video = document.querySelector('video');
         let button = actions.querySelector('#yt-shorts-to-video-btn');
 
         if (button) {
