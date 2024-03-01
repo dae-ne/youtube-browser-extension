@@ -25,10 +25,8 @@
       image.style.width = '24px';
       image.style.filter = 'invert(1)';
 
-
       button = document.createElement('button');
       button.id = 'yt-shorts-to-video-btn';
-      button.title
       button.classList.add(
         'yt-spec-button-shape-next',
         'yt-spec-button-shape-next--tonal',
