@@ -13,5 +13,11 @@
       "js": ["youtube.js"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "resources": ["video-play.svg"]
+    }
+  ],
   "manifest_version": 3
 }

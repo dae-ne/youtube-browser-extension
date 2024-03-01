@@ -20,16 +20,24 @@
         return;
       }
 
+      const image = document.createElement('img');
+      image.src = chrome.runtime.getURL('video-play.svg');
+      image.style.width = '24px';
+      image.style.filter = 'invert(1)';
+
+
       button = document.createElement('button');
       button.id = 'yt-shorts-to-video-btn';
-      button.textContent = 'vid';
+      button.title
       button.classList.add(
         'yt-spec-button-shape-next',
         'yt-spec-button-shape-next--tonal',
         'yt-spec-button-shape-next--mono',
         'yt-spec-button-shape-next--size-l',
         'yt-spec-button-shape-next--icon-button');
-      actions.insertBefore(button, actions.firstChild);
+      button.style.marginTop = '16px';
+      button.appendChild(image);
+      actions.insertBefore(button, actions.querySelector('#menu-button'));
 
       button.addEventListener('click', () => {
         const currentUrl = window.location.href;
