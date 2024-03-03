@@ -1,7 +1,7 @@
 {
-  "name": "YT Shorts to Video",
+  "name": "YT extension",
   "version": "1.0.0",
-  "description": "Converts YouTube Shorts to Videos",
+  "description": "Chrome extension for YouTube",
   "permissions": ["tabs", "storage"],
   "host_permissions": ["https://*.youtube.com/*"],
   "background": {
