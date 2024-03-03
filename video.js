@@ -1,41 +1,46 @@
 (() => {
+  let observer = null;
+
   function autoSkipAds() {
     const video = document.querySelector('video');
+    const adsInfoContainer = document.querySelector('.video-ads');
+
+    const isAdPlaying = adsInfoContainer.childNodes.length > 0;
 
     const skipAd = () => {
-      console.log('Skip ad function called');
-
-      const adsInfoContainer = document.querySelector('.video-ads');
-      const isAdPlaying = adsInfoContainer.childNodes.length > 0;
-
-      if (!isAdPlaying) {
-        console.log('No ad playing');
-        return;
-      }
-
       const skipButton = document.querySelector('.ytp-ad-skip-button-modern');
 
       if (skipButton) {
-        console.log('Skip button found - skipping');
         skipButton.click();
         return;
       }
 
-      console.log('No skip button found - skipping to end of ad');
       video.currentTime = video.duration;
-    }
+    };
 
-    video.addEventListener('durationchange', () => {
-      skipAd();
+    observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0) {
+          skipAd();
+        }
+      });
     });
 
-    skipAd();
+    if (isAdPlaying) {
+      skipAd();
+    }
+
+    observer.observe(adsInfoContainer, { childList: true });
   };
 
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.action) {
-      case 'skipAds':
+      case 'skip-ads':
+        observer?.disconnect();
         autoSkipAds();
+        break;
+      case 'disconnect-ads-observer':
+        observer?.disconnect();
         break;
       default:
         break;

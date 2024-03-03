@@ -1,6 +1,6 @@
 (() => {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action !== 'showButton') {
+    if (request.action !== 'show-shorts-to-video-button') {
       return;
     }
 
