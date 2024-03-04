@@ -1,19 +1,22 @@
 (() => {
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action !== 'show-shorts-to-video-button') {
-      return;
-    }
+  function displayShortsToVideoButton() {
+    let renderer = null;
+    let actions = null;
 
-    const interval = setInterval(() => {
-      const renderer = document.querySelector('ytd-shorts [is-active]');
-      const actions = renderer && renderer.querySelector('#actions');
+    const handleButtonClick = () => {
+        const currentUrl = window.location.href;
 
-      if (!actions) {
-        return;
-      }
+        if (!currentUrl.includes('youtube.com/shorts')) {
+          return;
+        }
 
-      clearInterval(interval);
+        const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
 
+        renderer.querySelector('video').pause();
+        window.open(videoUrl, '_blank');
+    };
+
+    const displayButton = () => {
       let button = actions.querySelector('#yt-shorts-to-video-btn');
 
       if (button) {
@@ -38,17 +41,30 @@
       actions.insertBefore(button, actions.querySelector('#menu-button'));
 
       button.addEventListener('click', () => {
-        const currentUrl = window.location.href;
-
-        if (!currentUrl.includes('youtube.com/shorts')) {
-          return;
-        }
-
-        const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
-
-        renderer.querySelector('video').pause();
-        window.open(videoUrl, '_blank');
+        handleButtonClick();
       });
+    };
+
+    const interval = setInterval(() => {
+      renderer = document.querySelector('ytd-shorts [is-active]');
+      actions = renderer && renderer.querySelector('#actions');
+
+      if (!actions) {
+        return;
+      }
+
+      clearInterval(interval);
+      displayButton(actions);
     }, 100);
+  }
+
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    switch (request.action) {
+      case 'show-shorts-to-video-button':
+        displayShortsToVideoButton();
+        break;
+      default:
+        break;
+    }
   });
 })();
