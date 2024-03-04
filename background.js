@@ -12,6 +12,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     chrome.tabs.sendMessage(tabId, { action: 'skip-ads' });
     return;
   } else {
-    // chrome.tabs.sendMessage(tabId, { action: 'disconnect-ads-observer' });
+    chrome.tabs.sendMessage(tabId, { action: 'disconnect-ads-observer' });
   }
 });
