@@ -18,6 +18,10 @@
       video.currentTime = video.duration;
     };
 
+    if (isAdPlaying) {
+      skipAd();
+    }
+
     observer = observer ?? new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.target.childNodes.length > 0) {
@@ -25,10 +29,6 @@
         }
       });
     });
-
-    if (isAdPlaying) {
-      skipAd();
-    }
 
     observer.observe(adsInfoContainer, { childList: true });
   };
