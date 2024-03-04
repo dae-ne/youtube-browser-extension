@@ -4,16 +4,16 @@
     let actions = null;
 
     const handleButtonClick = () => {
-        const currentUrl = window.location.href;
+      const currentUrl = window.location.href;
 
-        if (!currentUrl.includes('youtube.com/shorts')) {
-          return;
-        }
+      if (!currentUrl.includes('youtube.com/shorts')) {
+        return;
+      }
 
-        const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
+      const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
 
-        renderer.querySelector('video').pause();
-        window.open(videoUrl, '_blank');
+      renderer.querySelector('video').pause();
+      window.open(videoUrl, '_blank');
     };
 
     const displayButton = () => {
@@ -40,21 +40,19 @@
       button.appendChild(image);
       actions.insertBefore(button, actions.querySelector('#menu-button'));
 
-      button.addEventListener('click', () => {
-        handleButtonClick();
-      });
+      button.addEventListener('click', handleButtonClick);
     };
 
     const interval = setInterval(() => {
       renderer = document.querySelector('ytd-shorts [is-active]');
-      actions = renderer && renderer.querySelector('#actions');
+      actions = renderer?.querySelector('#actions');
 
       if (!actions) {
         return;
       }
 
       clearInterval(interval);
-      displayButton(actions);
+      displayButton();
     }, 100);
   }
 
