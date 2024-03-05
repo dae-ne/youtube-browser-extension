@@ -5,6 +5,11 @@
     const video = document.querySelector('video');
     const adsInfoContainer = document.querySelector('.video-ads');
 
+    if (!adsInfoContainer) {
+      setTimeout(autoSkipAds, 100);
+      return;
+    }
+
     const isAdPlaying = adsInfoContainer.childNodes.length > 0;
 
     const skipAd = () => {
