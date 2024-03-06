@@ -1,0 +1,13 @@
+@media (max-aspect-ratio: 10/16) {
+  ytd-mini-guide-renderer {
+    display: none !important;
+  }
+
+  ytd-page-manager {
+    margin-left: 0 !important;
+  }
+
+  #shorts-container {
+    justify-content: left !important;
+  }
+}

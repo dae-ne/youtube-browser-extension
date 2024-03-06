@@ -10,6 +10,10 @@
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
+      "css": ["yt.css"]
+    },
+    {
+      "matches": ["https://*.youtube.com/*"],
       "js": ["shorts.js"]
     },
     {
