@@ -53,5 +53,4 @@
   }
 
   chrome.runtime.onMessage.addListener(handleAction);
-  chrome.runtime.sendMessage({ action: 'video-content-script-loaded' });
 })();

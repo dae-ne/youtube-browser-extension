@@ -1,6 +1,3 @@
-let isShortsContentScriptLoaded = false;
-let isVideoContentScriptLoaded = false;
-
 function sendMessages(tabId, changeInfo, tab) {
   if (changeInfo.status !== 'complete' || !tab.url) {
     return;
@@ -21,21 +18,4 @@ function sendMessages(tabId, changeInfo, tab) {
   }
 }
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  switch (request.action) {
-    case 'shorts-content-script-loaded':
-      isShortsContentScriptLoaded = true;
-      break;
-    case 'video-content-script-loaded':
-      isVideoContentScriptLoaded = true;
-      break;
-  }
-
-  if (isShortsContentScriptLoaded && isVideoContentScriptLoaded) {
-    const { tab } = sender;
-    sendMessages(tab.id, { status: 'complete' }, tab);
-    chrome.tabs.onUpdated.addListener(sendMessages);
-  }
-
-  sendResponse({ status: 'success' });
-});
+setTimeout(() => chrome.tabs.onUpdated.addListener(sendMessages), 100);

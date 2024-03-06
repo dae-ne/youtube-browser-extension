@@ -57,5 +57,4 @@
   }
 
   chrome.runtime.onMessage.addListener(handleAction);
-  chrome.runtime.sendMessage({ action: 'shorts-content-script-loaded' });
 })();
