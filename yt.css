@@ -1,3 +1,7 @@
+#player-ads {
+  display: none !important;
+}
+
 @media (max-aspect-ratio: 10/16) {
   ytd-mini-guide-renderer {
     display: none !important;
