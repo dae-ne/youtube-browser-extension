@@ -1,6 +1,20 @@
 (() => {
   let observer = null;
 
+  function handleAction(request, sender, sendResponse) {
+    switch (request.action) {
+      case 'auto-skip-ads':
+        observer?.disconnect();
+        autoSkipAds();
+        sendResponse({ status: 'success' });
+        break;
+      case 'disconnect-ads-observer':
+        observer?.disconnect();
+        sendResponse({ status: 'success' });
+        break;
+    }
+  }
+
   function autoSkipAds() {
     const video = document.querySelector('video');
     const adsInfoContainer = document.querySelector('.video-ads');
@@ -36,19 +50,8 @@
     });
 
     observer.observe(adsInfoContainer, { childList: true });
-  };
+  }
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    switch (request.action) {
-      case 'skip-ads':
-        observer?.disconnect();
-        autoSkipAds();
-        break;
-      case 'disconnect-ads-observer':
-        observer?.disconnect();
-        break;
-      default:
-        break;
-    }
-  });
+  chrome.runtime.onMessage.addListener(handleAction);
+  chrome.runtime.sendMessage({ action: 'video-content-script-loaded' });
 })();

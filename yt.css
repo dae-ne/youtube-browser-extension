@@ -8,6 +8,6 @@
   }
 
   #shorts-container {
-    justify-content: left !important;
+    justify-content: start !important;
   }
 }

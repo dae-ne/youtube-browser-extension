@@ -1,4 +1,13 @@
 (() => {
+  function handleAction(request, sender, sendResponse) {
+    switch (request.action) {
+      case 'show-shorts-to-video-button':
+        displayShortsToVideoButton();
+        sendResponse({ status: 'success' });
+        break;
+    }
+  }
+
   function displayShortsToVideoButton() {
     const renderer = document.querySelector('ytd-shorts [is-active]');
     const actions = renderer?.querySelector('#actions');
@@ -47,13 +56,6 @@
     button.addEventListener('click', handleButtonClick);
   }
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    switch (request.action) {
-      case 'show-shorts-to-video-button':
-        displayShortsToVideoButton();
-        break;
-      default:
-        break;
-    }
-  });
+  chrome.runtime.onMessage.addListener(handleAction);
+  chrome.runtime.sendMessage({ action: 'shorts-content-script-loaded' });
 })();

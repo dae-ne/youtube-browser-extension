@@ -1,4 +1,7 @@
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+let isShortsContentScriptLoaded = false;
+let isVideoContentScriptLoaded = false;
+
+function sendMessages(tabId, changeInfo, tab) {
   if (changeInfo.status !== 'complete' || !tab.url) {
     return;
   }
@@ -13,7 +16,24 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 
   if (tab.url.includes('youtube.com/watch')) {
-    chrome.tabs.sendMessage(tabId, { action: 'skip-ads' });
+    chrome.tabs.sendMessage(tabId, { action: 'auto-skip-ads' });
     return;
+  }
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  switch (request.action) {
+    case 'shorts-content-script-loaded':
+      isShortsContentScriptLoaded = true;
+      sendResponse({ status: 'success' });
+      break;
+    case 'video-content-script-loaded':
+      isVideoContentScriptLoaded = true;
+      sendResponse({ status: 'success' });
+      break;
+  }
+
+  if (isShortsContentScriptLoaded && isVideoContentScriptLoaded) {
+    chrome.tabs.onUpdated.addListener(sendMessages);
   }
 });
