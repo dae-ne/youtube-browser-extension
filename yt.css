@@ -14,4 +14,8 @@
   #shorts-container {
     justify-content: start !important;
   }
+
+  .navigation-container.ytd-shorts {
+    display: none !important;
+  }
 }
