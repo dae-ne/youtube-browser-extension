@@ -11,8 +11,16 @@
     margin-left: 0 !important;
   }
 
-  #shorts-container {
-    justify-content: start !important;
+  .action-container.ytd-reel-player-overlay-renderer {
+    margin: 0 0 16px auto !important;
+  }
+
+  .metadata-container.ytd-reel-player-overlay-renderer {
+    position: absolute;
+  }
+
+  .overlay.ytd-reel-video-renderer {
+    width: 100% !important;
   }
 
   .navigation-container.ytd-shorts {
