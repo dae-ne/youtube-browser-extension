@@ -1,9 +1,8 @@
 (() => {
-  function handleAction(request, sender, sendResponse) {
+  function handleAction(request, sender) {
     switch (request.action) {
       case 'show-shorts-to-video-button':
         displayShortsToVideoButton();
-        sendResponse({ status: 'success' });
         break;
     }
   }

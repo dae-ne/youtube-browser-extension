@@ -23,9 +23,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 });
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request, sender) => {
   if (request.action === 'open-video-from-shorts') {
     chrome.tabs.create({ url: request.url }, (tab) => loopVideoTabIds.push(tab.id));
-    sendResponse({ status: 'success' });
   }
 });

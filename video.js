@@ -1,20 +1,17 @@
 (() => {
   let observer = null;
 
-  function handleAction(request, sender, sendResponse) {
+  function handleAction(request, sender) {
     switch (request.action) {
       case 'auto-skip-ads':
         observer?.disconnect();
         autoSkipAds();
-        sendResponse({ status: 'success' });
         break;
       case 'disconnect-ads-observer':
         observer?.disconnect();
-        sendResponse({ status: 'success' });
         break;
       case 'loop-video':
         loopVideo();
-        sendResponse({ status: 'success' });
         break;
     }
   }
