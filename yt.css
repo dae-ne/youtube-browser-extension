@@ -1,4 +1,5 @@
-#player-ads {
+#player-ads,
+ytd-ad-slot-renderer {
   display: none !important;
 }
 
