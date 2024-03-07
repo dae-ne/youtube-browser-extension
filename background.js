@@ -1,4 +1,4 @@
-function sendMessages(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'complete' || !tab.url) {
     return;
   }
@@ -16,6 +16,4 @@ function sendMessages(tabId, changeInfo, tab) {
     chrome.tabs.sendMessage(tabId, { action: 'auto-skip-ads' });
     return;
   }
-}
-
-setTimeout(() => chrome.tabs.onUpdated.addListener(sendMessages), 100);
+});

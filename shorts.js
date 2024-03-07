@@ -17,19 +17,6 @@
       return;
     }
 
-    const handleButtonClick = () => {
-      const currentUrl = window.location.href;
-
-      if (!currentUrl.includes('youtube.com/shorts')) {
-        return;
-      }
-
-      const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
-
-      renderer.querySelector('video').pause();
-      window.open(videoUrl, '_blank');
-    };
-
     let button = actions.querySelector('#yt-shorts-to-video-btn');
 
     if (button) {
@@ -53,7 +40,18 @@
     button.appendChild(image);
     actions.insertBefore(button, actions.querySelector('#menu-button'));
 
-    button.addEventListener('click', handleButtonClick);
+    button.addEventListener('click', () => {
+      const currentUrl = window.location.href;
+
+      if (!currentUrl.includes('youtube.com/shorts')) {
+        return;
+      }
+
+      const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
+
+      renderer.querySelector('video').pause();
+      window.open(videoUrl, '_blank');
+    });
   }
 
   chrome.runtime.onMessage.addListener(handleAction);

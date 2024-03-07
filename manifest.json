@@ -14,11 +14,13 @@
     },
     {
       "matches": ["https://*.youtube.com/*"],
-      "js": ["shorts.js"]
+      "js": ["shorts.js"],
+      "run_at": "document_start"
     },
     {
       "matches": ["https://*.youtube.com/*"],
-      "js": ["video.js"]
+      "js": ["video.js"],
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
