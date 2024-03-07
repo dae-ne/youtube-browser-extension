@@ -50,7 +50,7 @@
       const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
 
       renderer.querySelector('video').pause();
-      window.open(videoUrl, '_blank');
+      chrome.runtime.sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
     });
   }
 

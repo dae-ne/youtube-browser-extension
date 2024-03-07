@@ -12,6 +12,10 @@
         observer?.disconnect();
         sendResponse({ status: 'success' });
         break;
+      case 'loop-video':
+        loopVideo();
+        sendResponse({ status: 'success' });
+        break;
     }
   }
 
@@ -50,6 +54,10 @@
     });
 
     observer.observe(adsInfoContainer, { childList: true });
+  }
+
+  function loopVideo() {
+    document.querySelector('video').loop = true;
   }
 
   chrome.runtime.onMessage.addListener(handleAction);

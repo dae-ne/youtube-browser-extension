@@ -1,3 +1,5 @@
+const loopVideoTabIds = [];
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'complete' || !tab.url) {
     return;
@@ -9,11 +11,21 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
   if (tab.url.includes('youtube.com/shorts')) {
     chrome.tabs.sendMessage(tabId, { action: 'show-shorts-to-video-button' });
-    return;
   }
 
   if (tab.url.includes('youtube.com/watch')) {
     chrome.tabs.sendMessage(tabId, { action: 'auto-skip-ads' });
-    return;
+  }
+
+  if (tab.url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {
+    chrome.tabs.sendMessage(tabId, { action: 'loop-video' });
+    loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
+  }
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'open-video-from-shorts') {
+    chrome.tabs.create({ url: request.url }, (tab) => loopVideoTabIds.push(tab.id));
+    sendResponse({ status: 'success' });
   }
 });
