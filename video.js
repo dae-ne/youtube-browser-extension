@@ -1,14 +1,13 @@
 (() => {
-  let observer = null;
+  let adsObserver = null;
 
   function handleAction(request, sender) {
     switch (request.action) {
       case 'auto-skip-ads':
-        observer?.disconnect();
         autoSkipAds();
         break;
       case 'disconnect-ads-observer':
-        observer?.disconnect();
+        adsObserver?.disconnect();
         break;
       case 'loop-video':
         loopVideo();
@@ -16,12 +15,22 @@
     }
   }
 
+  function isVideo() {
+    return window.location.href.includes('youtube.com/watch');
+  }
+
   function autoSkipAds() {
+    if (!isVideo()) {
+      return;
+    }
+
+    adsObserver?.disconnect();
+
     const video = document.querySelector('video');
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
-      setTimeout(autoSkipAds, 100);
+      setTimeout(autoSkipAds, 200);
       return;
     }
 
@@ -42,7 +51,7 @@
       skipAd();
     }
 
-    observer = observer ?? new MutationObserver((mutations) => {
+    adsObserver = adsObserver ?? new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.target.childNodes.length > 0) {
           skipAd();
@@ -50,10 +59,14 @@
       });
     });
 
-    observer.observe(adsInfoContainer, { childList: true });
+    adsObserver.observe(adsInfoContainer, { childList: true });
   }
 
   function loopVideo() {
+    if (!isVideo()) {
+      return;
+    }
+
     document.querySelector('video').loop = true;
   }
 

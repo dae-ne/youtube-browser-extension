@@ -4,19 +4,33 @@
       case 'show-shorts-to-video-button':
         displayShortsToVideoButton();
         break;
+      case 'add-shorts-ui-updates':
+        addShortsUiUpdates();
+        break;
+      case 'remove-shorts-global-css-classes':
+        removeShortsGlobalCssClasses();
+        break;
     }
   }
 
+  function isShorts() {
+    return window.location.href.includes('youtube.com/shorts');
+  }
+
   function displayShortsToVideoButton() {
+    if (!isShorts()) {
+      return;
+    }
+
     const renderer = document.querySelector('ytd-shorts [is-active]');
     const actions = renderer?.querySelector('#actions');
 
     if (!actions) {
-      setTimeout(displayShortsToVideoButton, 100);
+      setTimeout(displayShortsToVideoButton, 200);
       return;
     }
 
-    let button = actions.querySelector('.ytext-shorts-video-btn');
+    let button = actions.querySelector('.ytext-shorts-actions-btn');
 
     if (button) {
       return;
@@ -24,12 +38,12 @@
 
     const image = document.createElement('img');
     image.src = chrome.runtime.getURL('video-play.svg');
-    image.classList.add('ytext-shorts-video-btn-icon');
+    image.classList.add('ytext-shorts-actions-btn-icon');
 
     button = document.createElement('button');
 
     button.classList.add(
-      'ytext-shorts-video-btn',
+      'ytext-shorts-actions-btn',
       'yt-spec-button-shape-next',
       'yt-spec-button-shape-next--tonal',
       'yt-spec-button-shape-next--mono',
@@ -50,6 +64,64 @@
 
       renderer.querySelector('video').pause();
       chrome.runtime.sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
+    });
+  }
+
+  function addShortsUiUpdates(firstRun = true, missingElements = []) {
+    if (!isShorts()) {
+      return;
+    }
+
+    if (!firstRun && missingElements.length === 0) {
+      return;
+    }
+
+    const addCssClass = (selector, className) => {
+      const missing = missingElements.includes(className);
+
+      if (!firstRun && !missing) {
+        return;
+      }
+
+      const element = document.querySelector(selector);
+
+      if (element) {
+        element.classList.add(className);
+        missing && missingElements.splice(missingElements.indexOf(className), 1);
+      } else {
+        missingElements.push(className);
+      }
+    };
+
+    addCssClass(
+      'ytd-shorts [is-active] .action-container',
+      'ytext-shorts-actions-container');
+    addCssClass(
+      'ytd-page-manager',
+      'ytext-shorts-g-page-manager');
+    addCssClass(
+      'ytd-mini-guide-renderer.ytd-app',
+      'ytext-shorts-g-side-mini-guide');
+
+    if (missingElements.length === 0) {
+      return;
+    }
+
+    setTimeout(() => addShortsUiUpdates(false, missingElements), 200);
+  }
+
+  function removeShortsGlobalCssClasses() {
+    if (isShorts()) {
+      return;
+    }
+
+    const elements = document.querySelectorAll('[class*="ytext-shorts-g-"]');
+
+    elements.forEach((element) => {
+      const classNamesToRemove = Array.from(element.classList)
+        .filter((className) => className.startsWith('ytext-shorts'));
+
+      element.classList.remove(...classNamesToRemove);
     });
   }
 

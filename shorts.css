@@ -1,8 +1,22 @@
-.ytext-shorts-video-btn {
+.ytext-shorts-actions-btn {
   margin-top: 16px !important;
 }
 
-.ytext-shorts-video-btn-icon {
+.ytext-shorts-actions-btn-icon {
   width: 24px;
   filter: invert(1);
+}
+
+@media (max-aspect-ratio: 12/16) {
+  .ytext-shorts-actions-container {
+    margin: 0 0 16px auto !important;
+  }
+
+  .ytext-shorts-g-page-manager {
+    margin-left: 0 !important;
+  }
+
+  .ytext-shorts-g-side-mini-guide {
+    display: none !important;
+  }
 }
