@@ -15,6 +15,7 @@
     {
       "matches": ["https://*.youtube.com/*"],
       "js": ["shorts.js"],
+      "css": ["shorts.css"],
       "run_at": "document_start"
     },
     {
