@@ -1,4 +1,6 @@
 (() => {
+  const { getURL, sendMessage } = chrome.runtime;
+
   function handleAction(request, sender) {
     switch (request.action) {
       case 'show-shorts-to-video-button':
@@ -37,7 +39,7 @@
     }
 
     const image = document.createElement('img');
-    image.src = chrome.runtime.getURL('video-play.svg');
+    image.src = getURL('video-play.svg');
     image.classList.add('ytext-shorts-actions-btn-icon');
 
     button = document.createElement('button');
@@ -63,7 +65,7 @@
       const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
 
       renderer.querySelector('video').pause();
-      chrome.runtime.sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
+      sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
     });
   }
 
@@ -97,7 +99,7 @@
       '.ytd-shorts [is-active] .action-container',
       'ytext-shorts-actions-container');
     addCssClass(
-      '.ytd-shorts [is-active] .metadata-container.ytd-reel-player-overlay-renderer',
+      '.ytd-shorts [is-active] .metadata-container',
       'ytext-shorts-player-metadata-container');
     addCssClass(
       '.navigation-container.ytd-shorts',
