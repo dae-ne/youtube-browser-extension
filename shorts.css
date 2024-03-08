@@ -12,6 +12,14 @@
     margin: 0 0 16px auto !important;
   }
 
+  .ytext-shorts-player-metadata-container {
+    position: absolute;
+  }
+
+  .ytext-shorts-navigation-container {
+    display: none !important;
+  }
+
   .ytext-shorts-g-page-manager {
     margin-left: 0 !important;
   }

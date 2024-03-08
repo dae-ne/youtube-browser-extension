@@ -7,7 +7,7 @@
         autoSkipAds();
         break;
       case 'disconnect-ads-observer':
-        adsObserver?.disconnect();
+        disconnectAdsObserver();
         break;
       case 'loop-video':
         loopVideo();
@@ -60,6 +60,14 @@
     });
 
     adsObserver.observe(adsInfoContainer, { childList: true });
+  }
+
+  function disconnectAdsObserver() {
+    if (isVideo()) {
+      return;
+    }
+
+    adsObserver?.disconnect();
   }
 
   function loopVideo() {

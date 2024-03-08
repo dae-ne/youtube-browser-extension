@@ -10,7 +10,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
-      "css": ["yt.css"]
+      "css": ["ads.css"]
     },
     {
       "matches": ["https://*.youtube.com/*"],

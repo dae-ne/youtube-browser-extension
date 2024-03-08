@@ -94,8 +94,14 @@
     };
 
     addCssClass(
-      'ytd-shorts [is-active] .action-container',
+      '.ytd-shorts [is-active] .action-container',
       'ytext-shorts-actions-container');
+    addCssClass(
+      '.ytd-shorts [is-active] .metadata-container.ytd-reel-player-overlay-renderer',
+      'ytext-shorts-player-metadata-container');
+    addCssClass(
+      '.navigation-container.ytd-shorts',
+      'ytext-shorts-navigation-container');
     addCssClass(
       'ytd-page-manager',
       'ytext-shorts-g-page-manager');
@@ -119,7 +125,7 @@
 
     elements.forEach((element) => {
       const classNamesToRemove = Array.from(element.classList)
-        .filter((className) => className.startsWith('ytext-shorts'));
+        .filter((className) => className.startsWith('ytext-shorts-g-'));
 
       element.classList.remove(...classNamesToRemove);
     });
