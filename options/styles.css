@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  min-width: 400px;
+  padding: 8px;
+}
+
+.container > .option:not(:first-child) {
+  margin-top: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+}
+
+.option > input {
+  margin-right: 8px;
+}

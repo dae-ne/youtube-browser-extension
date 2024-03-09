@@ -39,7 +39,7 @@
     }
 
     const image = document.createElement('img');
-    image.src = getURL('video-play.svg');
+    image.src = getURL('assets/video-play.svg');
     image.classList.add('ytext-shorts-actions-btn-icon');
 
     button = document.createElement('button');
@@ -53,7 +53,6 @@
       'yt-spec-button-shape-next--icon-button');
 
     button.appendChild(image);
-    actions.insertBefore(button, actions.querySelector('#menu-button'));
 
     button.addEventListener('click', () => {
       const currentUrl = window.location.href;
@@ -67,6 +66,8 @@
       renderer.querySelector('video').pause();
       sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
     });
+
+    actions.insertBefore(button, actions.querySelector('#menu-button'));
   }
 
   function addShortsUiUpdates(firstRun = true, missingElements = []) {

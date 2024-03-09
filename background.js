@@ -1,22 +1,39 @@
+const options = {};
 const loopVideoTabIds = [];
-const { create, sendMessage } = chrome.tabs;
+
+chrome.storage.sync.get().then((data) => Object.assign(options, data));
+
+chrome.storage.onChanged.addListener((changes) => {
+  for (const [name, { newValue }] of Object.entries(changes)) {
+    options[name] = newValue;
+  }
+});
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'complete' || !tab.url) {
     return;
   }
 
+  const { sendMessage } = chrome.tabs;
+
+  const {
+    loopShortsToVideo,
+    showShortsToVideoButton,
+    updateShortsUI,
+    autoSkipAds
+  } = options;
+
   if (tab.url.includes('youtube.com/shorts')) {
-    sendMessage(tabId, { action: 'show-shorts-to-video-button' });
-    sendMessage(tabId, { action: 'add-shorts-ui-updates' });
+    showShortsToVideoButton && sendMessage(tabId, { action: 'show-shorts-to-video-button' });
+    updateShortsUI && sendMessage(tabId, { action: 'add-shorts-ui-updates' });
   }
 
   if (tab.url.includes('youtube.com/watch')) {
-    sendMessage(tabId, { action: 'auto-skip-ads' });
+    autoSkipAds && sendMessage(tabId, { action: 'auto-skip-ads' });
   }
 
   if (tab.url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {
-    sendMessage(tabId, { action: 'loop-video' });
+    loopShortsToVideo && sendMessage(tabId, { action: 'loop-video' });
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
@@ -30,6 +47,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 chrome.runtime.onMessage.addListener((request, sender) => {
+  const { create } = chrome.tabs;
+
   if (request.action === 'open-video-from-shorts') {
     create({ url: request.url }, (tab) => loopVideoTabIds.push(tab.id));
   }
