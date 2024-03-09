@@ -34,7 +34,7 @@
   "web_accessible_resources": [
     {
       "matches": ["https://*.youtube.com/*"],
-      "resources": ["assets/*"]
+      "resources": ["resources/*"]
     }
   ],
   "manifest_version": 3

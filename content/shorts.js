@@ -39,7 +39,7 @@
     }
 
     const image = document.createElement('img');
-    image.src = getURL('assets/video-play.svg');
+    image.src = getURL('resources/video-play.svg');
     image.classList.add('ytext-shorts-actions-btn-icon');
 
     button = document.createElement('button');
