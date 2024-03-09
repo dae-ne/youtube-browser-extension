@@ -1,7 +1,9 @@
 const options = {};
 const loopVideoTabIds = [];
 
-chrome.storage.sync.get().then((data) => Object.assign(options, data));
+chrome.storage.sync.get().then((data) => {
+  Object.assign(options, data);
+});
 
 chrome.storage.onChanged.addListener((changes) => {
   for (const [name, { newValue }] of Object.entries(changes)) {
@@ -50,6 +52,10 @@ chrome.runtime.onMessage.addListener((request, sender) => {
   const { create } = chrome.tabs;
 
   if (request.action === 'open-video-from-shorts') {
-    create({ url: request.url }, (tab) => loopVideoTabIds.push(tab.id));
+    create({
+      url: request.url,
+      index: sender.tab.index + 1,
+      openerTabId: sender.tab.id
+    }, (tab) => loopVideoTabIds.push(tab.id));
   }
 });
