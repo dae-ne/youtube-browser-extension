@@ -1,13 +1,15 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .container {
-  min-width: 400px;
-  padding: 8px;
+  min-width: 350px;
+  padding: 16px;
 }
 
-.container > .option:not(:first-child) {
+.option:not(:first-child) {
   margin-top: 8px;
 }
 
