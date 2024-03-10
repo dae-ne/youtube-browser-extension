@@ -44,7 +44,7 @@
         return;
       }
 
-      video.currentTime = video.duration;
+      video.currentTime = Number.MAX_VALUE;
     };
 
     if (isAdPlaying) {
