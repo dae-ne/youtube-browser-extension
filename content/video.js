@@ -37,7 +37,7 @@
     const isAdPlaying = adsInfoContainer.childNodes.length > 0;
 
     const skipAd = () => {
-      const skipButton = document.querySelector('.ytp-ad-skip-button-modern');
+      const skipButton = document.querySelector('button[class*="-skip-"]');
 
       if (skipButton) {
         skipButton.click();
