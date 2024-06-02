@@ -7,7 +7,7 @@
   filter: invert(1);
 }
 
-@media (max-aspect-ratio: 12/16) {
+@media (aspect-ratio < 12/16) {
   .yte-shorts-actions-container {
     margin: 0 0 16px auto !important;
   }

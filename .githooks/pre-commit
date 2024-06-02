@@ -1,3 +1,4 @@
 #!/bin/sh
 
 npm run sync
+npm run lint:css
