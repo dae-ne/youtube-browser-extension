@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "sync": "node tools/sync-version.js && git add ./popup/index.html",
+    "prepare": "git config core.hooksPath .githooks"
+  }
+}
