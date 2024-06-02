@@ -1,10 +1,14 @@
 {
   "scripts": {
     "sync": "node tools/sync-version.js && git add ./popup/index.html",
+    "lint:js": "eslint .",
     "lint:css": "stylelint **/*.css",
     "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "globals": "^15.3.0",
     "stylelint": "^16.6.1",
     "stylelint-config-standard": "^36.0.0"
   }

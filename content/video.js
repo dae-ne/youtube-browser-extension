@@ -1,7 +1,8 @@
 (() => {
   let adsObserver = null;
 
-  function handleAction(request, sender) {
+  // eslint-disable-next-line no-unused-vars
+  function handleAction(request, _sender) {
     switch (request.action) {
       case 'auto-skip-ads':
         autoSkipAds();
