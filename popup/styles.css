@@ -3,3 +3,8 @@
   min-width: 400px;
   border: var(--border-width) solid var(--border-color);
 }
+
+#version {
+  position: absolute;
+  inset: auto auto 2px 4px;
+}
