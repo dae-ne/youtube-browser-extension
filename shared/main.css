@@ -348,6 +348,11 @@ hr {
   border-width: 0;
 }
 
+.yte-icon-btn svg {
+  width: var(--font-size-lg);
+  height: var(--font-size-lg);
+}
+
 /* Switch */
 
 .yte-switch {
