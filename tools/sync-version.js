@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = require("path");
+const path = require('path');
 
 const manifestPath = path.resolve(__dirname, '../manifest.json');
 const htmlPath = path.resolve(__dirname, '../popup/index.html');

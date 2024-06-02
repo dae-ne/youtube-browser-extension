@@ -1,5 +1,5 @@
 {
-  "name": "YT extension",
+  "name": "YouTube extension",
   "version": "1.0.0",
   "description": "Chrome extension for YouTube",
   "permissions": ["tabs", "storage"],
