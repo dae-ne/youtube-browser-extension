@@ -1,12 +1,47 @@
 const options = {};
-const optionsForm = document.querySelector('.options-form');
+const form = document.querySelector('form');
+const template = document.querySelector('template');
+
+const optionsData = [
+  {
+    name: 'autoSkipAds',
+    title: 'Automatically skip ads',
+  },
+  {
+    name: 'showShortsToVideoButton',
+    title: 'Show shorts to video button',
+  },
+  {
+    name: 'loopShortsToVideo',
+    title: 'Auto loop video opened from shorts',
+  },
+  {
+    name: 'updateShortsUI',
+    title: 'Update shorts UI for vertical screens',
+  },
+  {
+    name: 'removeAds',
+    title: 'Remove non layout breaking ads',
+  }
+];
+
+optionsData.forEach(({ name, title }) => {
+  const clone = template.content.cloneNode(true);
+  const titleElement = clone.querySelector('#option-title');
+  const inputElement = clone.querySelector('input[type="checkbox"]');
+
+  titleElement.textContent = title;
+  inputElement.name = name;
+
+  form.appendChild(clone);
+});
 
 chrome.storage.sync.get().then((data) => {
   const initialOptions = {
-    loopShortsToVideo: false,
-    showShortsToVideoButton: true,
-    updateShortsUI: true,
     autoSkipAds: true,
+    showShortsToVideoButton: true,
+    loopShortsToVideo: false,
+    updateShortsUI: true,
     removeAds: true,
   };
 
@@ -16,7 +51,7 @@ chrome.storage.sync.get().then((data) => {
   Object.assign(options, currentOptions);
 
   for (const [name, value] of Object.entries(options)) {
-    const input = optionsForm.querySelector(`[name="${name}"]`);
+    const input = form.querySelector(`[name="${name}"]`);
 
     if (input) {
       input.checked = value;
@@ -24,7 +59,7 @@ chrome.storage.sync.get().then((data) => {
   }
 });
 
-optionsForm.addEventListener('change', (event) => {
+form.addEventListener('change', (event) => {
   const { target } = event;
 
   if (target.type !== 'checkbox') {

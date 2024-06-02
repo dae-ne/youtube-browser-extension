@@ -32,7 +32,7 @@
       return;
     }
 
-    let button = actions.querySelector('.ytext-shorts-actions-btn');
+    let button = actions.querySelector('.yte-shorts-actions-btn');
 
     if (button) {
       return;
@@ -40,12 +40,12 @@
 
     const image = document.createElement('img');
     image.src = getURL('resources/video-play.svg');
-    image.classList.add('ytext-shorts-actions-btn-icon');
+    image.classList.add('yte-shorts-actions-btn-icon');
 
     button = document.createElement('button');
 
     button.classList.add(
-      'ytext-shorts-actions-btn',
+      'yte-shorts-actions-btn',
       'yt-spec-button-shape-next',
       'yt-spec-button-shape-next--tonal',
       'yt-spec-button-shape-next--mono',
@@ -98,19 +98,19 @@
 
     addCssClass(
       '.ytd-shorts [is-active] .action-container',
-      'ytext-shorts-actions-container');
+      'yte-shorts-actions-container');
     addCssClass(
       '.ytd-shorts [is-active] .metadata-container',
-      'ytext-shorts-player-metadata-container');
+      'yte-shorts-player-metadata-container');
     addCssClass(
       '.navigation-container.ytd-shorts',
-      'ytext-shorts-navigation-container');
+      'yte-shorts-navigation-container');
     addCssClass(
       'ytd-page-manager',
-      'ytext-shorts-g-page-manager');
+      'yte-shorts-g-page-manager');
     addCssClass(
       'ytd-mini-guide-renderer.ytd-app',
-      'ytext-shorts-g-side-mini-guide');
+      'yte-shorts-g-side-mini-guide');
 
     if (missingElements.length === 0) {
       return;
@@ -124,11 +124,11 @@
       return;
     }
 
-    const elements = document.querySelectorAll('[class*="ytext-shorts-g-"]');
+    const elements = document.querySelectorAll('[class*="yte-shorts-g-"]');
 
     elements.forEach((element) => {
       const classNamesToRemove = Array.from(element.classList)
-        .filter((className) => className.startsWith('ytext-shorts-g-'));
+        .filter((className) => className.startsWith('yte-shorts-g-'));
 
       element.classList.remove(...classNamesToRemove);
     });

@@ -1,38 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>YT extension options</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/main.css">
+  <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="container">
-    <form class="options-form">
-      <div class="option">
-        <input type="checkbox" id="auto-skip-ads" name="autoSkipAds" />
-        <label>Automatically skip ads</label>
-      </div>
+  <main class="yte-bg yte-text">
+    <h1 class="yte-p-md yte-header">
+      You<span class="yte-color-theme">Tube</span> extension options
+    </h1>
+    <form></form>
+  </main>
 
-      <div class="option">
-        <input type="checkbox" id="shorts-to-video-btn" name="showShortsToVideoButton" />
-        <label for="shorts-to-video-btn">Show shorts to video button</label>
-      </div>
-
-      <div class="option">
-        <input type="checkbox" id="loop-shorts-to-video" name="loopShortsToVideo" />
-        <label for="loop-shorts-to-video">Auto loop video opened from shorts</label>
-      </div>
-
-      <div class="option">
-        <input type="checkbox" id="shorts-ui-update" name="updateShortsUI" />
-        <label for="shorts-ui-update">Update shorts UI for vertical screens</label>
-      </div>
-
-      <div class="option">
-        <input type="checkbox" id="remove-ads" name="removeAds" />
-        <label for="remove-ads">Remove non layout breaking ads</label>
-      </div>
-    </form>
-  </div>
+  <template>
+    <div class="yte-p-md yte-flex yte-space-between yte-align-center">
+      <p id="option-title">Option title</p>
+      <label class="yte-switch">
+        <input type="checkbox" name="optionName">
+        <span class="yte-switch-slider yte-switch-round"></span>
+      </label>
+    </div>
+  </template>
 </body>
 </html>

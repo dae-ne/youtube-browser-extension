@@ -1,30 +1,30 @@
-.ytext-shorts-actions-btn {
+.yte-shorts-actions-btn {
   margin-top: 16px !important;
 }
 
-.ytext-shorts-actions-btn-icon {
+.yte-shorts-actions-btn-icon {
   width: 24px;
   filter: invert(1);
 }
 
 @media (max-aspect-ratio: 12/16) {
-  .ytext-shorts-actions-container {
+  .yte-shorts-actions-container {
     margin: 0 0 16px auto !important;
   }
 
-  .ytext-shorts-player-metadata-container {
+  .yte-shorts-player-metadata-container {
     position: absolute;
   }
 
-  .ytext-shorts-navigation-container {
+  .yte-shorts-navigation-container {
     display: none !important;
   }
 
-  .ytext-shorts-g-page-manager {
+  .yte-shorts-g-page-manager {
     margin-left: 0 !important;
   }
 
-  .ytext-shorts-g-side-mini-guide {
+  .yte-shorts-g-side-mini-guide {
     display: none !important;
   }
 }
