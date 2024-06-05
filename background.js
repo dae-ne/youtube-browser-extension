@@ -2,6 +2,22 @@ const options = {};
 const loopVideoTabIds = [];
 
 chrome.storage.sync.get().then((data) => {
+  const dataExists = data && Object.keys(data).length;
+
+  if (dataExists){
+    Object.assign(options, data);
+    return;
+  }
+
+  const initialOptions = {
+    autoSkipAds: true,
+    showShortsToVideoButton: true,
+    loopShortsToVideo: false,
+    updateShortsUI: true,
+    removeAds: true,
+  };
+
+  chrome.storage.sync.set(initialOptions);
   Object.assign(options, data);
 });
 

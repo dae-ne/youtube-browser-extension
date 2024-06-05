@@ -1,8 +1,7 @@
 (() => {
-  let adsObserver = null;
+  let adsObserver;
 
-  // eslint-disable-next-line no-unused-vars
-  function handleAction(request, _sender) {
+  function handleAction(request) {
     switch (request.action) {
       case 'auto-skip-ads':
         autoSkipAds();
@@ -25,9 +24,6 @@
       return;
     }
 
-    adsObserver?.disconnect();
-
-    const video = document.querySelector('video');
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
@@ -45,12 +41,14 @@
         return;
       }
 
-      video.currentTime = Number.MAX_VALUE;
+      document.querySelector('video').currentTime = Number.MAX_VALUE;
     };
 
     if (isAdPlaying) {
       skipAd();
     }
+
+    adsObserver?.disconnect();
 
     adsObserver = adsObserver ?? new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {

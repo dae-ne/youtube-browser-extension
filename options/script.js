@@ -37,18 +37,7 @@ optionsData.forEach(({ name, title }) => {
 });
 
 chrome.storage.sync.get().then((data) => {
-  const initialOptions = {
-    autoSkipAds: true,
-    showShortsToVideoButton: true,
-    loopShortsToVideo: false,
-    updateShortsUI: true,
-    removeAds: true,
-  };
-
-  const dataExists = data && Object.keys(data).length;
-  const currentOptions = dataExists ? data : initialOptions;
-
-  Object.assign(options, currentOptions);
+  Object.assign(options, data);
 
   for (const [name, value] of Object.entries(options)) {
     const input = form.querySelector(`[name="${name}"]`);
@@ -61,11 +50,12 @@ chrome.storage.sync.get().then((data) => {
 
 form.addEventListener('change', (event) => {
   const { target } = event;
+  const { name, type, checked } = target;
 
-  if (target.type !== 'checkbox') {
+  if (type !== 'checkbox') {
     return;
   }
 
-  options[target.name] = target.checked;
+  options[name] = checked;
   chrome.storage.sync.set(options);
 });

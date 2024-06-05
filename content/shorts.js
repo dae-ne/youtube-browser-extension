@@ -1,8 +1,7 @@
 (() => {
   const { getURL, sendMessage } = chrome.runtime;
 
-  // eslint-disable-next-line no-unused-vars
-  function handleAction(request, _sender) {
+  function handleAction(request) {
     switch (request.action) {
       case 'show-shorts-to-video-button':
         displayShortsToVideoButton();
