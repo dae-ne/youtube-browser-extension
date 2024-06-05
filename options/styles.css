@@ -2,6 +2,10 @@ form > div:not(:last-child) {
   border-bottom: var(--border-width) solid var(--border-color);
 }
 
+.yte-options-container {
+  min-width: 620px;
+}
+
 .yte-option-info {
   flex-shrink: 10;
 }
