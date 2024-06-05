@@ -53,10 +53,15 @@ hr {
 .yte-text {
   color: var(--primary-color);
   font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
 }
 
 .yte-text-sm {
   font-size: var(--font-size-sm);
+}
+
+.yte-text-md {
+  font-size: var(--font-size-md);
 }
 
 .yte-text-lg {
@@ -371,6 +376,8 @@ hr {
 .yte-switch-slider {
   position: absolute;
   cursor: pointer;
+  height: inherit;
+  width: inherit;
   inset: 0;
   background-color: var(--secondary-color);
   border-radius: 9999px;

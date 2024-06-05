@@ -1,3 +1,7 @@
 form > div:not(:last-child) {
   border-bottom: var(--border-width) solid var(--border-color);
 }
+
+.yte-option-info {
+  flex-shrink: 10;
+}
