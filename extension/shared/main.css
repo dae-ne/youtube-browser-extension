@@ -328,13 +328,23 @@ hr {
   color: var(--background-color);
 }
 
-.yte-btn-primary {
+.yte-btn-main {
   border-color: var(--theme-color);
   color: var(--theme-color);
 }
 
-.yte-btn-primary:hover {
+.yte-btn-main:hover {
   background-color: var(--theme-color);
+  color: var(--background-color);
+}
+
+.yte-btn-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.yte-btn-primary:hover {
+  background-color: var(--primary-color);
   color: var(--background-color);
 }
 
@@ -402,4 +412,27 @@ input:checked + .yte-switch-slider {
 
 input:checked + .yte-switch-slider::before {
   transform: translateX(calc(var(--font-size-lg) * 1.6 - var(--font-size-lg)));
+}
+
+/* Cursor flashlight effect */
+
+.yte-flashlight-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.yte-flashlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--secondary-color) 10%, transparent 80%);
+  opacity: 0.04;
+  transition: opacity 0.5s;
+}
+
+.yte-flashlight.hidden {
+  opacity: 0;
 }

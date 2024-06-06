@@ -8,3 +8,7 @@
   position: absolute;
   inset: auto auto 2px 4px;
 }
+
+.yte-icon-btn:not(:hover) {
+  opacity: 0.8;
+}
