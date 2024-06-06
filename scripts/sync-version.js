@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const manifestPath = path.resolve(__dirname, '../manifest.json');
-const htmlPath = path.resolve(__dirname, '../popup/index.html');
+const manifestPath = path.resolve(__dirname, '../extension/manifest.json');
+const htmlPath = path.resolve(__dirname, '../extension/popup/index.html');
 
 const manifest = fs.readFileSync(manifestPath, 'utf8');
 const { version } = JSON.parse(manifest);
@@ -12,4 +12,4 @@ const updatedHtml = html.replace(/v\d+\.\d+\.\d+/,`v${version}`);
 
 fs.writeFileSync(htmlPath, updatedHtml, 'utf8');
 
-console.log(`Version updated to v${version} in popup/index.html`);
+console.log(`Version updated to v${version}`);
