@@ -1,4 +1,6 @@
 (() => {
+  'use strict';
+
   const { getURL, sendMessage } = chrome.runtime;
 
   function handleAction(request) {

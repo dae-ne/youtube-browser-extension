@@ -1,5 +1,4 @@
 .yte-popup {
-  background-color: var(--background-color);
   min-width: 400px;
   border: var(--border-width) solid var(--border-color);
 }

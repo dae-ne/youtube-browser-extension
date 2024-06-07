@@ -9,32 +9,33 @@
   <script src="script.js" defer></script>
   <script src="../shared/cursor.js" defer></script>
 </head>
-<body>
-  <main class="yte-bg yte-text yte-options-container yte-flashlight-container">
-    <article class="yte-p-md">
+<body class="yte-bg">
+  <main class="yte-text yte-options-container yte-flashlight-container">
+    <div id="options-info" class="yte-p-md yte-bg">
       <h1 class="yte-text yte-text-lg">
-        You<span class="yte-color-theme">Tube</span> extension options
+        YouTube extension options
       </h1>
-      <p class="yte-mt-md yte-color-secondary">
+      <p class="yte-mt-sm yte-text yte-color-secondary">
         Customize your experience by toggling the options below. Changes will be saved automatically.
       </p>
-    </article>
+    </div>
     <form>
       <!-- Placeholder for options -->
     </form>
   </main>
 
   <template>
-    <div class="yte-p-md yte-flex yte-space-between yte-align-center">
-      <article class="yte-option-info">
+    <div id="option" class="yte-p-md yte-flex yte-space-between yte-align-center">
+      <div class="yte-option-info">
         <h2 id="option-title" class="yte-text">Option title</h2>
-        <p id="option-description" class="yte-mt-sm yte-text-sm yte-color-secondary">Option description</p>
-      </article>
+        <p id="option-description" class="yte-text yte-text-sm yte-color-secondary">Option description</p>
+      </div>
       <label class="yte-ms-md yte-switch">
         <input type="checkbox" name="optionName">
         <span class="yte-switch-slider"></span>
       </label>
     </div>
   </template>
+
 </body>
 </html>

@@ -1,3 +1,5 @@
+'use strict';
+
 const options = {};
 const loopVideoTabIds = [];
 

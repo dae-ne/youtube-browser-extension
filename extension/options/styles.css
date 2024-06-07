@@ -1,5 +1,19 @@
-form > div:not(:last-child) {
-  border-bottom: var(--border-width) solid var(--border-color);
+#option {
+  z-index: 1;
+  background-color: var(--background-color);
+  transition: background-color 0.5s;
+}
+
+form > #option {
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+#option:hover {
+  background-color: transparent;
+}
+
+#options-info {
+  z-index: 1000;
 }
 
 .yte-options-container {

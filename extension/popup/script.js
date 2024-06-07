@@ -1,3 +1,5 @@
+'use strict';
+
 const optionsButton = document.querySelector('#options-button');
 
 optionsButton.addEventListener('click', () => {

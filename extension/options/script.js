@@ -1,3 +1,5 @@
+'use strict';
+
 const options = {};
 const form = document.querySelector('form');
 const template = document.querySelector('template');

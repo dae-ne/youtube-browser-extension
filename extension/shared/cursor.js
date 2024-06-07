@@ -1,22 +1,27 @@
 (() => {
-  const container = document.querySelector('.yte-flashlight-container');
-  const flashlight = document.createElement('span');
+  'use strict';
 
-  flashlight.classList.add('yte-flashlight', 'hidden');
-  container.appendChild(flashlight);
+  const FLASHLIGHT_HIDDEN_CLASS = 'yte-flashlight-hidden';
+
+  const container = document.querySelector('.yte-flashlight-container');
+  container.classList.add(FLASHLIGHT_HIDDEN_CLASS);
 
   document.addEventListener('mousemove', (e) => {
-    const width = flashlight.offsetWidth;
-    const height = flashlight.offsetHeight;
-    flashlight.style.top = `${e.pageY - height / 2}px`;
-    flashlight.style.left = `${e.pageX - width / 2}px`;
+    const style = getComputedStyle(document.documentElement);
+    const sizeAsString = style.getPropertyValue('--flashlight-size');
+    const size = parseInt(sizeAsString.slice(0, -2), 10);
+
+    const getFlashlightPosition = (mousePosition, size) => `${mousePosition - size / 2}px`;
+
+    document.documentElement.style.setProperty('--flashlight-y', getFlashlightPosition(e.pageY, size));
+    document.documentElement.style.setProperty('--flashlight-x', getFlashlightPosition(e.pageX, size));
   });
 
   container.addEventListener('mouseleave', () => {
-    flashlight.classList.add('hidden');
+    container.classList.add(FLASHLIGHT_HIDDEN_CLASS);
   });
 
   container.addEventListener('mouseenter', () => {
-    flashlight.classList.remove('hidden');
+    container.classList.remove(FLASHLIGHT_HIDDEN_CLASS);
   });
 })();

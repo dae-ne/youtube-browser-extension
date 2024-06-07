@@ -1,4 +1,6 @@
 (() => {
+  'use strict';
+
   let adsObserver;
 
   function handleAction(request) {
