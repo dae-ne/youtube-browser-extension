@@ -1,5 +1,12 @@
 'use strict';
 
+import {
+  loopVideo,
+  displayShortsToVideoButton,
+  addShortsUiUpdates,
+  removeShortsGlobalCssClasses
+} from './content/injected-scripts.js';
+
 const options = {};
 const loopVideoTabIds = [];
 
@@ -7,6 +14,7 @@ function updateApp(url, tabId) {
   // TODO: handle switching options off
 
   const { sendMessage } = chrome.tabs;
+  const { executeScript } = chrome.scripting;
 
   const {
     autoSkipAds,
@@ -16,26 +24,29 @@ function updateApp(url, tabId) {
     // TODO: handle the removeAds option
   } = options;
 
-  if (url.includes('youtube.com/shorts')) {
-    showShortsToVideoButton && sendMessage(tabId, { action: 'show-shorts-to-video-button' });
-    updateShortsUI && sendMessage(tabId, { action: 'add-shorts-ui-updates' });
+  if (url.includes('youtube.com')) {
+    updateShortsUI || sendMessage(tabId, { action: 'disconnect-ads-observer' });
   }
 
-  if (url.includes('youtube.com/watch')) {
-    autoSkipAds && sendMessage(tabId, { action: 'auto-skip-ads' });
+  if (url.includes('youtube.com/shorts')) {
+    showShortsToVideoButton && executeScript({ target: { tabId }, func: displayShortsToVideoButton });
+    updateShortsUI && executeScript({ target: { tabId }, func: addShortsUiUpdates });
   }
 
   if (url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {
-    loopShortsToVideo && sendMessage(tabId, { action: 'loop-video' });
+    loopShortsToVideo && executeScript({ target: { tabId }, func: loopVideo });
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
   if (url.includes('youtube.com') && !url.includes('watch')) {
+    // The content script checks if a miniplayer is opened.
+    // If it is, it will not disconnect the observer.
     sendMessage(tabId, { action: 'disconnect-ads-observer' });
   }
 
   if (url.includes('youtube.com') && !url.includes('shorts')) {
-    sendMessage(tabId, { action: 'remove-shorts-global-css-classes' });
+    autoSkipAds && sendMessage(tabId, { action: 'auto-skip-ads' });
+    executeScript({ target: { tabId }, func: removeShortsGlobalCssClasses });
   }
 }
 

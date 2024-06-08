@@ -5,16 +5,18 @@ const { node, browser, webextensions } = globals;
 
 export default [
   {
-    files: ['**/*.js'],
-    languageOptions: { sourceType: 'commonjs' }
-  },
-  {
     files: ['extension/**/*.js'],
-    languageOptions: { globals: { ...browser, ...webextensions } }
+    languageOptions: {
+      globals: { ...browser, ...webextensions },
+      sourceType: 'module'
+    }
   },
   {
     files: ['scripts/**/*.js'],
-    languageOptions: { globals: node }
+    languageOptions: {
+      globals: node,
+      sourceType: 'commonjs'
+    }
   },
   pluginJs.configs.recommended,
 ];

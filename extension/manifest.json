@@ -2,10 +2,11 @@
   "name": "YouTube extension",
   "version": "1.0.0",
   "description": "Chrome extension for YouTube",
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage", "scripting"],
   "host_permissions": ["https://*.youtube.com/*"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "action": {
     "default_popup": "popup/index.html"
@@ -17,14 +18,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
-      "js": [
-        "content/shorts.js",
-        "content/video.js"
-      ],
-      "css": [
-        "content/ads.css",
-        "content/shorts.css"
-      ],
+      "js": ["content/content-scripts.js"],
+      "css": ["content/content-styles.css"],
       "run_at": "document_start"
     }
   ],

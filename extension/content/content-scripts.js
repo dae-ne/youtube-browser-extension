@@ -3,26 +3,19 @@
 
   let adsObserver;
 
-  function handleAction(request) {
-    switch (request.action) {
-      case 'auto-skip-ads':
-        autoSkipAds();
-        break;
-      case 'disconnect-ads-observer':
-        disconnectAdsObserver();
-        break;
-      case 'loop-video':
-        loopVideo();
-        break;
-    }
-  }
+  const actionHandlers = {
+    'auto-skip-ads': autoSkipAds,
+    'disconnect-ads-observer': disconnectAdsObserver
+  };
 
-  function isVideo() {
-    return window.location.href.includes('youtube.com/watch');
+  function isVideoOpened() {
+    const isWatchPage = window.location.href.includes('youtube.com/watch');
+    const isMiniplayerOpened = !!document.querySelector('.miniplayer');
+    return isWatchPage || isMiniplayerOpened;
   }
 
   function autoSkipAds() {
-    if (!isVideo()) {
+    if (!isVideoOpened()) {
       return;
     }
 
@@ -64,20 +57,12 @@
   }
 
   function disconnectAdsObserver() {
-    if (isVideo()) {
+    if (isVideoOpened()) {
       return;
     }
 
     adsObserver?.disconnect();
   }
 
-  function loopVideo() {
-    if (!isVideo()) {
-      return;
-    }
-
-    document.querySelector('video').loop = true;
-  }
-
-  chrome.runtime.onMessage.addListener(handleAction);
+  chrome.runtime.onMessage.addListener(({ action }) => actionHandlers[action]());
 })();
