@@ -1,10 +1,29 @@
-'use strict';
+/**
+ * Methods in this file are injected into the YouTube page to manipulate
+ * the UI. The methods are called from the background script (usually when the
+ * URL changes). It uses the chrome.scripting API to inject the methods into
+ * the page, that means all the methods run in an isolated environment and have
+ * no access to the global scope. An injected method cannot access anything
+ * outside of its scope (even other methods in the same file), so don't try
+ * to DRY, just put everything in one method.
+ */
 
-export function loopVideo() {
-  document.querySelector('video').loop = true;
+/**
+ * Finds the video element and sets the loop property.
+ * @param {boolean} loop - The value to set the loop property to.
+ */
+export function loopVideo(loop = true) {
+  document.querySelector('video').loop = loop;
 }
 
+/**
+ * Displays a button to open the video from the shorts page (on an action bar
+ * next to the shorts player). When clicked, it opens the video page in
+ * a new tab.
+ */
 export function displayShortsToVideoButton() {
+  const INTERVAL_MS = 200;
+
   const isShortsPage = window.location.href.includes('youtube.com/shorts');
 
   if (!isShortsPage) {
@@ -17,7 +36,7 @@ export function displayShortsToVideoButton() {
   const actions = renderer?.querySelector('#actions');
 
   if (!actions) {
-    setTimeout(displayShortsToVideoButton, 200);
+    setTimeout(displayShortsToVideoButton, INTERVAL_MS);
     return;
   }
 
@@ -59,14 +78,22 @@ export function displayShortsToVideoButton() {
   actions.insertBefore(button, actions.querySelector('#menu-button'));
 }
 
+/**
+ * Adds CSS classes to the shorts page elements to style them. Runs recursively
+ * with a specified interval until all the elements are found and styled.
+ * @param {boolean} firstRun - If it's the first run of the function.
+ * @param {string[]} missingElements - The elements that are not found yet.
+ */
 export function addShortsUiUpdates(firstRun = true, missingElements = []) {
+  const INTERVAL_MS = 200;
+
   const isShortsPage = window.location.href.includes('youtube.com/shorts');
 
   if (!isShortsPage) {
     return;
   }
 
-  if (!firstRun && missingElements.length === 0) {
+  if (!firstRun && missingElements.length < 1) {
     return;
   }
 
@@ -117,9 +144,15 @@ export function addShortsUiUpdates(firstRun = true, missingElements = []) {
     return;
   }
 
-  setTimeout(() => addShortsUiUpdates(false, missingElements), 200);
+  setTimeout(() => addShortsUiUpdates(false, missingElements), INTERVAL_MS);
 }
 
+/**
+ * Removes CSS classes with a specific prefix from the page elements.
+ * By default, it removes all classes with the 'yte' prefix, so all the
+ * classes that are added by this extension.
+ * @param {string} classNamePrefix - The prefix of the classes to remove.
+ */
 export function removeCssClasses(classNamePrefix = 'yte') {
   const isShortsPage = window.location.href.includes('youtube.com/shorts');
 

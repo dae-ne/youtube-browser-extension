@@ -7,9 +7,25 @@ import {
   removeCssClasses
 } from './content/injected-scripts.js';
 
+/**
+ * The options loaded from the storage.
+ * @type {Object}
+ */
 const options = {};
+
+/**
+ * The tab IDs of the tabs that are looping videos after opening them from the
+ * shorts page.
+ * @type {number[]}
+ */
 const loopVideoTabIds = [];
 
+/**
+ * Updates the app based on the URL and the tab ID. It will send messages
+ * to the content scripts and inject scripts based on the URL and the options.
+ * @param {string} url - The URL of the tab.
+ * @param {number} tabId - The ID of the tab.
+ */
 function updateApp(url, tabId) {
   // TODO: handle switching options off
 
@@ -70,6 +86,10 @@ chrome.storage.sync.get().then((data) => {
   Object.assign(options, data);
 });
 
+/**
+ * Listens for storage changes and updates the options object. Triggers the
+ * app update function with the new options for each youtube tab.
+ */
 chrome.storage.onChanged.addListener((changes) => {
   for (const [name, { newValue }] of Object.entries(changes)) {
     options[name] = newValue;
@@ -80,6 +100,11 @@ chrome.storage.onChanged.addListener((changes) => {
   });
 });
 
+/**
+ * Listens for tab updates and triggers the app update function. The app update
+ * function will update the content scripts and the injected scripts based on
+ * the tab URL, options, and the tab ID.
+ */
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   const { url } = tab;
 
@@ -90,6 +115,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   updateApp(url, tabId);
 });
 
+/**
+ * Listens for content script messages and triggers the corresponding actions.
+ */
 chrome.runtime.onMessage.addListener((request, sender) => {
   const { create } = chrome.tabs;
 
