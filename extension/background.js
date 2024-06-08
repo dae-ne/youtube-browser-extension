@@ -66,6 +66,11 @@ function updateApp(url, tabId) {
   }
 }
 
+/**
+ * Loads the options from the storage and assigns them to the options object.
+ * If the options don't exist in the storage, it will create them with the
+ * default values.
+ */
 chrome.storage.sync.get().then((data) => {
   const dataExists = data && Object.keys(data).length;
 

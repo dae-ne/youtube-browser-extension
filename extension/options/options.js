@@ -1,9 +1,27 @@
 'use strict';
 
+/**
+ * The options object that stores the user's preferences.
+ * @type {Object<string, boolean>}
+ */
 const options = {};
+
+/**
+ * The form element that contains checkboxes for the options.
+ * @type {HTMLFormElement}
+ */
 const form = document.querySelector('form');
+
+/**
+ * The HTML template element for the option items.
+ * @type {HTMLTemplateElement}
+ */
 const template = document.querySelector('template');
 
+/**
+ * The data for the options that will be displayed (name, title, description).
+ * @type {Object[]}
+ */
 const optionsData = [
   {
     name: 'autoSkipAds',
@@ -32,6 +50,10 @@ const optionsData = [
   }
 ];
 
+/**
+ * Creates the option items using the template and the options data, and adds
+ * them to the form.
+ */
 optionsData.forEach(({ name, title, description }) => {
   const clone = template.content.cloneNode(true);
   const titleElement = clone.querySelector('#option-title');
@@ -50,6 +72,9 @@ optionsData.forEach(({ name, title, description }) => {
   form.appendChild(clone);
 });
 
+/**
+ * Loads the options from the storage and updates the form.
+ */
 chrome.storage.sync.get().then((data) => {
   Object.assign(options, data);
 
@@ -62,6 +87,10 @@ chrome.storage.sync.get().then((data) => {
   }
 });
 
+/**
+ * Updates the options object on checkbox value change and saves the new value
+ * to the storage.
+ */
 form.addEventListener('change', (event) => {
   const { target } = event;
   const { name, type, checked } = target;
