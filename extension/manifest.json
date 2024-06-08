@@ -9,10 +9,10 @@
     "type": "module"
   },
   "action": {
-    "default_popup": "popup/index.html"
+    "default_popup": "popup/popup.html"
   },
   "options_ui": {
-    "page": "options/index.html",
+    "page": "options/options.html",
     "open_in_tab": false
   },
   "content_scripts": [
