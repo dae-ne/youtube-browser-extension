@@ -64,5 +64,5 @@
     adsObserver?.disconnect();
   }
 
-  chrome.runtime.onMessage.addListener(({ action }) => actionHandlers[action]());
+  chrome.runtime.onMessage.addListener(({ action }) => actionHandlers[action]?.());
 })();
