@@ -1,15 +1,15 @@
-#option {
+.yte-option-item {
   z-index: 1;
   background-color: var(--background-color);
+  border-top: var(--border-width) solid var(--border-color);
   transition: background-color 0.5s;
+}
+
+.yte-option-item label {
   cursor: pointer;
 }
 
-form > #option {
-  border-top: var(--border-width) solid var(--border-color);
-}
-
-#option:hover {
+.yte-option-item:hover {
   background-color: transparent;
 }
 
@@ -18,7 +18,7 @@ form > #option {
 }
 
 .yte-options-container {
-  min-width: 620px;
+  width: 620px;
 }
 
 .yte-option-info {
