@@ -24,10 +24,6 @@ function updateApp(url, tabId) {
     // TODO: handle the removeAds option
   } = options;
 
-  if (url.includes('youtube.com')) {
-    updateShortsUI || sendMessage(tabId, { action: 'disconnect-ads-observer' });
-  }
-
   if (url.includes('youtube.com/shorts')) {
     showShortsToVideoButton && executeScript({ target: { tabId }, func: displayShortsToVideoButton });
     updateShortsUI && executeScript({ target: { tabId }, func: addShortsUiUpdates });
@@ -61,7 +57,7 @@ chrome.storage.sync.get().then((data) => {
   const initialOptions = {
     autoSkipAds: true,
     showShortsToVideoButton: true,
-    loopShortsToVideo: false,
+    loopShortsToVideo: true,
     updateShortsUI: true,
     removeAds: true
   };
