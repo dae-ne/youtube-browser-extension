@@ -2,24 +2,28 @@
 
 /**
  * The options object that stores the user's preferences.
+ *
  * @type {Object<string, boolean>}
  */
 const options = {};
 
 /**
  * The form element that contains checkboxes for the options.
+ *
  * @type {HTMLFormElement}
  */
 const form = document.querySelector('form');
 
 /**
  * The HTML template element for the option items.
+ *
  * @type {HTMLTemplateElement}
  */
 const template = document.querySelector('template');
 
 /**
  * The data for the options that will be displayed (name, title, description).
+ *
  * @type {Object[]}
  */
 const optionsData = [

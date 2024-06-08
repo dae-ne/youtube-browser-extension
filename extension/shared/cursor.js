@@ -9,6 +9,7 @@
   /**
    * The class name for the flashlight container when the effect should
    * not be visible.
+   *
    * @constant
    * @type {string}
    * @default
@@ -18,6 +19,7 @@
   /**
    * The flashlight container element. The following flashlight effect is
    * a pseudo element inside this container.
+   *
    * @type {HTMLElement}
    */
   const container = document.querySelector('.yte-flashlight-container');

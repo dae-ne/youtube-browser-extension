@@ -2,6 +2,7 @@
 
 /**
  * Button to open the options page.
+ *
  * @type {HTMLButtonElement}
  */
 const optionsButton = document.querySelector('#options-button');

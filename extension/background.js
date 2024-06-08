@@ -9,6 +9,7 @@ import {
 
 /**
  * The options loaded from the storage.
+ *
  * @type {Object}
  */
 const options = {};
@@ -16,6 +17,7 @@ const options = {};
 /**
  * The tab IDs of the tabs that are looping videos after opening them from the
  * shorts page.
+ *
  * @type {number[]}
  */
 const loopVideoTabIds = [];
@@ -23,6 +25,7 @@ const loopVideoTabIds = [];
 /**
  * Updates the app based on the URL and the tab ID. It will send messages
  * to the content scripts and inject scripts based on the URL and the options.
+ *
  * @param {string} url - The URL of the tab.
  * @param {number} tabId - The ID of the tab.
  */

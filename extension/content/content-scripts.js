@@ -3,6 +3,7 @@
 
   /**
    * The interval in milliseconds for recurring tasks.
+   *
    * @constant
    * @type {number}
    * @default
@@ -11,12 +12,14 @@
 
   /**
    * The observer that watches for ads to skip them.
+   *
    * @type {MutationObserver}
    */
   let adsObserver;
 
   /**
    * The action handlers for messages from the background script.
+   *
    * @type {Object<string, Function>}
    */
   const actionHandlers = {
@@ -27,6 +30,7 @@
   /**
    * Checks if the current page is a video page. Checks the URL but also
    * if the miniplayer is opened.
+   *
    * @returns {boolean} Whether the current page is a video page.
    */
   function isVideoOpened() {

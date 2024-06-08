@@ -10,6 +10,7 @@
 
 /**
  * Finds the video element and sets the loop property.
+ *
  * @param {boolean} loop - The value to set the loop property to.
  */
 export function loopVideo(loop = true) {
@@ -81,6 +82,7 @@ export function displayShortsToVideoButton() {
 /**
  * Adds CSS classes to the shorts page elements to style them. Runs recursively
  * with a specified interval until all the elements are found and styled.
+ *
  * @param {boolean} firstRun - If it's the first run of the function.
  * @param {string[]} missingElements - The elements that are not found yet.
  */
@@ -151,6 +153,7 @@ export function addShortsUiUpdates(firstRun = true, missingElements = []) {
  * Removes CSS classes with a specific prefix from the page elements.
  * By default, it removes all classes with the 'yte' prefix, so all the
  * classes that are added by this extension.
+ *
  * @param {string} classNamePrefix - The prefix of the classes to remove.
  */
 export function removeCssClasses(classNamePrefix = 'yte') {
