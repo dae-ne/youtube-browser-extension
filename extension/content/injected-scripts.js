@@ -120,18 +120,18 @@ export function addShortsUiUpdates(firstRun = true, missingElements = []) {
   setTimeout(() => addShortsUiUpdates(false, missingElements), 200);
 }
 
-export function removeShortsGlobalCssClasses() {
+export function removeCssClasses(classNamePrefix = 'yte') {
   const isShortsPage = window.location.href.includes('youtube.com/shorts');
 
   if (isShortsPage) {
     return;
   }
 
-  const elements = document.querySelectorAll('[class*="yte-shorts-g-"]');
+  const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
 
   elements.forEach((element) => {
     const classNamesToRemove = Array.from(element.classList)
-      .filter((className) => className.startsWith('yte-shorts-g-'));
+      .filter((className) => className.startsWith(classNamePrefix));
 
     element.classList.remove(...classNamesToRemove);
   });

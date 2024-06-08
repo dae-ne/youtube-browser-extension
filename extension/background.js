@@ -4,7 +4,7 @@ import {
   loopVideo,
   displayShortsToVideoButton,
   addShortsUiUpdates,
-  removeShortsGlobalCssClasses
+  removeCssClasses
 } from './content/injected-scripts.js';
 
 const options = {};
@@ -24,6 +24,10 @@ function updateApp(url, tabId) {
     // TODO: handle the removeAds option
   } = options;
 
+  if (url.includes('youtube.com')) {
+    updateShortsUI || executeScript({ target: { tabId }, func: () => removeCssClasses('yte-shorts-') });
+  }
+
   if (url.includes('youtube.com/shorts')) {
     showShortsToVideoButton && executeScript({ target: { tabId }, func: displayShortsToVideoButton });
     updateShortsUI && executeScript({ target: { tabId }, func: addShortsUiUpdates });
@@ -42,7 +46,7 @@ function updateApp(url, tabId) {
 
   if (url.includes('youtube.com') && !url.includes('shorts')) {
     autoSkipAds && sendMessage(tabId, { action: 'auto-skip-ads' });
-    executeScript({ target: { tabId }, func: removeShortsGlobalCssClasses });
+    executeScript({ target: { tabId }, func: () => removeCssClasses('yte-shorts-g-') });
   }
 }
 
