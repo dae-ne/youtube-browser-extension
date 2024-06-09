@@ -1,9 +1,9 @@
 /**
- * Methods in this file are injected into the YouTube page to manipulate
- * the UI. The methods are called from the background script using
- * chrome.scripting API and run in an isolated environment. Once a function
- * is injected, it can't access this file or any other file in the extension.
- * Don't try to DRY, just keep the methods simple and self-contained.
+ * Methods in this file are injected into a YouTube page to manipulate the UI.
+ * The methods are called from the background script using the chrome.scripting
+ * API and run in an isolated environment. Once a function is injected,
+ * it can't access this file or any other file in the extension. Don't try
+ * to DRY, just keep the methods simple and self-contained.
  */
 
 /**
