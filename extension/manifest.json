@@ -1,7 +1,7 @@
 {
-  "name": "YouTube extension",
+  "name": "YouTube Extension",
   "version": "1.0.0",
-  "description": "Chrome extension for YouTube",
+  "description": "Chrome extension for YouTube.",
   "permissions": ["tabs", "storage", "scripting"],
   "host_permissions": ["https://*.youtube.com/*"],
   "background": {
