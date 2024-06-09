@@ -36,7 +36,7 @@
   function isVideoOpened() {
     const isWatchPage = window.location.href.includes('youtube.com/watch');
     const miniplayer = document.querySelector('.miniplayer');
-    const isMiniplayerOpened = miniplayer?.querySelector('video');
+    const isMiniplayerOpened = !!miniplayer?.querySelector('video');
     return isWatchPage || isMiniplayerOpened;
   }
 
