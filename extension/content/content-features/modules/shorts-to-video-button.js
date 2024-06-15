@@ -70,9 +70,8 @@ export function displayShortsToVideoButton() {
 
   newButtonContainer.id = BUTTON_ID;
 
-  const button = setButton(newButtonContainer, shareButtonContainer);
+  const button = createButton(newButtonContainer, shareButtonContainer);
 
-  observer?.disconnect();
   observer = createNewObserver();
 
   observer.observe(shareButtonContainer.querySelector('label'), {
@@ -95,14 +94,14 @@ export function cleanUp() {
 }
 
 /**
- * Sets the new button. It clones nodes from elements that already exist
+ * Creates the new button. It clones nodes from elements that already exist
  * on the page and adds event listeners.
  *
  * @param {HTMLElement} container The container for the new button.
  * @param {HTMLElement} templateContainer The template container for the new button.
  * @returns {HTMLElement} The new button.
  */
-function setButton(container, templateContainer) {
+function createButton(container, templateContainer) {
   const templateButtonLabel = templateContainer.querySelector('label');
   const templateButton = templateContainer.querySelector('button');
   const templateButtonTouchFeedback = templateButton.querySelector('yt-touch-feedback-shape');
