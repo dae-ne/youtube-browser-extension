@@ -3,7 +3,7 @@ import { ACTIONS } from '../shared/actions.js';
 import {
   autoSkipAdvertisementsFeature as ft1,
   shortsToVideoButtonFeature as ft2
-} from './content-features';
+} from './features';
 
 /**
  * The action handlers for messages from the background script.
