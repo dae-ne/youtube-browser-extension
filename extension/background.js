@@ -132,7 +132,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.runtime.onMessage.addListener((request, sender) => {
   const { create } = chrome.tabs;
 
-  if (request.action === 'open-video-from-shorts') {
+  if (request.action === ACTIONS.OPEN_VIDEO_FROM_SHORTS) {
     create({
       url: request.url,
       index: sender.tab.index + 1,

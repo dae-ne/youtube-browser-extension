@@ -1,3 +1,4 @@
+import ACTIONS from '../../../shared/actions.js';
 import { isShortsPage } from '../common';
 
 /**
@@ -138,7 +139,10 @@ function handleButtonClick(renderer) {
   const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
 
   renderer.querySelector('video').pause();
-  chrome.runtime.sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
+  chrome.runtime.sendMessage({
+    action: ACTIONS.OPEN_VIDEO_FROM_SHORTS,
+    url: videoUrl
+  });
 }
 
 /**
