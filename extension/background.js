@@ -2,10 +2,10 @@
 
 import {
   loopVideo,
-  displayShortsToVideoButton,
   addShortsUiUpdates,
-  removeCssClasses
-} from './content/injected-scripts.js';
+  removeShortsCssClasses,
+  removeShortsGlobalCssClasses
+} from './content/injected-scripts';
 
 /**
  * The options loaded from the storage.
@@ -44,11 +44,11 @@ function updateApp(url, tabId) {
   } = options;
 
   if (url.includes('youtube.com')) {
-    updateShortsUI || executeScript({ target: { tabId }, func: () => removeCssClasses('yte-shorts-') });
+    updateShortsUI || executeScript({ target: { tabId }, func: removeShortsCssClasses });
   }
 
   if (url.includes('youtube.com/shorts')) {
-    showShortsToVideoButton && executeScript({ target: { tabId }, func: displayShortsToVideoButton });
+    showShortsToVideoButton && sendMessage(tabId, { action: 'display-shorts-to-video-button' });
     updateShortsUI && executeScript({ target: { tabId }, func: addShortsUiUpdates });
   }
 
@@ -60,12 +60,13 @@ function updateApp(url, tabId) {
   if (url.includes('youtube.com') && !url.includes('watch')) {
     // The content script checks if a miniplayer is opened.
     // If it is, it will not disconnect the observer.
-    sendMessage(tabId, { action: 'disconnect-ads-observer' });
+    sendMessage(tabId, { action: 'disconnect-advertisements-observer' });
   }
 
   if (url.includes('youtube.com') && !url.includes('shorts')) {
-    autoSkipAds && sendMessage(tabId, { action: 'auto-skip-ads' });
-    executeScript({ target: { tabId }, func: () => removeCssClasses('yte-shorts-g-') });
+    autoSkipAds && sendMessage(tabId, { action: 'auto-skip-advertisements' });
+    sendMessage(tabId, { action: 'shorts-to-video-button-cleanup' });
+    executeScript({ target: { tabId }, func: removeShortsGlobalCssClasses });
   }
 }
 

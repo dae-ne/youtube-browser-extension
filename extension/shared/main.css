@@ -399,7 +399,7 @@ hr {
 
 .yte-switch-slider::before {
   position: absolute;
-  content: "";
+  content: ' ';
   height: calc(var(--font-size-lg) - 4px);
   width: calc(var(--font-size-lg) - 4px);
   left: 2px;

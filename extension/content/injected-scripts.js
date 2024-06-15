@@ -12,69 +12,13 @@
  * @param {boolean} loop - The value to set the loop property to.
  */
 export function loopVideo(loop = true) {
-  document.querySelector('video').loop = loop;
-}
+  const video = document.querySelector('video');
 
-/**
- * Displays a button to open the video from the shorts page (on an action bar
- * next to the shorts player). When clicked, it opens the video page in
- * a new tab.
- */
-export function displayShortsToVideoButton() {
-  const INTERVAL_MS = 200;
-
-  const isShortsPage = window.location.href.includes('youtube.com/shorts');
-
-  if (!isShortsPage) {
+  if (!video) {
     return;
   }
 
-  const { getURL, sendMessage } = chrome.runtime;
-
-  const renderer = document.querySelector('ytd-shorts [is-active]');
-  const actions = renderer?.querySelector('#actions');
-
-  if (!actions) {
-    setTimeout(displayShortsToVideoButton, INTERVAL_MS);
-    return;
-  }
-
-  let button = actions.querySelector('.yte-shorts-actions-btn');
-
-  if (button) {
-    return;
-  }
-
-  const image = document.createElement('img');
-  image.src = getURL('resources/video-play.svg');
-  image.classList.add('yte-shorts-actions-btn-icon');
-
-  button = document.createElement('button');
-
-  button.classList.add(
-    'yte-shorts-actions-btn',
-    'yt-spec-button-shape-next',
-    'yt-spec-button-shape-next--tonal',
-    'yt-spec-button-shape-next--mono',
-    'yt-spec-button-shape-next--size-l',
-    'yt-spec-button-shape-next--icon-button');
-
-  button.appendChild(image);
-
-  button.addEventListener('click', () => {
-    const currentUrl = window.location.href;
-
-    if (!currentUrl.includes('youtube.com/shorts')) {
-      return;
-    }
-
-    const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
-
-    renderer.querySelector('video').pause();
-    sendMessage({ action: 'open-video-from-shorts', url: videoUrl });
-  });
-
-  actions.insertBefore(button, actions.querySelector('#menu-button'));
+  video.loop = loop;
 }
 
 /**
@@ -147,25 +91,63 @@ export function addShortsUiUpdates(firstRun = true, missingElements = []) {
   setTimeout(() => addShortsUiUpdates(false, missingElements), INTERVAL_MS);
 }
 
-/**
- * Removes CSS classes with a specific prefix from the page elements.
- * By default, it removes all classes with the 'yte' prefix, so all the
- * classes that are added by this extension.
- *
- * @param {string} classNamePrefix - The prefix of the classes to remove.
- */
-export function removeCssClasses(classNamePrefix = 'yte') {
+// /**
+//  * Removes CSS classes with a specific prefix from the page elements.
+//  * By default, it removes all classes with the 'yte' prefix, so all the
+//  * classes that are added by this extension.
+//  *
+//  * @param {string} classNamePrefix - The prefix of the classes to remove.
+//  */
+// export function removeCssClasses(classNamePrefix = 'yte') {
+//   const isShortsPage = window.location.href.includes('youtube.com/shorts');
+
+//   if (isShortsPage) {
+//     return;
+//   }
+
+//   const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
+
+//   elements.forEach((element) => {
+//     const classNamesToRemove = Array.from(element.classList)
+//       .filter((className) => className.startsWith(classNamePrefix));
+
+//     element.classList.remove(...classNamesToRemove);
+//   });
+// }
+
+export function removeShortsCssClasses() {
+  const CLASS_NAME_PREFIX = 'yte-shorts-';
+
   const isShortsPage = window.location.href.includes('youtube.com/shorts');
 
   if (isShortsPage) {
     return;
   }
 
-  const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
+  const elements = document.querySelectorAll(`[class*="${CLASS_NAME_PREFIX}"]`);
 
   elements.forEach((element) => {
     const classNamesToRemove = Array.from(element.classList)
-      .filter((className) => className.startsWith(classNamePrefix));
+      .filter((className) => className.startsWith(CLASS_NAME_PREFIX));
+
+    element.classList.remove(...classNamesToRemove);
+  });
+}
+
+export function removeShortsGlobalCssClasses() {
+  const CLASS_NAME_PREFIX = 'yte-shorts-g-';
+
+  const isShortsPage = window.location.href.includes('youtube.com/shorts');
+
+  if (isShortsPage) {
+    return;
+  }
+
+  const elements = document.querySelectorAll(`[class*="${CLASS_NAME_PREFIX}"]`);
+
+  elements.forEach((element) => {
+    const classNamesToRemove = Array.from(element.classList)
+      .filter((className) => className.startsWith(CLASS_NAME_PREFIX));
 
     element.classList.remove(...classNamesToRemove);
   });

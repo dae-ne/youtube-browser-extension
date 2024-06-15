@@ -18,5 +18,8 @@ export default [
       sourceType: 'commonjs'
     }
   },
+  {
+    ignores: ['node_modules', 'dist'],
+  },
   pluginJs.configs.recommended,
 ];

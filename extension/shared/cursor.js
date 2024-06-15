@@ -29,15 +29,15 @@
   /**
    * Updates the flashlight position based on the mouse cursor position.
    */
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', (event) => {
     const style = getComputedStyle(document.documentElement);
     const sizeAsString = style.getPropertyValue('--flashlight-size');
     const size = parseInt(sizeAsString.slice(0, -2), 10);
 
     const getFlashlightPosition = (mousePosition, size) => `${mousePosition - size / 2}px`;
 
-    document.documentElement.style.setProperty('--flashlight-y', getFlashlightPosition(e.pageY, size));
-    document.documentElement.style.setProperty('--flashlight-x', getFlashlightPosition(e.pageX, size));
+    document.documentElement.style.setProperty('--flashlight-y', getFlashlightPosition(event.pageY, size));
+    document.documentElement.style.setProperty('--flashlight-x', getFlashlightPosition(event.pageX, size));
   });
 
   /**

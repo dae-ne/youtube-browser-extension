@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const manifestPath = path.resolve(__dirname, '../extension/manifest.json');
-const htmlPath = path.resolve(__dirname, '../extension/popup/popup.html');
+const htmlPath = path.resolve(__dirname, '../extension/popup/index.html');
 
 const manifest = fs.readFileSync(manifestPath, 'utf8');
 const { version } = JSON.parse(manifest);
