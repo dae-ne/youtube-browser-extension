@@ -1,5 +1,7 @@
 'use strict';
 
+import ACTIONS from './shared/actions.js';
+
 import {
   loopVideo,
   addShortsUiUpdates,
@@ -48,7 +50,7 @@ function updateApp(url, tabId) {
   }
 
   if (url.includes('youtube.com/shorts')) {
-    showShortsToVideoButton && sendMessage(tabId, { action: 'display-shorts-to-video-button' });
+    showShortsToVideoButton && sendMessage(tabId, { action: ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON });
     updateShortsUI && executeScript({ target: { tabId }, func: addShortsUiUpdates });
   }
 
@@ -60,12 +62,12 @@ function updateApp(url, tabId) {
   if (url.includes('youtube.com') && !url.includes('watch')) {
     // The content script checks if a miniplayer is opened.
     // If it is, it will not disconnect the observer.
-    sendMessage(tabId, { action: 'disconnect-advertisements-observer' });
+    sendMessage(tabId, { action: ACTIONS.DISCONNECT_ADVERTISEMENTS_OBSERVER });
   }
 
   if (url.includes('youtube.com') && !url.includes('shorts')) {
-    autoSkipAds && sendMessage(tabId, { action: 'auto-skip-advertisements' });
-    sendMessage(tabId, { action: 'shorts-to-video-button-cleanup' });
+    autoSkipAds && sendMessage(tabId, { action: ACTIONS.AUTO_SKIP_ADVERTISEMENTS });
+    sendMessage(tabId, { action: ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
     executeScript({ target: { tabId }, func: removeShortsGlobalCssClasses });
   }
 }

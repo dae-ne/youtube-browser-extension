@@ -1,3 +1,5 @@
+import ACTIONS from '../shared/actions.js';
+
 import {
   autoSkipAdvertisementsFeature as ft1,
   shortsToVideoButtonFeature as ft2
@@ -10,12 +12,12 @@ import {
  */
 const actionHandlers = {
   // auto-skip-advertisements feature
-  'auto-skip-advertisements': ft1.autoSkipAdvertisements,
-  'disconnect-advertisements-observer': ft1.disconnectAdvertisementsObserver,
+  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: ft1.autoSkipAdvertisements,
+  [ACTIONS.DISCONNECT_ADVERTISEMENTS_OBSERVER]: ft1.disconnectAdvertisementsObserver,
 
   // shorts-to-video-button feature
-  'display-shorts-to-video-button': ft2.displayShortsToVideoButton,
-  'shorts-to-video-button-cleanup': ft2.cleanUp
+  [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: ft2.displayShortsToVideoButton,
+  [ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP]: ft2.cleanUp
 };
 
 /**
