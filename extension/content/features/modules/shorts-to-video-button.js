@@ -1,5 +1,5 @@
-import { ACTIONS } from '../../../shared/actions.js';
-import { isShortsPage } from '../common.js';
+import { ACTIONS } from '../../../shared/actions';
+import { isShortsPage } from '../common';
 
 /**
  * The interval in milliseconds for recurring tasks.
