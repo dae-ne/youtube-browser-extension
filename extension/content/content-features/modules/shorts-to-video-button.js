@@ -1,4 +1,4 @@
-import ACTIONS from '../../../shared/actions.js';
+import { ACTIONS } from '../../../shared/actions.js';
 import { isShortsPage } from '../common';
 
 /**
@@ -112,6 +112,12 @@ function createButton(container, templateContainer) {
   const newButtonTouchFeedback = templateButtonTouchFeedback.cloneNode(true);
 
   newButton.classList = templateButton.classList;
+
+  const icon = document.createElement('img');
+  icon.src = chrome.runtime.getURL('resources/video-play.svg');
+  icon.classList.add('yte-shorts-actions-btn-icon');
+
+  newButton.appendChild(icon);
 
   newButtonLabel.appendChild(newButton);
   newButton.appendChild(newButtonTouchFeedback);

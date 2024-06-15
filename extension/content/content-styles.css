@@ -15,7 +15,9 @@ ytd-watch-next-secondary-results-renderer ytd-ad-slot-renderer {
 
 .yte-shorts-actions-btn-icon {
   width: 24px;
-  filter: invert(1);
+
+  /* TODO: try to find a better way to do this */
+  filter: brightness(0) saturate(100%) invert(100%) sepia(54%) saturate(351%) hue-rotate(51deg) brightness(110%) contrast(90%);
 }
 
 @media (aspect-ratio < 12/16) {

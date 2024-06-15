@@ -1,4 +1,4 @@
-import ACTIONS from '../shared/actions.js';
+import { ACTIONS } from '../shared/actions.js';
 
 import {
   autoSkipAdvertisementsFeature as ft1,
