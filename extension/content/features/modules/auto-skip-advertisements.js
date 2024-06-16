@@ -45,7 +45,7 @@ export function autoSkipAdvertisements() {
     skipAdvertisement();
   }
 
-  disconnectAdvertisementsObserver();
+  cleanUp();
   observer.observe(adsInfoContainer, { childList: true });
 }
 
@@ -53,7 +53,7 @@ export function autoSkipAdvertisements() {
  * Disconnects the mutation observer used to watch for advertisements. Does not
  * disconnect the observer if a video is currently opened.
  */
-export function disconnectAdvertisementsObserver() {
+export function cleanUp() {
   if (isVideoOpened()) {
     return;
   }

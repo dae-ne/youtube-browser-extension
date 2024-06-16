@@ -13,7 +13,7 @@ import {
 const actionHandlers = {
   // auto-skip-advertisements feature
   [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: ft1.autoSkipAdvertisements,
-  [ACTIONS.DISCONNECT_ADVERTISEMENTS_OBSERVER]: ft1.cleanUp,
+  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP]: ft1.cleanUp,
 
   // shorts-to-video-button feature
   [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: ft2.displayShortsToVideoButton,
