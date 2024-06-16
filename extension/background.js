@@ -2,13 +2,6 @@
 
 import { ACTIONS } from './shared/actions';
 
-import {
-  loopVideo,
-  addShortsUiUpdates,
-  removeShortsCssClasses,
-  removeShortsGlobalCssClasses
-} from './content/injected-scripts';
-
 /**
  * The options loaded from the storage.
  *
@@ -35,7 +28,6 @@ function updateApp(url, tabId) {
   // TODO: handle switching options off
 
   const { sendMessage } = chrome.tabs;
-  const { executeScript } = chrome.scripting;
 
   const {
     autoSkipAds,
@@ -46,16 +38,16 @@ function updateApp(url, tabId) {
   } = options;
 
   if (url.includes('youtube.com')) {
-    updateShortsUI || executeScript({ target: { tabId }, func: removeShortsCssClasses });
+    updateShortsUI || sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS_DISABLE });
   }
 
   if (url.includes('youtube.com/shorts')) {
     showShortsToVideoButton && sendMessage(tabId, { action: ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON });
-    updateShortsUI && executeScript({ target: { tabId }, func: addShortsUiUpdates });
+    updateShortsUI && sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS });
   }
 
   if (url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {
-    loopShortsToVideo && executeScript({ target: { tabId }, func: loopVideo });
+    loopShortsToVideo && sendMessage(tabId, { action: ACTIONS.AUTO_LOOP_VIDEO });
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
@@ -68,7 +60,7 @@ function updateApp(url, tabId) {
   if (url.includes('youtube.com') && !url.includes('shorts')) {
     autoSkipAds && sendMessage(tabId, { action: ACTIONS.AUTO_SKIP_ADVERTISEMENTS });
     sendMessage(tabId, { action: ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
-    executeScript({ target: { tabId }, func: removeShortsGlobalCssClasses });
+    sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS_CLEANUP });
   }
 }
 

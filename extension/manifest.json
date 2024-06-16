@@ -2,7 +2,7 @@
   "name": "YouTube Extension",
   "version": "1.0.0",
   "description": "Chrome extension for YouTube.",
-  "permissions": ["tabs", "storage", "scripting"],
+  "permissions": ["tabs", "storage"],
   "host_permissions": ["https://*.youtube.com/*"],
   "background": {
     "service_worker": "background.js",

@@ -1,8 +1,10 @@
 import { ACTIONS } from '../shared/actions';
 
 import {
-  autoSkipAdvertisementsFeature as ft1,
-  shortsToVideoButtonFeature as ft2
+  autoLoopVideoFeature as ft1,
+  autoSkipAdvertisementsFeature as ft2,
+  shortsToVideoButtonFeature as ft3,
+  shortsUiTweaksFeature as ft4
 } from './features';
 
 /**
@@ -11,13 +13,21 @@ import {
  * @type {Object<string, Function>}
  */
 const actionHandlers = {
+  // auto-loop-video feature
+  [ACTIONS.AUTO_LOOP_VIDEO]: ft1.loopVideo,
+
   // auto-skip-advertisements feature
-  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: ft1.autoSkipAdvertisements,
-  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP]: ft1.cleanUp,
+  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: ft2.autoSkipAdvertisements,
+  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP]: ft2.cleanUp,
 
   // shorts-to-video-button feature
-  [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: ft2.displayShortsToVideoButton,
-  [ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP]: ft2.cleanUp
+  [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: ft3.displayShortsToVideoButton,
+  [ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP]: ft3.cleanUp,
+
+  // shorts-ui-tweaks feature
+  [ACTIONS.SHORTS_UI_TWEAKS]: ft4.addShortsUiUpdates,
+  [ACTIONS.SHORTS_UI_TWEAKS_CLEANUP]: ft4.cleanUp,
+  [ACTIONS.SHORTS_UI_TWEAKS_DISABLE]: ft4.disable
 };
 
 /**
