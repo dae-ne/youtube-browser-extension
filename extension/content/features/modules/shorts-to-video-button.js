@@ -51,19 +51,25 @@ export function displayShortsToVideoButton() {
   let newButtonContainer = actions.querySelector(`#${BUTTON_ID}`);
   const buttonAlreadyExists = !!newButtonContainer;
 
+  const shareButtonContainer = actions.querySelector('#share-button');
+
+  cleanUp();
+  controller = new AbortController();
+
   if (buttonAlreadyExists) {
+    const button = newButtonContainer.querySelector('button');
+    const touchFeedback = newButtonContainer.querySelector('yt-touch-feedback-shape');
+
+    handleUiChanges(button, touchFeedback);
+    handleButtonEvents(renderer, button, shareButtonContainer);
+
     return;
   }
-
-  const shareButtonContainer = actions.querySelector('#share-button');
 
   if (!shareButtonContainer.querySelector('#tooltip')) {
     setTimeout(displayShortsToVideoButton, INTERVAL_MS);
     return;
   }
-
-  cleanUp();
-  controller = new AbortController();
 
   newButtonContainer = shareButtonContainer.cloneNode(true);
   actions.insertBefore(newButtonContainer, shareButtonContainer.nextSibling);
@@ -71,17 +77,7 @@ export function displayShortsToVideoButton() {
   newButtonContainer.id = BUTTON_ID;
 
   const button = createButton(newButtonContainer, shareButtonContainer);
-
-  observer = createNewObserver();
-
-  observer.observe(shareButtonContainer.querySelector('label'), {
-    attributes: true,
-    attributeFilter: ['class']
-  });
-
-  button.addEventListener('click', () => {
-    handleButtonClick(renderer);
-  }, { signal: controller.signal });
+  handleButtonEvents(renderer, button, shareButtonContainer);
 }
 
 /**
@@ -127,6 +123,28 @@ function createButton(container, templateContainer) {
 
   handleUiChanges(newButton, newButtonTouchFeedback);
   return newButton;
+}
+
+/**
+ * Adds event listeners and a mutation observer to the button. The observer
+ * watches for changes in the share button and updates the new button
+ * accordingly.
+ *
+ * @param {HTMLElement} renderer The video renderer element.
+ * @param {HTMLElement} button The new button.
+ * @param {HTMLElement} templateButtonContainer The template container for the new button.
+ */
+function handleButtonEvents(renderer, button, templateButtonContainer) {
+  observer = createNewObserver();
+
+  observer.observe(templateButtonContainer.querySelector('label'), {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+
+  button.addEventListener('click', () => {
+    handleButtonClick(renderer);
+  }, { signal: controller.signal });
 }
 
 /**
