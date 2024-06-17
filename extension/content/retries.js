@@ -56,7 +56,9 @@ export function handleRetries(callback, options = {}, retries = 0) {
     maxRetries = MAX_NUMBER_OF_RETRIES,
   } = options;
 
-  if (retries >= maxRetries) {
+  const { status, params } = callback();
+
+  if (status === 'success' || retries >= maxRetries) {
     return;
   }
 
@@ -70,10 +72,6 @@ export function handleRetries(callback, options = {}, retries = 0) {
   };
 
   setTimeout(() => {
-    const { status, params } = callback();
-
-    if (status === "fail") {
-      handleRetries(() => callback(params), newOptions, ++retries);
-    }
+    handleRetries(() => callback(params), newOptions, ++retries);
   }, intervalMs);
 }
