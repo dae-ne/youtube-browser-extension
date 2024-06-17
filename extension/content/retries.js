@@ -48,7 +48,7 @@ const MAX_NUMBER_OF_RETRIES = 20;
  * @param {number} options.maxRetries - The maximum number of retries.
  * @param {number} retries - The retry count.
  */
-export function handleRetry(callback, options = {}, retries = 0) {
+export function handleRetries(callback, options = {}, retries = 0) {
   const {
     intervalMs = INITIAL_INTERVAL_MS,
     intervalMultiplayer = INTERVAL_MULTIPLIER,
@@ -73,7 +73,7 @@ export function handleRetry(callback, options = {}, retries = 0) {
     const { status, params } = callback();
 
     if (status === "fail") {
-      handleRetry(() => callback(params), newOptions, ++retries);
+      handleRetries(() => callback(params), newOptions, ++retries);
     }
   }, intervalMs);
 }
