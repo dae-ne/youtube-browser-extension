@@ -1,11 +1,11 @@
 import { ACTIONS } from '../shared/actions';
+import { handleRetry } from './retries';
 
 import {
   autoLoopVideoFeature as ft1,
   autoSkipAdvertisementsFeature as ft2,
   shortsToVideoButtonFeature as ft3,
-  shortsUiTweaksFeature as ft4,
-  handleRetry
+  shortsUiTweaksFeature as ft4
 } from './features';
 
 /**

@@ -1,9 +1,40 @@
-import {
-  INITIAL_INTERVAL_MS,
-  INTERVAL_MULTIPLIER,
-  MAX_INTERVAL_MS,
-  MAX_NUMBER_OF_RETRIES,
-} from "./defaults";
+/**
+ * The default initial interval in milliseconds for recurring tasks. After each
+ * retry, the interval is multiplied by the `INTERVAL_MULTIPLIER` constant.
+ *
+ * @constant
+ * @type {number}
+ * @default
+ */
+const INITIAL_INTERVAL_MS = 10;
+
+/**
+ * The multiplier for the interval in milliseconds for recurring tasks.
+ * It's used to increase the interval after each retry.
+ *
+ * @constant
+ * @type {number}
+ * @default
+ */
+const INTERVAL_MULTIPLIER = 2;
+
+/**
+ * The maximum interval in milliseconds for recurring tasks.
+ *
+ * @constant
+ * @type {number}
+ * @default
+ */
+const MAX_INTERVAL_MS = 1000;
+
+/**
+ * The maximum number of retries for recurring tasks.
+ *
+ * @constant
+ * @type {number}
+ * @default
+ */
+const MAX_NUMBER_OF_RETRIES = 20;
 
 /**
  * Handles the retry logic for a callback function. It retries the callback
