@@ -1,15 +1,6 @@
 import { isVideoOpened } from '../common';
 
 /**
- * The interval in milliseconds for recurring tasks.
- *
- * @constant
- * @type {number}
- * @default
- */
-const INTERVAL_MS = 200;
-
-/**
  * This mutation observer is used to watch for changes in the advertisements
  * container and skip the ads when they appear.
  *
@@ -26,17 +17,18 @@ const observer = new MutationObserver((mutations) => {
 /**
  * Automatically skips ads on the current video. Uses a mutation observer to
  * watch for changes in the advertisements container.
+ *
+ * @returns {Object} The status of the function and the parameters.
  */
 export function autoSkipAdvertisements() {
   if (!isVideoOpened()) {
-    return;
+    return { status: 'success', params: {} };
   }
 
   const adsInfoContainer = document.querySelector('.video-ads');
 
   if (!adsInfoContainer) {
-    setTimeout(autoSkipAdvertisements, INTERVAL_MS);
-    return;
+    return { status: 'fail', params: {} };
   }
 
   const isAdPlaying = adsInfoContainer.childNodes.length > 0;
@@ -47,6 +39,7 @@ export function autoSkipAdvertisements() {
 
   cleanUp();
   observer.observe(adsInfoContainer, { childList: true });
+  return { status: 'success', params: {} };
 }
 
 /**

@@ -4,7 +4,8 @@ import {
   autoLoopVideoFeature as ft1,
   autoSkipAdvertisementsFeature as ft2,
   shortsToVideoButtonFeature as ft3,
-  shortsUiTweaksFeature as ft4
+  shortsUiTweaksFeature as ft4,
+  handleRetry
 } from './features';
 
 /**
@@ -14,18 +15,18 @@ import {
  */
 const actionHandlers = {
   // auto-loop-video feature
-  [ACTIONS.AUTO_LOOP_VIDEO]: ft1.loopVideo,
+  [ACTIONS.AUTO_LOOP_VIDEO]: () => handleRetry(ft1.loopVideo),
 
   // auto-skip-advertisements feature
-  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: ft2.autoSkipAdvertisements,
+  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: () => handleRetry(ft2.autoSkipAdvertisements),
   [ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP]: ft2.cleanUp,
 
   // shorts-to-video-button feature
-  [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: ft3.displayShortsToVideoButton,
+  [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: () => handleRetry(ft3.displayShortsToVideoButton),
   [ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP]: ft3.cleanUp,
 
   // shorts-ui-tweaks feature
-  [ACTIONS.SHORTS_UI_TWEAKS]: ft4.addShortsUiUpdates,
+  [ACTIONS.SHORTS_UI_TWEAKS]: () => handleRetry(ft4.addShortsUiUpdates),
   [ACTIONS.SHORTS_UI_TWEAKS_CLEANUP]: ft4.cleanUp,
   [ACTIONS.SHORTS_UI_TWEAKS_DISABLE]: ft4.disable
 };

@@ -2,15 +2,6 @@ import { ACTIONS } from '../../../shared/actions';
 import { isShortsPage } from '../common';
 
 /**
- * The interval in milliseconds for recurring tasks.
- *
- * @constant
- * @type {number}
- * @default
- */
-const INTERVAL_MS = 200;
-
-/**
  * The ID of the button to open the added button.
  *
  * @constant
@@ -35,17 +26,18 @@ let controller = null;
  * Displays a button to open the video from the shorts page (new button on
  * an action bar next to the shorts player). When clicked, it opens the video
  * page in a new tab.
+ *
+ * @returns {Object} The status of the function and the parameters.
  */
 export function displayShortsToVideoButton() {
   if (!isShortsPage()) {
-    return;
+    return { status: 'success', params: {} };
   }
 
   const { renderer, actions } = getRendererAndActionsContainer();
 
   if (!actions) {
-    setTimeout(displayShortsToVideoButton, INTERVAL_MS);
-    return;
+    return { status: 'fail', params: {} };
   }
 
   let newButtonContainer = actions.querySelector(`#${BUTTON_ID}`);
@@ -63,12 +55,11 @@ export function displayShortsToVideoButton() {
     handleUiChanges(button, touchFeedback);
     handleButtonEvents(renderer, button, shareButtonContainer);
 
-    return;
+    return { status: 'success', params: {} };
   }
 
   if (!shareButtonContainer.querySelector('#tooltip')) {
-    setTimeout(displayShortsToVideoButton, INTERVAL_MS);
-    return;
+    return { status: 'fail', params: {} };
   }
 
   newButtonContainer = shareButtonContainer.cloneNode(true);
@@ -78,6 +69,7 @@ export function displayShortsToVideoButton() {
 
   const button = createButton(newButtonContainer, shareButtonContainer);
   handleButtonEvents(renderer, button, shareButtonContainer);
+  return { status: 'success', params: {} };
 }
 
 /**

@@ -1,15 +1,6 @@
 import { isShortsPage, removeCssClasses } from '../common';
 
 /**
- * The interval in milliseconds for recurring tasks.
- *
- * @constant
- * @type {number}
- * @default
- */
-const INTERVAL_MS = 200;
-
-/**
  * CSS classes to add to the shorts page elements to style them and their
  * corresponding selectors.
  *
@@ -46,10 +37,16 @@ const classes = [
  *
  * @param {boolean} firstRun - If it's the first run of the function.
  * @param {string[]} missingElements - The elements that are not found yet.
+ * @returns {Object} The status of the function and the parameters.
  */
-export function addShortsUiUpdates(firstRun = true, missingElements = []) {
+export function addShortsUiUpdates(params = {}) {
+  const {
+    firstRun = true,
+    missingElements = []
+  } = params;
+
   if (!isShortsPage() || !firstRun && missingElements.length < 1) {
-    return;
+    return { status: 'success', params: {} };
   }
 
   classes.forEach(({ className, selector }) => {
@@ -57,10 +54,10 @@ export function addShortsUiUpdates(firstRun = true, missingElements = []) {
   });
 
   if (missingElements.length < 1) {
-    return;
+    return { status: 'success', params: {} };
   }
 
-  setTimeout(() => addShortsUiUpdates(false, missingElements), INTERVAL_MS);
+  return { status: 'fail', params: { firstRun: false, missingElements } };
 }
 
 /**
