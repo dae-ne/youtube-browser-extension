@@ -22,7 +22,7 @@ const actionHandlers = {
   [ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP]: ft2.cleanUp,
 
   // shorts-to-video-button feature
-  [ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON]: () => handleRetries(ft3.displayShortsToVideoButton),
+  [ACTIONS.SHORTS_TO_VIDEO_BUTTON]: () => handleRetries(ft3.displayShortsToVideoButton),
   [ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP]: ft3.cleanUp,
 
   // shorts-ui-tweaks feature

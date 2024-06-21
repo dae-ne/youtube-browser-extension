@@ -42,7 +42,7 @@ function updateApp(url, tabId) {
   }
 
   if (url.includes('youtube.com/shorts')) {
-    showShortsToVideoButton && sendMessage(tabId, { action: ACTIONS.DISPLAY_SHORTS_TO_VIDEO_BUTTON });
+    showShortsToVideoButton && sendMessage(tabId, { action: ACTIONS.SHORTS_TO_VIDEO_BUTTON });
     updateShortsUI && sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS });
   }
 
