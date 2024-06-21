@@ -1,4 +1,4 @@
-import { isVideoOpened } from '../common';
+import { isVideoOpened } from '../lib/utils';
 
 /**
  * This mutation observer is used to watch for changes in the advertisements

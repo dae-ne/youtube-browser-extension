@@ -8,9 +8,6 @@
     "service_worker": "background.js",
     "type": "module"
   },
-  "action": {
-    "default_popup": "popup/index.html"
-  },
   "options_ui": {
     "page": "options/index.html",
     "open_in_tab": false
@@ -18,8 +15,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
-      "js": ["content/yte-scripts.js"],
-      "css": ["content/yte-styles.css"],
+      "js": ["yte-scripts.js"],
+      "css": ["yte-styles.css"],
       "run_at": "document_start"
     }
   ],

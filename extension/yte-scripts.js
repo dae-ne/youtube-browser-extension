@@ -1,5 +1,5 @@
-import { ACTIONS } from '../shared/actions';
-import { handleRetries } from './retries';
+import { ACTIONS } from './actions';
+import { handleRetries } from './lib/retries';
 
 import {
   autoLoopVideoFeature as ft1,

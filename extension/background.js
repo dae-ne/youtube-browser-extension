@@ -1,6 +1,6 @@
 'use strict';
 
-import { ACTIONS } from './shared/actions';
+import { ACTIONS } from './actions';
 
 /**
  * The options loaded from the storage.

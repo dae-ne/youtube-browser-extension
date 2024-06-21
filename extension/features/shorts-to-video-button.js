@@ -1,5 +1,5 @@
-import { ACTIONS } from '../../../shared/actions';
-import { isShortsPage } from '../common';
+import { ACTIONS } from '../actions';
+import { isShortsPage } from '../lib/utils';
 
 /**
  * The ID of the button to open the added button.

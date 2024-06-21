@@ -6,13 +6,12 @@
     "lint:css": "stylelint **/*.css",
     "prepare": "git config core.hooksPath .githooks",
     "build:background": "esbuild --bundle ./extension/background.js --outfile=./dist/background.js --minify",
-    "build:content-scripts": "esbuild --bundle ./extension/content/yte-scripts.js --outfile=./dist/content/yte-scripts.js",
-    "build:content-styles": "esbuild --bundle ./extension/content/yte-styles.css --outfile=./dist/content/yte-styles.css --minify",
-    "build:popup": "vite build extension/popup/ --outDir=../../dist/popup/ --base ./ --emptyOutDir --minify",
+    "build:content-scripts": "esbuild --bundle ./extension/yte-scripts.js --outfile=./dist/yte-scripts.js",
+    "build:content-styles": "esbuild --bundle ./extension/yte-styles.css --outfile=./dist/yte-styles.css --minify",
     "build:options": "vite build extension/options/ --outDir=../../dist/options/ --base ./ --emptyOutDir --minify",
     "build:copy-manifest": "copyfiles -f ./extension/manifest.json ./dist",
     "build:copy-resources": "copyfiles -f ./extension/resources/* ./dist/resources",
-    "build": "concurrently --kill-others \"npm run build:popup\" \"npm run build:options\" && concurrently --kill-others \"npm run build:background\" \"npm run build:content-scripts\" \"npm run build:content-styles\" \"npm run build:copy-manifest\" \"npm run build:copy-resources\"",
+    "build": "npm run build:options && concurrently --kill-others \"npm run build:background\" \"npm run build:content-scripts\" \"npm run build:content-styles\" \"npm run build:copy-manifest\" \"npm run build:copy-resources\"",
     "vite:help": "vite build --help"
   },
   "devDependencies": {

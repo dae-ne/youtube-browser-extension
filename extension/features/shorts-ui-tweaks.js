@@ -1,4 +1,4 @@
-import { isShortsPage, removeCssClasses } from '../common';
+import { isShortsPage, removeCssClasses } from '../lib/utils';
 
 /**
  * CSS classes to add to the shorts page elements to style them and their
