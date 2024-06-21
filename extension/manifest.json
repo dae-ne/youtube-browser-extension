@@ -15,8 +15,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
-      "js": ["yte-scripts.js"],
-      "css": ["yte-styles.css"],
+      "js": ["youtube-extension.js"],
+      "css": ["youtube-extension.css"],
       "run_at": "document_start"
     }
   ],
