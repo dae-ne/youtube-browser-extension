@@ -49,17 +49,13 @@ export function displayShortsToVideoButton() {
   controller = new AbortController();
 
   if (buttonAlreadyExists) {
-    const button = newButtonContainer.querySelector('button');
+    const label = newButtonContainer.querySelector('label');
     const touchFeedback = newButtonContainer.querySelector('yt-touch-feedback-shape');
 
-    handleUiChanges(button, touchFeedback);
-    handleButtonEvents(renderer, button, shareButtonContainer);
+    handleUiChanges(label, touchFeedback);
+    handleButtonEvents(renderer, label, shareButtonContainer);
 
     return { status: 'success', params: {} };
-  }
-
-  if (!shareButtonContainer.querySelector('#tooltip')) {
-    return { status: 'fail', params: {} };
   }
 
   newButtonContainer = shareButtonContainer.cloneNode(true);
@@ -94,7 +90,6 @@ function createButton(container, templateContainer) {
   const templateButton = templateContainer.querySelector('button');
   const templateButtonTouchFeedback = templateButton.querySelector('yt-touch-feedback-shape');
 
-  const tooltip = templateContainer.querySelector('#tooltip').cloneNode(true);
   const newButtonLabel = templateButtonLabel.cloneNode();
   const newButton = document.createElement('button');
   const newButtonTouchFeedback = templateButtonTouchFeedback.cloneNode(true);
@@ -111,9 +106,8 @@ function createButton(container, templateContainer) {
   newButton.appendChild(newButtonTouchFeedback);
 
   container.querySelector('yt-button-shape').appendChild(newButtonLabel);
-  container.querySelector('tp-yt-paper-tooltip').appendChild(tooltip);
 
-  handleUiChanges(newButton, newButtonTouchFeedback);
+  handleUiChanges(newButtonLabel, newButtonTouchFeedback);
   return newButton;
 }
 
@@ -177,21 +171,21 @@ function updateCssClasses(container, templateContainer) {
 /**
  * Handles the UI changes when the button is pressed.
  *
- * @param {HTMLElement} button The button element.
+ * @param {HTMLElement} label The button label.
  * @param {HTMLElement} touchFeedback The touch feedback element.
  */
-function handleUiChanges(button, touchFeedback) {
+function handleUiChanges(label, touchFeedback) {
   const buttonPressedClassName = 'yt-spec-touch-feedback-shape--down';
 
-  button.addEventListener('mousedown', () => {
+  label.addEventListener('mousedown', () => {
     touchFeedback.firstChild.classList.add(buttonPressedClassName);
   }, { signal: controller.signal });
 
-  button.addEventListener('mouseup', () => {
+  label.addEventListener('mouseup', () => {
     touchFeedback.firstChild.classList.remove(buttonPressedClassName);
   }, { signal: controller.signal });
 
-  button.addEventListener('mouseleave', () => {
+  label.addEventListener('mouseleave', () => {
     touchFeedback.firstChild.classList.remove(buttonPressedClassName);
   }, { signal: controller.signal });
 }
