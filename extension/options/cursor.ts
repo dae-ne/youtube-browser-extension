@@ -24,6 +24,10 @@
    */
   const container = document.querySelector('.yte-flashlight-container');
 
+  if (!container) {
+    return;
+  }
+
   container.classList.add(FLASHLIGHT_HIDDEN_CLASS);
 
   /**

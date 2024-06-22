@@ -1,11 +1,11 @@
 'use strict';
 
+import { Options } from "../types";
+
 /**
  * The options object that stores the user's preferences.
- *
- * @type {Object<string, boolean>}
  */
-const options = {};
+const options: Options = {};
 
 /**
  * The form element that contains checkboxes for the options.
@@ -20,6 +20,10 @@ const form = document.querySelector('form');
  * @type {HTMLTemplateElement}
  */
 const template = document.querySelector('template');
+
+if (!form || !template) {
+  throw new Error('The form or the template element is missing.');
+}
 
 /**
  * The data for the options that will be displayed (name, title, description).
@@ -59,10 +63,14 @@ const optionsData = [
  * them to the form.
  */
 optionsData.forEach(({ name, title, description }) => {
-  const clone = template.content.cloneNode(true);
+  const clone = template.content.cloneNode(true) as HTMLElement;
   const titleElement = clone.querySelector('#option-title');
-  const inputElement = clone.querySelector('input[type="checkbox"]');
+  const inputElement = clone.querySelector('input[type="checkbox"]') as HTMLInputElement;
   const descriptionElement = clone.querySelector('#option-description');
+
+  if (!titleElement || !inputElement || !descriptionElement) {
+    throw new Error('The title, input, or description element is missing.');
+  }
 
   titleElement.textContent = title;
   inputElement.name = name;
@@ -83,7 +91,7 @@ chrome.storage.sync.get().then((data) => {
   Object.assign(options, data);
 
   for (const [name, value] of Object.entries(options)) {
-    const input = form.querySelector(`[name="${name}"]`);
+    const input = form.querySelector(`[name="${name}"]`) as HTMLInputElement;
 
     if (input) {
       input.checked = value;
@@ -97,6 +105,11 @@ chrome.storage.sync.get().then((data) => {
  */
 form.addEventListener('change', (event) => {
   const { target } = event;
+
+  if (!(target instanceof HTMLInputElement)) {
+    return;
+  }
+
   const { name, type, checked } = target;
 
   if (type !== 'checkbox') {

@@ -1,5 +1,10 @@
 import { isShortsPage, removeCssClasses } from '../lib/utils';
 
+type Params = {
+  firstRun?: boolean;
+  missingElements?: string[];
+};
+
 /**
  * CSS classes to add to the shorts page elements to style them and their
  * corresponding selectors.
@@ -39,7 +44,7 @@ const classes = [
  * @param {string[]} missingElements - The elements that are not found yet.
  * @returns {Object} The status of the function and the parameters.
  */
-export function addShortsUiUpdates(params = {}) {
+export function addShortsUiUpdates(params: Params = {}) {
   const {
     firstRun = true,
     missingElements = []

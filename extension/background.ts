@@ -1,30 +1,27 @@
 'use strict';
 
 import { ACTIONS } from './actions';
+import { Options } from './types';
 
 /**
  * The options loaded from the storage.
- *
- * @type {Object}
  */
-const options = {};
+const options: Options = {};
 
 /**
  * The tab IDs of the tabs that are looping videos after opening them from the
  * shorts page.
- *
- * @type {number[]}
  */
-const loopVideoTabIds = [];
+const loopVideoTabIds: number[] = [];
 
 /**
  * Updates the app based on the URL and the tab ID. It will send messages
  * to the content scripts and inject scripts based on the URL and the options.
  *
- * @param {string} url - The URL of the tab.
- * @param {number} tabId - The ID of the tab.
+ * @param url - The URL of the tab.
+ * @param tabId - The ID of the tab.
  */
-function updateApp(url, tabId) {
+function updateApp(url: string, tabId: number) {
   // TODO: handle switching options off
 
   const { sendMessage } = chrome.tabs;
@@ -99,7 +96,13 @@ chrome.storage.onChanged.addListener((changes) => {
   }
 
   chrome.tabs.query({ url: 'https://www.youtube.com/*' }, (tabs) => {
-    tabs.forEach(({ id, url }) => updateApp(url, id));
+    tabs.forEach(({ id, url }) => {
+      if (!url || !id) {
+        return;
+      }
+
+      updateApp(url, id)
+    });
   });
 });
 
@@ -122,13 +125,15 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  * Listens for content script messages and triggers the corresponding actions.
  */
 chrome.runtime.onMessage.addListener((request, sender) => {
-  const { create } = chrome.tabs;
+  if (!sender.tab) {
+    return;
+  }
 
   if (request.action === ACTIONS.OPEN_VIDEO_FROM_SHORTS) {
-    create({
+    chrome.tabs.create({
       url: request.url,
       index: sender.tab.index + 1,
       openerTabId: sender.tab.id
-    }, (tab) => loopVideoTabIds.push(tab.id));
+    }, (tab) => tab.id && loopVideoTabIds.push(tab.id));
   }
 });

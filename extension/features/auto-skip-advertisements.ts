@@ -62,7 +62,7 @@ export function cleanUp() {
  *   doesn't exist
  */
 function skipAdvertisement() {
-  const skipButton = document.querySelector('button[class*="-skip-"]');
+  const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
 
   if (skipButton) {
     // Method 1: Click the skip button
@@ -70,6 +70,12 @@ function skipAdvertisement() {
     return;
   }
 
+  const video: HTMLVideoElement | null = document.querySelector('video');
+
+  if (!video) {
+    return;
+  }
+
   // Method 2: Set the video's current time to the maximum value
-  document.querySelector('video').currentTime = Number.MAX_VALUE;
+  video.currentTime = Number.MAX_VALUE;
 };

@@ -36,6 +36,17 @@ const MAX_INTERVAL_MS = 1000;
  */
 const MAX_NUMBER_OF_RETRIES = 20;
 
+type Callback = {
+  (params: object): { status: string; params: object };
+};
+
+type RetryOptions = {
+  intervalMs?: number;
+  intervalMultiplayer?: number;
+  maxIntervalMs?: number;
+  maxRetries?: number;
+};
+
 /**
  * Handles the retry logic for a callback function. It retries the callback
  * function with an increasing interval between retries.
@@ -48,7 +59,7 @@ const MAX_NUMBER_OF_RETRIES = 20;
  * @param {number} options.maxRetries - The maximum number of retries.
  * @param {number} retries - The retry count.
  */
-export function handleRetries(callback, options = {}, retries = 0) {
+export function handleRetries(callback: Callback, options: RetryOptions = {}, retries = 0) {
   const {
     intervalMs = INITIAL_INTERVAL_MS,
     intervalMultiplayer = INTERVAL_MULTIPLIER,
@@ -56,7 +67,7 @@ export function handleRetries(callback, options = {}, retries = 0) {
     maxRetries = MAX_NUMBER_OF_RETRIES,
   } = options;
 
-  const { status, params } = callback();
+  const { status, params } = callback({});
 
   if (status === 'success' || retries >= maxRetries) {
     return;

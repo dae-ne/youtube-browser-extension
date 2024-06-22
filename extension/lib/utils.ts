@@ -5,10 +5,6 @@
 
 /**
  * The CSS class prefix used by the extension.
- *
- * @constant
- * @type {string}
- * @default
  */
 const EXTENSION_CSS_CLASS_PREFIX = 'yte-';
 

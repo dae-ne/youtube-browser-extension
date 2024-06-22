@@ -12,15 +12,13 @@ const BUTTON_ID = 'yte-shorts-to-video-button';
 
 /**
  * The mutation observer for the shorts page.
- *
- * @type {MutationObserver}
  */
-let observer = null;
+let observer: MutationObserver | null = null;
 
 /**
  * The controller for the abort signal. It's used to remove event listeners.
  */
-let controller = null;
+let controller: AbortController | null = null;
 
 /**
  * Displays a button to open the video from the shorts page (new button on
@@ -41,14 +39,16 @@ export function displayShortsToVideoButton() {
   }
 
   let newButtonContainer = actions.querySelector(`#${BUTTON_ID}`);
-  const buttonAlreadyExists = !!newButtonContainer;
-
   const shareButtonContainer = actions.querySelector('#share-button');
 
   cleanUp();
   controller = new AbortController();
 
-  if (buttonAlreadyExists) {
+  if (!shareButtonContainer) {
+    return { status: 'fail', params: {} };
+  }
+
+  if (!!newButtonContainer) {
     const label = newButtonContainer.querySelector('label');
     const touchFeedback = newButtonContainer.querySelector('yt-touch-feedback-shape');
 
@@ -58,7 +58,7 @@ export function displayShortsToVideoButton() {
     return { status: 'success', params: {} };
   }
 
-  newButtonContainer = shareButtonContainer.cloneNode(true);
+  newButtonContainer = shareButtonContainer.cloneNode(true) as HTMLElement;
   actions.insertBefore(newButtonContainer, shareButtonContainer.nextSibling);
 
   newButtonContainer.id = BUTTON_ID;
@@ -85,16 +85,25 @@ export function cleanUp() {
  * @param {HTMLElement} templateContainer The template container for the new button.
  * @returns {HTMLElement} The new button.
  */
-function createButton(container, templateContainer) {
+function createButton(container: Element, templateContainer: Element) {
   const templateButtonLabel = templateContainer.querySelector('label');
   const templateButton = templateContainer.querySelector('button');
+
+  if (!templateButtonLabel || !templateButton) {
+    return;
+  }
+
   const templateButtonTouchFeedback = templateButton.querySelector('yt-touch-feedback-shape');
+
+  if (!templateButtonTouchFeedback) {
+    return;
+  }
 
   const newButtonLabel = templateButtonLabel.cloneNode();
   const newButton = document.createElement('button');
   const newButtonTouchFeedback = templateButtonTouchFeedback.cloneNode(true);
 
-  newButton.classList = templateButton.classList;
+  newButton.classList.add(...templateButton.classList);
 
   const icon = document.createElement('img');
   icon.src = chrome.runtime.getURL('resources/video-play.svg');
@@ -105,7 +114,13 @@ function createButton(container, templateContainer) {
   newButtonLabel.appendChild(newButton);
   newButton.appendChild(newButtonTouchFeedback);
 
-  container.querySelector('yt-button-shape').appendChild(newButtonLabel);
+  const buttonShape = container.querySelector('yt-button-shape');
+
+  if (!buttonShape) {
+    return;
+  }
+
+  buttonShape.appendChild(newButtonLabel);
 
   handleUiChanges(newButtonLabel, newButtonTouchFeedback);
   return newButton;
@@ -130,7 +145,7 @@ function handleButtonEvents(renderer, button, templateButtonContainer) {
 
   button.addEventListener('click', () => {
     handleButtonClick(renderer);
-  }, { signal: controller.signal });
+  }, { signal: controller?.signal });
 }
 
 /**
@@ -179,15 +194,15 @@ function handleUiChanges(label, touchFeedback) {
 
   label.addEventListener('mousedown', () => {
     touchFeedback.firstChild.classList.add(buttonPressedClassName);
-  }, { signal: controller.signal });
+  }, { signal: controller?.signal });
 
   label.addEventListener('mouseup', () => {
     touchFeedback.firstChild.classList.remove(buttonPressedClassName);
-  }, { signal: controller.signal });
+  }, { signal: controller?.signal });
 
   label.addEventListener('mouseleave', () => {
     touchFeedback.firstChild.classList.remove(buttonPressedClassName);
-  }, { signal: controller.signal });
+  }, { signal: controller?.signal });
 }
 
 /**

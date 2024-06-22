@@ -5,8 +5,8 @@
     "lint:js": "eslint .",
     "lint:css": "stylelint **/*.css",
     "prepare": "git config core.hooksPath .githooks",
-    "build:background": "esbuild --bundle ./extension/background.js --outfile=./dist/background.js --minify",
-    "build:content-scripts": "esbuild --bundle ./extension/youtube-extension.js --outfile=./dist/youtube-extension.js",
+    "build:background": "esbuild --bundle ./extension/background.ts --outfile=./dist/background.js --minify",
+    "build:content-scripts": "esbuild --bundle ./extension/youtube-extension.ts --outfile=./dist/youtube-extension.js",
     "build:content-styles": "esbuild --bundle ./extension/youtube-extension.css --outfile=./dist/youtube-extension.css --minify",
     "build:options": "vite build extension/options/ --outDir=../../dist/options/ --base ./ --emptyOutDir --minify",
     "build:copy-manifest": "copyfiles -f ./extension/manifest.json ./dist",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",
+    "@types/chrome": "^0.0.268",
     "concurrently": "^8.2.2",
     "copyfiles": "^2.4.1",
     "esbuild": "^0.21.5",

@@ -8,12 +8,14 @@ import {
   shortsUiTweaksFeature as ft4
 } from './features';
 
+type ActionHandlers = {
+  [s: string]: () => void;
+};
+
 /**
  * The action handlers for messages from the background script.
- *
- * @type {Object<string, Function>}
  */
-const actionHandlers = {
+const actionHandlers: ActionHandlers = {
   // auto-loop-video feature
   [ACTIONS.AUTO_LOOP_VIDEO]: () => handleRetries(ft1.loopVideo),
 
