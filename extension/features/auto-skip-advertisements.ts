@@ -55,27 +55,15 @@ export function cleanUp() {
 }
 
 /**
- * Skips an advertisement on the current video. It uses one of the following
- * methods:
- * - Clicks the skip button if it exists (even if it's not visible)
- * - Sets the video's current time to the maximum value if the skip button
- *   doesn't exist
+ * Skips an advertisement on the current video. It's not an AdBlocker, it just
+ * automates the process of clicking the skip button.
  */
 function skipAdvertisement() {
   const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
 
-  if (skipButton) {
-    // Method 1: Click the skip button
-    skipButton.click();
+  if (!skipButton) {
     return;
   }
 
-  const video: HTMLVideoElement | null = document.querySelector('video');
-
-  if (!video) {
-    return;
-  }
-
-  // Method 2: Set the video's current time to the maximum value
-  video.currentTime = Number.MAX_VALUE;
+  skipButton.click();
 };
