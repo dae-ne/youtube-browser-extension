@@ -2,11 +2,7 @@ import { ACTIONS } from '../actions';
 import { isShortsPage } from '../lib/utils';
 
 /**
- * The ID of the button to open the added button.
- *
- * @constant
- * @type {string}
- * @default
+ * The ID of the button container to open the video from the shorts page.
  */
 const BUTTON_ID = 'yte-shorts-to-video-button';
 
@@ -21,11 +17,10 @@ let observer: MutationObserver | null = null;
 let controller: AbortController | null = null;
 
 /**
- * Displays a button to open the video from the shorts page (new button on
- * an action bar next to the shorts player). When clicked, it opens the video
- * page in a new tab.
+ * Displays a button to open the video from the shorts page (new button on the action bar next to
+ * the shorts player). When clicked, it opens the video page in a new tab.
  *
- * @returns {Object} The status of the function and the parameters.
+ * @returns The status of the function and the parameters.
  */
 export function displayShortsToVideoButton() {
   if (!isShortsPage()) {
@@ -39,7 +34,7 @@ export function displayShortsToVideoButton() {
   }
 
   let newButtonContainer = actions.querySelector(`#${BUTTON_ID}`);
-  const shareButtonContainer = actions.querySelector('#share-button');
+  const shareButtonContainer = actions.querySelector('#share-button') as HTMLElement;
 
   cleanUp();
   controller = new AbortController();
@@ -49,11 +44,13 @@ export function displayShortsToVideoButton() {
   }
 
   if (!!newButtonContainer) {
-    const label = newButtonContainer.querySelector('label');
-    const touchFeedback = newButtonContainer.querySelector('yt-touch-feedback-shape');
+    const label = newButtonContainer.querySelector('label') as HTMLLabelElement
+    const button = newButtonContainer.querySelector('button') as HTMLButtonElement;
+    const touchFeedback = newButtonContainer
+      .querySelector('yt-touch-feedback-shape') as HTMLElement;
 
     handleUiChanges(label, touchFeedback);
-    handleButtonEvents(renderer, label, shareButtonContainer);
+    handleButtonEvents(renderer, button, shareButtonContainer);
 
     return { status: 'success', params: {} };
   }
@@ -64,13 +61,18 @@ export function displayShortsToVideoButton() {
   newButtonContainer.id = BUTTON_ID;
 
   const button = createButton(newButtonContainer, shareButtonContainer);
+
+  if (!button) {
+    return { status: 'fail', params: {} };
+  }
+
   handleButtonEvents(renderer, button, shareButtonContainer);
   return { status: 'success', params: {} };
 }
 
 /**
- * Disconnects the mutation observer used to watch for changes in the share
- * button and removes event listeners.
+ * Disconnects the mutation observer used to watch for changes in the share button and removes
+ * event listeners.
  */
 export function cleanUp() {
   observer?.disconnect();
@@ -78,30 +80,30 @@ export function cleanUp() {
 }
 
 /**
- * Creates the new button. It clones nodes from elements that already exist
- * on the page and adds event listeners.
+ * Creates the new button. It clones nodes from elements that already exist on the page and adds
+ * event listeners.
  *
- * @param {HTMLElement} container The container for the new button.
- * @param {HTMLElement} templateContainer The template container for the new button.
- * @returns {HTMLElement} The new button.
+ * @param container The container for the new button.
+ * @param templateContainer The template container for the new button.
+ * @returns The new button if it was created.
  */
-function createButton(container: Element, templateContainer: Element) {
+function createButton(container: Element, templateContainer: Element): HTMLButtonElement | null {
   const templateButtonLabel = templateContainer.querySelector('label');
   const templateButton = templateContainer.querySelector('button');
 
   if (!templateButtonLabel || !templateButton) {
-    return;
+    return null;
   }
 
   const templateButtonTouchFeedback = templateButton.querySelector('yt-touch-feedback-shape');
 
   if (!templateButtonTouchFeedback) {
-    return;
+    return null;
   }
 
-  const newButtonLabel = templateButtonLabel.cloneNode();
+  const newButtonLabel = templateButtonLabel.cloneNode() as HTMLLabelElement;
   const newButton = document.createElement('button');
-  const newButtonTouchFeedback = templateButtonTouchFeedback.cloneNode(true);
+  const newButtonTouchFeedback = templateButtonTouchFeedback.cloneNode(true) as HTMLElement;
 
   newButton.classList.add(...templateButton.classList);
 
@@ -117,7 +119,7 @@ function createButton(container: Element, templateContainer: Element) {
   const buttonShape = container.querySelector('yt-button-shape');
 
   if (!buttonShape) {
-    return;
+    return null;
   }
 
   buttonShape.appendChild(newButtonLabel);
@@ -127,18 +129,22 @@ function createButton(container: Element, templateContainer: Element) {
 }
 
 /**
- * Adds event listeners and a mutation observer to the button. The observer
- * watches for changes in the share button and updates the new button
- * accordingly.
+ * Adds event listeners and a mutation observer to the button. The observer watches for changes in
+ * the share button and updates the new button accordingly.
  *
- * @param {HTMLElement} renderer The video renderer element.
- * @param {HTMLElement} button The new button.
- * @param {HTMLElement} templateButtonContainer The template container for the new button.
+ * @param renderer The video renderer element.
+ * @param button The new button.
+ * @param templateButtonContainer The template container for the new button.
  */
-function handleButtonEvents(renderer, button, templateButtonContainer) {
+function handleButtonEvents(
+  renderer: HTMLElement,
+  button: HTMLButtonElement,
+  templateButtonContainer: HTMLElement
+) {
   observer = createNewObserver();
+  const label = templateButtonContainer.querySelector('label') as HTMLLabelElement;
 
-  observer.observe(templateButtonContainer.querySelector('label'), {
+  observer.observe(label, {
     attributes: true,
     attributeFilter: ['class']
   });
@@ -151,9 +157,9 @@ function handleButtonEvents(renderer, button, templateButtonContainer) {
 /**
  * Handles the button click event. It opens the video page in a new tab.
  *
- * @param {HTMLElement} renderer The video renderer element.
+ * @param renderer The video renderer element.
  */
-function handleButtonClick(renderer) {
+function handleButtonClick(renderer: HTMLElement) {
   const currentUrl = window.location.href;
 
   if (!currentUrl.includes('youtube.com/shorts')) {
@@ -161,8 +167,13 @@ function handleButtonClick(renderer) {
   }
 
   const videoUrl = currentUrl.replace('youtube.com/shorts', 'youtube.com/video');
+  const video = renderer.querySelector('video');
 
-  renderer.querySelector('video').pause();
+  if (!video) {
+    return;
+  }
+
+  video.pause();
   chrome.runtime.sendMessage({
     action: ACTIONS.OPEN_VIDEO_FROM_SHORTS,
     url: videoUrl
@@ -172,47 +183,52 @@ function handleButtonClick(renderer) {
 /**
  * Updates the CSS classes of the button to match the default youtube buttons.
  *
- * @param {HTMLElement} container The container for the new button.
- * @param {HTMLElement} templateContainer The template container for the new button.
+ * @param container The container for the new button.
+ * @param templateContainer The template container for the new button.
  */
-function updateCssClasses(container, templateContainer) {
+function updateCssClasses(container: HTMLElement, templateContainer: HTMLElement) {
   const button = container.querySelector('button');
   const label = container.querySelector('label');
+  const templateButton = templateContainer.querySelector('button');
+  const templateLabel = templateContainer.querySelector('label');
 
-  button.classList = templateContainer.querySelector('button').classList;
-  label.classList = templateContainer.querySelector('label').classList;
+  if (!button || !label || !templateButton || !templateLabel) {
+    return;
+  }
+
+  button.classList.add(...templateButton.classList);
+  label.classList.add(...templateLabel.classList);
 }
 
 /**
  * Handles the UI changes when the button is pressed.
  *
- * @param {HTMLElement} label The button label.
- * @param {HTMLElement} touchFeedback The touch feedback element.
+ * @param label The button label.
+ * @param touchFeedback The touch feedback element.
  */
-function handleUiChanges(label, touchFeedback) {
+function handleUiChanges(label: HTMLElement, touchFeedback: HTMLElement) {
   const buttonPressedClassName = 'yt-spec-touch-feedback-shape--down';
+  const child = touchFeedback.firstChild as HTMLElement;
 
   label.addEventListener('mousedown', () => {
-    touchFeedback.firstChild.classList.add(buttonPressedClassName);
+    child.classList.add(buttonPressedClassName);
   }, { signal: controller?.signal });
 
   label.addEventListener('mouseup', () => {
-    touchFeedback.firstChild.classList.remove(buttonPressedClassName);
+    child.classList.remove(buttonPressedClassName);
   }, { signal: controller?.signal });
 
   label.addEventListener('mouseleave', () => {
-    touchFeedback.firstChild.classList.remove(buttonPressedClassName);
+    child.classList.remove(buttonPressedClassName);
   }, { signal: controller?.signal });
 }
 
 /**
  * Creates a new mutation observer to watch for UI changes.
  *
- * @param {HTMLElement} renderer The video renderer element.
- * @param {HTMLElement} observedElement The element to observe.
- * @returns {MutationObserver} The new observer.
+ * @returns The new observer.
  */
-function createNewObserver() {
+function createNewObserver(): MutationObserver {
   return new MutationObserver((_mutations, observer) => {
     const { actions } = getRendererAndActionsContainer();
 
@@ -221,8 +237,8 @@ function createNewObserver() {
       return;
     }
 
-    const container = actions.querySelector(`#${BUTTON_ID}`);
-    const templateContainer = actions.querySelector('#share-button');
+    const container = actions.querySelector(`#${BUTTON_ID}`) as HTMLElement;
+    const templateContainer = actions.querySelector('#share-button') as HTMLElement;
 
     updateCssClasses(container, templateContainer);
   });
@@ -230,12 +246,11 @@ function createNewObserver() {
 
 /**
  * Gets the actions container from the renderer.
- *
- * @param {HTMLElement} renderer The video renderer element.
- * @returns {HTMLElement} The actions container.
+
+ * @returns The actions container.
  */
 function getRendererAndActionsContainer() {
-  const renderer = document.querySelector('ytd-shorts [is-active]');
-  const actions =  renderer?.querySelector('#actions');
+  const renderer = document.querySelector('ytd-shorts [is-active]') as HTMLElement;
+  const actions =  renderer?.querySelector('#actions') as HTMLElement;
   return { renderer, actions };
 }

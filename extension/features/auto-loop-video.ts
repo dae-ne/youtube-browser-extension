@@ -1,7 +1,7 @@
 /**
  * Finds the video element and sets the loop property.
  *
- * @returns {Object} The status of the function and the parameters.
+ * @returns The status of the function and the parameters.
  */
 export function loopVideo() {
   const video = document.querySelector('video');

@@ -15,7 +15,7 @@ const loopVideoTabIds: number[] = [];
 
 /**
  * Updates the app based on the URL and the tab ID. It will send messages to the content scripts
- * and inject scripts based on the URL and the options.
+ * based on the URL and the options.
  *
  * @param url - The URL of the tab.
  * @param tabId - The ID of the tab.

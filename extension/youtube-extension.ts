@@ -34,8 +34,7 @@ const actionHandlers: ActionHandlers = {
 };
 
 /**
- * Listens for messages from the background script and calls the appropriate
- * action handler.
+ * Listens for messages from the background script and calls the appropriate action handler.
  */
 chrome.runtime.onMessage.addListener(({ action }) => {
   console.log(action);

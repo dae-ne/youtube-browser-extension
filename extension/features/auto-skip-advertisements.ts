@@ -1,10 +1,14 @@
 import { isVideoOpened } from '../lib/utils';
 
+// terms of service - can't use adblockers
+
 /**
- * This mutation observer is used to watch for changes in the advertisements
- * container and skip the ads when they appear.
+ * This mutation observer is used to watch for changes in the advertisements container and skip
+ * the ads when they appear.
  *
- * @type {MutationObserver}
+ * @remarks
+ * The observer is used to automatically skip ads on the current video. It's not an AdBlocker, it
+ * waits until the skip button appears and then clicks it.
  */
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
@@ -15,10 +19,10 @@ const observer = new MutationObserver((mutations) => {
 });
 
 /**
- * Automatically skips ads on the current video. Uses a mutation observer to
- * watch for changes in the advertisements container.
+ * Automatically skips ads on the current video. Uses a mutation observer to watch for changes in
+ * the advertisements container.
  *
- * @returns {Object} The status of the function and the parameters.
+ * @returns The status of the function and the parameters.
  */
 export function autoSkipAdvertisements() {
   if (!isVideoOpened()) {
@@ -43,8 +47,8 @@ export function autoSkipAdvertisements() {
 }
 
 /**
- * Disconnects the mutation observer used to watch for advertisements. Does not
- * disconnect the observer if a video is currently opened.
+ * Disconnects the mutation observer used to watch for advertisements. Does not disconnect
+ * the observer if a video is currently opened.
  */
 export function cleanUp() {
   if (isVideoOpened()) {
@@ -55,8 +59,7 @@ export function cleanUp() {
 }
 
 /**
- * Skips an advertisement on the current video. It's not an AdBlocker, it just
- * automates the process of clicking the skip button.
+ * Skips an advertisement on the current video. Clicks the skip button if it exists.
  */
 function skipAdvertisement() {
   const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
