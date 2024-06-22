@@ -9,8 +9,6 @@ const options: Options = {};
 
 /**
  * The form element that contains checkboxes for the options.
- *
- * @type {HTMLFormElement}
  */
 const form = document.querySelector('form');
 

@@ -1,33 +1,21 @@
 /**
- * This file contains the code for the flashlight cursor effect. The flashlight
- * follows the mouse cursor and slightly illuminates the area around it.
+ * This file contains the code for the flashlight cursor effect. The flashlight follows the mouse
+ * cursor and slightly illuminates the area around it.
  */
 
 (() => {
   'use strict';
 
   /**
-   * The class name for the flashlight container when the effect should
-   * not be visible.
-   *
-   * @constant
-   * @type {string}
-   * @default
+   * The class name for the flashlight container when the effect should not be visible.
    */
   const FLASHLIGHT_HIDDEN_CLASS = 'yte-flashlight-hidden';
 
   /**
-   * The flashlight container element. The following flashlight effect is
-   * a pseudo element inside this container.
-   *
-   * @type {HTMLElement}
+   * The flashlight container element. The following flashlight effect is a pseudo element inside
+   * this container.
    */
-  const container = document.querySelector('.yte-flashlight-container');
-
-  if (!container) {
-    return;
-  }
-
+  const container = document.querySelector('.yte-flashlight-container') as HTMLElement;
   container.classList.add(FLASHLIGHT_HIDDEN_CLASS);
 
   /**
