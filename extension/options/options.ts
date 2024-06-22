@@ -14,8 +14,6 @@ const form = document.querySelector('form');
 
 /**
  * The HTML template element for the option items.
- *
- * @type {HTMLTemplateElement}
  */
 const template = document.querySelector('template');
 
@@ -25,8 +23,6 @@ if (!form || !template) {
 
 /**
  * The data for the options that will be displayed (name, title, description).
- *
- * @type {Object[]}
  */
 const optionsData = [
   {
@@ -57,8 +53,7 @@ const optionsData = [
 ];
 
 /**
- * Creates the option items using the template and the options data, and adds
- * them to the form.
+ * Creates the option items using the template and the options data, and adds them to the form.
  */
 optionsData.forEach(({ name, title, description }) => {
   const clone = template.content.cloneNode(true) as HTMLElement;
