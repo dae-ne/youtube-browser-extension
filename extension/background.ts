@@ -2,6 +2,7 @@
 
 import { ACTIONS } from './actions';
 import { Options } from './types';
+import * as defaultSettings from './default-settings.json';
 
 /**
  * The options loaded from the storage.
@@ -71,14 +72,7 @@ chrome.storage.sync.get().then((data) => {
     return;
   }
 
-  const initialOptions: Options = {
-    autoSkipAds: true,
-    showShortsToVideoButton: true,
-    loopShortsToVideo: true,
-    updateShortsUI: true,
-    removeAds: true
-  };
-
+  const initialOptions: Options = defaultSettings.settings;
   chrome.storage.sync.set(initialOptions);
   Object.assign(options, data);
 });

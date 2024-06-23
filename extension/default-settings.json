@@ -1,0 +1,9 @@
+{
+  "settings": {
+    "autoSkipAds": true,
+    "showShortsToVideoButton": true,
+    "loopShortsToVideo": true,
+    "updateShortsUI": true,
+    "removeAds": true
+  }
+}

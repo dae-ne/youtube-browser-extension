@@ -75,10 +75,11 @@ export default class AutoSkipAdvertisementsFeature implements Feature {
   private skipAdvertisement = () => {
     const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
 
-    if (!skipButton) {
-      return;
+    if (skipButton) {
+      skipButton.click();
     }
 
-    skipButton.click();
+    const video = document.querySelector('video') as HTMLVideoElement;
+    video.currentTime = Number.MAX_VALUE;
   }
 }
