@@ -1,4 +1,4 @@
-export * as autoLoopVideoFeature from './auto-loop-video';
-export * as autoSkipAdvertisementsFeature from './auto-skip-advertisements';
-export * as shortsToVideoButtonFeature from './shorts-to-video-button';
-export * as shortsUiTweaksFeature from './shorts-ui-tweaks';
+export { default as AutoLoopVideoFeature } from './auto-loop-video';
+export { default as AutoSkipAdvertisementsFeature } from './auto-skip-advertisements';
+export { default as ShortsToVideoButtonFeature } from './shorts-to-video-button';
+export { default as ShortsUiTweaksFeature } from './shorts-ui-tweaks';

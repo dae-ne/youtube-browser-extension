@@ -1,4 +1,5 @@
 import { isShortsPage, removeCssClasses } from '../lib/utils';
+import { Feature, FeatureResult } from '../types';
 
 /**
  * The parameters for the addShortsUiUpdates function.
@@ -34,64 +35,66 @@ const classes = [
   }
 ];
 
-/**
- * Adds CSS classes to the shorts page elements to style them. Runs recursively with a specified
- * interval until all the elements are found and styled.
- *
- * @param params - The parameters for the function.
- * @returns The status of the function and the parameters.
- */
-export function addShortsUiUpdates(params: Params = {}) {
-  const {
-    firstRun = true,
-    missingElements = []
-  } = params;
+export default class ShortsUiTweaksFeature implements Feature {
+  /**
+   * Adds CSS classes to the shorts page elements to style them. Runs recursively with a specified
+   * interval until all the elements are found and styled.
+   *
+   * @param params - The parameters for the function.
+   * @returns The status of the function and the parameters.
+   */
+  public setUp = (params: Params = {}): FeatureResult => {
+    const {
+      firstRun = true,
+      missingElements = []
+    } = params;
 
-  if (!isShortsPage() || !firstRun && missingElements.length < 1) {
-    return { status: 'success', params: {} };
+    if (!isShortsPage() || !firstRun && missingElements.length < 1) {
+      return { status: 'success', params: {} };
+    }
+
+    classes.forEach(({ className, selector }) => {
+      this.addCssClass(className, selector, missingElements);
+    });
+
+    if (missingElements.length < 1) {
+      return { status: 'success', params: {} };
+    }
+
+    return { status: 'fail', params: { firstRun: false, missingElements } };
   }
 
-  classes.forEach(({ className, selector }) => {
-    addCssClass(className, selector, missingElements);
-  });
-
-  if (missingElements.length < 1) {
-    return { status: 'success', params: {} };
+  /**
+   * Removes the global CSS classes from the shorts page elements.
+   */
+  public cleanUp = () => {
+    removeCssClasses('yte-shorts-g-');
   }
 
-  return { status: 'fail', params: { firstRun: false, missingElements } };
-}
-
-/**
- * Removes the global CSS classes from the shorts page elements.
- */
-export function cleanUp() {
-  removeCssClasses('yte-shorts-g-');
-}
-
-/**
- * Removes all the CSS classes from the shorts page to disable the feature.
- */
-export function disable() {
-  removeCssClasses('yte-shorts-');
-}
-
-/**
- * Adds a CSS class to an element if it exists.
- *
- * @param className - The name of the CSS class to add.
- * @param selector - The selector of the element.
- * @param missingElements - The elements that are not found yet.
- */
-function addCssClass(className: string, selector: string, missingElements: string[]) {
-  const missing = missingElements.includes(className);
-  const element = document.querySelector(selector);
-
-  if (!element) {
-    missingElements.push(className);
-    return;
+  /**
+   * Removes all the CSS classes from the shorts page to disable the feature.
+   */
+  public disable = () => {
+    removeCssClasses('yte-shorts-');
   }
 
-  element.classList.add(className);
-  missing && missingElements.splice(missingElements.indexOf(className), 1);
+  /**
+   * Adds a CSS class to an element if it exists.
+   *
+   * @param className - The name of the CSS class to add.
+   * @param selector - The selector of the element.
+   * @param missingElements - The elements that are not found yet.
+   */
+  private addCssClass = (className: string, selector: string, missingElements: string[]) => {
+    const missing = missingElements.includes(className);
+    const element = document.querySelector(selector);
+
+    if (!element) {
+      missingElements.push(className);
+      return;
+    }
+
+    element.classList.add(className);
+    missing && missingElements.splice(missingElements.indexOf(className), 1);
+  }
 }
