@@ -1,3 +1,4 @@
+import { ACTIONS } from '../actions';
 import Feature from '../feature';
 import { isVideoOpened } from '../lib/utils';
 import { FeatureResult } from '../types';
@@ -17,6 +18,13 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
       }
     });
   });
+
+  /**
+   * Initializes the feature with action names.
+   */
+  public constructor() {
+    super(ACTIONS.AUTO_SKIP_ADVERTISEMENTS, ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP);
+  }
 
   /**
    * Automatically skips ads on the current video. Uses a mutation observer to watch for changes in

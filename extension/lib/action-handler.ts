@@ -1,25 +1,13 @@
 import Feature from '../feature';
 import { handleRetries } from './retries';
 
-type FeatureActions = {
-  feature: Feature,
-  setUpAction: string,
-  cleanUpAction: string | null,
-  disableAction: string | null
-};
-
 type ActionTypes = 'setUp' | 'cleanUp' | 'disable';
 
 export default class ActionHandler {
-  private featureActions: FeatureActions[] = [];
+  private features: Feature[] = [];
 
-  public registerFeatureActions = (
-    feature: any,
-    setUpAction: string,
-    cleanUpAction: string | null = null,
-    disableAction: string | null = null
-  ) => {
-    this.featureActions.push({ feature, setUpAction, cleanUpAction, disableAction })
+  public registerFeatures = (...features: Feature[]) => {
+    this.features.push(...features);
   }
 
   public handleAction = (action: string) => {
@@ -29,22 +17,22 @@ export default class ActionHandler {
 
     let type: ActionTypes | undefined;
 
-    const featureActions = this.featureActions.find(({
-      setUpAction,
-      cleanUpAction,
-      disableAction
+    const feature = this.features.find(({
+      setUpActionName,
+      cleanUpActionName,
+      disableActionName
     }) => {
-      if (action === setUpAction) {
+      if (action === setUpActionName) {
         type = 'setUp';
         return true;
       }
 
-      if (action === cleanUpAction) {
+      if (action === cleanUpActionName) {
         type = 'cleanUp';
         return true;
       }
 
-      if (action === disableAction) {
+      if (action === disableActionName) {
         type = 'disable';
         return true;
       }
@@ -52,11 +40,11 @@ export default class ActionHandler {
       return false;
     });
 
-    if (!featureActions || !type) {
+    if (!feature || !type) {
       return;
     }
 
-    const { setUp, cleanUp, disable } = featureActions.feature;
+    const { setUp, cleanUp, disable } = feature;
 
     switch (type) {
       case 'setUp':

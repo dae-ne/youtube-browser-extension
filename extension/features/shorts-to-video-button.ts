@@ -30,6 +30,13 @@ export default class ShortsToVideoButtonFeature extends Feature {
   private controller: AbortController | null = null;
 
   /**
+   * Initializes the feature with action names.
+   */
+  public constructor() {
+    super(ACTIONS.SHORTS_TO_VIDEO_BUTTON, ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP);
+  }
+
+  /**
    * Displays a button to open the video from the shorts page (new button on the action bar next to
    * the shorts player). When clicked, it opens the video page in a new tab.
    *
@@ -92,9 +99,10 @@ export default class ShortsToVideoButtonFeature extends Feature {
     this.controller?.abort();
   }
 
-  public disable = () => {
-    // Do nothing
-  }
+  /**
+   * Not needed for this feature.
+   */
+  public disable = () => {}
 
   /**
    * Creates the new button. It clones nodes from elements that already exist on the page and adds

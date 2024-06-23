@@ -12,20 +12,43 @@ import { FeatureResult } from './types';
  */
 export default abstract class Feature {
   /**
-   * Registers the feature with the action handler.
+   * Initializes the feature with action names.
    *
-   * @param handler - The action handler.
    * @param setUpAction - The action to set up the feature.
    * @param cleanUpAction - The action to clean up the feature.
    * @param disableAction - The action to disable the feature after switching it off in the options
    */
-  public register = (
-    handler: ActionHandler,
-    setUpAction: string,
-    cleanUpAction: string | null = null,
-    disableAction: string | null = null
-  ) => {
-    handler.registerFeatureActions(this, setUpAction, cleanUpAction, disableAction);
+  protected constructor(
+    private setUpAction: string,
+    private cleanUpAction: string | null = null,
+    private disableAction: string | null = null
+  ) {}
+
+  /**
+   * Returns the name of the action to set up the feature.
+   *
+   * @returns The name of the action to set up the feature.
+   */
+  public get setUpActionName() {
+    return this.setUpAction;
+  }
+
+  /**
+   * Returns the name of the action to clean up the feature.
+   *
+   * @returns The name of the action to clean up the feature.
+   */
+  public get cleanUpActionName() {
+    return this.cleanUpAction;
+  }
+
+  /**
+   * Returns the name of the action to disable the feature.
+   *
+   * @returns The name of the action to disable the feature.
+   */
+  public get disableActionName() {
+    return this.disableAction;
   }
 
   /**

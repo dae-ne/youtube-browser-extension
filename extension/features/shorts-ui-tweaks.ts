@@ -1,3 +1,4 @@
+import { ACTIONS } from '../actions';
 import Feature from '../feature';
 import { isShortsPage, removeCssClasses } from '../lib/utils';
 import { FeatureResult } from '../types';
@@ -36,7 +37,21 @@ const classes = [
   }
 ];
 
+/**
+ * A feature that adds CSS classes to the shorts page elements to style them.
+ */
 export default class ShortsUiTweaksFeature extends Feature {
+  /**
+   * Initializes the feature with action names.
+   */
+  public constructor() {
+    super(
+      ACTIONS.SHORTS_UI_TWEAKS,
+      ACTIONS.SHORTS_UI_TWEAKS_CLEANUP,
+      ACTIONS.SHORTS_UI_TWEAKS_DISABLE
+    );
+  }
+
   /**
    * Adds CSS classes to the shorts page elements to style them. Runs recursively with a specified
    * interval until all the elements are found and styled.
