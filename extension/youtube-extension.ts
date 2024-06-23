@@ -1,5 +1,5 @@
 import { ACTIONS } from './actions';
-import { handleRetries } from './lib/retries';
+import ActionHandler from './lib/action-handler';
 
 import {
   AutoLoopVideoFeature,
@@ -7,42 +7,34 @@ import {
   ShortsToVideoButtonFeature,
   ShortsUiTweaksFeature
 } from './features';
-import { Feature } from './types';
 
-type ActionHandlers = {
-  [s: string]: () => void;
-};
+const handler = new ActionHandler();
 
-const ft1: Feature = new AutoLoopVideoFeature();
-const ft2: Feature = new AutoSkipAdvertisementsFeature();
-const ft3: Feature = new ShortsToVideoButtonFeature();
-const ft4: Feature = new ShortsUiTweaksFeature();
+handler.registerFeatureActions(
+  new AutoLoopVideoFeature(),
+  ACTIONS.AUTO_LOOP_VIDEO
+);
 
-/**
- * The action handlers for messages from the background script.
- */
-const actionHandlers: ActionHandlers = {
-  // auto-loop-video feature
-  [ACTIONS.AUTO_LOOP_VIDEO]: () => handleRetries(ft1.setUp),
+handler.registerFeatureActions(
+  new AutoSkipAdvertisementsFeature(),
+  ACTIONS.AUTO_SKIP_ADVERTISEMENTS,
+  ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP
+);
 
-  // auto-skip-advertisements feature
-  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS]: () => handleRetries(ft2.setUp),
-  [ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP]: ft2.cleanUp,
+handler.registerFeatureActions(
+  new ShortsToVideoButtonFeature(),
+  ACTIONS.SHORTS_TO_VIDEO_BUTTON,
+  ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP
+);
 
-  // shorts-to-video-button feature
-  [ACTIONS.SHORTS_TO_VIDEO_BUTTON]: () => handleRetries(ft3.setUp),
-  [ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP]: ft3.cleanUp,
+handler.registerFeatureActions(
+  new ShortsUiTweaksFeature(),
+  ACTIONS.SHORTS_UI_TWEAKS,
+  ACTIONS.SHORTS_UI_TWEAKS_CLEANUP,
+  ACTIONS.SHORTS_UI_TWEAKS_DISABLE
+);
 
-  // shorts-ui-tweaks feature
-  [ACTIONS.SHORTS_UI_TWEAKS]: () => handleRetries(ft4.setUp),
-  [ACTIONS.SHORTS_UI_TWEAKS_CLEANUP]: ft4.cleanUp,
-  [ACTIONS.SHORTS_UI_TWEAKS_DISABLE]: ft4.disable
-};
-
-/**
- * Listens for messages from the background script and calls the appropriate action handler.
- */
 chrome.runtime.onMessage.addListener(({ action }) => {
   console.log(action);
-  actionHandlers[action]?.()
+  handler.handleAction(action);
 });

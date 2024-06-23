@@ -1,5 +1,6 @@
+import Feature from '../feature';
 import { isShortsPage, removeCssClasses } from '../lib/utils';
-import { Feature, FeatureResult } from '../types';
+import { FeatureResult } from '../types';
 
 /**
  * The parameters for the addShortsUiUpdates function.
@@ -35,7 +36,7 @@ const classes = [
   }
 ];
 
-export default class ShortsUiTweaksFeature implements Feature {
+export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Adds CSS classes to the shorts page elements to style them. Runs recursively with a specified
    * interval until all the elements are found and styled.

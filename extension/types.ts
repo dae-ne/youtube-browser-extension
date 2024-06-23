@@ -1,24 +1,4 @@
 /**
- * A feature that can be enabled or disabled.
- */
-export interface Feature {
-  /**
-   * The function that implements the feature.
-   */
-  setUp: () => FeatureResult;
-
-  /**
-   * The function that cleans up the feature.
-   */
-  cleanUp: () => void;
-
-  /**
-   * The function that disables the feature.
-   */
-  disable: () => void;
-}
-
-/**
  * The options stored in the extension's local storage.
  *
  * @remarks

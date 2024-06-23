@@ -1,4 +1,5 @@
-import { Feature, FeatureResult } from '../types';
+import Feature from '../feature';
+import { FeatureResult } from '../types';
 
 /**
  * A feature that automatically loops the video.
@@ -7,7 +8,7 @@ import { Feature, FeatureResult } from '../types';
  * This feature is used after clicking the 'shorts to video' button on the shorts page. It opens
  * the video in a new tab and automatically loops it if the shorts to video loop option is enabled.
  */
-export default class AutoLoopVideoFeature implements Feature {
+export default class AutoLoopVideoFeature extends Feature {
   /**
    * Finds the video element and sets the loop property.
    *

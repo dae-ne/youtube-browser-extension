@@ -1,6 +1,7 @@
 import { ACTIONS } from '../actions';
+import Feature from '../feature';
 import { isShortsPage } from '../lib/utils';
-import { Feature, FeatureResult } from '../types';
+import { FeatureResult } from '../types';
 
 /**
  * The ID of the button container to open the video from the shorts page.
@@ -14,7 +15,7 @@ const BUTTON_ID = 'yte-shorts-to-video-button';
  * This feature displays a new button on the action bar next to the shorts player. When clicked, it
  * opens the video page in a new tab.
  */
-export default class ShortsToVideoButtonFeature implements Feature {
+export default class ShortsToVideoButtonFeature extends Feature {
   /**
    * The mutation observer for the shorts page.
    *
@@ -55,7 +56,7 @@ export default class ShortsToVideoButtonFeature implements Feature {
       return { status: 'fail', params: {} };
     }
 
-    if (!!newButtonContainer) {
+    if (newButtonContainer) {
       const label = newButtonContainer.querySelector('label') as HTMLLabelElement
       const button = newButtonContainer.querySelector('button') as HTMLButtonElement;
       const touchFeedback = newButtonContainer

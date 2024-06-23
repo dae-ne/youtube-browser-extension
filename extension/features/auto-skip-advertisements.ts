@@ -1,10 +1,11 @@
+import Feature from '../feature';
 import { isVideoOpened } from '../lib/utils';
-import { Feature, FeatureResult } from '../types';
+import { FeatureResult } from '../types';
 
 /**
  * A feature that automatically skips advertisements on the current video.
  */
-export default class AutoSkipAdvertisementsFeature implements Feature {
+export default class AutoSkipAdvertisementsFeature extends Feature {
   /**
    * This mutation observer is used to watch for changes in the advertisements container and skip
    * the ads when they appear.
