@@ -3,11 +3,6 @@ import { Feature, FeatureResult } from '../types';
 
 /**
  * A feature that automatically skips advertisements on the current video.
- *
- * @remarks
- * This feature uses a mutation observer to watch for changes in the advertisements container and
- * automatically skips the ads. It's not an AdBlocker, it waits until the skip button appears and
- * then clicks it.
  */
 export default class AutoSkipAdvertisementsFeature implements Feature {
   /**
