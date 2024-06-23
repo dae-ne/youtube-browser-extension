@@ -1,5 +1,5 @@
-import Feature from '../feature';
-import { handleRetries } from './retries';
+import Feature from './feature';
+import { handleRetries } from './lib/retries';
 
 type ActionTypes = 'setUp' | 'cleanUp' | 'disable';
 

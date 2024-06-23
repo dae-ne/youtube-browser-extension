@@ -1,4 +1,4 @@
-import ActionHandler from './lib/action-handler';
+import ActionHandler from './action-handler';
 import { FeatureResult } from './types';
 
 /**
