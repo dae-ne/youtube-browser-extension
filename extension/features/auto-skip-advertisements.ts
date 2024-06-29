@@ -85,31 +85,5 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
 
     const video = document.querySelector('video') as HTMLVideoElement;
     video.currentTime = Number.MAX_VALUE;
-
-    const errorContainerObserver = new MutationObserver((mutations, observer) => {
-      mutations.forEach(({ target }) => {
-        if (target.childNodes.length === 0) {
-          return;
-        }
-
-        const errorContainer = target as HTMLElement;
-        const videoPlayer = document.querySelector('.html5-video-player') as HTMLElement;
-
-        videoPlayer.click();
-
-        const disableUpgrateAttribute = document.createAttribute('disable-upgrade');
-        const hiddenAttribute = document.createAttribute('hidden');
-
-        errorContainer.attributes.setNamedItem(disableUpgrateAttribute);
-        errorContainer.attributes.setNamedItem(hiddenAttribute);
-        errorContainer.innerHTML = '';
-      });
-
-      observer.disconnect();
-    });
-
-    const errorContainer = document.querySelector('#error-screen') as HTMLElement;
-    errorContainerObserver.observe(errorContainer, { childList: true });
-    setTimeout(errorContainerObserver.disconnect, 10000);
   }
 }
