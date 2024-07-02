@@ -1,5 +1,3 @@
-'use strict';
-
 import { ACTIONS } from './actions';
 import { Options } from './types';
 import * as defaultSettings from './default-settings.json';
@@ -25,13 +23,7 @@ function updateApp(url: string, tabId: number) {
   // TODO: handle switching options off
 
   const { sendMessage } = chrome.tabs;
-
-  const {
-    autoSkipAds,
-    showShortsToVideoButton,
-    loopShortsToVideo,
-    updateShortsUI
-  } = options;
+  const { autoSkipAds, showShortsToVideoButton, loopShortsToVideo, updateShortsUI } = options;
 
   if (url.includes('youtube.com')) {
     updateShortsUI || sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS_DISABLE });
@@ -64,10 +56,10 @@ function updateApp(url: string, tabId: number) {
  * Loads the options from the storage and assigns them to the options object. If the options don't
  * exist in the storage, it will create them with the default values.
  */
-chrome.storage.sync.get().then((data) => {
+chrome.storage.sync.get().then(data => {
   const dataExists = data && Object.keys(data).length;
 
-  if (dataExists){
+  if (dataExists) {
     Object.assign(options, data);
     return;
   }
@@ -81,18 +73,18 @@ chrome.storage.sync.get().then((data) => {
  * Listens for storage changes and updates the options object. Triggers the app update function
  * with the new options for each youtube tab.
  */
-chrome.storage.onChanged.addListener((changes) => {
+chrome.storage.onChanged.addListener(changes => {
   for (const [name, { newValue }] of Object.entries(changes)) {
     options[name] = newValue;
   }
 
-  chrome.tabs.query({ url: 'https://www.youtube.com/*' }, (tabs) => {
+  chrome.tabs.query({ url: 'https://www.youtube.com/*' }, tabs => {
     tabs.forEach(({ id, url }) => {
       if (!url || !id) {
         return;
       }
 
-      updateApp(url, id)
+      updateApp(url, id);
     });
   });
 });
@@ -121,10 +113,13 @@ chrome.runtime.onMessage.addListener((request, sender) => {
   }
 
   if (request.action === ACTIONS.OPEN_VIDEO_FROM_SHORTS) {
-    chrome.tabs.create({
-      url: request.url,
-      index: sender.tab.index + 1,
-      openerTabId: sender.tab.id
-    }, (tab) => tab.id && loopVideoTabIds.push(tab.id));
+    chrome.tabs.create(
+      {
+        url: request.url,
+        index: sender.tab.index + 1,
+        openerTabId: sender.tab.id
+      },
+      tab => tab.id && loopVideoTabIds.push(tab.id)
+    );
   }
 });

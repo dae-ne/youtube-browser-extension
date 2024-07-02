@@ -60,12 +60,9 @@ export default class ShortsUiTweaksFeature extends Feature {
    * @returns The status of the function and the parameters.
    */
   public setUp = (params: Params = {}): FeatureResult => {
-    const {
-      firstRun = true,
-      missingElements = []
-    } = params;
+    const { firstRun = true, missingElements = [] } = params;
 
-    if (!isShortsPage() || !firstRun && missingElements.length < 1) {
+    if (!isShortsPage() || (!firstRun && missingElements.length < 1)) {
       return { status: 'success', params: {} };
     }
 
@@ -78,21 +75,21 @@ export default class ShortsUiTweaksFeature extends Feature {
     }
 
     return { status: 'fail', params: { firstRun: false, missingElements } };
-  }
+  };
 
   /**
    * Removes the global CSS classes from the shorts page elements.
    */
   public cleanUp = () => {
     removeCssClasses('yte-shorts-g-');
-  }
+  };
 
   /**
    * Removes all the CSS classes from the shorts page to disable the feature.
    */
   public disable = () => {
     removeCssClasses('yte-shorts-');
-  }
+  };
 
   /**
    * Adds a CSS class to an element if it exists.
@@ -112,5 +109,5 @@ export default class ShortsUiTweaksFeature extends Feature {
 
     element.classList.add(className);
     missing && missingElements.splice(missingElements.indexOf(className), 1);
-  }
+  };
 }

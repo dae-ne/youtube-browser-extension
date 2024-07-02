@@ -50,7 +50,7 @@ export function handleRetries(callback: Callback, options: RetryOptions = {}, re
     intervalMs = INITIAL_INTERVAL_MS,
     intervalMultiplayer = INTERVAL_MULTIPLIER,
     maxIntervalMs = MAX_INTERVAL_MS,
-    maxRetries = MAX_NUMBER_OF_RETRIES,
+    maxRetries = MAX_NUMBER_OF_RETRIES
   } = options;
 
   const { status, params } = callback({});
@@ -63,9 +63,7 @@ export function handleRetries(callback: Callback, options: RetryOptions = {}, re
 
   const newOptions = {
     ...options,
-    intervalMs: newIntervalMs > maxIntervalMs
-      ? maxIntervalMs
-      : newIntervalMs
+    intervalMs: newIntervalMs > maxIntervalMs ? maxIntervalMs : newIntervalMs
   };
 
   setTimeout(() => {

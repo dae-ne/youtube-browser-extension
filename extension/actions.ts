@@ -1,3 +1,5 @@
+// prettier-ignore
+
 /**
  * Action names used to communicate between the background script and the content script.
  */

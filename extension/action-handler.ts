@@ -8,7 +8,7 @@ export default class ActionHandler {
 
   public registerFeatures = (...features: Feature[]) => {
     this.features.push(...features);
-  }
+  };
 
   public handleAction = (action: string) => {
     if (!action) {
@@ -17,28 +17,23 @@ export default class ActionHandler {
 
     let type: ActionTypes | undefined;
 
-    const feature = this.features.find(({
-      setUpActionName,
-      cleanUpActionName,
-      disableActionName
-    }) => {
-      if (action === setUpActionName) {
-        type = 'setUp';
-        return true;
+    const feature = this.features.find(
+      ({ setUpActionName, cleanUpActionName, disableActionName }) => {
+        switch (action) {
+          case setUpActionName:
+            type = 'setUp';
+            return true;
+          case cleanUpActionName:
+            type = 'cleanUp';
+            return true;
+          case disableActionName:
+            type = 'disable';
+            return true;
+          default:
+            return false;
+        }
       }
-
-      if (action === cleanUpActionName) {
-        type = 'cleanUp';
-        return true;
-      }
-
-      if (action === disableActionName) {
-        type = 'disable';
-        return true;
-      }
-
-      return false;
-    });
+    );
 
     if (!feature || !type) {
       return;
@@ -57,5 +52,5 @@ export default class ActionHandler {
         disable();
         break;
     }
-  }
+  };
 }

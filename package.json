@@ -2,8 +2,9 @@
   "name": "youtube-extension",
   "scripts": {
     "sync": "node scripts/sync-version.js && git add ./popup/index.html",
-    "lint:js": "eslint .",
-    "lint:css": "stylelint **/*.css",
+    "lint:ts": "eslint . --ext .ts --ignore-path .gitignore",
+    "lint:css": "stylelint **/*.css --ignore-path .gitignore",
+    "format": "prettier **/*.ts --write --ignore-path .gitignore",
     "prepare": "git config core.hooksPath .githooks",
     "build:background": "esbuild --bundle ./extension/background.ts --outfile=./dist/background.js --minify",
     "build:content-scripts": "esbuild --bundle ./extension/youtube-extension.ts --outfile=./dist/youtube-extension.js",
@@ -15,13 +16,15 @@
     "vite:help": "vite build --help"
   },
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
     "@types/chrome": "^0.0.268",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
     "concurrently": "^8.2.2",
     "copyfiles": "^2.4.1",
     "esbuild": "^0.21.5",
-    "eslint": "^9.4.0",
-    "globals": "^15.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.2",
     "stylelint": "^16.6.1",
     "stylelint-config-standard": "^36.0.0",
     "vite": "^5.3.0"

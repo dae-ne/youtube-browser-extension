@@ -1,5 +1,3 @@
-'use strict';
-
 import { Options } from '../types';
 import * as optionsData from './data.json';
 
@@ -50,7 +48,7 @@ optionsData.data.forEach(({ name, title, description }) => {
 /**
  * Loads the options from the storage and updates the form.
  */
-chrome.storage.sync.get().then((data) => {
+chrome.storage.sync.get().then(data => {
   Object.assign(options, data);
 
   for (const [name, value] of Object.entries(options)) {
@@ -66,7 +64,7 @@ chrome.storage.sync.get().then((data) => {
  * Updates the options object on checkbox value change and saves the new value
  * to the storage.
  */
-form.addEventListener('change', (event) => {
+form.addEventListener('change', event => {
   const { target } = event;
 
   if (!(target instanceof HTMLInputElement)) {

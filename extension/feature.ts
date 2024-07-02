@@ -1,4 +1,3 @@
-import ActionHandler from './action-handler';
 import { FeatureResult } from './types';
 
 /**

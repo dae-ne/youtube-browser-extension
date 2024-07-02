@@ -11,8 +11,8 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
    * This mutation observer is used to watch for changes in the advertisements container and skip
    * the ads when they appear.
    */
-  private readonly observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
+  private readonly observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
       if (mutation.target.childNodes.length > 0) {
         this.skipAdvertisement();
       }
@@ -43,16 +43,16 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
       return { status: 'fail', params: {} };
     }
 
+    this.cleanUp();
     const isAdPlaying = adsInfoContainer.childNodes.length > 0;
 
     if (isAdPlaying) {
       this.skipAdvertisement();
     }
 
-    this.cleanUp();
     this.observer.observe(adsInfoContainer, { childList: true });
     return { status: 'success', params: {} };
-  }
+  };
 
   /**
    * Disconnects the mutation observer used to watch for advertisements. Does not disconnect
@@ -64,14 +64,14 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
     }
 
     this.observer.disconnect();
-  }
+  };
 
   /**
    * Disables the feature by disconnecting the mutation observer.
    */
   public disable = () => {
     this.observer.disconnect();
-  }
+  };
 
   /**
    * Skips an advertisement on the current video.
@@ -85,5 +85,5 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
 
     const video = document.querySelector('video') as HTMLVideoElement;
     video.currentTime = Number.MAX_VALUE;
-  }
+  };
 }

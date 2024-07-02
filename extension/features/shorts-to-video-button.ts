@@ -64,10 +64,11 @@ export default class ShortsToVideoButtonFeature extends Feature {
     }
 
     if (newButtonContainer) {
-      const label = newButtonContainer.querySelector('label') as HTMLLabelElement
+      const label = newButtonContainer.querySelector('label') as HTMLLabelElement;
       const button = newButtonContainer.querySelector('button') as HTMLButtonElement;
-      const touchFeedback = newButtonContainer
-        .querySelector('yt-touch-feedback-shape') as HTMLElement;
+      const touchFeedback = newButtonContainer.querySelector(
+        'yt-touch-feedback-shape'
+      ) as HTMLElement;
 
       this.handleUiChanges(label, touchFeedback);
       this.handleButtonEvents(renderer, button, shareButtonContainer);
@@ -88,7 +89,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     this.handleButtonEvents(renderer, button, shareButtonContainer);
     return { status: 'success', params: {} };
-  }
+  };
 
   /**
    * Disconnects the mutation observer used to watch for changes in the share button and removes
@@ -97,12 +98,12 @@ export default class ShortsToVideoButtonFeature extends Feature {
   public cleanUp = () => {
     this.observer?.disconnect();
     this.controller?.abort();
-  }
+  };
 
   /**
    * Not needed for this feature.
    */
-  public disable = () => {}
+  public disable = () => {};
 
   /**
    * Creates the new button. It clones nodes from elements that already exist on the page and adds
@@ -154,7 +155,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     this.handleUiChanges(newButtonLabel, newButtonTouchFeedback);
     return newButton;
-  }
+  };
 
   /**
    * Adds event listeners and a mutation observer to the button. The observer watches for changes
@@ -172,9 +173,13 @@ export default class ShortsToVideoButtonFeature extends Feature {
     this.observer = this.createNewObserver();
     const label = templateButtonContainer.querySelector('label') as HTMLLabelElement;
 
-    button.addEventListener('click', () => {
-      this.handleButtonClick(renderer);
-    }, { signal: this.controller?.signal });
+    button.addEventListener(
+      'click',
+      () => {
+        this.handleButtonClick(renderer);
+      },
+      { signal: this.controller?.signal }
+    );
 
     if (!this.observer) {
       return;
@@ -184,7 +189,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
       attributes: true,
       attributeFilter: ['class']
     });
-  }
+  };
 
   /**
    * Handles the button click event. It opens the video page in a new tab.
@@ -210,7 +215,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
       action: ACTIONS.OPEN_VIDEO_FROM_SHORTS,
       url: videoUrl
     });
-  }
+  };
 
   /**
    * Updates the CSS classes of the button to match the default youtube buttons.
@@ -230,7 +235,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     button.classList.add(...templateButton.classList);
     label.classList.add(...templateLabel.classList);
-  }
+  };
 
   /**
    * Handles the UI changes when the button is pressed.
@@ -242,18 +247,30 @@ export default class ShortsToVideoButtonFeature extends Feature {
     const buttonPressedClassName = 'yt-spec-touch-feedback-shape--down';
     const child = touchFeedback.firstChild as HTMLElement;
 
-    label.addEventListener('mousedown', () => {
-      child.classList.add(buttonPressedClassName);
-    }, { signal: this.controller?.signal });
+    label.addEventListener(
+      'mousedown',
+      () => {
+        child.classList.add(buttonPressedClassName);
+      },
+      { signal: this.controller?.signal }
+    );
 
-    label.addEventListener('mouseup', () => {
-      child.classList.remove(buttonPressedClassName);
-    }, { signal: this.controller?.signal });
+    label.addEventListener(
+      'mouseup',
+      () => {
+        child.classList.remove(buttonPressedClassName);
+      },
+      { signal: this.controller?.signal }
+    );
 
-    label.addEventListener('mouseleave', () => {
-      child.classList.remove(buttonPressedClassName);
-    }, { signal: this.controller?.signal });
-  }
+    label.addEventListener(
+      'mouseleave',
+      () => {
+        child.classList.remove(buttonPressedClassName);
+      },
+      { signal: this.controller?.signal }
+    );
+  };
 
   /**
    * Creates a new mutation observer to watch for UI changes.
@@ -274,7 +291,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
       this.updateCssClasses(container, templateContainer);
     });
-  }
+  };
 
   /**
    * Gets the actions container from the renderer.
@@ -283,7 +300,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
    */
   private getRendererAndActionsContainer = () => {
     const renderer = document.querySelector('ytd-shorts [is-active]') as HTMLElement;
-    const actions =  renderer?.querySelector('#actions') as HTMLElement;
+    const actions = renderer?.querySelector('#actions') as HTMLElement;
     return { renderer, actions };
-  }
+  };
 }

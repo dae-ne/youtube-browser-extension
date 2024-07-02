@@ -31,15 +31,15 @@ export default class AutoLoopVideoFeature extends Feature {
 
     video.loop = true;
     return { status: 'success', params: {} };
-  }
+  };
 
   /**
    * Not needed for this feature.
    */
-  public cleanUp = () => {}
+  public cleanUp = () => {};
 
   /**
    * Not needed for this feature.
    */
-  public disable = () => {}
+  public disable = () => {};
 }
