@@ -77,13 +77,21 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
    * Skips an advertisement on the current video.
    */
   private skipAdvertisement = () => {
+    const MAX_NON_SKIPABLE_AD_DURATION = 30;
+
     const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
 
     if (skipButton) {
       skipButton.click();
+      return;
     }
 
     const video = document.querySelector('video') as HTMLVideoElement;
+
+    if (video.duration > MAX_NON_SKIPABLE_AD_DURATION) {
+      return;
+    }
+
     video.currentTime = Number.MAX_VALUE;
   };
 }
