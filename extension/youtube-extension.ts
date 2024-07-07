@@ -7,9 +7,7 @@ import {
   ShortsUiTweaksFeature
 } from './features';
 
-const handler = new ActionHandler();
-
-handler.registerFeatures(
+const handler = new ActionHandler(
   new AutoLoopVideoFeature(),
   new AutoSkipAdvertisementsFeature(),
   new ShortsToVideoButtonFeature(),

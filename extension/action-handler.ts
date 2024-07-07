@@ -1,14 +1,14 @@
 import Feature from './feature';
 import { handleRetries } from './lib/retries';
 
-type ActionTypes = 'setUp' | 'cleanUp' | 'disable';
+type ActionTypes = 'setup' | 'cleanup' | 'disable';
 
 export default class ActionHandler {
   private features: Feature[] = [];
 
-  public registerFeatures = (...features: Feature[]) => {
+  public constructor(...features: Feature[]) {
     this.features.push(...features);
-  };
+  }
 
   public handleAction = (action: string) => {
     if (!action) {
@@ -21,10 +21,10 @@ export default class ActionHandler {
       ({ setUpActionName, cleanUpActionName, disableActionName }) => {
         switch (action) {
           case setUpActionName:
-            type = 'setUp';
+            type = 'setup';
             return true;
           case cleanUpActionName:
-            type = 'cleanUp';
+            type = 'cleanup';
             return true;
           case disableActionName:
             type = 'disable';
@@ -42,10 +42,10 @@ export default class ActionHandler {
     const { setUp, cleanUp, disable } = feature;
 
     switch (type) {
-      case 'setUp':
+      case 'setup':
         handleRetries(setUp);
         break;
-      case 'cleanUp':
+      case 'cleanup':
         cleanUp();
         break;
       case 'disable':
