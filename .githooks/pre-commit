@@ -1,5 +1,5 @@
 #!/bin/sh
 
 npm run format
-npm run lint:ts
+npm run lint:src
 npm run lint:css

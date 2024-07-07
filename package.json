@@ -2,18 +2,18 @@
   "name": "youtube-extension",
   "scripts": {
     "sync": "node scripts/sync-version.js && git add ./popup/index.html",
-    "lint:ts": "eslint . --ext .ts --ignore-path .gitignore",
+    "lint:src": "eslint . --ext .ts --ignore-path .gitignore",
     "lint:css": "stylelint **/*.css --ignore-path .gitignore",
     "format": "prettier **/*.ts --write --ignore-path .gitignore",
-    "prepare": "git config core.hooksPath .githooks",
-    "build:background": "esbuild --bundle ./extension/background.ts --outfile=./dist/background.js --minify",
-    "build:content-scripts": "esbuild --bundle ./extension/youtube-extension.ts --outfile=./dist/youtube-extension.js",
-    "build:content-styles": "esbuild --bundle ./extension/youtube-extension.css --outfile=./dist/youtube-extension.css --minify",
+    "build:background": "node scripts/build-background.mjs",
+    "build:content-scripts": "node scripts/build-content-scripts.mjs",
+    "build:content-styles": "node scripts/build-content-styles.mjs",
     "build:options": "vite build extension/options/ --outDir=../../dist/options/ --base ./ --emptyOutDir --minify",
     "build:copy-manifest": "copyfiles -f ./extension/manifest.json ./dist",
     "build:copy-resources": "copyfiles -f ./extension/resources/* ./dist/resources",
     "build": "npm run build:options && concurrently --kill-others \"npm run build:background\" \"npm run build:content-scripts\" \"npm run build:content-styles\" \"npm run build:copy-manifest\" \"npm run build:copy-resources\"",
-    "vite:help": "vite build --help"
+    "vite:help": "vite build --help",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.268",
