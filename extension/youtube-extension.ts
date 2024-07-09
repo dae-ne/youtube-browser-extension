@@ -1,9 +1,9 @@
 import ActionHandler from './action-handler';
-import RemoveSponsoredShortsFeature from './features/remove-sponsored-shorts';
 
 import {
   AutoLoopVideoFeature,
   AutoSkipAdvertisementsFeature,
+  RemoveSponsoredShortsFeature,
   ShortsToVideoButtonFeature,
   ShortsUiTweaksFeature
 } from './features';
