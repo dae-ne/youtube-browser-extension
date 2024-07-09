@@ -2,13 +2,22 @@ import { ACTIONS } from '../actions';
 import Feature from '../feature';
 import { FeatureResult } from '../types';
 
-// TODO: add documentation
-
+/**
+ * Removes the sponsored shorts from the shorts page.
+ */
 export default class RemoveSponsoredShortsFeature extends Feature {
+  /**
+   * Creates an instance of RemoveSponsoredShortsFeature.
+   */
   public constructor() {
     super(ACTIONS.REMOVE_SPONSORED_SHORTS);
   }
 
+  /**
+   * Removes the sponsored shorts from the shorts page.
+   *
+   * @returns The status of the function and the parameters.
+   */
   public setUp = (): FeatureResult => {
     const sponsoredShorts = document.querySelectorAll('ytd-reel-video-renderer');
 
@@ -25,7 +34,17 @@ export default class RemoveSponsoredShortsFeature extends Feature {
     return { status: 'success', params: {} };
   };
 
-  public cleanUp = () => {};
+  /**
+   * Cleans up the feature. Not used in this feature.
+   */
+  public cleanUp = () => {
+    throw new Error('Method not implemented.');
+  };
 
-  public disable = () => {};
+  /**
+   * Disables the feature. Not used in this feature.
+   */
+  public disable = () => {
+    throw new Error('Method not implemented.');
+  };
 }
