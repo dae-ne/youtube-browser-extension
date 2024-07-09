@@ -12,5 +12,6 @@ export const ACTIONS = {
   OPEN_VIDEO_FROM_SHORTS:           'open-video-from-shorts',
   SHORTS_UI_TWEAKS:                 'shorts-ui-tweaks',
   SHORTS_UI_TWEAKS_CLEANUP:         'shorts-ui-tweaks-cleanup',
-  SHORTS_UI_TWEAKS_DISABLE:         'shorts-ui-tweaks-disable'
+  SHORTS_UI_TWEAKS_DISABLE:         'shorts-ui-tweaks-disable',
+  REMOVE_SPONSORED_SHORTS:          'remove-sponsored-shorts',
 };

@@ -32,6 +32,7 @@ function updateApp(url: string, tabId: number) {
   if (url.includes('youtube.com/shorts')) {
     showShortsToVideoButton && sendMessage(tabId, { action: ACTIONS.SHORTS_TO_VIDEO_BUTTON });
     updateShortsUI && sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS });
+    sendMessage(tabId, { action: ACTIONS.REMOVE_SPONSORED_SHORTS }); // TODO: add to options
   }
 
   if (url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {

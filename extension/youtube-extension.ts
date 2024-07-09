@@ -1,4 +1,5 @@
 import ActionHandler from './action-handler';
+import RemoveSponsoredShortsFeature from './features/remove-sponsored-shorts';
 
 import {
   AutoLoopVideoFeature,
@@ -11,7 +12,8 @@ const handler = new ActionHandler(
   new AutoLoopVideoFeature(),
   new AutoSkipAdvertisementsFeature(),
   new ShortsToVideoButtonFeature(),
-  new ShortsUiTweaksFeature()
+  new ShortsUiTweaksFeature(),
+  new RemoveSponsoredShortsFeature()
 );
 
 chrome.runtime.onMessage.addListener(({ action }) => {
