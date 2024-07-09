@@ -14,7 +14,7 @@ Chrome extension for YouTube that adds new features and improvmements to the web
 
 ## How to install?
 
-For now, it works only in Google Chrome.
+For now, it works only in Google Chrome (it's still in development, so not every feature is working properly).
 
 1. Clone the repository to your local machine.
 
