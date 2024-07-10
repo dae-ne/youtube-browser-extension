@@ -15,9 +15,9 @@ export function getRootDir() {
 /**
  * Resolve a file path relative to the project root directory.
  *
- * @param {string} filePath - The file path to resolve.
+ * @param {string[]} paths A sequence of paths or path segments.
  * @returns {string} The resolved file path.
  */
-export function resolveFilePath(filePath) {
-  return path.resolve(getRootDir(), filePath);
+export function resolveFilePath(...paths) {
+  return path.resolve(getRootDir(), ...paths);
 }
