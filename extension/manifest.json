@@ -8,6 +8,7 @@
     "service_worker": "background.js",
     "type": "module"
   },
+  "action": {},
   "options_ui": {
     "page": "options/index.html",
     "open_in_tab": false

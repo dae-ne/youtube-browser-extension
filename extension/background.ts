@@ -124,3 +124,10 @@ chrome.runtime.onMessage.addListener((request, sender) => {
     );
   }
 });
+
+chrome.action.onClicked.addListener(async tab => {
+  await chrome.tabs.create({
+    openerTabId: tab.id,
+    url: 'https://www.youtube.com/'
+  });
+});
