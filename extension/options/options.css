@@ -2,14 +2,18 @@
   --primary-color: #e3e3e3;
   --secondary-color: #c4c7c5;
   --background-color: #292a2d;
-  --theme-color: #f00;
   --border-width: 1px;
   --border-color: rgb(255 255 255 / 10%);
   --padding-vertical: 12px;
   --padding-vertical-small: 8px;
   --padding-horizontal: 20px;
-  --switch-height: 1.25rem;
-  --transition-duration: 0.3s;
+  --switch-height: 16px;
+  --switch-width: 26px;
+  --switch-color: #444746;
+  --switch-checked-color: #a8c7fa;
+  --switch-toggle-color: #83918f;
+  --switch-checked-toggle-color: #062e6f;
+  --transition-duration: 0.1s;
 }
 
 * {
@@ -63,7 +67,7 @@ h1, p {
   position: relative;
   display: inline-block;
   height: var(--switch-height);
-  width: calc(var(--switch-height) * 1.6);
+  width: var(--switch-width);
 }
 
 .yte-switch input {
@@ -78,8 +82,9 @@ h1, p {
   height: inherit;
   width: inherit;
   inset: 0;
-  background-color: var(--secondary-color);
+  background-color: var(--switch-color);
   border-radius: 9999px;
+  box-shadow: inset 0 0 0 var(--border-width) var(--switch-toggle-color);
   transition: all var(--transition-duration);
 }
 
@@ -90,15 +95,21 @@ h1, p {
   width: calc(var(--switch-height) - 4px);
   left: 2px;
   bottom: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--switch-toggle-color);
   border-radius: 50%;
   transition: all var(--transition-duration);
 }
 
 input:checked + .yte-switch-slider {
-  background-color: var(--theme-color);
+  background-color: var(--switch-checked-color);
+  box-shadow: none;
 }
 
 input:checked + .yte-switch-slider::before {
-  transform: translateX(calc(var(--switch-height) * 1.6 - var(--switch-height)));
+  background-color: var(--switch-checked-toggle-color);
+  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+}
+
+input:not(:checked) + .yte-switch-slider::before {
+  transform: scale(0.7);
 }
