@@ -24,6 +24,11 @@ For now, it works only in Google Chrome (it's still in development, so not every
 6. Click the `Load unpacked` button and select the `dist` directory.
 
 
+## Running locally
+
+Do all the steps from the installation section and then run the `npm run prepare` command to set up git hooks.
+
+
 ## How to add a new feature?
 
 1. Create a new file in the `features` directory with a class that extends the `Feature` base class and implement methods.
