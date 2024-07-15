@@ -5,11 +5,11 @@ Chrome extension for YouTube that adds new features and improvmements to the web
 
 ## Features
 
-- **Shorts To Video Button** - adds a button to the shorts page that allows you to watch the short as a standard video
-- **Auto Loop Video** - sets the loop property of the video after clicking the `shorts to video` button
-- **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens
-- **Auto Skip Advertisements** - automatically skips ads when they appear on a video
-- **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page
+- **Shorts To Video Button** - adds a button to the shorts page that allows you to watch the short as a standard video.
+- **Auto Loop Video** - sets the loop property of the video after clicking the `shorts to video` button.
+- **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
+- **Auto Skip Advertisements** - automatically skips ads when they appear on a video.
+- **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
 
 
 ## How to install?
