@@ -12,7 +12,6 @@
     "build:copy-manifest": "copyfiles -f ./extension/manifest.json ./dist",
     "build:copy-resources": "copyfiles -f ./extension/resources/* ./dist/resources",
     "build": "npm run build:options && concurrently --kill-others \"npm run build:background\" \"npm run build:content-scripts\" \"npm run build:content-styles\" \"npm run build:copy-manifest\" \"npm run build:copy-resources\"",
-    "vite:help": "vite build --help",
     "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
