@@ -1,26 +1,103 @@
-.yte-option-item {
-  z-index: 1;
+:root {
+  --primary-color: #e3e3e3;
+  --secondary-color: #c4c7c5;
+  --background-color: #292a2d;
+  --theme-color: #f00;
+  --border-width: 1px;
+  --border-color: rgb(255 255 255 / 10%);
+  --padding-vertical: 12px;
+  --padding-vertical-small: 8px;
+  --padding-horizontal: 20px;
+  --switch-height: 1.25rem;
+  --transition-duration: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   background-color: var(--background-color);
-  border-top: var(--border-width) solid var(--border-color);
-  transition: background-color 0.5s;
+  color: var(--primary-color);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-.yte-option-item label {
-  cursor: pointer;
-}
-
-.yte-option-item:hover {
-  background-color: transparent;
-}
-
-#options-info {
-  z-index: 1000;
+h1, p {
+  font-size: 13px; /* TODO: calculate the font size */
+  font-weight: normal;
 }
 
 .yte-options-container {
-  width: 620px;
+  width: 420px;
+}
+
+.yte-options-description {
+  padding: var(--padding-vertical-small) var(--padding-horizontal) var(--padding-vertical);
+}
+
+.yte-option-item {
+  padding: var(--padding-vertical) var(--padding-horizontal);
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.yte-option-item label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
 .yte-option-info {
+  margin-right: var(--padding-horizontal);
   flex-shrink: 10;
+}
+
+.yte-color-secondary {
+  color: var(--secondary-color);
+}
+
+.yte-switch {
+  position: relative;
+  display: inline-block;
+  height: var(--switch-height);
+  width: calc(var(--switch-height) * 1.6);
+}
+
+.yte-switch input {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.yte-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  height: inherit;
+  width: inherit;
+  inset: 0;
+  background-color: var(--secondary-color);
+  border-radius: 9999px;
+  transition: all var(--transition-duration);
+}
+
+.yte-switch-slider::before {
+  position: absolute;
+  content: ' ';
+  height: calc(var(--switch-height) - 4px);
+  width: calc(var(--switch-height) - 4px);
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  transition: all var(--transition-duration);
+}
+
+input:checked + .yte-switch-slider {
+  background-color: var(--theme-color);
+}
+
+input:checked + .yte-switch-slider::before {
+  transform: translateX(calc(var(--switch-height) * 1.6 - var(--switch-height)));
 }

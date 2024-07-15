@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="main.css">
+  <!-- <link rel="stylesheet" href="main.css"> -->
   <link rel="stylesheet" href="options.css">
   <script src="options.ts" type="module" defer></script>
-  <script src="cursor.ts" type="module" defer></script>
 </head>
-<body class="yte-bg">
-  <main class="yte-text yte-options-container yte-flashlight-container">
-    <div id="options-info" class="yte-p-md yte-bg">
-      <h1 class="yte-text yte-text-lg">
-        YouTube extension options
-      </h1>
-      <p class="yte-text yte-text-sm yte-color-secondary">
-        Customize your experience by toggling the options below. Changes will be saved automatically.
-      </p>
-    </div>
+<body>
+  <main class="yte-options-container">
+    <p class="yte-options-description">
+      Customize your experience by toggling the options below. Changes will be saved automatically.
+    </p>
     <form>
       <!-- Placeholder for the options -->
     </form>
   </main>
 
   <template>
-    <div class="yte-p-md yte-option-item">
-      <label class="yte-flex yte-space-between yte-align-center">
+    <div class="yte-option-item">
+      <label>
         <div class="yte-option-info">
-          <h2 id="option-title" class="yte-text">Option title</h2>
-          <p id="option-description" class="yte-text yte-text-sm yte-color-secondary">Option description</p>
+          <h1 id="option-title">Option title</h1>
+          <p id="option-description" class="yte-color-secondary">Option description</p>
         </div>
-        <div class="yte-ms-md yte-switch">
+        <div class="yte-switch">
           <input type="checkbox" name="optionName">
           <span class="yte-switch-slider"></span>
         </div>
