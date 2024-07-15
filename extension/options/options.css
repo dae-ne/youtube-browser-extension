@@ -27,6 +27,7 @@ body {
 h1, p {
   font-size: 13px; /* TODO: calculate the font size */
   font-weight: normal;
+  line-height: 154%;
 }
 
 .yte-options-container {
