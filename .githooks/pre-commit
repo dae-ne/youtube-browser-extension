@@ -1,5 +1,14 @@
 #!/bin/sh
 
+echo "🚀 Running pre-commit hook 🚀"
+
+echo -e "\n🔧 Formatting code..."
 npm run format
+
+echo -e "\n🔍 Running linter for the source code..."
 npm run lint:src
+
+echo -e "\n🔍 Running linter for the CSS files..."
 npm run lint:css
+
+echo -e "\n🎉 All checks passed! 🎉\n"
