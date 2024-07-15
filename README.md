@@ -24,7 +24,7 @@ For now, it works only in Google Chrome (it's still in development, so not every
 6. Click the `Load unpacked` button and select the `dist` directory.
 
 
-## Running locally
+## Local development
 
 Do all the steps from the installation section and then run the `npm run prepare` command to set up git hooks.
 
