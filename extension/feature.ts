@@ -4,7 +4,7 @@ import { FeatureResult } from './types';
  * The base class for all features.
  *
  * @remarks
- * Features are the building blocks of the extension. They implement the functionality that the
+ * Features are the building blocks of the extension. They implement functionalities that the
  * extension provides, and can be enabled or disabled by the user. Each feature should extend this
  * class and implement the setUp, cleanUp, and disable methods which are further used by the
  * action handler.

@@ -1,7 +1,7 @@
 // prettier-ignore
 
 /**
- * Action names used to communicate between the background script and the content script.
+ * Action names used to communicate between the background script and content scripts.
  */
 export const ACTIONS = {
   AUTO_LOOP_VIDEO:                  'auto-loop-video',
