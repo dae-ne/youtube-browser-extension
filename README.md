@@ -9,6 +9,7 @@ Chrome extension for YouTube that adds new features and improvmements to the web
 - **Auto Loop Video** - sets the loop property of the video after clicking the `shorts to video` button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
 - **Auto Skip Advertisements** - automatically skips ads when they appear on a video.
+- **Remove Non-layout breaking Ads** - removes ads that don't break the layout of the website.
 - **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
 
 
