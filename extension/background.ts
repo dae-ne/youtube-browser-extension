@@ -125,9 +125,14 @@ chrome.runtime.onMessage.addListener((request, sender) => {
   }
 });
 
+/**
+ * Listens for the browser action click (the extension icon) and opens YouTube in a new tab.
+ */
 chrome.action.onClicked.addListener(async tab => {
+  const { id, index } = tab;
   await chrome.tabs.create({
-    openerTabId: tab.id,
+    openerTabId: id,
+    index: index + 1,
     url: 'https://www.youtube.com/'
   });
 });
