@@ -86,7 +86,11 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
       return;
     }
 
-    const video = document.querySelector('video') as HTMLVideoElement;
+    const video = document.querySelector('video');
+
+    if (!video) {
+      return;
+    }
 
     if (video.duration > MAX_NON_SKIPABLE_AD_DURATION) {
       return;
