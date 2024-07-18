@@ -1,6 +1,15 @@
-# YouTube Extension
+<div align="center">
 
-Chrome extension for YouTube that adds new features and improvmements to the website.
+  <img src="assets/logo.png" alt="logo" width="300px">
+
+  ![GitHub release](https://img.shields.io/github/v/release/dae-ne/youtube-browser-extension)
+  ![GitHub last commit](https://img.shields.io/github/last-commit/dae-ne/youtube-browser-extension)
+
+  ![Node.js](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+  ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+</div>
 
 
 ## Features
