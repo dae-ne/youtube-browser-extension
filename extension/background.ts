@@ -127,12 +127,20 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 
 /**
  * Listens for the browser action click (the extension icon) and opens YouTube in a new tab.
+ * If YouTube is already opened in a tab, it will open the options page.
  */
 chrome.action.onClicked.addListener(async tab => {
-  const { id, index } = tab;
+  const { id, url, index } = tab;
+  const YOUTUBE_URL = 'https://www.youtube.com/';
+
+  if (url && url.includes(YOUTUBE_URL)) {
+    await chrome.runtime.openOptionsPage();
+    return;
+  }
+
   await chrome.tabs.create({
     openerTabId: id,
     index: index + 1,
-    url: 'https://www.youtube.com/'
+    url: YOUTUBE_URL
   });
 });
