@@ -52,4 +52,4 @@ Do all the steps from the installation section and then run the `npm run prepare
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+See the [LICENSE](LICENSE) file for details.
