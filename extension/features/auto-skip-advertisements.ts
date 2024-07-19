@@ -105,6 +105,7 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
       return;
     }
 
+    video.muted = true;
     video.playbackRate = AD_PLAYBACK_RATE;
   };
 }
