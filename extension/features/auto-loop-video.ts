@@ -14,7 +14,9 @@ export default class AutoLoopVideoFeature extends Feature {
    * Initializes the feature with action names.
    */
   public constructor() {
-    super(ACTIONS.AUTO_LOOP_VIDEO);
+    super({
+      setUpAction: ACTIONS.AUTO_LOOP_VIDEO
+    });
   }
 
   /**

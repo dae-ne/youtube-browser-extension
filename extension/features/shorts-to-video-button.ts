@@ -33,7 +33,10 @@ export default class ShortsToVideoButtonFeature extends Feature {
    * Initializes the feature with action names.
    */
   public constructor() {
-    super(ACTIONS.SHORTS_TO_VIDEO_BUTTON, ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP);
+    super({
+      setUpAction: ACTIONS.SHORTS_TO_VIDEO_BUTTON,
+      cleanUpAction: ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP
+    });
   }
 
   /**

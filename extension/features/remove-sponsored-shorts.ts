@@ -10,7 +10,9 @@ export default class RemoveSponsoredShortsFeature extends Feature {
    * Creates an instance of RemoveSponsoredShortsFeature.
    */
   public constructor() {
-    super(ACTIONS.REMOVE_SPONSORED_SHORTS);
+    super({
+      setUpAction: ACTIONS.REMOVE_SPONSORED_SHORTS
+    });
   }
 
   /**

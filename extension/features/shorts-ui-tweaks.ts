@@ -45,11 +45,11 @@ export default class ShortsUiTweaksFeature extends Feature {
    * Initializes the feature with action names.
    */
   public constructor() {
-    super(
-      ACTIONS.SHORTS_UI_TWEAKS,
-      ACTIONS.SHORTS_UI_TWEAKS_CLEANUP,
-      ACTIONS.SHORTS_UI_TWEAKS_DISABLE
-    );
+    super({
+      setUpAction: ACTIONS.SHORTS_UI_TWEAKS,
+      cleanUpAction: ACTIONS.SHORTS_UI_TWEAKS_CLEANUP,
+      disableAction: ACTIONS.SHORTS_UI_TWEAKS_DISABLE
+    });
   }
 
   /**

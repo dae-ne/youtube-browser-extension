@@ -1,6 +1,20 @@
 import { FeatureResult } from './types';
 
 /**
+ * The setup for the actions of the feature.
+ *
+ * @remarks
+ * This type defines the actions that are used to set up, clean up, and disable the feature.
+ * Each action is a string that represents the name of the action. The cleanUpAction and
+ * disableAction can be null if the feature doesn't require a clean up or disable action.
+ */
+export type ActionsSetup = {
+  setUpAction: string;
+  cleanUpAction?: string;
+  disableAction?: string;
+};
+
+/**
  * The base class for all features.
  *
  * @remarks
@@ -13,15 +27,9 @@ export default abstract class Feature {
   /**
    * Initializes the feature with action names.
    *
-   * @param setUpAction - The action to set up the feature.
-   * @param cleanUpAction - The action to clean up the feature.
-   * @param disableAction - The action to disable the feature after switching it off in the options
+   * @param actions - The action names to set up, clean up, and disable the feature.
    */
-  protected constructor(
-    private setUpAction: string,
-    private cleanUpAction: string | null = null,
-    private disableAction: string | null = null
-  ) {}
+  protected constructor(private actions: ActionsSetup) {}
 
   /**
    * Returns the name of the action to set up the feature.
@@ -29,7 +37,8 @@ export default abstract class Feature {
    * @returns The name of the action to set up the feature.
    */
   public get setUpActionName() {
-    return this.setUpAction;
+    const { setUpAction } = this.actions;
+    return setUpAction;
   }
 
   /**
@@ -38,7 +47,8 @@ export default abstract class Feature {
    * @returns The name of the action to clean up the feature.
    */
   public get cleanUpActionName() {
-    return this.cleanUpAction;
+    const { cleanUpAction } = this.actions;
+    return cleanUpAction;
   }
 
   /**
@@ -47,7 +57,8 @@ export default abstract class Feature {
    * @returns The name of the action to disable the feature.
    */
   public get disableActionName() {
-    return this.disableAction;
+    const { disableAction } = this.actions;
+    return disableAction;
   }
 
   /**

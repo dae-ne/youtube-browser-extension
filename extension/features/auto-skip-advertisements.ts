@@ -23,7 +23,10 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
    * Initializes the feature with action names.
    */
   public constructor() {
-    super(ACTIONS.AUTO_SKIP_ADVERTISEMENTS, ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP);
+    super({
+      setUpAction: ACTIONS.AUTO_SKIP_ADVERTISEMENTS,
+      cleanUpAction: ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP
+    });
   }
 
   /**
