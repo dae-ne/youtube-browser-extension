@@ -78,9 +78,15 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
 
   /**
    * Skips an advertisement on the current video.
+   *
+   * @remarks
+   * This function will skip the ad by clicking the skip button if it exists, or by increasing the
+   * playback rate of the video. The maximum playback rate is 16 for most browsers (at least for
+   * Chrome).
    */
   private skipAdvertisement = () => {
     const MAX_NON_SKIPABLE_AD_DURATION = 30;
+    const AD_PLAYBACK_RATE = 16;
 
     const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
 
@@ -99,6 +105,6 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
       return;
     }
 
-    video.currentTime = Number.MAX_VALUE;
+    video.playbackRate = AD_PLAYBACK_RATE;
   };
 }
