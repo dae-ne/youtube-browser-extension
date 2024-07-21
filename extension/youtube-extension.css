@@ -22,7 +22,12 @@ ytd-watch-next-secondary-results-renderer ytd-ad-slot-renderer {
 
 @media (aspect-ratio < 12/16) {
   .yte-shorts-actions-container {
-    margin: 0 0 16px auto !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .yte-shorts-actions-container #pivot-button > * {
+    padding-bottom: 24px !important;
   }
 
   .yte-shorts-player-metadata-container {
@@ -39,5 +44,10 @@ ytd-watch-next-secondary-results-renderer ytd-ad-slot-renderer {
 
   .yte-shorts-g-side-mini-guide {
     display: none !important;
+  }
+
+  .yte-shorts-actions-container #actions > * > .ytd-reel-player-overlay-renderer {
+    padding-top: 0 !important;
+    padding-bottom: 24px !important;
   }
 }
