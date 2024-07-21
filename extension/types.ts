@@ -11,11 +11,3 @@ export type Options = {
   updateShortsUI?: boolean;
   removeAds?: boolean;
 };
-
-/**
- * The result of a feature setup function.
- */
-export type FeatureResult = {
-  status: string;
-  params: object;
-};

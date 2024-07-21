@@ -1,7 +1,6 @@
 import { ACTIONS } from '../actions';
-import Feature from '../feature';
+import Feature, { FeatureResult } from '../feature';
 import { isShortsPage } from '../lib/utils';
-import { FeatureResult } from '../types';
 
 /**
  * The ID of the button container to open the video from the shorts page.

@@ -1,7 +1,6 @@
 import { ACTIONS } from '../actions';
-import Feature from '../feature';
+import Feature, { FeatureResult } from '../feature';
 import { isShortsPage, removeCssClasses } from '../lib/utils';
-import { FeatureResult } from '../types';
 
 /**
  * The parameters for the addShortsUiUpdates function.

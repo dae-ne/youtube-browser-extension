@@ -1,6 +1,5 @@
 import { ACTIONS } from '../actions';
-import Feature from '../feature';
-import { FeatureResult } from '../types';
+import Feature, { FeatureResult } from '../feature';
 
 /**
  * A feature that automatically loops the video.

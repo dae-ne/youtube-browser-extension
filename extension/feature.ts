@@ -1,5 +1,3 @@
-import { FeatureResult } from './types';
-
 /**
  * The setup for the actions of the feature.
  *
@@ -12,6 +10,14 @@ export type ActionsSetup = {
   setUpAction: string;
   cleanUpAction?: string;
   disableAction?: string;
+};
+
+/**
+ * The result of a feature setup function.
+ */
+export type FeatureResult = {
+  status: string;
+  params: object;
 };
 
 /**

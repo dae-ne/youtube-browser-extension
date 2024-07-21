@@ -1,7 +1,6 @@
 import { ACTIONS } from '../actions';
-import Feature from '../feature';
+import Feature, { FeatureResult } from '../feature';
 import { isVideoOpened } from '../lib/utils';
-import { FeatureResult } from '../types';
 
 /**
  * A feature that automatically skips advertisements on the current video.
