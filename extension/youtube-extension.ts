@@ -17,6 +17,5 @@ const handler = new ActionHandler(
 );
 
 chrome.runtime.onMessage.addListener(({ action }) => {
-  console.log(action);
   handler.handleAction(action);
 });
