@@ -236,6 +236,9 @@ export default class ShortsToVideoButtonFeature extends Feature {
       return;
     }
 
+    button.className = '';
+    label.className = '';
+
     button.classList.add(...templateButton.classList);
     label.classList.add(...templateLabel.classList);
   };
