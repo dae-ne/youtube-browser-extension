@@ -1,37 +1,36 @@
-import { Actions } from '../actions.js';
 import Feature, { FeatureResult } from '../feature.js';
 
 /**
- * The class name for masterhead ad elements.
+ * The class name for in-feed ad elements.
  */
-const CLASS_NAME = 'yte-masterhead-ad';
+const CLASS_NAME = 'yte-in-feed-ad';
 
 /**
- * A feature that hides the masterhead ads.
+ * A feature that hides the in-feed ads.
  *
  * @remarks
- * This feature hides the masterhead ads on the YouTube website. This class only adds a class to
+ * This feature hides the in-feed ads on the YouTube website. This class only adds a class to
  * elements, hiding them is implemented in the injected CSS.
  */
-export default class AutoLoopVideoFeature extends Feature {
+export default class HideInFeedAdsFeature extends Feature {
   /**
    * Initializes the feature with action names.
    */
   public constructor() {
     super({
-      setUpAction: Actions.HIDE_IN_FEED_ADS,
-      disableAction: Actions.HIDE_IN_FEED_ADS_DISABLE
+      setUpAction: 'hideInFeedAds',
+      cleanUpAction: 'hideInFeedAdsCleanup'
     });
   }
 
   /**
-   * Adds a class to the masterhead ads to hide them.
+   * Adds a class to the in-feed ads to hide them.
    *
    * @returns The status of the function and the parameters.
    */
   public setUp = (): FeatureResult => {
-    const selector = '#masthead-ad';
-    const ads = document.querySelectorAll(selector);
+    const selectors = ['ytd-search-pyv-renderer', '[class~="-feed-ad-"]'];
+    const ads = document.querySelectorAll(selectors.join(', '));
 
     ads.forEach(ad => {
       ad.classList.add(CLASS_NAME);
@@ -41,12 +40,12 @@ export default class AutoLoopVideoFeature extends Feature {
   };
 
   /**
-   * Not needed for this feature.
+   * Not needed for this feature
    */
   public cleanUp: () => void;
 
   /**
-   * Removes the class from the masterhead ads to show them.
+   * Removes the class from the in-feed ads to show them.
    */
   public disable = () => {
     const ads = document.querySelectorAll(`.${CLASS_NAME}`);

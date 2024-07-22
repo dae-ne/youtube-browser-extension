@@ -41,6 +41,12 @@ function updateApp(url: string, tabId: number) {
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
+  if (url.includes('youtube.com') && url !== 'https://www.youtube.com/') {
+    // Hiding all in-feed ads except the ones in the home page.
+    // Removing them from the home page would break the grid layout.
+    sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
+  }
+
   if (url.includes('youtube.com') && !url.includes('watch')) {
     // The content script checks if a miniplayer is opened.
     // If it is, it will not disconnect the observer.

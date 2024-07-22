@@ -6,6 +6,7 @@ ytd-watch-next-secondary-results-renderer ytd-ad-slot-renderer {
   display: none !important;
 } */
 
+.yte-in-feed-ad,
 .yte-masterhead-ad {
   display: none !important;
 }

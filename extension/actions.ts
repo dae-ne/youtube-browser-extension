@@ -15,5 +15,7 @@ export const Actions = {
   SHORTS_UI_TWEAKS_DISABLE:         'shorts-ui-tweaks-disable',
   REMOVE_SPONSORED_SHORTS:          'remove-sponsored-shorts',
   HIDE_MASTERHEAD_ADS:              'hide-masterhead-ads',
-  HIDE_MASTERHEAD_ADS_DISABLE:      'hide-masterhead-ads-disable'
+  HIDE_MASTERHEAD_ADS_DISABLE:      'hide-masterhead-ads-disable',
+  HIDE_IN_FEED_ADS:                 'hide-in-feed-ads',
+  HIDE_IN_FEED_ADS_DISABLE:         'hide-in-feed-ads-disable',
 };

@@ -3,6 +3,7 @@ import ActionHandler from './action-handler';
 import {
   AutoLoopVideoFeature,
   AutoSkipAdvertisementsFeature,
+  HideInFeedAdsFeature,
   HideMasterheadAdsFeature,
   RemoveSponsoredShortsFeature,
   ShortsToVideoButtonFeature,
@@ -15,6 +16,7 @@ import {
 const handler = new ActionHandler(
   new AutoLoopVideoFeature(),
   new AutoSkipAdvertisementsFeature(),
+  new HideInFeedAdsFeature(),
   new HideMasterheadAdsFeature(),
   new RemoveSponsoredShortsFeature(),
   new ShortsToVideoButtonFeature(),
