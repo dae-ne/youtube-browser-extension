@@ -33,6 +33,16 @@ export function isShortsPage(): boolean {
 }
 
 /**
+ * Removes a CSS class from all elements on the page.
+ *
+ * @param className - The name of the CSS class to remove.
+ */
+export function removeCssClass(className: string) {
+  const elements = document.querySelectorAll(`.${className}`);
+  elements.forEach(element => element.classList.remove(className));
+}
+
+/**
  * Removes all elements with a specific class prefix from the page.
  *
  * @remarks
@@ -49,7 +59,7 @@ export function removeCssClassesByClassNamePrefix(classNamePrefix = EXTENSION_CS
     return;
   }
 
-  const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
+  const elements = document.querySelectorAll(`[class^="${classNamePrefix}"]`);
 
   elements.forEach(element => {
     const classNamesToRemove = Array.from(element.classList).filter(className =>

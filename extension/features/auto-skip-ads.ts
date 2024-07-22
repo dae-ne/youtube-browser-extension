@@ -1,6 +1,7 @@
 import { Actions } from '../actions';
-import Feature, { FeatureResult } from '../feature';
+import Feature from '../feature';
 import { isVideoOpened } from '../lib/utils';
+import { Result } from '../types';
 
 /**
  * A feature that automatically skips ads on the current video.
@@ -34,7 +35,7 @@ export default class AutoSkipAdsFeature extends Feature {
    *
    * @returns The status of the function and the parameters.
    */
-  public setUp = (): FeatureResult => {
+  public setUp = (): Result => {
     if (!isVideoOpened()) {
       return { status: 'success', params: {} };
     }
@@ -42,7 +43,7 @@ export default class AutoSkipAdsFeature extends Feature {
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
-      return { status: 'fail', params: {} };
+      return { status: 'error', params: {} };
     }
 
     this.cleanUp();

@@ -1,3 +1,5 @@
+import { Result } from '../types';
+
 /**
  * The default initial interval in milliseconds for recurring tasks. After each retry, the interval
  * is multiplied by the `INTERVAL_MULTIPLIER` constant.
@@ -24,7 +26,7 @@ const DEFAULT_MAX_NUMBER_OF_RETRIES = 20;
  * The callback function type.
  */
 export type Callback = {
-  (params: object): { status: string; params: object };
+  (params: object): Result;
 };
 
 /**
@@ -42,10 +44,16 @@ export type RetryOptions = {
  * an increasing interval between retries.
  *
  * @param callback - The callback function to retry.
+ * @param callbackParameters - The parameters to pass to the callback function.
  * @param options - The options to configure the retry logic.
  * @param retries - The retry count.
  */
-export function handleRetries(callback: Callback, options: RetryOptions = {}, retries = 0) {
+export function handleRetries(
+  callback: Callback,
+  callbackParameters: object = {},
+  options: RetryOptions = {},
+  retries = 0
+): void {
   const {
     intervalMs = DEFAULT_INITIAL_INTERVAL_MS,
     intervalMultiplayer = DEFAULT_INTERVAL_MULTIPLIER,
@@ -53,7 +61,7 @@ export function handleRetries(callback: Callback, options: RetryOptions = {}, re
     maxRetries = DEFAULT_MAX_NUMBER_OF_RETRIES
   } = options;
 
-  const { status, params } = callback({});
+  const { status, params } = callback(callbackParameters);
 
   if (status === 'success' || retries >= maxRetries) {
     return;
@@ -67,6 +75,6 @@ export function handleRetries(callback: Callback, options: RetryOptions = {}, re
   };
 
   setTimeout(() => {
-    handleRetries(() => callback(params), newOptions, ++retries);
+    handleRetries(callback, params, newOptions, ++retries);
   }, intervalMs);
 }

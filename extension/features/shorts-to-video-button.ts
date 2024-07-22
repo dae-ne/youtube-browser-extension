@@ -1,6 +1,7 @@
 import { Actions } from '../actions';
-import Feature, { FeatureResult } from '../feature';
+import Feature from '../feature';
 import { isShortsPage } from '../lib/utils';
+import { Result } from '../types';
 
 /**
  * The ID of the button container to open the video from the shorts page.
@@ -44,7 +45,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
    *
    * @returns The status of the function and the parameters.
    */
-  public setUp = (): FeatureResult => {
+  public setUp = (): Result => {
     if (!isShortsPage()) {
       return { status: 'success', params: {} };
     }
@@ -52,7 +53,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
     const { renderer, actions } = this.getRendererAndActionsContainer();
 
     if (!actions) {
-      return { status: 'fail', params: {} };
+      return { status: 'error', params: {} };
     }
 
     let newButtonContainer = actions.querySelector(`#${BUTTON_ID}`);
@@ -62,7 +63,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
     this.controller = new AbortController();
 
     if (!shareButtonContainer) {
-      return { status: 'fail', params: {} };
+      return { status: 'error', params: {} };
     }
 
     if (newButtonContainer) {
@@ -86,7 +87,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
     const button = this.createButton(newButtonContainer, shareButtonContainer);
 
     if (!button) {
-      return { status: 'fail', params: {} };
+      return { status: 'error', params: {} };
     }
 
     this.handleButtonEvents(renderer, button, shareButtonContainer);

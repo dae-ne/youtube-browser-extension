@@ -18,55 +18,65 @@ const options: Options = {};
 const loopVideoTabIds: number[] = [];
 
 /**
- * Updates the app based on the URL and the tab ID. It will send messages to the content scripts
- * based on the URL and the options.
+ * Sends actions to the content scripts if option for the action is enabled.
  *
  * @param url - The URL of the tab.
  * @param tabId - The ID of the tab.
  */
-function updateApp(url: string, tabId: number) {
+function handleTabUpdate(url: string, tabId: number) {
   // TODO: handle switching options off
 
   const { sendMessage } = chrome.tabs;
   const { autoSkipAds, showShortsToVideoButton, loopShortsToVideo, updateShortsUI } = options;
 
-  // Homepage only
-  if (url === YOUTUBE_BASE_URL) {
-    sendMessage(tabId, { action: Actions.HIDE_MASTERHEAD_ADS }); // TODO: add to options
+  if (!url.includes('youtube.com')) {
+    return;
   }
 
-  if (url.includes('youtube.com')) {
-    updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
-  }
+  sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS }); // TODO: add to options
+  sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS }); // TODO: add to options
+  sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS }); // TODO: add to options
 
-  if (url.includes('youtube.com/shorts')) {
+  if (url.includes('shorts')) {
     showShortsToVideoButton && sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON });
     updateShortsUI && sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS });
     sendMessage(tabId, { action: Actions.REMOVE_SPONSORED_SHORTS }); // TODO: add to options
   }
 
-  if (url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {
+  if (url.includes('watch') && loopVideoTabIds.includes(tabId)) {
     loopShortsToVideo && sendMessage(tabId, { action: Actions.AUTO_LOOP_VIDEO });
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
-  if (url.includes('youtube.com') && url !== YOUTUBE_BASE_URL) {
-    // Hiding all in-feed ads except the ones in the homepage.
-    // Removing them from the home page would break the grid layout.
-    sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
-  }
-
-  if (url.includes('youtube.com') && !url.includes('watch')) {
+  if (!url.includes('watch')) {
     // The content script checks if a miniplayer is opened.
     // If it is, it will not disconnect the observer.
     sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
   }
 
-  if (url.includes('youtube.com') && !url.includes('shorts')) {
+  if (!url.includes('shorts')) {
     autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
     sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
     sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP });
   }
+}
+
+/**
+ * Sends actions to the content scripts to disable switched off features.
+ *
+ * @param url - The URL of the tab.
+ * @param tabId - The ID of the tab.
+ */
+function disableFeatures(url: string, tabId: number) {
+  const { sendMessage } = chrome.tabs;
+  const { updateShortsUI } = options;
+
+  if (!url.includes('youtube.com')) {
+    return;
+  }
+
+  updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
+  // TODO: disable other features
 }
 
 /**
@@ -101,7 +111,8 @@ chrome.storage.onChanged.addListener(changes => {
         return;
       }
 
-      updateApp(url, id);
+      handleTabUpdate(url, id);
+      disableFeatures(url, id);
     });
   });
 });
@@ -118,7 +129,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     return;
   }
 
-  updateApp(url, tabId);
+  handleTabUpdate(url, tabId);
 });
 
 /**

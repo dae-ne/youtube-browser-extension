@@ -19,7 +19,7 @@
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
 - **Auto Skip Ads** - automatically skips ads when they appear on a video.
 - **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
-- **Hide Masterhead Ads** - hides the masterhead ads on the homepage.
+- **Hide Masthead Ads** - hides the masthead ads on the homepage.
 - **Hide In-Feed Ads** - hides in-feed ads (except for homepage).
 - **Hide Player Ads** - hides the player ads.
 

@@ -1,17 +1,19 @@
 import { Actions } from '../actions.js';
-import Feature, { FeatureResult } from '../feature.js';
+import Feature from '../feature.js';
+import { removeCssClass } from '../lib/utils.js';
+import { Result } from '../types.js';
 
 /**
- * The class name for player ad elements.
+ * The class name for the hide-player-ads feature, which is added to the body element.
  */
-const CLASS_NAME = 'yte-player-ad';
+const CLASS_NAME = 'yte-f-hide-player-ads';
 
 /**
  * A feature that hides the player ads.
  *
  * @remarks
- * This feature hides the player ads on the YouTube website. This class only adds a class to
- * elements, hiding them is implemented in the injected CSS.
+ * This feature hides the player ads on the YouTube website by adding a class to the body element.
+ * If the class is present, the player ads are hidden by the injected CSS.
  */
 export default class HidePlayerAdsFeature extends Feature {
   /**
@@ -25,18 +27,18 @@ export default class HidePlayerAdsFeature extends Feature {
   }
 
   /**
-   * Adds a class to the player ads to hide them.
+   * Adds the feature class to the body element to hide the player ads.
    *
    * @returns The status of the function and the parameters.
    */
-  public setUp = (): FeatureResult => {
-    const selector = '#player-ads';
-    const ads = document.querySelectorAll(selector);
+  public setUp = (): Result => {
+    const body = document.querySelector('body');
 
-    ads.forEach(ad => {
-      ad.classList.add(CLASS_NAME);
-    });
+    if (!body) {
+      return { status: 'error', params: {} };
+    }
 
+    body.classList.add(CLASS_NAME);
     return { status: 'success', params: {} };
   };
 
@@ -46,10 +48,9 @@ export default class HidePlayerAdsFeature extends Feature {
   public cleanUp: () => void;
 
   /**
-   * Removes the class from the player ads to show them.
+   * Removes the feature class from the body element.
    */
   public disable = () => {
-    const ads = document.querySelectorAll(`.${CLASS_NAME}`);
-    ads.forEach(ad => ad.classList.remove(CLASS_NAME));
+    removeCssClass(CLASS_NAME);
   };
 }

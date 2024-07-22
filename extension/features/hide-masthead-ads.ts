@@ -4,30 +4,30 @@ import { removeCssClass } from '../lib/utils.js';
 import { Result } from '../types.js';
 
 /**
- * The class name for the hide-in-feed-ads feature, which is added to the body element.
+ * The class name for the hide-masthead-ads feature, which is added to the body element.
  */
-const CLASS_NAME = 'yte-f-hide-in-feed-ads';
+const CLASS_NAME = 'yte-f-hide-masthead-ads';
 
 /**
- * A feature that hides the in-feed ads.
+ * A feature that hides the masthead ads.
  *
  * @remarks
- * This feature hides the in-feed ads on the YouTube website by adding a class to the body element.
- * If the class is present, the in-feed ads are hidden by the injected CSS.
+ * This feature hides the masthead ads on the YouTube website by adding a class to the body element.
+ * If the class is present, the masthead ads are hidden by the injected CSS.
  */
-export default class HideInFeedAdsFeature extends Feature {
+export default class HideMastheadAdsFeature extends Feature {
   /**
    * Initializes the feature with action names.
    */
   public constructor() {
     super({
-      setUpAction: Actions.HIDE_IN_FEED_ADS,
-      cleanUpAction: Actions.HIDE_IN_FEED_ADS_DISABLE
+      setUpAction: Actions.HIDE_MASTHEAD_ADS,
+      disableAction: Actions.HIDE_MASTHEAD_ADS_DISABLE
     });
   }
 
   /**
-   * Adds the feature class to the body element to hide the in-feed ads.
+   * Adds the feature class to the body element to hide the masthead ads.
    *
    * @returns The status of the function and the parameters.
    */
@@ -43,7 +43,7 @@ export default class HideInFeedAdsFeature extends Feature {
   };
 
   /**
-   * Not needed for this feature
+   * Not needed for this feature.
    */
   public cleanUp: () => void;
 

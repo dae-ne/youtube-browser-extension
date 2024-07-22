@@ -1,3 +1,5 @@
+import { Result } from './types';
+
 /**
  * The setup for the actions of the feature.
  *
@@ -10,14 +12,6 @@ export type ActionsSetup = {
   setUpAction: string;
   cleanUpAction?: string;
   disableAction?: string;
-};
-
-/**
- * The result of a feature setup function.
- */
-export type FeatureResult = {
-  status: string;
-  params: object;
 };
 
 /**
@@ -76,7 +70,7 @@ export default abstract class Feature {
    *
    * @returns The result of the setup.
    */
-  public abstract setUp: () => FeatureResult;
+  public abstract setUp: () => Result;
 
   /**
    * The function that cleans up the feature.

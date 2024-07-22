@@ -6,4 +6,4 @@ echo -e "\n🛠️  Building project"
 
 npm run build
 
-echo -e "\n🚀 Project built successfully! 🚀"
+echo -e "\n🚀 Project built successfully! 🚀\n"
