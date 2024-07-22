@@ -5,8 +5,8 @@
  */
 export const Actions = {
   AUTO_LOOP_VIDEO:                  'auto-loop-video',
-  AUTO_SKIP_ADVERTISEMENTS:         'auto-skip-advertisements',
-  AUTO_SKIP_ADVERTISEMENTS_CLEANUP: 'auto-skip-advertisements-cleanup',
+  AUTO_SKIP_ADS:                    'auto-skip-ads',
+  AUTO_SKIP_ADS_CLEANUP:            'auto-skip-ads-cleanup',
   SHORTS_TO_VIDEO_BUTTON:           'shorts-to-video-button',
   SHORTS_TO_VIDEO_BUTTON_CLEANUP:   'shorts-to-video-button-cleanup',
   OPEN_VIDEO_FROM_SHORTS:           'open-video-from-shorts',

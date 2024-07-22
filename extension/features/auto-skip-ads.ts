@@ -3,17 +3,17 @@ import Feature, { FeatureResult } from '../feature';
 import { isVideoOpened } from '../lib/utils';
 
 /**
- * A feature that automatically skips advertisements on the current video.
+ * A feature that automatically skips ads on the current video.
  */
-export default class AutoSkipAdvertisementsFeature extends Feature {
+export default class AutoSkipAdsFeature extends Feature {
   /**
-   * This mutation observer is used to watch for changes in the advertisements container and skip
-   * the ads when they appear.
+   * This mutation observer is used to watch for changes in the ads container and skip the ads
+   * when they appear.
    */
   private readonly observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       if (mutation.target.childNodes.length > 0) {
-        this.skipAdvertisement();
+        this.skipAd();
       }
     });
   });
@@ -23,14 +23,14 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: Actions.AUTO_SKIP_ADVERTISEMENTS,
-      cleanUpAction: Actions.AUTO_SKIP_ADVERTISEMENTS_CLEANUP
+      setUpAction: Actions.AUTO_SKIP_ADS,
+      cleanUpAction: Actions.AUTO_SKIP_ADS_CLEANUP
     });
   }
 
   /**
    * Automatically skips ads on the current video. Uses a mutation observer to watch for changes in
-   * the advertisements container.
+   * the ads container.
    *
    * @returns The status of the function and the parameters.
    */
@@ -49,7 +49,7 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
     const isAdPlaying = adsInfoContainer.childNodes.length > 0;
 
     if (isAdPlaying) {
-      this.skipAdvertisement();
+      this.skipAd();
     }
 
     this.observer.observe(adsInfoContainer, { childList: true });
@@ -57,7 +57,7 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
   };
 
   /**
-   * Disconnects the mutation observer used to watch for advertisements. Does not disconnect
+   * Disconnects the mutation observer used to watch for ads. Does not disconnect
    * the observer if a video is currently opened.
    */
   public cleanUp = () => {
@@ -76,14 +76,14 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
   };
 
   /**
-   * Skips an advertisement on the current video.
+   * Skips an ad on the current video.
    *
    * @remarks
    * This function will skip the ad by clicking the skip button if it exists, or by increasing the
    * playback rate of the video. The maximum playback rate is 16 for most browsers (at least for
    * Chrome).
    */
-  private skipAdvertisement = () => {
+  private skipAd = () => {
     const MAX_NON_SKIPABLE_AD_DURATION = 30;
     const AD_PLAYBACK_RATE = 16;
 

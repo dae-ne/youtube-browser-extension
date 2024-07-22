@@ -17,7 +17,7 @@
 - **Shorts To Video Button** - adds a button to the shorts page that allows you to watch the short as a standard video.
 - **Auto Loop Video** - sets the loop property of the video after clicking the `shorts to video` button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
-- **Auto Skip Advertisements** - automatically skips ads when they appear on a video.
+- **Auto Skip Ads** - automatically skips ads when they appear on a video.
 - **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
 - **Hide Masterhead Ads** - hides the masterhead ads on the homepage.
 - **Hide In-Feed Ads** - hides in-feed ads (except for homepage).

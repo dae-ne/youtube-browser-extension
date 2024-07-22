@@ -2,7 +2,7 @@ import ActionHandler from './action-handler';
 
 import {
   AutoLoopVideoFeature,
-  AutoSkipAdvertisementsFeature,
+  AutoSkipAdsFeature,
   HideInFeedAdsFeature,
   HideMasterheadAdsFeature,
   HidePlayerAdsFeature,
@@ -16,7 +16,7 @@ import {
  */
 const handler = new ActionHandler(
   new AutoLoopVideoFeature(),
-  new AutoSkipAdvertisementsFeature(),
+  new AutoSkipAdsFeature(),
   new HideInFeedAdsFeature(),
   new HideMasterheadAdsFeature(),
   new HidePlayerAdsFeature(),

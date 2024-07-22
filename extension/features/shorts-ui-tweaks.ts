@@ -1,6 +1,6 @@
 import { Actions } from '../actions';
 import Feature, { FeatureResult } from '../feature';
-import { isShortsPage, removeCssClasses } from '../lib/utils';
+import { isShortsPage, removeCssClassesByClassPrefix } from '../lib/utils';
 
 /**
  * The parameters for the addShortsUiUpdates function.
@@ -80,14 +80,14 @@ export default class ShortsUiTweaksFeature extends Feature {
    * Removes the global CSS classes from the shorts page elements.
    */
   public cleanUp = () => {
-    removeCssClasses('yte-shorts-g-');
+    removeCssClassesByClassPrefix('yte-shorts-g-');
   };
 
   /**
    * Removes all the CSS classes from the shorts page to disable the feature.
    */
   public disable = () => {
-    removeCssClasses('yte-shorts-');
+    removeCssClassesByClassPrefix('yte-shorts-');
   };
 
   /**

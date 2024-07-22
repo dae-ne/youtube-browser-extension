@@ -59,11 +59,11 @@ function updateApp(url: string, tabId: number) {
   if (url.includes('youtube.com') && !url.includes('watch')) {
     // The content script checks if a miniplayer is opened.
     // If it is, it will not disconnect the observer.
-    sendMessage(tabId, { action: Actions.AUTO_SKIP_ADVERTISEMENTS_CLEANUP });
+    sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
   }
 
   if (url.includes('youtube.com') && !url.includes('shorts')) {
-    autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADVERTISEMENTS });
+    autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
     sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
     sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP });
   }
