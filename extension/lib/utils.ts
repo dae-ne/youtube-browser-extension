@@ -42,7 +42,7 @@ export function isShortsPage(): boolean {
  *
  * @param classNamePrefix - The class name prefix used to filter the elements.
  */
-export function removeCssClasses(classNamePrefix = EXTENSION_CSS_CLASS_PREFIX) {
+export function removeCssClassesByClassNamePrefix(classNamePrefix = EXTENSION_CSS_CLASS_PREFIX) {
   const isExtensionClassName = classNamePrefix.startsWith(EXTENSION_CSS_CLASS_PREFIX);
 
   if (!isExtensionClassName) {

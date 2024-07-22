@@ -32,11 +32,7 @@ export default class HideMasterheadAdsFeature extends Feature {
   public setUp = (): FeatureResult => {
     const selector = '#masthead-ad';
     const ads = document.querySelectorAll(selector);
-
-    ads.forEach(ad => {
-      ad.classList.add(CLASS_NAME);
-    });
-
+    ads.forEach(ad => ad.classList.add(CLASS_NAME));
     return { status: 'success', params: {} };
   };
 
