@@ -14,14 +14,14 @@
 
 ## Features
 
-- **Shorts To Video Button** - adds a button to the shorts page that allows you to watch the short as a standard video.
-- **Auto Loop Video** - sets the loop property of the video after clicking the `shorts to video` button.
+- ***Shorts To Video* Button** - adds a button to the shorts page that allows you to watch the short as a standard video.
+- **Auto Loop Video** - sets the loop property of the video after clicking the *shorts to video* button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
 - **Auto Skip Ads** - automatically skips ads when they appear on a video.
 - **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
-- **Hide Masthead Ads** - hides the masthead ads on the homepage.
-- **Hide In-Feed Ads** - hides in-feed ads (except for homepage).
-- **Hide Player Ads** - hides the player ads.
+- **Hide Masthead Ads** - hides the *masthead ads* on the homepage.
+- **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage).
+- **Hide Player Ads** - hides *player ads* on the watch page.
 
 
 ## How to install?
@@ -48,7 +48,7 @@ Do all the steps from the installation section and then run the `npm run prepare
 3. Register the new actions in a constructor of the new feature class (using the constructor of the `Feature` base class).
 4. Add the new feature to exports in the `features/index.ts` file.
 5. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
-6. Add sending messages from the background script to the content script in the `background.ts` file (in the `updateApp` method).
+6. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
 7. Update the `README.md` file with the new feature.
 
 
