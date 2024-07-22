@@ -1,13 +1,6 @@
-/* ytd-ad-slot-renderer */
-
-/* #player-ads,
-#masthead-ad,
-ytd-watch-next-secondary-results-renderer ytd-ad-slot-renderer {
-  display: none !important;
-} */
-
 .yte-in-feed-ad,
-.yte-masterhead-ad {
+.yte-masterhead-ad,
+.yte-player-ad {
   display: none !important;
 }
 

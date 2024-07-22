@@ -5,6 +5,7 @@ import {
   AutoSkipAdvertisementsFeature,
   HideInFeedAdsFeature,
   HideMasterheadAdsFeature,
+  HidePlayerAdsFeature,
   RemoveSponsoredShortsFeature,
   ShortsToVideoButtonFeature,
   ShortsUiTweaksFeature
@@ -18,6 +19,7 @@ const handler = new ActionHandler(
   new AutoSkipAdvertisementsFeature(),
   new HideInFeedAdsFeature(),
   new HideMasterheadAdsFeature(),
+  new HidePlayerAdsFeature(),
   new RemoveSponsoredShortsFeature(),
   new ShortsToVideoButtonFeature(),
   new ShortsUiTweaksFeature()
@@ -26,6 +28,4 @@ const handler = new ActionHandler(
 /**
  * Listens for messages from the background script and triggers a corresponding feature action.
  */
-chrome.runtime.onMessage.addListener(({ action }) => {
-  handler.handleAction(action);
-});
+chrome.runtime.onMessage.addListener(({ action }) => handler.handleAction(action));

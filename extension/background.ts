@@ -3,6 +3,11 @@ import { Options } from './types';
 import * as defaultSettings from './default-settings.json';
 
 /**
+ * The base URL of the YouTube website.
+ */
+const YOUTUBE_BASE_URL = 'https://www.youtube.com/';
+
+/**
  * The options loaded from the storage.
  */
 const options: Options = {};
@@ -25,9 +30,13 @@ function updateApp(url: string, tabId: number) {
   const { sendMessage } = chrome.tabs;
   const { autoSkipAds, showShortsToVideoButton, loopShortsToVideo, updateShortsUI } = options;
 
+  // Homepage only
+  if (url === YOUTUBE_BASE_URL) {
+    sendMessage(tabId, { action: Actions.HIDE_MASTERHEAD_ADS }); // TODO: add to options
+  }
+
   if (url.includes('youtube.com')) {
     updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
-    sendMessage(tabId, { action: Actions.HIDE_MASTERHEAD_ADS }); // TODO: add to options
   }
 
   if (url.includes('youtube.com/shorts')) {
@@ -41,8 +50,8 @@ function updateApp(url: string, tabId: number) {
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
-  if (url.includes('youtube.com') && url !== 'https://www.youtube.com/') {
-    // Hiding all in-feed ads except the ones in the home page.
+  if (url.includes('youtube.com') && url !== YOUTUBE_BASE_URL) {
+    // Hiding all in-feed ads except the ones in the homepage.
     // Removing them from the home page would break the grid layout.
     sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
   }
@@ -86,7 +95,7 @@ chrome.storage.onChanged.addListener(changes => {
     options[name] = newValue;
   }
 
-  chrome.tabs.query({ url: 'https://www.youtube.com/*' }, tabs => {
+  chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
     tabs.forEach(({ id, url }) => {
       if (!url || !id) {
         return;
@@ -138,9 +147,8 @@ chrome.runtime.onMessage.addListener((request, sender) => {
  */
 chrome.action.onClicked.addListener(async tab => {
   const { id, url, index } = tab;
-  const YOUTUBE_URL = 'https://www.youtube.com/';
 
-  if (url && url.includes(YOUTUBE_URL)) {
+  if (url && url.includes(YOUTUBE_BASE_URL)) {
     await chrome.runtime.openOptionsPage();
     return;
   }
@@ -148,6 +156,6 @@ chrome.action.onClicked.addListener(async tab => {
   await chrome.tabs.create({
     openerTabId: id,
     index: index + 1,
-    url: YOUTUBE_URL
+    url: YOUTUBE_BASE_URL
   });
 });

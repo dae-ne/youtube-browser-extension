@@ -18,4 +18,6 @@ export const Actions = {
   HIDE_MASTERHEAD_ADS_DISABLE:      'hide-masterhead-ads-disable',
   HIDE_IN_FEED_ADS:                 'hide-in-feed-ads',
   HIDE_IN_FEED_ADS_DISABLE:         'hide-in-feed-ads-disable',
+  HIDE_PLAYER_ADS:                  'hide-player-ads',
+  HIDE_PLAYER_ADS_DISABLE:          'hide-player-ads-disable',
 };

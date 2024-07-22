@@ -214,7 +214,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     video.pause();
     chrome.runtime.sendMessage({
-      action: ACTIONS.OPEN_VIDEO_FROM_SHORTS,
+      action: Actions.OPEN_VIDEO_FROM_SHORTS,
       url: videoUrl
     });
   };

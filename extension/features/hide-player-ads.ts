@@ -2,35 +2,35 @@ import { Actions } from '../actions.js';
 import Feature, { FeatureResult } from '../feature.js';
 
 /**
- * The class name for masterhead ad elements.
+ * The class name for player ad elements.
  */
-const CLASS_NAME = 'yte-masterhead-ad';
+const CLASS_NAME = 'yte-player-ad';
 
 /**
- * A feature that hides the masterhead ads.
+ * A feature that hides the player ads.
  *
  * @remarks
- * This feature hides the masterhead ads on the YouTube website. This class only adds a class to
+ * This feature hides the player ads on the YouTube website. This class only adds a class to
  * elements, hiding them is implemented in the injected CSS.
  */
-export default class HideMasterheadAdsFeature extends Feature {
+export default class HidePlayerAdsFeature extends Feature {
   /**
    * Initializes the feature with action names.
    */
   public constructor() {
     super({
-      setUpAction: Actions.HIDE_IN_FEED_ADS,
-      disableAction: Actions.HIDE_IN_FEED_ADS_DISABLE
+      setUpAction: Actions.HIDE_PLAYER_ADS,
+      disableAction: Actions.HIDE_PLAYER_ADS_DISABLE
     });
   }
 
   /**
-   * Adds a class to the masterhead ads to hide them.
+   * Adds a class to the player ads to hide them.
    *
    * @returns The status of the function and the parameters.
    */
   public setUp = (): FeatureResult => {
-    const selector = '#masthead-ad';
+    const selector = '#player-ads';
     const ads = document.querySelectorAll(selector);
 
     ads.forEach(ad => {
@@ -46,7 +46,7 @@ export default class HideMasterheadAdsFeature extends Feature {
   public cleanUp: () => void;
 
   /**
-   * Removes the class from the masterhead ads to show them.
+   * Removes the class from the player ads to show them.
    */
   public disable = () => {
     const ads = document.querySelectorAll(`.${CLASS_NAME}`);
