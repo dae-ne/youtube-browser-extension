@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions.js';
+import { Actions } from '../actions.js';
 import Feature, { FeatureResult } from '../feature.js';
 
 /**
@@ -19,8 +19,8 @@ export default class AutoLoopVideoFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: ACTIONS.HIDE_MASTERHEAD_ADS,
-      disableAction: ACTIONS.HIDE_MASTERHEAD_ADS_DISABLE
+      setUpAction: Actions.HIDE_MASTERHEAD_ADS,
+      disableAction: Actions.HIDE_MASTERHEAD_ADS_DISABLE
     });
   }
 

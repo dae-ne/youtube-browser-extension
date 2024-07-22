@@ -3,7 +3,7 @@
 /**
  * Action names used to communicate between the background script and content scripts.
  */
-export const ACTIONS = {
+export const Actions = {
   AUTO_LOOP_VIDEO:                  'auto-loop-video',
   AUTO_SKIP_ADVERTISEMENTS:         'auto-skip-advertisements',
   AUTO_SKIP_ADVERTISEMENTS_CLEANUP: 'auto-skip-advertisements-cleanup',

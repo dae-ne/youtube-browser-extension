@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions';
+import { Actions } from '../actions';
 import Feature, { FeatureResult } from '../feature';
 import { isShortsPage, removeCssClasses } from '../lib/utils';
 
@@ -45,9 +45,9 @@ export default class ShortsUiTweaksFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: ACTIONS.SHORTS_UI_TWEAKS,
-      cleanUpAction: ACTIONS.SHORTS_UI_TWEAKS_CLEANUP,
-      disableAction: ACTIONS.SHORTS_UI_TWEAKS_DISABLE
+      setUpAction: Actions.SHORTS_UI_TWEAKS,
+      cleanUpAction: Actions.SHORTS_UI_TWEAKS_CLEANUP,
+      disableAction: Actions.SHORTS_UI_TWEAKS_DISABLE
     });
   }
 

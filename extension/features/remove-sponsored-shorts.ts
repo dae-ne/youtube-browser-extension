@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions';
+import { Actions } from '../actions';
 import Feature, { FeatureResult } from '../feature';
 
 /**
@@ -10,7 +10,7 @@ export default class RemoveSponsoredShortsFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: ACTIONS.REMOVE_SPONSORED_SHORTS
+      setUpAction: Actions.REMOVE_SPONSORED_SHORTS
     });
   }
 

@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions';
+import { Actions } from '../actions';
 import Feature, { FeatureResult } from '../feature';
 import { isShortsPage } from '../lib/utils';
 
@@ -33,8 +33,8 @@ export default class ShortsToVideoButtonFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: ACTIONS.SHORTS_TO_VIDEO_BUTTON,
-      cleanUpAction: ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP
+      setUpAction: Actions.SHORTS_TO_VIDEO_BUTTON,
+      cleanUpAction: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP
     });
   }
 

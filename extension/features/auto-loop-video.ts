@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions';
+import { Actions } from '../actions';
 import Feature, { FeatureResult } from '../feature';
 
 /**
@@ -14,7 +14,7 @@ export default class AutoLoopVideoFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: ACTIONS.AUTO_LOOP_VIDEO
+      setUpAction: Actions.AUTO_LOOP_VIDEO
     });
   }
 

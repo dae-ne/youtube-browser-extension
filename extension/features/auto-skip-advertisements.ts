@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions';
+import { Actions } from '../actions';
 import Feature, { FeatureResult } from '../feature';
 import { isVideoOpened } from '../lib/utils';
 
@@ -23,8 +23,8 @@ export default class AutoSkipAdvertisementsFeature extends Feature {
    */
   public constructor() {
     super({
-      setUpAction: ACTIONS.AUTO_SKIP_ADVERTISEMENTS,
-      cleanUpAction: ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP
+      setUpAction: Actions.AUTO_SKIP_ADVERTISEMENTS,
+      cleanUpAction: Actions.AUTO_SKIP_ADVERTISEMENTS_CLEANUP
     });
   }
 

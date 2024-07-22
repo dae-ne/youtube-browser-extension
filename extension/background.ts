@@ -1,4 +1,4 @@
-import { ACTIONS } from './actions';
+import { Actions } from './actions';
 import { Options } from './types';
 import * as defaultSettings from './default-settings.json';
 
@@ -26,31 +26,31 @@ function updateApp(url: string, tabId: number) {
   const { autoSkipAds, showShortsToVideoButton, loopShortsToVideo, updateShortsUI } = options;
 
   if (url.includes('youtube.com')) {
-    updateShortsUI || sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS_DISABLE });
-    sendMessage(tabId, { action: ACTIONS.HIDE_MASTERHEAD_ADS }); // TODO: add to options
+    updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
+    sendMessage(tabId, { action: Actions.HIDE_MASTERHEAD_ADS }); // TODO: add to options
   }
 
   if (url.includes('youtube.com/shorts')) {
-    showShortsToVideoButton && sendMessage(tabId, { action: ACTIONS.SHORTS_TO_VIDEO_BUTTON });
-    updateShortsUI && sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS });
-    sendMessage(tabId, { action: ACTIONS.REMOVE_SPONSORED_SHORTS }); // TODO: add to options
+    showShortsToVideoButton && sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON });
+    updateShortsUI && sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS });
+    sendMessage(tabId, { action: Actions.REMOVE_SPONSORED_SHORTS }); // TODO: add to options
   }
 
   if (url.includes('youtube.com/watch') && loopVideoTabIds.includes(tabId)) {
-    loopShortsToVideo && sendMessage(tabId, { action: ACTIONS.AUTO_LOOP_VIDEO });
+    loopShortsToVideo && sendMessage(tabId, { action: Actions.AUTO_LOOP_VIDEO });
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
   if (url.includes('youtube.com') && !url.includes('watch')) {
     // The content script checks if a miniplayer is opened.
     // If it is, it will not disconnect the observer.
-    sendMessage(tabId, { action: ACTIONS.AUTO_SKIP_ADVERTISEMENTS_CLEANUP });
+    sendMessage(tabId, { action: Actions.AUTO_SKIP_ADVERTISEMENTS_CLEANUP });
   }
 
   if (url.includes('youtube.com') && !url.includes('shorts')) {
-    autoSkipAds && sendMessage(tabId, { action: ACTIONS.AUTO_SKIP_ADVERTISEMENTS });
-    sendMessage(tabId, { action: ACTIONS.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
-    sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS_CLEANUP });
+    autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADVERTISEMENTS });
+    sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
+    sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP });
   }
 }
 
@@ -114,7 +114,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
     return;
   }
 
-  if (request.action === ACTIONS.OPEN_VIDEO_FROM_SHORTS) {
+  if (request.action === Actions.OPEN_VIDEO_FROM_SHORTS) {
     chrome.tabs.create(
       {
         url: request.url,
