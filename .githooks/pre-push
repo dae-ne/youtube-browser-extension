@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "🚀 Running pre-push hook 🚀"
+
+echo -e "\n🛠️ Building project"
+
+npm run build
+
+echo "🚀 Project built successfully 🚀"
