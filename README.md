@@ -20,6 +20,7 @@
 - **Auto Skip Advertisements** - automatically skips ads when they appear on a video.
 - **Remove Non-layout breaking Ads** - removes ads that don't break the layout of the website.
 - **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
+- **Hide Masterhead ads** - hides the masterhead ads on the homepage.
 
 
 ## How to install?

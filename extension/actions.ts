@@ -14,4 +14,6 @@ export const ACTIONS = {
   SHORTS_UI_TWEAKS_CLEANUP:         'shorts-ui-tweaks-cleanup',
   SHORTS_UI_TWEAKS_DISABLE:         'shorts-ui-tweaks-disable',
   REMOVE_SPONSORED_SHORTS:          'remove-sponsored-shorts',
+  HIDE_MASTERHEAD_ADS:              'hide-masterhead-ads',
+  HIDE_MASTERHEAD_ADS_DISABLE:      'hide-masterhead-ads-disable'
 };

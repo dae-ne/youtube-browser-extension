@@ -27,6 +27,7 @@ function updateApp(url: string, tabId: number) {
 
   if (url.includes('youtube.com')) {
     updateShortsUI || sendMessage(tabId, { action: ACTIONS.SHORTS_UI_TWEAKS_DISABLE });
+    sendMessage(tabId, { action: ACTIONS.HIDE_MASTERHEAD_ADS }); // TODO: add to options
   }
 
   if (url.includes('youtube.com/shorts')) {

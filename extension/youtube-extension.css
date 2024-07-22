@@ -1,11 +1,12 @@
 /* ytd-ad-slot-renderer */
-#player-ads,
+
+/* #player-ads,
 #masthead-ad,
 ytd-watch-next-secondary-results-renderer ytd-ad-slot-renderer {
   display: none !important;
-}
+} */
 
-.yte-hidden {
+.yte-masterhead-ad {
   display: none !important;
 }
 
