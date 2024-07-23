@@ -49,7 +49,7 @@ Do all the steps from the installation section and then run the `npm run prepare
 4. Add the new feature to exports in the `features/index.ts` file.
 5. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
 6. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
-7. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script.
+7. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script. Also update the `default-settings.ts`.
 8. If the feature uses custom CSS, add it to the `youtube-extension.css` file.
 7. Update the `README.md` file with the new feature.
 

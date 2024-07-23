@@ -4,7 +4,7 @@
     "loopShortsToVideo": true,
     "updateShortsUI": true,
     "autoSkipAds": true,
-    "removeSponsoredShorts": true,
+    "hideSponsoredShorts": true,
     "hideMastheadAds": true,
     "hideInFeedAds": true,
     "hidePlayerAds": true
