@@ -6,7 +6,7 @@ import {
   HideInFeedAdsFeature,
   HideMastheadAdsFeature,
   HidePlayerAdsFeature,
-  RemoveSponsoredShortsFeature,
+  HideSponsoredShortsFeature,
   ShortsToVideoButtonFeature,
   ShortsUiTweaksFeature
 } from './features';
@@ -20,7 +20,7 @@ const handler = new ActionHandler(
   new HideInFeedAdsFeature(),
   new HideMastheadAdsFeature(),
   new HidePlayerAdsFeature(),
-  new RemoveSponsoredShortsFeature(),
+  new HideSponsoredShortsFeature(),
   new ShortsToVideoButtonFeature(),
   new ShortsUiTweaksFeature()
 );

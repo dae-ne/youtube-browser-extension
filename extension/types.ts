@@ -9,7 +9,7 @@ export type Options = {
   loopShortsToVideo?: boolean;
   updateShortsUI?: boolean;
   autoSkipAds?: boolean;
-  removeSponsoredShorts?: boolean;
+  removeSponsoredShorts?: boolean; // TODO: Rename to hideSponsoredShorts
   hideMastheadAds?: boolean;
   hideInFeedAds?: boolean;
   hidePlayerAds?: boolean;

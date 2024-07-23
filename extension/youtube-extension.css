@@ -2,7 +2,8 @@ body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) ytd-sea
 body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) ytd-in-feed-ad-layout-renderer,
 body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) .ytd-in-feed-ad-layout-renderer,
 body.yte-f-hide-masthead-ads #masthead-ad,
-body.yte-f-hide-player-ads #player-ads {
+body.yte-f-hide-player-ads #player-ads,
+body.yte-f-hide-sponsored-shorts ytd-reel-video-renderer:has([class*="-in-feed-ad-"]) {
   display: none !important;
 }
 
