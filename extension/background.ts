@@ -152,6 +152,15 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 /**
+ * Reloads all YouTube tabs when the extension is installed or updated.
+ */
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
+    tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
+  });
+});
+
+/**
  * Listens for content script messages and triggers the corresponding actions.
  */
 chrome.runtime.onMessage.addListener((request, sender) => {
