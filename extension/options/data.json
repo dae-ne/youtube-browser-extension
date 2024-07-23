@@ -7,7 +7,7 @@
     },
     {
       "name": "loopShortsToVideo",
-      "title": "Enable Auto Loop for Shorts",
+      "title": "Loop Shorts Video on Watch Page",
       "description": "Automatically loop the video on the watch page if the original Shorts video is looped (after clicking the 'shorts to video' button)."
     },
     {
