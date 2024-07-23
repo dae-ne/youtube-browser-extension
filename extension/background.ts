@@ -77,16 +77,25 @@ function handleTabUpdate(url: string, tabId: number) {
  */
 function disableFeatures(url: string, tabId: number) {
   const { sendMessage } = chrome.tabs;
-  const { updateShortsUI, hideMastheadAds, hideInFeedAds, hidePlayerAds }: Options = options;
+  const {
+    showShortsToVideoButton,
+    updateShortsUI,
+    autoSkipAds,
+    hideMastheadAds,
+    hideInFeedAds,
+    hidePlayerAds
+  }: Options = options;
 
   if (!url.includes('youtube.com')) {
     return;
   }
 
+  autoSkipAds || sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_DISABLE });
   updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
   hideMastheadAds || sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS_DISABLE });
   hideInFeedAds || sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS_DISABLE });
   hidePlayerAds || sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS_DISABLE });
+  showShortsToVideoButton || sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE });
 }
 
 /**

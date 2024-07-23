@@ -59,7 +59,7 @@ export function removeCssClassesByClassNamePrefix(classNamePrefix = EXTENSION_CS
     return;
   }
 
-  const elements = document.querySelectorAll(`[class^="${classNamePrefix}"]`);
+  const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
 
   elements.forEach(element => {
     const classNamesToRemove = Array.from(element.classList).filter(className =>

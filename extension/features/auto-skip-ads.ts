@@ -25,7 +25,8 @@ export default class AutoSkipAdsFeature extends Feature {
   public constructor() {
     super({
       setUpAction: Actions.AUTO_SKIP_ADS,
-      cleanUpAction: Actions.AUTO_SKIP_ADS_CLEANUP
+      cleanUpAction: Actions.AUTO_SKIP_ADS_CLEANUP,
+      disableAction: Actions.AUTO_SKIP_ADS_DISABLE
     });
   }
 

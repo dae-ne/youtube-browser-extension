@@ -35,7 +35,8 @@ export default class ShortsToVideoButtonFeature extends Feature {
   public constructor() {
     super({
       setUpAction: Actions.SHORTS_TO_VIDEO_BUTTON,
-      cleanUpAction: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP
+      cleanUpAction: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP,
+      disableAction: Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE
     });
   }
 
@@ -104,9 +105,13 @@ export default class ShortsToVideoButtonFeature extends Feature {
   };
 
   /**
-   * Not needed for this feature.
+   * Disables the feature by removing the button.
    */
-  public disable = () => {};
+  public disable = () => {
+    this.cleanUp();
+    const buttons = document.querySelectorAll(`#${BUTTON_ID}`);
+    buttons.forEach(button => button.remove());
+  };
 
   /**
    * Creates the new button. It clones nodes from elements that already exist on the page and adds
