@@ -30,7 +30,7 @@ function handleTabUpdate(url: string, tabId: number) {
     loopShortsToVideo,
     updateShortsUI,
     autoSkipAds,
-    removeSponsoredShorts,
+    hideSponsoredShorts,
     hideMastheadAds,
     hideInFeedAds,
     hidePlayerAds
@@ -43,7 +43,7 @@ function handleTabUpdate(url: string, tabId: number) {
   hideInFeedAds && sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
   hideMastheadAds && sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS });
   hidePlayerAds && sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS });
-  removeSponsoredShorts && sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS });
+  hideSponsoredShorts && sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS });
 
   sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
 
@@ -84,7 +84,7 @@ function disableFeatures(url: string, tabId: number) {
     hideMastheadAds,
     hideInFeedAds,
     hidePlayerAds,
-    removeSponsoredShorts
+    hideSponsoredShorts: removeSponsoredShorts
   }: Options = options;
 
   if (!url.includes('youtube.com')) {

@@ -21,7 +21,7 @@
       "description": "Automatically skip ads on the video player or mini player by auto-clicking the skip button or increasing playback speed for non-skippable ads."
     },
     {
-      "name": "removeSponsoredShorts",
+      "name": "hideSponsoredShorts",
       "title": "Hide Sponsored Shorts",
       "description": "Hide sponsored Shorts on the Shorts page."
     },
