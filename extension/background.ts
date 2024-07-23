@@ -24,23 +24,32 @@ const loopVideoTabIds: number[] = [];
  * @param tabId - The ID of the tab.
  */
 function handleTabUpdate(url: string, tabId: number) {
-  // TODO: handle switching options off
-
   const { sendMessage } = chrome.tabs;
-  const { autoSkipAds, showShortsToVideoButton, loopShortsToVideo, updateShortsUI } = options;
+  const {
+    showShortsToVideoButton,
+    loopShortsToVideo,
+    updateShortsUI,
+    autoSkipAds,
+    removeSponsoredShorts,
+    hideMastheadAds,
+    hideInFeedAds,
+    hidePlayerAds
+  }: Options = options;
 
   if (!url.includes('youtube.com')) {
     return;
   }
 
-  sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS }); // TODO: add to options
-  sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS }); // TODO: add to options
-  sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS }); // TODO: add to options
+  hideInFeedAds && sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
+  hideMastheadAds && sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS });
+  hidePlayerAds && sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS });
+
+  sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
 
   if (url.includes('shorts')) {
     showShortsToVideoButton && sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON });
     updateShortsUI && sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS });
-    sendMessage(tabId, { action: Actions.REMOVE_SPONSORED_SHORTS }); // TODO: add to options
+    removeSponsoredShorts && sendMessage(tabId, { action: Actions.REMOVE_SPONSORED_SHORTS });
   }
 
   if (url.includes('watch') && loopVideoTabIds.includes(tabId)) {
@@ -56,7 +65,6 @@ function handleTabUpdate(url: string, tabId: number) {
 
   if (!url.includes('shorts')) {
     autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
-    sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
     sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP });
   }
 }
@@ -69,14 +77,16 @@ function handleTabUpdate(url: string, tabId: number) {
  */
 function disableFeatures(url: string, tabId: number) {
   const { sendMessage } = chrome.tabs;
-  const { updateShortsUI } = options;
+  const { updateShortsUI, hideMastheadAds, hideInFeedAds, hidePlayerAds }: Options = options;
 
   if (!url.includes('youtube.com')) {
     return;
   }
 
   updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
-  // TODO: disable other features
+  hideMastheadAds || sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS_DISABLE });
+  hideInFeedAds || sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS_DISABLE });
+  hidePlayerAds || sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS_DISABLE });
 }
 
 /**

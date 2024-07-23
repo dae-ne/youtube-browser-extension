@@ -1,29 +1,44 @@
 {
   "data": [
     {
-      "name": "autoSkipAds",
-      "title": "Automatically skip ads",
-      "description": "All ads will be skipped automatically without any user interaction."
-    },
-    {
       "name": "showShortsToVideoButton",
-      "title": "Show shorts to video button",
-      "description": "This button will be shown on shorts pages. Clicking it will open the the shorts video in the main video player."
+      "title": "Enable 'Shorts to Video' Button",
+      "description": "Display a button on Shorts pages that allows users to view the same video on the standard watch page."
     },
     {
       "name": "loopShortsToVideo",
-      "title": "Auto loop video opened from shorts",
-      "description": "The video opened from shorts will be looped automatically (just like shorts videos are)."
+      "title": "Enable Auto Loop for Shorts",
+      "description": "Automatically loop the video on the watch page if the original Shorts video is looped (after clicking the 'shorts to video' button)."
     },
     {
       "name": "updateShortsUI",
-      "title": "Update shorts UI for vertical screens",
-      "description": "Some UI elements will be updated to be more suitable for vertical screens."
+      "title": "Optimize Shorts User Interface",
+      "description": "Enhance the user interface for Shorts, particularly for vertical screens."
     },
     {
-      "name": "removeAds",
-      "title": "Remove non layout breaking ads",
-      "description": "Some ads will be removed from the page to improve the user experience. It will not remove ads that will mess up the layout of the page (e.g. leaving a big empty space)."
+      "name": "autoSkipAds",
+      "title": "Automatically Skip Ads",
+      "description": "Automatically skip ads on the video player or mini player by auto-clicking the skip button or increasing playback speed for non-skippable ads."
+    },
+    {
+      "name": "removeSponsoredShorts",
+      "title": "Remove Sponsored Shorts",
+      "description": "Remove sponsored Shorts from the Shorts page."
+    },
+    {
+      "name": "hideMastheadAds",
+      "title": "Hide Masthead Ads",
+      "description": "Hide masthead ads on the YouTube homepage."
+    },
+    {
+      "name": "hideInFeedAds",
+      "title": "Hide In-Feed Ads",
+      "description": "Hide in-feed ads, except those that might disrupt the layout or leave blank spaces."
+    },
+    {
+      "name": "hidePlayerAds",
+      "title": "Hide Player Ads",
+      "description": "Hide ads that appear on the video player page."
     }
   ]
 }

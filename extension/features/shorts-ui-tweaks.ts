@@ -16,23 +16,23 @@ type Params = {
  */
 const classes = [
   {
-    className: 'yte-shorts-actions-container',
+    className: 'yte-shorts-tweaks-actions-container',
     selector: '.ytd-shorts [is-active] .action-container'
   },
   {
-    className: 'yte-shorts-player-metadata-container',
+    className: 'yte-shorts-tweaks-player-metadata-container',
     selector: '.ytd-shorts [is-active] .metadata-container'
   },
   {
-    className: 'yte-shorts-navigation-container',
+    className: 'yte-shorts-tweaks-navigation-container',
     selector: '.navigation-container.ytd-shorts'
   },
   {
-    className: 'yte-shorts-g-page-manager',
+    className: 'yte-shorts-tweaks-g-page-manager',
     selector: 'ytd-page-manager'
   },
   {
-    className: 'yte-shorts-g-side-mini-guide',
+    className: 'yte-shorts-tweaks-g-side-mini-guide',
     selector: 'ytd-mini-guide-renderer.ytd-app'
   }
 ];
@@ -81,14 +81,14 @@ export default class ShortsUiTweaksFeature extends Feature {
    * Removes the global CSS classes from the shorts page elements.
    */
   public cleanUp = () => {
-    removeCssClassesByClassNamePrefix('yte-shorts-g-');
+    removeCssClassesByClassNamePrefix('yte-shorts-tweaks-g-');
   };
 
   /**
    * Removes all the CSS classes from the shorts page to disable the feature.
    */
   public disable = () => {
-    removeCssClassesByClassNamePrefix('yte-shorts-');
+    removeCssClassesByClassNamePrefix('yte-shorts-tweaks-');
   };
 
   /**

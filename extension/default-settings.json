@@ -1,9 +1,12 @@
 {
   "settings": {
-    "autoSkipAds": true,
     "showShortsToVideoButton": true,
     "loopShortsToVideo": true,
     "updateShortsUI": true,
-    "removeAds": true
+    "autoSkipAds": true,
+    "removeSponsoredShorts": true,
+    "hideMastheadAds": true,
+    "hideInFeedAds": true,
+    "hidePlayerAds": true
   }
 }

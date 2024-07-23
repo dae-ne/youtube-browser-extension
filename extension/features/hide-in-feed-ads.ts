@@ -22,7 +22,7 @@ export default class HideInFeedAdsFeature extends Feature {
   public constructor() {
     super({
       setUpAction: Actions.HIDE_IN_FEED_ADS,
-      cleanUpAction: Actions.HIDE_IN_FEED_ADS_DISABLE
+      disableAction: Actions.HIDE_IN_FEED_ADS_DISABLE
     });
   }
 

@@ -5,11 +5,14 @@
  * The options are used to configure the extension's features.
  */
 export type Options = {
-  autoSkipAds?: boolean;
   showShortsToVideoButton?: boolean;
   loopShortsToVideo?: boolean;
   updateShortsUI?: boolean;
-  removeAds?: boolean;
+  autoSkipAds?: boolean;
+  removeSponsoredShorts?: boolean;
+  hideMastheadAds?: boolean;
+  hideInFeedAds?: boolean;
+  hidePlayerAds?: boolean;
 };
 
 /**
