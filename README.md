@@ -18,9 +18,9 @@
 - **Auto Loop Video** - sets the loop property of the video after clicking the *shorts to video* button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
 - **Auto Skip Ads** - automatically skips ads when they appear on a video.
-- **Remove Sponsored Shorts** - removes sponsored shorts from the shorts page.
+- **Hide Sponsored Shorts** - hides sponsored shorts from the shorts page.
 - **Hide Masthead Ads** - hides the *masthead ads* on the homepage.
-- **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage).
+- **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage, because it would break the layout).
 - **Hide Player Ads** - hides *player ads* on the watch page.
 
 
@@ -49,6 +49,8 @@ Do all the steps from the installation section and then run the `npm run prepare
 4. Add the new feature to exports in the `features/index.ts` file.
 5. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
 6. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
+7. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script.
+8. If the feature uses custom CSS, add it to the `youtube-extension.css` file.
 7. Update the `README.md` file with the new feature.
 
 
