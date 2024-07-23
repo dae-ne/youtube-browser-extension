@@ -26,7 +26,7 @@
 
 ## Options
 
-The features can be switched on and off on the options page. To open the options page, right-click the extension icon in the browser toolbar and select *Options*. It can be also accessed just by left-clicking the icon, but that works only if YouTube is opened in the active tab, the icon will open the YouTube homepage otherwise.
+You can toggle the features on and off on the options page. To access the options page, right-click the extension icon in the browser toolbar and select `Options` Alternatively, you can left-click the icon to opened the options page, but this method only works if YouTube is currently open in the active tab. Otherwise, the icon will simply open the YouTube homepage.
 
 For now only dark mode is available.
 
@@ -37,19 +37,26 @@ For now only dark mode is available.
 
 ## How to install?
 
-For now, it works only in Google Chrome (it's still in development, so not every feature is working properly).
+For now it's Chrome only.
 
-1. Clone the repository to your local machine.
-2. Install the dependencies using the `npm install` command.
-3. Build the project using the `npm run build` command.
-4. Open the Chrome browser and go to the `chrome://extensions/` page.
-5. Turn on the developer mode in the top right corner.
-6. Click the `Load unpacked` button and select the `dist` directory.
+1. Open the latest release (e.g.: 0.1.0) and download the `youtube_extension_<VERSION>.zip`, where `<VERSION>` is the version number (e.g.: *youtube_extension_0.1.0.zip*).
+2. Unzip the downloaded file to a new directory.
+3. In Chrome, go to the `chrome://extensions/` page.
+4. Turn on the developer mode in the top right corner.
+5. Click the `Load unpacked` button and select the unzipped directory with the extension.
+6. You can add the extension to the browser toolbar by clicking the `puzzle` icon in the top right corner and then clicking the `pin` icon next to the extension name.
+7. Right-click the extension icon in the toolbar and select `Options` to open the options page. Enable or disable the features as you wish.
 
 
 ## Local development
 
-Do all the steps from the installation section and then run the `npm run prepare` command to set up git hooks.
+1. Clone the repository to your local machine.
+2. Set git hooks by running the `npm run prepare` command.
+3. Install the dependencies using the `npm install` command.
+4. Build the project using the `npm run build` command.
+5. Open the Chrome browser and go to the `chrome://extensions/` page.
+6. Turn on the developer mode in the top right corner.
+7. Click the `Load unpacked` button and select the `dist` directory from the cloned repository.
 
 
 ## How to add a new feature?
