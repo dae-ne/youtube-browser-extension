@@ -24,6 +24,15 @@
 - **Hide Player Ads** - hides *player ads* on the watch page.
 
 
+## Options
+
+The features can be switched on and off on the options page. To open the options page, right-click the extension icon in the browser toolbar and select *Options*. It can be also accessed just by left-clicking the icon, but that works only if YouTube is opened in the active tab, the icon will open the YouTube homepage otherwise.
+
+<div align="center">
+  <img src="assets/options.png" alt="options">
+</div>
+
+
 ## How to install?
 
 For now, it works only in Google Chrome (it's still in development, so not every feature is working properly).
