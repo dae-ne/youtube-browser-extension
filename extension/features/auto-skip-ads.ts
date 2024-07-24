@@ -44,9 +44,29 @@ export default class AutoSkipAdsFeature extends Feature {
 
       element.removeAttribute(UNAVAILABLE_ATTRIBUTE_NAME);
       const video = document.querySelector('video');
-      video?.click();
+
+      if (!video) {
+        return;
+      }
+
+      video.click();
 
       (mutation.target as HTMLElement).innerHTML = '';
+      this.videoSrcObserver.observe(video, { attributes: true, attributeFilter: ['src'] });
+    });
+  });
+
+  /**
+   * This mutation observer is used to watch for changes in the video source. When the source is
+   * removed, it will reload the page.
+   */
+  private readonly videoSrcObserver = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      const video = mutation.target as HTMLVideoElement;
+
+      if (mutation.attributeName === 'src' && !video.getAttribute('src')) {
+        window.location.reload();
+      }
     });
   });
 
@@ -87,7 +107,7 @@ export default class AutoSkipAdsFeature extends Feature {
     }
 
     this.cleanUp();
-    this.errorScreenObserver.observe(errorScreen, { childList: true, subtree: true });
+    this.errorScreenObserver.observe(errorScreen, { childList: true });
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
@@ -115,14 +135,14 @@ export default class AutoSkipAdsFeature extends Feature {
   public cleanUp = () => {
     this.observer.disconnect();
     this.errorScreenObserver.disconnect();
+    this.videoSrcObserver.disconnect();
   };
 
   /**
    * Disables the feature by disconnecting the mutation observer.
    */
   public disable = () => {
-    this.observer.disconnect();
-    this.errorScreenObserver.disconnect();
+    this.cleanUp();
     removeCssClass(CLASS_NAME);
   };
 
