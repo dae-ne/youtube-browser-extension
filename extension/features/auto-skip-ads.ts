@@ -1,7 +1,12 @@
 import { Actions } from '../actions';
 import Feature from '../feature';
-import { isVideoOpened } from '../lib/utils';
+import { isVideoOpened, removeCssClass } from '../lib/utils';
 import { Result } from '../types';
+
+/**
+ * The class name for the hide-in-feed-ads feature, which is added to the body element.
+ */
+const CLASS_NAME = 'yte-f-auto-skip-ads';
 
 /**
  * A feature that automatically skips ads on the current video.
@@ -16,6 +21,30 @@ export default class AutoSkipAdsFeature extends Feature {
       if (mutation.target.childNodes.length > 0) {
         this.skipAd();
       }
+    });
+  });
+
+  /**
+   * This mutation observer is used to watch for changes in the error screen. When the error screen
+   * appears, it will click the video to try to reload it and remove the 'player-unavailable'
+   * attribute from an element to unblock the video.
+   */
+  private readonly errorScreenObserver = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length > 0) {
+        return;
+      }
+
+      const UNAVAILABLE_ATTRIBUTE_NAME = 'player-unavailable';
+      const element = document.querySelector(`[${UNAVAILABLE_ATTRIBUTE_NAME}]`);
+
+      if (!element) {
+        return;
+      }
+
+      element.removeAttribute(UNAVAILABLE_ATTRIBUTE_NAME);
+      const video = document.querySelector('video');
+      video?.click();
     });
   });
 
@@ -41,17 +70,36 @@ export default class AutoSkipAdsFeature extends Feature {
       return { status: 'success', params: {} };
     }
 
+    const body = document.querySelector('body');
+
+    if (!body) {
+      return { status: 'error', params: {} };
+    }
+
+    body.classList.add(CLASS_NAME);
+
+    const errorScreen = document.querySelector('#error-screen');
+
+    if (!errorScreen) {
+      return { status: 'error', params: {} };
+    }
+
+    this.cleanUp();
+    this.errorScreenObserver.observe(errorScreen, { childList: true, subtree: true });
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
       return { status: 'error', params: {} };
     }
 
-    this.cleanUp();
     const isAdPlaying = adsInfoContainer.childNodes.length > 0;
 
     if (isAdPlaying) {
-      this.skipAd();
+      const success = this.skipAd();
+
+      if (!success) {
+        return { status: 'error', params: {} };
+      }
     }
 
     this.observer.observe(adsInfoContainer, { childList: true });
@@ -63,11 +111,8 @@ export default class AutoSkipAdsFeature extends Feature {
    * the observer if a video is currently opened.
    */
   public cleanUp = () => {
-    if (isVideoOpened()) {
-      return;
-    }
-
     this.observer.disconnect();
+    this.errorScreenObserver.disconnect();
   };
 
   /**
@@ -75,38 +120,41 @@ export default class AutoSkipAdsFeature extends Feature {
    */
   public disable = () => {
     this.observer.disconnect();
+    this.errorScreenObserver.disconnect();
+    removeCssClass(CLASS_NAME);
   };
 
   /**
    * Skips an ad on the current video.
    *
    * @remarks
-   * This function will skip the ad by clicking the skip button if it exists, or by increasing the
-   * playback rate of the video. The maximum playback rate is 16 for most browsers (at least for
-   * Chrome).
+   * This function will skip ads by clicking the skip button if it exists, or by setting the video
+   * current time to the maximum value.
+   *
+   * @returns Whether the function was successful.
    */
-  private skipAd = () => {
+  private skipAd = (): boolean => {
     const MAX_NON_SKIPABLE_AD_DURATION = 30;
-    const AD_PLAYBACK_RATE = 16;
 
     const skipButton: HTMLButtonElement | null = document.querySelector('button[class*="-skip-"]');
+    const isSkippable = !!skipButton;
 
-    if (skipButton) {
+    if (isSkippable) {
       skipButton.click();
-      return;
+      return true;
     }
 
     const video = document.querySelector('video');
 
     if (!video) {
-      return;
+      return false;
     }
 
     if (video.duration > MAX_NON_SKIPABLE_AD_DURATION) {
-      return;
+      return true;
     }
 
-    video.muted = true;
-    video.playbackRate = AD_PLAYBACK_RATE;
+    video.currentTime = Number.MAX_VALUE;
+    return true;
   };
 }

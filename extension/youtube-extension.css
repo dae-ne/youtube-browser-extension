@@ -7,6 +7,15 @@ body.yte-f-hide-sponsored-shorts ytd-reel-video-renderer:has([class*="-in-feed-a
   display: none !important;
 }
 
+.yte-f-auto-skip-ads #error-screen {
+  display: none !important;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+.yte-f-auto-skip-ads .ytd-player #movie_player video {
+  top: 0 !important;
+}
+
 .yte-shorts-actions-btn {
   margin-top: 16px !important;
 }

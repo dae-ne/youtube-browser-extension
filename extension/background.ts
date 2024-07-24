@@ -40,6 +40,8 @@ function handleTabUpdate(url: string, tabId: number) {
     return;
   }
 
+  sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
+
   hideInFeedAds && sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
   hideMastheadAds && sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS });
   hidePlayerAds && sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS });
@@ -55,12 +57,6 @@ function handleTabUpdate(url: string, tabId: number) {
   if (url.includes('watch') && loopVideoTabIds.includes(tabId)) {
     loopShortsToVideo && sendMessage(tabId, { action: Actions.AUTO_LOOP_VIDEO });
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
-  }
-
-  if (!url.includes('watch')) {
-    // The content script checks if a miniplayer is opened.
-    // If it is, it will not disconnect the observer.
-    sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
   }
 
   if (!url.includes('shorts')) {
