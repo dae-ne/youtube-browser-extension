@@ -45,6 +45,8 @@ export default class AutoSkipAdsFeature extends Feature {
       element.removeAttribute(UNAVAILABLE_ATTRIBUTE_NAME);
       const video = document.querySelector('video');
       video?.click();
+
+      (mutation.target as HTMLElement).innerHTML = '';
     });
   });
 
