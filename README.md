@@ -10,6 +10,8 @@
   ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
   ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
+  [Changes since last release](https://github.com/dae-ne/youtube-browser-extension/compare/latest...main)
+
 </div>
 
 
