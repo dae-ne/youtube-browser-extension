@@ -40,13 +40,12 @@ function handleTabUpdate(url: string, tabId: number) {
     return;
   }
 
-  sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
-
   hideInFeedAds && sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS });
   hideMastheadAds && sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS });
   hidePlayerAds && sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS });
   hideSponsoredShorts && sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS });
 
+  sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
   sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
 
   if (url.includes('shorts')) {
@@ -80,7 +79,7 @@ function disableFeatures(url: string, tabId: number) {
     hideMastheadAds,
     hideInFeedAds,
     hidePlayerAds,
-    hideSponsoredShorts: removeSponsoredShorts
+    hideSponsoredShorts
   }: Options = options;
 
   if (!url.includes('youtube.com')) {
@@ -92,7 +91,7 @@ function disableFeatures(url: string, tabId: number) {
   hideMastheadAds || sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS_DISABLE });
   hideInFeedAds || sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS_DISABLE });
   hidePlayerAds || sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS_DISABLE });
-  removeSponsoredShorts || sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS_DISABLE });
+  hideSponsoredShorts || sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS_DISABLE });
   showShortsToVideoButton || sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE });
 }
 

@@ -16,7 +16,7 @@ export default class AutoSkipAdsFeature extends Feature {
    * This mutation observer is used to watch for changes in the ads container and skip the ads
    * when they appear.
    */
-  private readonly observer = new MutationObserver(mutations => {
+  private readonly adsObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       if (mutation.target.childNodes.length > 0) {
         this.skipAd();
@@ -124,7 +124,7 @@ export default class AutoSkipAdsFeature extends Feature {
       }
     }
 
-    this.observer.observe(adsInfoContainer, { childList: true });
+    this.adsObserver.observe(adsInfoContainer, { childList: true });
     return { status: 'success', params: {} };
   };
 
@@ -133,7 +133,7 @@ export default class AutoSkipAdsFeature extends Feature {
    * the observer if a video is currently opened.
    */
   public cleanUp = () => {
-    this.observer.disconnect();
+    this.adsObserver.disconnect();
     this.errorScreenObserver.disconnect();
     this.videoSrcObserver.disconnect();
   };

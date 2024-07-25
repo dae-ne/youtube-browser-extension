@@ -2,8 +2,9 @@
 
   <img src="assets/logo.png" alt="logo" width="300px">
 
-  ![GitHub release](https://img.shields.io/github/v/release/dae-ne/youtube-browser-extension)
-  ![GitHub last commit](https://img.shields.io/github/last-commit/dae-ne/youtube-browser-extension)
+  ![Release](https://img.shields.io/github/v/release/dae-ne/youtube-browser-extension)
+  ![Last commit](https://img.shields.io/github/last-commit/dae-ne/youtube-browser-extension)
+  ![License](https://img.shields.io/github/license/dae-ne/youtube-browser-extension.svg)
 
   ![Node.js](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
   ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
