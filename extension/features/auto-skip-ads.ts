@@ -172,7 +172,7 @@ export default class AutoSkipAdsFeature extends Feature {
       return false;
     }
 
-    if (video.duration > MAX_NON_SKIPABLE_AD_DURATION) {
+    if (video.duration > MAX_NON_SKIPABLE_AD_DURATION || video.paused) {
       return true;
     }
 
