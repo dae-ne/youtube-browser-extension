@@ -1,5 +1,5 @@
 import { Actions } from './actions';
-import { Options } from './types';
+import { Options } from './options';
 import * as defaultSettings from './default-settings.json';
 
 /**

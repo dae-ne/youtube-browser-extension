@@ -1,7 +1,7 @@
-import { Actions } from '../actions.js';
-import Feature from '../feature.js';
-import { addCssClassToBody, removeCssClass } from '../lib/utils.js';
-import { Result, results } from '../result.js';
+import { Actions } from '../../actions.js';
+import Feature from '../../feature.js';
+import { addCssClassToBody, removeCssClass } from '../../lib/utils.js';
+import { Result, results } from '../../result.js';
 
 /**
  * The class name for the hide-in-feed-ads feature, which is added to the body element.

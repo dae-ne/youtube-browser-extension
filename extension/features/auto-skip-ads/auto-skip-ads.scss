@@ -1,0 +1,8 @@
+.yte-f-auto-skip-ads #error-screen {
+  display: none !important;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+.yte-f-auto-skip-ads .ytd-player #movie_player video {
+  top: 0 !important;
+}

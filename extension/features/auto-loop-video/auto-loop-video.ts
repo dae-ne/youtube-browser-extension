@@ -1,6 +1,6 @@
-import { Actions } from '../actions';
-import Feature from '../feature';
-import { Result, results } from '../result';
+import { Actions } from '../../actions';
+import Feature from '../../feature';
+import { Result, results } from '../../result';
 
 /**
  * A feature that automatically loops the video.

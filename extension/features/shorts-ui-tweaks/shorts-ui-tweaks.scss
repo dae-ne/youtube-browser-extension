@@ -1,0 +1,31 @@
+@media (aspect-ratio < 12/16) {
+  .yte-shorts-tweaks-actions-container {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .yte-shorts-tweaks-actions-container #pivot-button > * {
+    padding-bottom: 24px !important;
+  }
+
+  .yte-shorts-tweaks-player-metadata-container {
+    position: absolute;
+  }
+
+  .yte-shorts-tweaks-navigation-container {
+    display: none !important;
+  }
+
+  .yte-shorts-tweaks-g-page-manager {
+    margin-left: 0 !important;
+  }
+
+  .yte-shorts-tweaks-g-side-mini-guide {
+    display: none !important;
+  }
+
+  .yte-shorts-tweaks-actions-container #actions > * > .ytd-reel-player-overlay-renderer {
+    padding-top: 0 !important;
+    padding-bottom: 24px !important;
+  }
+}

@@ -1,7 +1,7 @@
-import { Actions } from '../actions';
-import Feature from '../feature';
-import { isShortsPage } from '../lib/utils';
-import { Result, results } from '../result';
+import { Actions } from '../../actions';
+import Feature from '../../feature';
+import { isShortsPage } from '../../lib/utils';
+import { Result, results } from '../../result';
 
 /**
  * The ID of the button container to open the video from the shorts page.

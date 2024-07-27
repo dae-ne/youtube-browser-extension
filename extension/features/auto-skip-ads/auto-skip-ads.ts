@@ -1,7 +1,7 @@
-import { Actions } from '../actions';
-import Feature from '../feature';
-import { isVideoOpened, removeCssClass } from '../lib/utils';
-import { Result, results } from '../result';
+import { Actions } from '../../actions';
+import Feature from '../../feature';
+import { isVideoOpened, removeCssClass } from '../../lib/utils';
+import { Result, results } from '../../result';
 
 /**
  * The class name for the hide-in-feed-ads feature, which is added to the body element.

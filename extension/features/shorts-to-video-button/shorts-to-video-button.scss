@@ -1,0 +1,10 @@
+.yte-shorts-actions-btn {
+  margin-top: 16px !important;
+}
+
+.yte-shorts-actions-btn-icon {
+  width: 24px;
+
+  /* TODO: try to find a better way to do this */
+  filter: brightness(0) saturate(100%) invert(100%) sepia(54%) saturate(351%) hue-rotate(51deg) brightness(110%) contrast(90%);
+}
