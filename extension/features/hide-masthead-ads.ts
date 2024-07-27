@@ -1,7 +1,7 @@
 import { Actions } from '../actions.js';
 import Feature from '../feature.js';
-import { removeCssClass } from '../lib/utils.js';
-import { Result } from '../types.js';
+import { addCssClassToBody, removeCssClass } from '../lib/utils.js';
+import { Result, results } from '../result.js';
 
 /**
  * The class name for the hide-masthead-ads feature, which is added to the body element.
@@ -32,14 +32,8 @@ export default class HideMastheadAdsFeature extends Feature {
    * @returns The status of the function and the parameters.
    */
   public setUp = (): Result => {
-    const body = document.querySelector('body');
-
-    if (!body) {
-      return { status: 'error', params: {} };
-    }
-
-    body.classList.add(CLASS_NAME);
-    return { status: 'success', params: {} };
+    const { success, fail } = results;
+    return addCssClassToBody(CLASS_NAME) ? success() : fail();
   };
 
   /**

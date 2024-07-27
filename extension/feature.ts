@@ -1,4 +1,4 @@
-import { Result } from './types';
+import { Result } from './result';
 
 /**
  * The setup for the actions of the feature.

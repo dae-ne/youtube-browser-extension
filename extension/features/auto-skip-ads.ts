@@ -1,7 +1,7 @@
 import { Actions } from '../actions';
 import Feature from '../feature';
 import { isVideoOpened, removeCssClass } from '../lib/utils';
-import { Result } from '../types';
+import { Result, results } from '../result';
 
 /**
  * The class name for the hide-in-feed-ads feature, which is added to the body element.
@@ -88,14 +88,16 @@ export default class AutoSkipAdsFeature extends Feature {
    * @returns The status of the function and the parameters.
    */
   public setUp = (): Result => {
+    const { success, fail } = results;
+
     if (!isVideoOpened()) {
-      return { status: 'success', params: {} };
+      return fail();
     }
 
     const body = document.querySelector('body');
 
     if (!body) {
-      return { status: 'error', params: {} };
+      return fail();
     }
 
     body.classList.add(CLASS_NAME);
@@ -103,7 +105,7 @@ export default class AutoSkipAdsFeature extends Feature {
     const errorScreen = document.querySelector('#error-screen');
 
     if (!errorScreen) {
-      return { status: 'error', params: {} };
+      return fail();
     }
 
     this.cleanUp();
@@ -111,21 +113,22 @@ export default class AutoSkipAdsFeature extends Feature {
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
-      return { status: 'error', params: {} };
+      return fail();
     }
 
     const isAdPlaying = adsInfoContainer.childNodes.length > 0;
+    let skippedSuccessfully = false;
 
     if (isAdPlaying) {
-      const success = this.skipAd();
+      skippedSuccessfully = this.skipAd();
+    }
 
-      if (!success) {
-        return { status: 'error', params: {} };
-      }
+    if (!skippedSuccessfully) {
+      return fail();
     }
 
     this.adsObserver.observe(adsInfoContainer, { childList: true });
-    return { status: 'success', params: {} };
+    return success();
   };
 
   /**

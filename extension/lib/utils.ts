@@ -1,8 +1,4 @@
 /**
- * This file contains common utility functions that are used across multiple features.
- */
-
-/**
  * The CSS class prefix used by the extension.
  */
 const EXTENSION_CSS_CLASS_PREFIX = 'yte-';
@@ -68,4 +64,21 @@ export function removeCssClassesByClassNamePrefix(classNamePrefix = EXTENSION_CS
 
     element.classList.remove(...classNamesToRemove);
   });
+}
+
+/**
+ * Adds a CSS class to the body element.
+ *
+ * @param className - The name of the CSS class to add.
+ * @returns Whether the class was successfully added.
+ */
+export function addCssClassToBody(className: string): boolean {
+  const body = document.querySelector('body');
+
+  if (!body) {
+    return false;
+  }
+
+  body.classList.add(className);
+  return true;
 }

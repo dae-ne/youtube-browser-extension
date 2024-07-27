@@ -1,6 +1,6 @@
 import { Actions } from '../actions';
 import Feature from '../feature';
-import { Result } from '../types';
+import { Result, results } from '../result';
 
 /**
  * A feature that automatically loops the video.
@@ -25,14 +25,15 @@ export default class AutoLoopVideoFeature extends Feature {
    * @returns The status of the function and the parameters.
    */
   public setUp = (): Result => {
+    const { success, fail } = results;
     const video = document.querySelector('video');
 
     if (!video) {
-      return { status: 'error', params: {} };
+      return fail();
     }
 
     video.loop = true;
-    return { status: 'success', params: {} };
+    return success();
   };
 
   /**

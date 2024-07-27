@@ -1,7 +1,7 @@
 import { Actions } from '../actions';
 import Feature from '../feature';
-import { removeCssClass } from '../lib/utils';
-import { Result } from '../types';
+import { addCssClassToBody, removeCssClass } from '../lib/utils';
+import { Result, results } from '../result';
 
 const CLASS_NAME = 'yte-f-hide-sponsored-shorts';
 
@@ -29,14 +29,8 @@ export default class HideSponsoredShortsFeature extends Feature {
    * @returns The status of the function and the parameters.
    */
   public setUp = (): Result => {
-    const body = document.querySelector('body');
-
-    if (!body) {
-      return { status: 'error', params: {} };
-    }
-
-    body.classList.add(CLASS_NAME);
-    return { status: 'success', params: {} };
+    const { success, fail } = results;
+    return addCssClassToBody(CLASS_NAME) ? success() : fail();
   };
 
   /**

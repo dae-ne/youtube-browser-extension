@@ -1,7 +1,7 @@
 import { Actions } from '../actions';
 import Feature from '../feature';
 import { isShortsPage, removeCssClassesByClassNamePrefix } from '../lib/utils';
-import { Result } from '../types';
+import { Result, results } from '../result';
 
 /**
  * The parameters for the addShortsUiUpdates function.
@@ -61,9 +61,10 @@ export default class ShortsUiTweaksFeature extends Feature {
    */
   public setUp = (params: Params = {}): Result => {
     const { firstRun = true, missingElements = [] } = params;
+    const { success, fail } = results;
 
     if (!isShortsPage() || (!firstRun && missingElements.length < 1)) {
-      return { status: 'success', params: {} };
+      return success();
     }
 
     classes.forEach(({ className, selector }) => {
@@ -71,10 +72,10 @@ export default class ShortsUiTweaksFeature extends Feature {
     });
 
     if (missingElements.length < 1) {
-      return { status: 'success', params: {} };
+      return success();
     }
 
-    return { status: 'error', params: { firstRun: false, missingElements } };
+    return fail({ firstRun: false, missingElements });
   };
 
   /**
