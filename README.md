@@ -64,15 +64,16 @@ For now it's Chrome only.
 
 ## How to add a new feature?
 
-1. Create a new file in the `features` directory with a class that extends the `Feature` base class and implement methods.
-2. Add new actions to the `actions.ts` file.
-3. Register the new actions in a constructor of the new feature class (using the constructor of the `Feature` base class).
-4. Add the new feature to exports in the `features/index.ts` file.
-5. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
-6. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
-7. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script. Also update the `default-settings.ts`.
-8. If the feature uses custom CSS, add it to the `youtube-extension.css` file.
-7. Update the `README.md` file with the new feature.
+1. Create a new directory in the `features` directory with the feature name.
+2. Create a file with the feature class in the new directory. The class should extend the `Feature` class from the `feature.ts` file and implement methods.
+3. Create an SCSS file in the new directory if the feature requires custom CSS. It will be picked up automatically on build.
+4. Add new actions to the `actions.ts` file.
+5. Register the new actions in a constructor of the new feature class (using the constructor of the `Feature` base class, see other features for a reference).
+6. Add the new feature to exports in the `features/index.ts` file.
+7. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
+8. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
+9. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script. Also update the `default-settings.ts`.
+10. Update the `README.md` file with the new feature.
 
 
 ## License
