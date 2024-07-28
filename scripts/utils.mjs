@@ -79,6 +79,12 @@ export function removeFile(path) {
   fs.unlinkSync(path);
 }
 
+/**
+ * Read a file and return its content as a JSON object.
+ *
+ * @param {string} path The file path.
+ * @returns {object} The JSON object.
+ */
 export function readJsonFile(path) {
   return JSON.parse(fs.readFileSync(path, 'utf8'));
 }
