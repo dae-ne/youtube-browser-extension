@@ -72,7 +72,7 @@ For now it's Chrome only.
 6. Add the new feature to exports in the `features/index.ts` file.
 7. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
 8. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
-9. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script. Also update the `default-settings.ts`.
+9. If the feature requires some settings, append the `Options` type (currently in the `types.ts`), add data to the `options/data.json`, and handle the new options in the background script. Also update the `default-settings.ts`. Don't forget to update the JSON schemas for the updated JSON files.
 10. Update the `README.md` file with the new feature.
 
 
