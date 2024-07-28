@@ -60,6 +60,7 @@ function handleTabUpdate(url: string, tabId: number) {
 
   if (!url.includes('shorts')) {
     autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
+    sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP });
   }
 }
 

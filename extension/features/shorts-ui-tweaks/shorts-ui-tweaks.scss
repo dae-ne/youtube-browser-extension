@@ -1,5 +1,5 @@
-@media (aspect-ratio < 12/16) {
-  body.yte-f-shorts-ui-tweaks .ytd-shorts {
+body.yte-f-shorts-ui-tweaks.yte-f-shorts-ui-tweaks--flipped {
+  .ytd-shorts {
     .action-container {
       margin-left: auto !important;
       margin-right: 0 !important;
@@ -23,15 +23,15 @@
     }
   }
 
-  body.yte-f-shorts-ui-tweaks .navigation-container.ytd-shorts {
+  .navigation-container.ytd-shorts {
     display: none !important;
   }
 
-  body.yte-f-shorts-ui-tweaks ytd-mini-guide-renderer.ytd-app:has( + #page-manager ytd-shorts[role="main"]) {
+  ytd-mini-guide-renderer.ytd-app:has( + #page-manager ytd-shorts[role="main"]) {
     display: none !important;
   }
 
-  body.yte-f-shorts-ui-tweaks #page-manager:has(ytd-shorts[role="main"]) {
+  #page-manager:has(ytd-shorts[role="main"]) {
     margin-left: 0 !important;
   }
 }
