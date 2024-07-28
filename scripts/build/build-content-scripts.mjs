@@ -4,5 +4,6 @@ import { resolveFilePath } from '../utils.mjs';
 await esbuild.build({
   entryPoints: [resolveFilePath('extension', 'youtube-extension.ts')],
   outfile: resolveFilePath('dist', 'youtube-extension.js'),
+  loader: { '.svg': 'text' },
   bundle: true,
 });

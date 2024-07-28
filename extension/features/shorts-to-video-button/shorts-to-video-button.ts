@@ -2,6 +2,7 @@ import { Actions } from '../../actions';
 import Feature from '../../feature';
 import { isShortsPage } from '../../lib/utils';
 import { Result, results } from '../../result';
+import svgIcon from './button-icon.svg';
 
 /**
  * The ID of the button container to open the video from the shorts page.
@@ -146,12 +147,11 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     newButton.classList.add(...templateButton.classList);
 
-    const icon = document.createElement('img');
-    icon.src = chrome.runtime.getURL('resources/video-play.svg');
+    const icon = document.createElement('div');
     icon.classList.add('yte-shorts-actions-btn-icon');
+    icon.innerHTML = svgIcon;
 
     newButton.appendChild(icon);
-
     newButtonLabel.appendChild(newButton);
     newButton.appendChild(newButtonTouchFeedback);
 

@@ -1,0 +1,4 @@
+Add any files you want to be accessible from the extension.
+
+How to access added resources:
+chrome.runtime.getURL('resources/<FILENAME>');
