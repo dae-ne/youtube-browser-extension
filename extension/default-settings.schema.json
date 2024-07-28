@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "settings": {
+      "type": "object",
+      "properties": {
+        "showShortsToVideoButton": {
+        "type": "boolean",
+        "description": "Enable 'Shorts to Video' Button"
+        },
+        "loopShortsToVideo": {
+          "type": "boolean",
+          "description": "Loop Shorts Video on Watch Page"
+        },
+        "updateShortsUI": {
+          "type": "boolean",
+          "description": "Optimize Shorts User Interface"
+        },
+        "autoSkipAds": {
+          "type": "boolean",
+          "description": "Automatically Skip Ads"
+        },
+        "hideSponsoredShorts": {
+          "type": "boolean",
+          "description": "Hide Sponsored Shorts"
+        },
+        "hideMastheadAds": {
+          "type": "boolean",
+          "description": "Hide Masthead Ads"
+        },
+        "hideInFeedAds": {
+          "type": "boolean",
+          "description": "Hide In-Feed Ads"
+        },
+        "hidePlayerAds": {
+          "type": "boolean",
+          "description": "Hide Player Ads"
+        }
+      },
+      "required": [
+        "showShortsToVideoButton",
+        "loopShortsToVideo",
+        "updateShortsUI",
+        "autoSkipAds",
+        "hideSponsoredShorts",
+        "hideMastheadAds",
+        "hideInFeedAds",
+        "hidePlayerAds"
+      ]
+    }
+  }
+}

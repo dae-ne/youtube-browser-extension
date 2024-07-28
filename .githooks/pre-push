@@ -1,9 +1,15 @@
 #!/bin/sh
 
+set -e
+
 echo "🚀 Running pre-push hook 🚀"
 
-echo -e "\n🛠️  Building project"
+echo -e "\n🔍 Run validators..."
+
+npm run validate
+
+echo -e "\n🛠️  Building project..."
 
 npm run build
 
-echo -e "\n🚀 Project built successfully! 🚀\n"
+echo -e "\n🎉 Pre-push status: success 🎉\n"

@@ -78,3 +78,7 @@ export function createFile(path, content) {
 export function removeFile(path) {
   fs.unlinkSync(path);
 }
+
+export function readJsonFile(path) {
+  return JSON.parse(fs.readFileSync(path, 'utf8'));
+}
