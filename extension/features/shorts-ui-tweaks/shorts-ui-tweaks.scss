@@ -1,31 +1,33 @@
 @media (aspect-ratio < 12/16) {
-  .yte-shorts-tweaks-actions-container {
-    margin-left: auto !important;
-    margin-right: 0 !important;
+  body.yte-f-shorts-ui-tweaks .ytd-shorts {
+    .action-container {
+      margin-left: auto !important;
+      margin-right: 0 !important;
+
+      #pivot-button > * {
+        padding-bottom: 24px !important;
+      }
+
+      #actions > * > .ytd-reel-player-overlay-renderer {
+        padding-top: 0 !important;
+        padding-bottom: 24px !important;
+      }
+    }
+
+    .metadata-container {
+      position: absolute;
+    }
   }
 
-  .yte-shorts-tweaks-actions-container #pivot-button > * {
-    padding-bottom: 24px !important;
-  }
-
-  .yte-shorts-tweaks-player-metadata-container {
-    position: absolute;
-  }
-
-  .yte-shorts-tweaks-navigation-container {
+  body.yte-f-shorts-ui-tweaks .navigation-container.ytd-shorts {
     display: none !important;
   }
 
-  .yte-shorts-tweaks-g-page-manager {
+  body.yte-f-shorts-ui-tweaks ytd-mini-guide-renderer.ytd-app:has( + #page-manager ytd-shorts[role="main"]) {
+    display: none !important;
+  }
+
+  body.yte-f-shorts-ui-tweaks #page-manager:has(ytd-shorts[role="main"]) {
     margin-left: 0 !important;
-  }
-
-  .yte-shorts-tweaks-g-side-mini-guide {
-    display: none !important;
-  }
-
-  .yte-shorts-tweaks-actions-container #actions > * > .ytd-reel-player-overlay-renderer {
-    padding-top: 0 !important;
-    padding-bottom: 24px !important;
   }
 }

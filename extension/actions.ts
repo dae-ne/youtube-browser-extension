@@ -13,7 +13,6 @@ export const Actions = {
   SHORTS_TO_VIDEO_BUTTON_DISABLE: 'shorts-to-video-button-disable',
   OPEN_VIDEO_FROM_SHORTS:         'open-video-from-shorts',
   SHORTS_UI_TWEAKS:               'shorts-ui-tweaks',
-  SHORTS_UI_TWEAKS_CLEANUP:       'shorts-ui-tweaks-cleanup',
   SHORTS_UI_TWEAKS_DISABLE:       'shorts-ui-tweaks-disable',
   HIDE_SPONSORED_SHORTS:          'remove-sponsored-shorts',
   HIDE_SPONSORED_SHORTS_DISABLE:  'remove-sponsored-shorts-cleanup',
