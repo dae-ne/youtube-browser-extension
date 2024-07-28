@@ -6,7 +6,7 @@ import {
   removeFile,
   resolveFilePath,
   searchFilesByExtension
-} from './utils.mjs';
+} from '../utils.mjs';
 
 const ENTRYPOINT_FILE_NAME = 'entrypoint.scss';
 

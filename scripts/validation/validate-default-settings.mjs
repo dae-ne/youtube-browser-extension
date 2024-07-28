@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import Ajv from 'ajv';
-import { readJsonFile, resolveFilePath } from './utils.mjs';
+import { readJsonFile, resolveFilePath } from '../utils.mjs';
 
 const ajv = new Ajv();
 
