@@ -1,5 +1,7 @@
-body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) > *:not(:has(.ytd-shorts)) ytd-search-pyv-renderer,
-body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) > *:not(:has(.ytd-shorts)) ytd-in-feed-ad-layout-renderer,
-body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) > *:not(:has(.ytd-shorts)) .ytd-in-feed-ad-layout-renderer {
-  display: none !important;
+body.yte-f-hide-in-feed-ads .ytd-page-manager:not([page-subtype="home"]) > *:not(:has(.ytd-shorts)) {
+  ytd-search-pyv-renderer,
+  ytd-in-feed-ad-layout-renderer,
+  .ytd-in-feed-ad-layout-renderer {
+    display: none !important;
+  }
 }
