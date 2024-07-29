@@ -1,10 +1,13 @@
-import { Options } from '../types';
+import { initialOptions } from '../options';
 import * as optionsData from './data.json';
 
 /**
  * The options object that stores the user's preferences.
+ *
+ * @remarks
+ * The initial options are overridden by the options stored in the storage.
  */
-const options: Options = {};
+const options = initialOptions;
 
 /**
  * The form element that contains checkboxes for the options.

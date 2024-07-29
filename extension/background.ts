@@ -1,6 +1,5 @@
 import { Actions } from './actions';
-import { Options } from './options';
-import * as defaultSettings from './default-settings.json';
+import { initialOptions, Options } from './options';
 
 /**
  * The base URL of the YouTube website.
@@ -10,7 +9,7 @@ const YOUTUBE_BASE_URL = 'https://www.youtube.com/';
 /**
  * The options loaded from the storage.
  */
-const options: Options = {};
+const options = initialOptions;
 
 /**
  * The tab IDs of the tabs that are looping videos after opening them from the shorts page.
@@ -101,15 +100,7 @@ function disableFeatures(url: string, tabId: number) {
  */
 chrome.storage.sync.get().then(data => {
   const dataExists = data && Object.keys(data).length;
-
-  if (dataExists) {
-    Object.assign(options, data);
-    return;
-  }
-
-  const initialOptions: Options = defaultSettings.settings;
-  chrome.storage.sync.set(initialOptions);
-  Object.assign(options, data);
+  dataExists ? Object.assign(options, data) : chrome.storage.sync.set(options);
 });
 
 /**

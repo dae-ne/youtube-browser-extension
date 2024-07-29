@@ -13,7 +13,6 @@
     "build:copy-icons": "copyfiles -f ./assets/icon* ./dist/assets",
     "build": "npm run clean && run-p build-* && run-p build:*",
     "validate:options": "node scripts/validation/validate-options.mjs",
-    "validate:default-settings": "node scripts/validation/validate-default-settings.mjs",
     "validate": "run-s validate:*",
     "clean": "rimraf dist",
     "prepare": "git config core.hooksPath .githooks"
