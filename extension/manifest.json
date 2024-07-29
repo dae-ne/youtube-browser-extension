@@ -28,11 +28,5 @@
       "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": [
-    {
-      "matches": ["https://*.youtube.com/*"],
-      "resources": ["resources/*"]
-    }
-  ],
   "manifest_version": 3
 }

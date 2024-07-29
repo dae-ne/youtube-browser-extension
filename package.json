@@ -10,7 +10,6 @@
     "build:content-scripts": "node scripts/build/build-content-scripts.mjs",
     "build:content-styles": "node scripts/build/build-content-styles.mjs",
     "build:copy-manifest": "copyfiles -f ./extension/manifest.json ./dist",
-    "build:copy-resources": "copyfiles -f ./extension/resources/* ./dist/resources",
     "build:copy-icons": "copyfiles -f ./assets/icon* ./dist/assets",
     "build": "npm run clean && run-p build-* && run-p build:*",
     "validate:options": "node scripts/validation/validate-options.mjs",
