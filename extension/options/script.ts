@@ -1,5 +1,5 @@
 import { initialOptions, OptionsNames } from '../options';
-import * as optionsData from './data.json';
+import data from './data';
 
 /**
  * The options object that stores the user's preferences.
@@ -26,7 +26,7 @@ if (!form || !template) {
 /**
  * Creates the option items using the template and the options data, and adds them to the form.
  */
-optionsData.data.forEach(({ name, title, description }) => {
+data.forEach(({ name, title, description }) => {
   const clone = template.content.cloneNode(true) as HTMLElement;
   const titleElement = clone.querySelector('#option-title');
   const inputElement = clone.querySelector('input[type="checkbox"]') as HTMLInputElement;
@@ -42,6 +42,7 @@ optionsData.data.forEach(({ name, title, description }) => {
   if (!description) {
     descriptionElement.remove();
     form.appendChild(clone);
+    return;
   }
 
   descriptionElement.textContent = description;

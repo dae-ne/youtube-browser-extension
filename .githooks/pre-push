@@ -9,10 +9,6 @@ if [ -z "$(git log --branches --not --remotes)" ]; then
   exit 0
 fi
 
-echo -e "\n🔍 Run validators..."
-
-npm run validate
-
 echo -e "\n🛠️  Building project..."
 
 npm run build

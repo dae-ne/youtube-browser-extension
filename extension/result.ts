@@ -1,5 +1,10 @@
 /**
  * The result of a feature setup function.
+ *
+ * @remarks
+ * The `params` object is not supposed to be used when triggering an action. It's rather for the
+ * retries functionality to be able to pass additional information when firing the action again.
+ * That behavior could be changed, but it requires changes in the action handler.
  */
 export type Result = {
   status: 'success' | 'fail';
