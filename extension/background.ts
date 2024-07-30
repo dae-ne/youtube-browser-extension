@@ -35,7 +35,7 @@ function handleTabUpdate(url: string, tabId: number) {
     hidePlayerAds
   }: Options = options;
 
-  if (!url.includes('youtube.com')) {
+  if (!url.includes(YOUTUBE_BASE_URL) || url.includes(`${YOUTUBE_BASE_URL}tv`)) {
     return;
   }
 
