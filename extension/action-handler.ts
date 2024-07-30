@@ -1,5 +1,5 @@
-import Feature from './feature';
-import { handleRetries } from './lib/retries';
+import Feature from 'feature';
+import { handleRetries } from 'lib/retries';
 
 /**
  * The types of actions that can be handled.

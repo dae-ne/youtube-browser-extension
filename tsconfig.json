@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "ES6",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "strict": true,
+    "baseUrl": "extension"
+	},
+  "exclude": ["node_modules", "dist"]
+}

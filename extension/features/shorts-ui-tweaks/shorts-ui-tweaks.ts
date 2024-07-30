@@ -1,7 +1,7 @@
-import { Actions } from '../../actions';
-import Feature from '../../feature';
-import { addCssClassToBody, removeCssClass } from '../../lib/utils';
-import { Result, results } from '../../result';
+import { Actions } from 'actions';
+import Feature from 'feature';
+import { addCssClassToBody, removeCssClass } from 'lib/utils';
+import { Result, results } from 'result';
 
 /**
  * The class name to add to the body element.

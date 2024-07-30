@@ -1,4 +1,4 @@
-import ActionHandler from './action-handler';
+import ActionHandler from 'action-handler';
 
 import {
   AutoLoopVideoFeature,

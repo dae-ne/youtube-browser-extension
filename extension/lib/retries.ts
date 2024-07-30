@@ -1,4 +1,4 @@
-import { Result } from '../result';
+import { Result } from 'result';
 
 /**
  * The default initial interval in milliseconds for recurring tasks. After each retry, the interval

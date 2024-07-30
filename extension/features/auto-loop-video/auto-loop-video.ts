@@ -1,6 +1,6 @@
-import { Actions } from '../../actions';
-import Feature from '../../feature';
-import { Result, results } from '../../result';
+import { Actions } from 'actions';
+import Feature from 'feature';
+import { Result, results } from 'result';
 
 /**
  * A feature that automatically loops the video.
@@ -39,10 +39,10 @@ export default class AutoLoopVideoFeature extends Feature {
   /**
    * Not needed for this feature.
    */
-  public cleanUp: () => void;
+  public cleanUp = () => {};
 
   /**
    * Not needed for this feature.
    */
-  public disable: () => void;
+  public disable = () => {};
 }

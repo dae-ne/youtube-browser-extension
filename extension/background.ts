@@ -1,5 +1,5 @@
-import { Actions } from './actions';
-import { initialOptions, Options } from './options';
+import { Actions } from 'actions';
+import { initialOptions, Options, OptionsNames } from 'options';
 
 /**
  * The base URL of the YouTube website.
@@ -109,7 +109,7 @@ chrome.storage.sync.get().then(data => {
  */
 chrome.storage.onChanged.addListener(changes => {
   for (const [name, { newValue }] of Object.entries(changes)) {
-    options[name] = newValue;
+    options[name as OptionsNames] = newValue;
   }
 
   chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {

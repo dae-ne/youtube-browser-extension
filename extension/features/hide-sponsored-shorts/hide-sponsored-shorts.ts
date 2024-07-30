@@ -1,7 +1,7 @@
-import { Actions } from '../../actions';
-import Feature from '../../feature';
-import { addCssClassToBody, removeCssClass } from '../../lib/utils';
-import { Result, results } from '../../result';
+import { Actions } from 'actions';
+import Feature from 'feature';
+import { addCssClassToBody, removeCssClass } from 'lib/utils';
+import { Result, results } from 'result';
 
 const CLASS_NAME = 'yte-f-hide-sponsored-shorts';
 
@@ -36,7 +36,7 @@ export default class HideSponsoredShortsFeature extends Feature {
   /**
    * Cleans up the feature. Not used in this feature.
    */
-  public cleanUp: () => void;
+  public cleanUp = () => {};
 
   /**
    * Removes the feature class from the body element.

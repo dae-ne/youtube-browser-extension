@@ -1,4 +1,4 @@
-import { initialOptions } from '../options';
+import { initialOptions, OptionsNames } from '../options';
 import * as optionsData from './data.json';
 
 /**
@@ -80,6 +80,6 @@ form.addEventListener('change', event => {
     return;
   }
 
-  options[name] = checked;
+  options[name as OptionsNames] = checked;
   chrome.storage.sync.set(options);
 });
