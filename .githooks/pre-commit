@@ -4,10 +4,7 @@ set -e
 
 echo "🚀 Running pre-commit hook 🚀"
 
-echo -e "\n🔧 Formatting code..."
-npm run format
-
-echo -e "\n🔍 Running linters..."
-npm run lint
+echo -e "\n🔍 Running formaters and linters"
+npm run lint-staged
 
 echo -e "\n🎉 Pre-commit status: success 🎉\n"
