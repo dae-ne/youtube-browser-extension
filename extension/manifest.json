@@ -1,6 +1,6 @@
 {
   "name": "YouTube Extension",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Chrome extension for YouTube.",
   "homepage_url": "https://github.com/dae-ne/youtube-browser-extension",
   "permissions": ["tabs", "storage"],
