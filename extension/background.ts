@@ -7,22 +7,38 @@ import { initialOptions, Options, OptionsNames } from 'options';
 const YOUTUBE_BASE_URL = 'https://www.youtube.com/';
 
 /**
- * The options loaded from the storage.
+ * The base URL of the YouTube TV website.
+ *
+ * @remarks
+ * The YouTube TV is a simplified version of YouTube specifically designed for TVs (smart TVs).
+ */
+const YOUTUBE_TV_BASE_URL = 'https://www.youtube.com/tv';
+
+/**
+ * The options object that stores the features' preferences. The initial options are overridden
+ * after being loaded from the storage.
  */
 const options = initialOptions;
 
 /**
- * The tab IDs of the tabs that are looping videos after opening them from the shorts page.
+ * List of tab IDs to auto loop videos on the watch page.
+ *
+ * @remarks
+ * It's a part of the auto-loop-video feature. After reciving a signal about the video being opened
+ * from the shorts page, the tab ID is added to the list. The content script will then auto-loop
+ * the video on the watch page by sending a message to the injected script and triggering the
+ * setup function of the feature.
  */
 const loopVideoTabIds: number[] = [];
 
 /**
- * Sends actions to the content scripts if option for the action is enabled.
+ * Sends actions to the content scripts to set up or clean up features. The actions depend on
+ * the tab URL and options. Messages are sent to the tab with the specified ID.
  *
  * @param url - The URL of the tab.
  * @param tabId - The ID of the tab.
  */
-function handleTabUpdate(url: string, tabId: number) {
+function notifyContentScripts(url: string, tabId: number) {
   const { sendMessage } = chrome.tabs;
   const {
     showShortsToVideoButton,
@@ -35,7 +51,10 @@ function handleTabUpdate(url: string, tabId: number) {
     hidePlayerAds
   }: Options = options;
 
-  if (!url.includes(YOUTUBE_BASE_URL) || url.includes(`${YOUTUBE_BASE_URL}tv`)) {
+  const isYouTubeTab = url.includes(YOUTUBE_BASE_URL);
+  const isYouTubeTvTab = url.includes(YOUTUBE_TV_BASE_URL);
+
+  if (!isYouTubeTab || isYouTubeTvTab) {
     return;
   }
 
@@ -96,7 +115,7 @@ function disableFeatures(url: string, tabId: number) {
 
 /**
  * Loads the options from the storage and assigns them to the options object. If the options don't
- * exist in the storage, it will create them with the default values.
+ * exist in the storage, it will create them with the initial values.
  */
 chrome.storage.sync.get().then(data => {
   const dataExists = data && Object.keys(data).length;
@@ -104,8 +123,9 @@ chrome.storage.sync.get().then(data => {
 });
 
 /**
- * Listens for storage changes and updates the options object. Triggers the app update function
- * with the new options for each youtube tab.
+ * Listens for storage changes and updates the options object effectively. The function will
+ * trigger the content scripts update based on the new options so that the features can be enabled
+ * or disabled dynamically.
  */
 chrome.storage.onChanged.addListener(changes => {
   for (const [name, { newValue }] of Object.entries(changes)) {
@@ -118,16 +138,14 @@ chrome.storage.onChanged.addListener(changes => {
         return;
       }
 
-      handleTabUpdate(url, id);
+      notifyContentScripts(url, id);
       disableFeatures(url, id);
     });
   });
 });
 
 /**
- * Listens for tab updates and triggers the app update function. The app update function will
- * update the content scripts and the injected scripts based on the tab URL, options,
- * and the tab ID.
+ * Listens for tab updates and notifies the content scripts to update the features.
  */
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   const { url } = tab;
@@ -136,7 +154,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     return;
   }
 
-  handleTabUpdate(url, tabId);
+  notifyContentScripts(url, tabId);
 });
 
 /**
@@ -144,6 +162,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  */
 chrome.runtime.onInstalled.addListener(() => {
   chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
+    // TODO: Check if it's a video page. Pause the videos and reload with the same time.
     tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
   });
 });
@@ -170,7 +189,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 
 /**
  * Listens for the browser action click (the extension icon) and opens YouTube in a new tab.
- * If YouTube is already opened in a tab, it will open the options page.
+ * If YouTube is already opened, it will open the options page.
  */
 chrome.action.onClicked.addListener(async tab => {
   const { id, url, index } = tab;
