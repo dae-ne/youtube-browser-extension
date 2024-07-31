@@ -3,7 +3,7 @@
   <img src="assets/logo.png" alt="logo" width="300px">
 
   [![Release][release-shield]][latest-release]
-  [![Last commit][last-commit-shield]][latest-changes]
+  [![Last commit][last-commit-shield]][latest-commit]
   [![License][license-shield]][license-file]
 
   [Changes since the last release »][latest-changes]
@@ -67,5 +67,6 @@ GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more inform
 <!-- Links -->
 [latest-release]: https://github.com/dae-ne/youtube-browser-extension/releases/latest
 [latest-changes]: https://github.com/dae-ne/youtube-browser-extension/compare/latest...main
+[latest-commit]: https://github.com/dae-ne/youtube-browser-extension/compare/main^...main
 [license-file]: LICENSE
 
