@@ -8,7 +8,7 @@
 
   [Changes since the last release »][latest-changes]
 
-  [Report Bug][bug-report-template] · [Request Feature][feature-request-template]
+  [Report Bug][bug-report-template] · [Request Feature][feature-request-template] · [Discussions][discussions]
 
 </div>
 
@@ -72,6 +72,7 @@ GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more inform
 [latest-release]: https://github.com/dae-ne/youtube-browser-extension/releases/latest
 [latest-changes]: https://github.com/dae-ne/youtube-browser-extension/compare/latest...main
 [latest-commit]: https://github.com/dae-ne/youtube-browser-extension/compare/main^...main
+[discussions]: https://github.com/dae-ne/youtube-browser-extension/discussions
 [license-file]: LICENSE
 
 <!-- Issue templates -->

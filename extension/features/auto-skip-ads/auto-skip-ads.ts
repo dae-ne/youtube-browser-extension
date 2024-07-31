@@ -52,6 +52,7 @@ export default class AutoSkipAdsFeature extends Feature {
       video.click();
 
       (mutation.target as HTMLElement).innerHTML = '';
+      this.videoSrcObserver.disconnect();
       this.videoSrcObserver.observe(video, { attributes: true, attributeFilter: ['src'] });
     });
   });
@@ -109,7 +110,9 @@ export default class AutoSkipAdsFeature extends Feature {
     }
 
     this.cleanUp();
-    this.errorScreenObserver.observe(errorScreen, { childList: true });
+    // TODO: uncomment before release
+    // The code below is commented out just for testing purposes.
+    // this.errorScreenObserver.observe(errorScreen, { childList: true });
     const adsInfoContainer = document.querySelector('.video-ads');
 
     if (!adsInfoContainer) {
