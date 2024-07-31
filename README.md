@@ -2,15 +2,11 @@
 
   <img src="assets/logo.png" alt="logo" width="300px">
 
-  ![Release](https://img.shields.io/github/v/release/dae-ne/youtube-browser-extension)
-  ![Last commit](https://img.shields.io/github/last-commit/dae-ne/youtube-browser-extension)
-  ![License](https://img.shields.io/github/license/dae-ne/youtube-browser-extension.svg)
+  [![Release][release-shield]][latest-release]
+  [![Last commit][last-commit-shield]][latest-changes]
+  [![License][license-shield]][license-file]
 
-  ![Node.js](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-  ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-
-  [Changes since last release](https://github.com/dae-ne/youtube-browser-extension/compare/latest...main)
+  [Changes since the last release »][latest-changes]
 
 </div>
 
@@ -29,9 +25,7 @@
 
 ## Options
 
-You can toggle the features on and off on the options page. To access the options page, right-click the extension icon in the browser toolbar and select `Options` Alternatively, you can left-click the icon to opened the options page, but this method only works if YouTube is currently open in the active tab. Otherwise, the icon will simply open the YouTube homepage.
-
-For now only dark mode is available.
+You can toggle the features on and off on the options page. To access the options page, right-click the extension icon in the browser toolbar and select `Options`. You can also left-click the icon when on the YouTube page. For other pages, the icon will open the YouTube homepage in a new tab.
 
 <div align="center">
   <img src="assets/options.png" alt="options">
@@ -40,9 +34,7 @@ For now only dark mode is available.
 
 ## How to install?
 
-For now it's Chrome only.
-
-1. Open the latest release (e.g.: 0.1.0) and download the `youtube_extension_<VERSION>.zip`, where `<VERSION>` is the version number (e.g.: *youtube_extension_0.1.0.zip*).
+1. Open the latest release (e.g.: 0.1.2) and download the `youtube_extension_<VERSION>.zip`, where `<VERSION>` is the version number (e.g.: *youtube_extension_0.1.2.zip*).
 2. Unzip the downloaded file to a new directory.
 3. In Chrome, go to the `chrome://extensions/` page.
 4. Turn on the developer mode in the top right corner.
@@ -62,20 +54,18 @@ For now it's Chrome only.
 7. Click the `Load unpacked` button and select the `dist` directory from the cloned repository.
 
 
-## How to add a new feature?
-
-1. Create a new directory in the `features` directory with the feature name.
-2. Create a file with the feature class in the new directory. The class should extend the `Feature` class from the `feature.ts` file and implement methods.
-3. Create an SCSS file in the new directory if the feature requires custom CSS. It will be picked up automatically on build.
-4. Add new actions to the `actions.ts` file.
-5. Register the new actions in a constructor of the new feature class (using the constructor of the `Feature` base class, see other features for a reference).
-6. Add the new feature to exports in the `features/index.ts` file.
-7. Import the new feature in the `youtube-extension.ts` and add it to the action handler.
-8. Add sending messages from the background script to the content script in the `background.ts` file (`handleTabUpdate` and `disableFeatures` methods).
-9. If the feature requires some settings, append the `initialOptions` in the `options.ts`, add data to the `options/data.ts`, and handle the new options in the background script.
-10. Update the `README.md` file with the new feature.
-
-
 ## License
 
-See the [LICENSE](LICENSE) file for details.
+GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more information.
+
+
+<!-- Shields -->
+[release-shield]: https://img.shields.io/github/v/release/dae-ne/youtube-browser-extension
+[last-commit-shield]: https://img.shields.io/github/last-commit/dae-ne/youtube-browser-extension
+[license-shield]: https://img.shields.io/github/license/dae-ne/youtube-browser-extension.svg
+
+<!-- Links -->
+[latest-release]: https://github.com/dae-ne/youtube-browser-extension/releases/tag/latest
+[latest-changes]: https://github.com/dae-ne/youtube-browser-extension/compare/latest...main
+[license-file]: LICENSE
+
