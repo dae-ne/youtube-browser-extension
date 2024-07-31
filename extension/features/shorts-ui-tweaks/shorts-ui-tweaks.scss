@@ -3,6 +3,7 @@ body.yte-f-shorts-ui-tweaks.yte-f-shorts-ui-tweaks--flipped {
     .action-container {
       margin-left: auto !important;
       margin-right: 0 !important;
+      z-index: 1;
 
       #pivot-button > * {
         padding-bottom: 24px !important;
@@ -20,6 +21,10 @@ body.yte-f-shorts-ui-tweaks.yte-f-shorts-ui-tweaks--flipped {
 
     .metadata-container {
       position: absolute;
+
+      & > #overlay {
+        margin-right: var(--action-button-full-width, 72px) !important;
+      }
     }
   }
 
