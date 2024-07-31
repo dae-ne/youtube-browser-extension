@@ -3,6 +3,6 @@
 }
 
 /* stylelint-disable-next-line selector-id-pattern */
-.yte-f-auto-skip-ads .ytd-player #movie_player video {
+.yte-f-auto-skip-ads .ytd-player #movie_player:not([class*="big-mode"]) video {
   top: 0 !important;
 }
