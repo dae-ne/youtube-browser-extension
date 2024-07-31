@@ -133,19 +133,26 @@ export default class AutoSkipAdsFeature extends Feature {
 
   /**
    * Disconnects the mutation observer used to watch for ads. Does not disconnect
-   * the observer if a video is currently opened.
+   * the observer if a video (also in the miniplayer) is currently opened.
    */
   public cleanUp = () => {
+    if (isVideoOpened()) {
+      return;
+    }
+
     this.adsObserver.disconnect();
     this.errorScreenObserver.disconnect();
     this.videoSrcObserver.disconnect();
   };
 
   /**
-   * Disables the feature by disconnecting the mutation observer.
+   * Disables the feature by disconnecting the mutation observer and removing the global feature
+   * class name.
    */
   public disable = () => {
-    this.cleanUp();
+    this.adsObserver.disconnect();
+    this.errorScreenObserver.disconnect();
+    this.videoSrcObserver.disconnect();
     removeCssClass(CLASS_NAME);
   };
 
@@ -154,7 +161,8 @@ export default class AutoSkipAdsFeature extends Feature {
    *
    * @remarks
    * This function will skip ads by clicking the skip button if it exists, or by setting the video
-   * current time to the maximum value.
+   * current time to the maximum value. Paused videos are not skipped unless they are close to the
+   * end (to avoid skipping the video itself and skip ads at the end of the video).
    *
    * @returns Whether the function was successful.
    */
@@ -175,7 +183,13 @@ export default class AutoSkipAdsFeature extends Feature {
       return false;
     }
 
-    if (video.duration > MAX_NON_SKIPABLE_AD_DURATION || video.paused) {
+    const pausedSkippingTrheshold = video.duration * 0.9;
+    const canPausedVideoBeSkipped = video.currentTime > pausedSkippingTrheshold;
+
+    if (
+      video.duration > MAX_NON_SKIPABLE_AD_DURATION ||
+      (video.paused && !canPausedVideoBeSkipped)
+    ) {
       return true;
     }
 
