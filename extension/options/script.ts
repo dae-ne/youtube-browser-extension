@@ -10,6 +10,11 @@ import data from './data';
 const options = initialOptions;
 
 /**
+ * The main container element.
+ */
+const container = document.querySelector('main');
+
+/**
  * The form element that contains checkboxes for the options.
  */
 const form = document.querySelector('form');
@@ -19,13 +24,16 @@ const form = document.querySelector('form');
  */
 const template = document.querySelector('template');
 
-if (!form || !template) {
+if (!container || !form || !template) {
   throw new Error('The form or the template element is missing.');
 }
 
-/**
- * Creates the option items using the template and the options data, and adds them to the form.
- */
+if (data.length === 0) {
+  container.setAttribute('empty', '');
+  throw new Error('The data array is empty.');
+}
+
+// Populating the form with the options data
 data.forEach(({ name, title, description }) => {
   const clone = template.content.cloneNode(true) as HTMLElement;
   const titleElement = clone.querySelector('#option-title');
@@ -49,9 +57,7 @@ data.forEach(({ name, title, description }) => {
   form.appendChild(clone);
 });
 
-/**
- * Loads the options from the storage and updates the form.
- */
+// Loading the options from the storage
 chrome.storage.sync.get().then(data => {
   Object.assign(options, data);
 
@@ -64,10 +70,7 @@ chrome.storage.sync.get().then(data => {
   }
 });
 
-/**
- * Updates the options object on checkbox value change and saves the new value
- * to the storage.
- */
+// Handling option changes
 form.addEventListener('change', event => {
   const { target } = event;
 

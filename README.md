@@ -32,7 +32,7 @@ You can toggle the features on and off on the options page. To access the option
 </div>
 
 
-## How to install?
+## Installation
 
 1. Open the latest release (e.g.: 0.1.2) and download the `youtube_extension_<VERSION>.zip`, where `<VERSION>` is the version number (e.g.: *youtube_extension_0.1.2.zip*).
 2. Unzip the downloaded file to a new directory.
@@ -52,6 +52,8 @@ You can toggle the features on and off on the options page. To access the option
 5. Open the Chrome browser and go to the `chrome://extensions/` page.
 6. Turn on the developer mode in the top right corner.
 7. Click the `Load unpacked` button and select the `dist` directory from the cloned repository.
+
+Build the project after making changes to the source code using the `npm run build` command. Reload the extension on the `chrome://extensions/` to make sure every change is applied.
 
 
 ## License

@@ -41,8 +41,22 @@ h1, p {
   width: 480px;
 }
 
-.yte-options-description {
+.yte-options-description,
+.yte-no-data-message {
   padding: var(--padding-vertical-small) var(--padding-horizontal) var(--padding-vertical);
+}
+
+.yte-no-data-message {
+  display: none;
+  text-align: center;
+}
+
+.yte-options-container[empty] .yte-options-description {
+  display: none;
+}
+
+.yte-options-container[empty] .yte-no-data-message {
+  display: block;
 }
 
 .yte-option-item {
