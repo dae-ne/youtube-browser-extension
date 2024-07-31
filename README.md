@@ -65,7 +65,7 @@ GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more inform
 [license-shield]: https://img.shields.io/github/license/dae-ne/youtube-browser-extension.svg
 
 <!-- Links -->
-[latest-release]: https://github.com/dae-ne/youtube-browser-extension/releases/tag/latest
+[latest-release]: https://github.com/dae-ne/youtube-browser-extension/releases/latest
 [latest-changes]: https://github.com/dae-ne/youtube-browser-extension/compare/latest...main
 [license-file]: LICENSE
 
