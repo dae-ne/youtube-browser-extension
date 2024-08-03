@@ -30,6 +30,11 @@ const data: DataType[] = [
     description: 'Automatically skip ads on the video player or mini player by auto-clicking the skip button or increasing playback speed for non-skippable ads.'
   },
   {
+    name: 'removeAdblockErrorMessage',
+    title: 'Remove Adblock Error Message',
+    description: 'Remove the error message that appears when an ad blocker is detected.'
+  },
+  {
     name: 'hideSponsoredShorts',
     title: 'Hide Sponsored Shorts',
     description: 'Hide sponsored Shorts on the Shorts page.'

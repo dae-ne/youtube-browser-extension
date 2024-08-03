@@ -19,6 +19,7 @@
 - **Auto Loop Video** - sets the loop property of the video after clicking the *shorts to video* button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
 - **Auto Skip Ads** - automatically skips ads when they appear on a video.
+- **Remove AdBlock error message** - removes the error message that appears when an ad blocker is detected.
 - **Hide Sponsored Shorts** - hides sponsored shorts from the shorts page.
 - **Hide Masthead Ads** - hides the *masthead ads* on the homepage.
 - **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage, because it would break the layout).

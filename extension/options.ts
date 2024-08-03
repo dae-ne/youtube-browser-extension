@@ -9,7 +9,8 @@ export const initialOptions = {
   hideSponsoredShorts: true,
   hideMastheadAds: true,
   hideInFeedAds: true,
-  hidePlayerAds: true
+  hidePlayerAds: true,
+  removeAdblockErrorMessage: true
 };
 
 /**

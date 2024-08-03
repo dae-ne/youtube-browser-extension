@@ -1,0 +1,8 @@
+.yte-f-remove-adblock-error-message #error-screen {
+  display: none !important;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+.yte-f-remove-adblock-error-message .ytd-player #movie_player:not([class*="big-mode"]) video {
+  top: 0 !important;
+}

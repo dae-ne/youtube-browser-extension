@@ -7,6 +7,7 @@ import {
   HideMastheadAdsFeature,
   HidePlayerAdsFeature,
   HideSponsoredShortsFeature,
+  RemoveAdblockErrorMessageFeature,
   ShortsToVideoButtonFeature,
   ShortsUiTweaksFeature
 } from './features';
@@ -21,6 +22,7 @@ const handler = new ActionHandler(
   new HideMastheadAdsFeature(),
   new HidePlayerAdsFeature(),
   new HideSponsoredShortsFeature(),
+  new RemoveAdblockErrorMessageFeature(),
   new ShortsToVideoButtonFeature(),
   new ShortsUiTweaksFeature()
 );

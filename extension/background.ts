@@ -48,7 +48,8 @@ function notifyContentScripts(url: string, tabId: number) {
     hideSponsoredShorts,
     hideMastheadAds,
     hideInFeedAds,
-    hidePlayerAds
+    hidePlayerAds,
+    removeAdblockErrorMessage
   }: Options = options;
 
   const isYouTubeTab = url.includes(YOUTUBE_BASE_URL);
@@ -64,10 +65,12 @@ function notifyContentScripts(url: string, tabId: number) {
   hideSponsoredShorts && sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS });
 
   sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
+  sendMessage(tabId, { action: Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP });
   sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
 
   // Always triggered in case the video is opened in a miniplayer.
   autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
+  removeAdblockErrorMessage && sendMessage(tabId, { action: Actions.REMOVE_ADBLOCK_ERROR_MESSAGE });
 
   if (url.includes('shorts')) {
     showShortsToVideoButton && sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON });
@@ -99,7 +102,8 @@ function disableFeatures(url: string, tabId: number) {
     hideMastheadAds,
     hideInFeedAds,
     hidePlayerAds,
-    hideSponsoredShorts
+    hideSponsoredShorts,
+    removeAdblockErrorMessage
   }: Options = options;
 
   if (!url.includes('youtube.com')) {
@@ -107,6 +111,8 @@ function disableFeatures(url: string, tabId: number) {
   }
 
   autoSkipAds || sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_DISABLE });
+  removeAdblockErrorMessage ||
+    sendMessage(tabId, { action: Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE });
   updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE });
   hideMastheadAds || sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS_DISABLE });
   hideInFeedAds || sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS_DISABLE });

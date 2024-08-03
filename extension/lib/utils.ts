@@ -96,3 +96,19 @@ export function addCssClassToBody(className: string): boolean {
   body.classList.add(className);
   return true;
 }
+
+/**
+ * Gets the video element on the current page. The miniplayer is prioritized over the main player.
+ *
+ * @remarks
+ * It returns only the video from the watch page or the miniplayer. It does not return the video
+ * from the shorts page.
+ *
+ * @returns The video element on the current page.
+ */
+export function getMainVideoElement(): HTMLVideoElement | null {
+  return (
+    document.querySelector('.miniplayer video') ??
+    document.querySelector('ytd-player:not(.ytd-shorts) video')
+  );
+}

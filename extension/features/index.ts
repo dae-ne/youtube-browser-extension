@@ -7,3 +7,4 @@ export { default as HideSponsoredShortsFeature } from './hide-sponsored-shorts/h
 export { default as HideMastheadAdsFeature } from './hide-masthead-ads/hide-masthead-ads';
 export { default as HideInFeedAdsFeature } from './hide-in-feed-ads/hide-in-feed-ads';
 export { default as HidePlayerAdsFeature } from './hide-player-ads/hide-player-ads';
+export { default as RemoveAdblockErrorMessageFeature } from './remove-adblock-error-message/remove-adblock-error-message';
