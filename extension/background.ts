@@ -66,6 +66,9 @@ function notifyContentScripts(url: string, tabId: number) {
   sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP });
   sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP });
 
+  // Always triggered in case the video is opened in a miniplayer.
+  autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
+
   if (url.includes('shorts')) {
     showShortsToVideoButton && sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON });
     updateShortsUI && sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS });
@@ -77,7 +80,6 @@ function notifyContentScripts(url: string, tabId: number) {
   }
 
   if (!url.includes('shorts')) {
-    autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS });
     sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP });
   }
 }
