@@ -39,10 +39,9 @@ export default class ActionHandler {
    * Handles the specified action for the features.
    *
    * @remarks
-   * The action is handled by finding the feature that corresponds to the action and calling the
-   * appropriate method on the feature. The action names are defined in the feature classes, in the
-   * constructor (by calling the super constructor of the Feature base class). Handled action names
-   * are stored in a set to prevent duplicate actions from being triggered for the same page.
+   * The action is handled by finding the feature with the corresponding action name and calling
+   * the appropriate method. Already handled action names are stored in a set to prevent duplicate
+   * actions from being triggered for the same page.
    *
    * @param action - The action to handle
    */
