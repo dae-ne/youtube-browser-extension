@@ -16,12 +16,23 @@ export default class ActionHandler {
   private features: Feature[] = [];
 
   /**
+   * The URL of the last page that was visited.
+   */
+  private lastUrl = window.location.href;
+
+  /**
+   * The actions that have been handled for the current page.
+   */
+  private handledActions = new Set<string>();
+
+  /**
    * Initializes the action handler with the specified features.
    *
    * @param features - The features to handle actions for.
    */
   public constructor(...features: Feature[]) {
     this.features.push(...features);
+    this.lastUrl = window.location.href;
   }
 
   /**
@@ -30,7 +41,8 @@ export default class ActionHandler {
    * @remarks
    * The action is handled by finding the feature that corresponds to the action and calling the
    * appropriate method on the feature. The action names are defined in the feature classes, in the
-   * constructor (by calling the super constructor of the Feature base class).
+   * constructor (by calling the super constructor of the Feature base class). Handled action names
+   * are stored in a set to prevent duplicate actions from being triggered for the same page.
    *
    * @param action - The action to handle
    */
@@ -39,6 +51,19 @@ export default class ActionHandler {
       return;
     }
 
+    const url = window.location.href;
+    const hasUrlChanged = this.lastUrl !== url;
+
+    if (!hasUrlChanged && this.handledActions.has(action)) {
+      return;
+    }
+
+    if (hasUrlChanged) {
+      this.lastUrl = url;
+      this.handledActions.clear();
+    }
+
+    this.handledActions.add(action);
     let type: ActionTypes | undefined;
 
     const feature = this.features.find(
