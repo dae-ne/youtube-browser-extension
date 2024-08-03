@@ -4,7 +4,7 @@ import { Result } from 'result';
  * The default initial interval in milliseconds for recurring tasks. After each retry, the interval
  * is multiplied by the `INTERVAL_MULTIPLIER` constant.
  */
-const DEFAULT_INITIAL_INTERVAL_MS = 10;
+const DEFAULT_INITIAL_INTERVAL_MS = 50;
 
 /**
  * The default multiplier for the interval in milliseconds for recurring tasks. It's used to

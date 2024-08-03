@@ -14,9 +14,23 @@ const EXTENSION_CSS_CLASS_PREFIX = 'yte-';
  */
 export function isVideoOpened(): boolean {
   const isWatchPage = window.location.href.includes('youtube.com/watch');
+  return isWatchPage || isMiniplayerOpened();
+}
+
+/**
+ * Checks if a miniplayer is opened on the current page.
+ *
+ * @returns Whether the current page has a miniplayer opened.
+ */
+export function isMiniplayerOpened(): boolean {
   const miniplayer = document.querySelector('.miniplayer');
-  const isMiniplayerOpened = !!miniplayer?.querySelector('video');
-  return isWatchPage || isMiniplayerOpened;
+  const container = miniplayer?.querySelector('#player-container');
+
+  if (!container) {
+    return false;
+  }
+
+  return container.childNodes.length > 0;
 }
 
 /**
