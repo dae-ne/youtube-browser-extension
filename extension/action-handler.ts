@@ -44,6 +44,8 @@ export default class ActionHandler {
    * actions from being triggered for the same page.
    *
    * @param action - The action to handle
+   * @param force - Whether to force the action to be handled again even if it was already handled
+   *                for the current page
    */
   public handleAction = (action: string, force: boolean) => {
     if (!action) {
