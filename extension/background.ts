@@ -1,4 +1,4 @@
-import { Actions } from 'actions';
+import { Actions, ActionTypes } from 'actions';
 import { initialOptions, Options, OptionsNames } from 'options';
 
 /**
@@ -32,6 +32,17 @@ const options = initialOptions;
 const loopVideoTabIds: number[] = [];
 
 /**
+ * Sends a message to the content script with the specified action and tab ID.
+ *
+ * @param tabId - The ID of the tab to send the message to.
+ * @param action - The action to send.
+ * @param force - Whether to force the action to be executed.
+ */
+function send(tabId: number, action: ActionTypes, force = false) {
+  chrome.tabs.sendMessage(tabId, { action, force });
+}
+
+/**
  * Sends actions to the content scripts to set up or clean up features. The actions depend on
  * the tab URL and options. Messages are sent to the tab with the specified ID.
  *
@@ -39,7 +50,6 @@ const loopVideoTabIds: number[] = [];
  * @param tabId - The ID of the tab.
  */
 function notifyContentScripts(url: string, tabId: number, force = false) {
-  const { sendMessage } = chrome.tabs;
   const {
     showShortsToVideoButton,
     loopShortsToVideo,
@@ -59,33 +69,31 @@ function notifyContentScripts(url: string, tabId: number, force = false) {
     return;
   }
 
-  hideInFeedAds && sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS, force });
-  hideMastheadAds && sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS, force });
-  hidePlayerAds && sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS, force });
-  hideSponsoredShorts && sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS, force });
+  hideInFeedAds && send(tabId, Actions.HIDE_IN_FEED_ADS, force);
+  hideMastheadAds && send(tabId, Actions.HIDE_MASTHEAD_ADS, force);
+  hidePlayerAds && send(tabId, Actions.HIDE_PLAYER_ADS, force);
+  hideSponsoredShorts && send(tabId, Actions.HIDE_SPONSORED_SHORTS, force);
 
-  sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_CLEANUP, force });
-  sendMessage(tabId, { action: Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP, force });
-  sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP, force });
+  send(tabId, Actions.AUTO_SKIP_ADS_CLEANUP, force);
+  send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP, force);
+  send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP, force);
 
   // Always triggered in case the video is opened in a miniplayer.
-  autoSkipAds && sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS, force });
-  removeAdblockErrorMessage &&
-    sendMessage(tabId, { action: Actions.REMOVE_ADBLOCK_ERROR_MESSAGE, force });
+  autoSkipAds && send(tabId, Actions.AUTO_SKIP_ADS, force);
+  removeAdblockErrorMessage && send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE, force);
 
   if (url.includes('shorts')) {
-    showShortsToVideoButton &&
-      sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON, force });
-    updateShortsUI && sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS, force });
+    showShortsToVideoButton && send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON, force);
+    updateShortsUI && send(tabId, Actions.SHORTS_UI_TWEAKS, force);
   }
 
   if (url.includes('watch') && loopVideoTabIds.includes(tabId)) {
-    loopShortsToVideo && sendMessage(tabId, { action: Actions.AUTO_LOOP_VIDEO, force });
+    loopShortsToVideo && send(tabId, Actions.AUTO_LOOP_VIDEO, force);
     loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
   }
 
   if (!url.includes('shorts')) {
-    sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_CLEANUP, force });
+    send(tabId, Actions.SHORTS_UI_TWEAKS_CLEANUP, force);
   }
 }
 
@@ -96,7 +104,6 @@ function notifyContentScripts(url: string, tabId: number, force = false) {
  * @param tabId - The ID of the tab.
  */
 function disableFeatures(url: string, tabId: number) {
-  const { sendMessage } = chrome.tabs;
   const {
     showShortsToVideoButton,
     updateShortsUI,
@@ -112,17 +119,14 @@ function disableFeatures(url: string, tabId: number) {
     return;
   }
 
-  autoSkipAds || sendMessage(tabId, { action: Actions.AUTO_SKIP_ADS_DISABLE, force: true });
-  removeAdblockErrorMessage ||
-    sendMessage(tabId, { action: Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE, force: true });
-  updateShortsUI || sendMessage(tabId, { action: Actions.SHORTS_UI_TWEAKS_DISABLE, force: true });
-  hideMastheadAds || sendMessage(tabId, { action: Actions.HIDE_MASTHEAD_ADS_DISABLE, force: true });
-  hideInFeedAds || sendMessage(tabId, { action: Actions.HIDE_IN_FEED_ADS_DISABLE, force: true });
-  hidePlayerAds || sendMessage(tabId, { action: Actions.HIDE_PLAYER_ADS_DISABLE, force: true });
-  hideSponsoredShorts ||
-    sendMessage(tabId, { action: Actions.HIDE_SPONSORED_SHORTS_DISABLE, force: true });
-  showShortsToVideoButton ||
-    sendMessage(tabId, { action: Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE, force: true });
+  autoSkipAds || send(tabId, Actions.AUTO_SKIP_ADS_DISABLE, true);
+  removeAdblockErrorMessage || send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE, true);
+  updateShortsUI || send(tabId, Actions.SHORTS_UI_TWEAKS_DISABLE, true);
+  hideMastheadAds || send(tabId, Actions.HIDE_MASTHEAD_ADS_DISABLE, true);
+  hideInFeedAds || send(tabId, Actions.HIDE_IN_FEED_ADS_DISABLE, true);
+  hidePlayerAds || send(tabId, Actions.HIDE_PLAYER_ADS_DISABLE, true);
+  hideSponsoredShorts || send(tabId, Actions.HIDE_SPONSORED_SHORTS_DISABLE, true);
+  showShortsToVideoButton || send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE, true);
 }
 
 /**

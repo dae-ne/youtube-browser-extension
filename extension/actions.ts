@@ -27,3 +27,8 @@ export const Actions = {
   REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP: 'remove-adblock-error-message-cleanup',
   REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE: 'remove-adblock-error-message-disable',
 };
+
+/**
+ * Type of actions used to communicate between the background script and content scripts.
+ */
+export type ActionTypes = (typeof Actions)[keyof typeof Actions];
