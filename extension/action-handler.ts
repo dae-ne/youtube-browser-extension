@@ -45,7 +45,7 @@ export default class ActionHandler {
    *
    * @param action - The action to handle
    */
-  public handleAction = (action: string) => {
+  public handleAction = (action: string, force: boolean) => {
     if (!action) {
       return;
     }
@@ -53,7 +53,7 @@ export default class ActionHandler {
     const url = window.location.href;
     const hasUrlChanged = this.lastUrl !== url;
 
-    if (!hasUrlChanged && this.handledActions.has(action)) {
+    if (!hasUrlChanged && this.handledActions.has(action) && !force) {
       return;
     }
 

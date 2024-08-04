@@ -30,4 +30,4 @@ const handler = new ActionHandler(
 /**
  * Listens for messages from the background script and triggers a corresponding feature action.
  */
-chrome.runtime.onMessage.addListener(({ action }) => handler.handleAction(action));
+chrome.runtime.onMessage.addListener(({ action, force }) => handler.handleAction(action, force));
