@@ -89,16 +89,10 @@ export default class ActionHandler {
 
     const { setUp, cleanUp, disable } = feature;
 
-    switch (type) {
-      case 'setup':
-        handleRetries(setUp);
-        break;
-      case 'cleanup':
-        cleanUp();
-        break;
-      case 'disable':
-        disable();
-        break;
-    }
+    ({
+      setup: () => handleRetries(setUp),
+      cleanup: cleanUp,
+      disable: disable
+    })[type]();
   };
 }
