@@ -10,10 +10,10 @@ import {
 
 const ENTRYPOINT_FILE_NAME = 'entrypoint.scss';
 
-const filePaths = searchFilesByExtension(resolveFilePath('extension'), '.scss');
+const filePaths = searchFilesByExtension(resolveFilePath('extension', 'features'), '.scss');
 const entrypointContent = filePaths.map((file) => {
   const forwardSlashFilePath = file.replace(/\\/g, '/');
-  return `@import "../extension/${forwardSlashFilePath}";`
+  return `@import "../extension/features/${forwardSlashFilePath}";`
 }).join('\n');
 
 createDir(resolveFilePath('dist'));
