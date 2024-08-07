@@ -51,24 +51,26 @@ h1, p {
   text-align: center;
 }
 
-.yte-options-container[empty] .yte-options-description {
-  display: none;
-}
+.yte-options-container[empty] {
+  .yte-options-description {
+    display: none;
+  }
 
-.yte-options-container[empty] .yte-no-data-message {
-  display: block;
+  .yte-no-data-message {
+    display: block;
+  }
 }
 
 .yte-option-item {
   padding: var(--padding-vertical) var(--padding-horizontal);
   border-top: var(--border-width) solid var(--border-color);
-}
 
-.yte-option-item label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
 .yte-option-info {
@@ -85,12 +87,12 @@ h1, p {
   display: inline-block;
   height: var(--switch-height);
   width: var(--switch-width);
-}
 
-.yte-switch input {
-  visibility: hidden;
-  width: 0;
-  height: 0;
+  input {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
 }
 
 .yte-switch-slider {
@@ -103,28 +105,28 @@ h1, p {
   border-radius: 9999px;
   box-shadow: inset 0 0 0 var(--border-width) var(--switch-toggle-color);
   transition: all var(--transition-duration);
-}
 
-.yte-switch-slider::before {
-  position: absolute;
-  content: ' ';
-  height: calc(var(--switch-height) - 4px);
-  width: calc(var(--switch-height) - 4px);
-  left: 2px;
-  bottom: 2px;
-  background-color: var(--switch-toggle-color);
-  border-radius: 50%;
-  transition: all var(--transition-duration);
+  &::before {
+    position: absolute;
+    content: ' ';
+    height: calc(var(--switch-height) - 4px);
+    width: calc(var(--switch-height) - 4px);
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--switch-toggle-color);
+    border-radius: 50%;
+    transition: all var(--transition-duration);
+  }
 }
 
 input:checked + .yte-switch-slider {
   background-color: var(--switch-checked-color);
   box-shadow: none;
-}
 
-input:checked + .yte-switch-slider::before {
-  background-color: var(--switch-checked-toggle-color);
-  transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+  &::before {
+    background-color: var(--switch-checked-toggle-color);
+    transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+  }
 }
 
 input:not(:checked) + .yte-switch-slider::before {
