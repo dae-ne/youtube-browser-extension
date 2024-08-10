@@ -2,15 +2,15 @@
  * The initial options for the extension.
  */
 export const initialOptions = {
-  showShortsToVideoButton: true,
-  loopShortsToVideo: true,
-  updateShortsUI: true,
-  autoSkipAds: true,
-  hideSponsoredShorts: true,
-  hideMastheadAds: true,
-  hideInFeedAds: true,
-  hidePlayerAds: true,
-  removeAdblockErrorMessage: true
+    showShortsToVideoButton: true,
+    loopShortsToVideo: true,
+    updateShortsUI: true,
+    autoSkipAds: true,
+    hideSponsoredShorts: true,
+    hideMastheadAds: true,
+    hideInFeedAds: true,
+    hidePlayerAds: true,
+    removeAdblockErrorMessage: true
 };
 
 /**

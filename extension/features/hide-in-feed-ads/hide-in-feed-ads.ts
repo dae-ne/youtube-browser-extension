@@ -16,36 +16,36 @@ const CLASS_NAME = 'yte-f-hide-in-feed-ads';
  * If the class is present, the in-feed ads are hidden by the injected CSS.
  */
 export default class HideInFeedAdsFeature extends Feature {
-  /**
-   * Initializes the feature with action names.
-   */
-  public constructor() {
-    super({
-      setUpAction: Actions.HIDE_IN_FEED_ADS,
-      disableAction: Actions.HIDE_IN_FEED_ADS_DISABLE
-    });
-  }
+    /**
+     * Initializes the feature with action names.
+     */
+    public constructor() {
+        super({
+            setUpAction: Actions.HIDE_IN_FEED_ADS,
+            disableAction: Actions.HIDE_IN_FEED_ADS_DISABLE
+        });
+    }
 
-  /**
-   * Adds the feature class to the body element to hide the in-feed ads.
-   *
-   * @returns The status of the function and the parameters.
-   */
-  public setUp = (): Result => {
-    const { success, fail } = results;
-    return addCssClassToBody(CLASS_NAME) ? success() : fail();
-  };
+    /**
+     * Adds the feature class to the body element to hide the in-feed ads.
+     *
+     * @returns The status of the function and the parameters.
+     */
+    public setUp = (): Result => {
+        const { success, fail } = results;
+        return addCssClassToBody(CLASS_NAME) ? success() : fail();
+    };
 
-  /**
-   * Not needed for this feature
-   */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public cleanUp = (): void => {};
+    /**
+     * Not needed for this feature
+     */
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    public cleanUp = (): void => {};
 
-  /**
-   * Removes the feature class from the body element.
-   */
-  public disable = (): void => {
-    removeCssClass(CLASS_NAME);
-  };
+    /**
+     * Removes the feature class from the body element.
+     */
+    public disable = (): void => {
+        removeCssClass(CLASS_NAME);
+    };
 }

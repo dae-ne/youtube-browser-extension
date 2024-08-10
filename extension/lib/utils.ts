@@ -13,8 +13,8 @@ const EXTENSION_CSS_CLASS_PREFIX = 'yte-';
  * @returns Whether the current page is a video page.
  */
 export function isVideoOpened(): boolean {
-  const isWatchPage = window.location.href.includes('youtube.com/watch');
-  return isWatchPage || isMiniplayerOpened();
+    const isWatchPage = window.location.href.includes('youtube.com/watch');
+    return isWatchPage || isMiniplayerOpened();
 }
 
 /**
@@ -23,14 +23,14 @@ export function isVideoOpened(): boolean {
  * @returns Whether the current page has a miniplayer opened.
  */
 export function isMiniplayerOpened(): boolean {
-  const miniplayer = document.querySelector('.miniplayer');
-  const container = miniplayer?.querySelector('#player-container');
+    const miniplayer = document.querySelector('.miniplayer');
+    const container = miniplayer?.querySelector('#player-container');
 
-  if (!container) {
-    return false;
-  }
+    if (!container) {
+        return false;
+    }
 
-  return container.childNodes.length > 0;
+    return container.childNodes.length > 0;
 }
 
 /**
@@ -39,7 +39,7 @@ export function isMiniplayerOpened(): boolean {
  * @returns Whether the current page is a shorts page.
  */
 export function isShortsPage(): boolean {
-  return window.location.href.includes('youtube.com/shorts');
+    return window.location.href.includes('youtube.com/shorts');
 }
 
 /**
@@ -48,8 +48,8 @@ export function isShortsPage(): boolean {
  * @param className - The name of the CSS class to remove.
  */
 export function removeCssClass(className: string): void {
-  const elements = document.querySelectorAll(`.${className}`);
-  elements.forEach(element => element.classList.remove(className));
+    const elements = document.querySelectorAll(`.${className}`);
+    elements.forEach(element => element.classList.remove(className));
 }
 
 /**
@@ -63,23 +63,23 @@ export function removeCssClass(className: string): void {
  * @param classNamePrefix - The class name prefix used to filter the elements.
  */
 export function removeCssClassesByClassNamePrefix(
-  classNamePrefix = EXTENSION_CSS_CLASS_PREFIX
+    classNamePrefix = EXTENSION_CSS_CLASS_PREFIX
 ): void {
-  const isExtensionClassName = classNamePrefix.startsWith(EXTENSION_CSS_CLASS_PREFIX);
+    const isExtensionClassName = classNamePrefix.startsWith(EXTENSION_CSS_CLASS_PREFIX);
 
-  if (!isExtensionClassName) {
-    return;
-  }
+    if (!isExtensionClassName) {
+        return;
+    }
 
-  const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
+    const elements = document.querySelectorAll(`[class*="${classNamePrefix}"]`);
 
-  elements.forEach(element => {
-    const classNamesToRemove = Array.from(element.classList).filter(className =>
-      className.startsWith(classNamePrefix)
-    );
+    elements.forEach(element => {
+        const classNamesToRemove = Array.from(element.classList).filter(className =>
+            className.startsWith(classNamePrefix)
+        );
 
-    element.classList.remove(...classNamesToRemove);
-  });
+        element.classList.remove(...classNamesToRemove);
+    });
 }
 
 /**
@@ -89,14 +89,14 @@ export function removeCssClassesByClassNamePrefix(
  * @returns Whether the class was successfully added.
  */
 export function addCssClassToBody(className: string): boolean {
-  const body = document.querySelector('body');
+    const body = document.querySelector('body');
 
-  if (!body) {
-    return false;
-  }
+    if (!body) {
+        return false;
+    }
 
-  body.classList.add(className);
-  return true;
+    body.classList.add(className);
+    return true;
 }
 
 /**
@@ -109,8 +109,8 @@ export function addCssClassToBody(className: string): boolean {
  * @returns The video element on the current page.
  */
 export function getMainVideoElement(): HTMLVideoElement | null {
-  return (
-    document.querySelector('.miniplayer video') ??
-    document.querySelector('ytd-player:not(.ytd-shorts) video')
-  );
+    return (
+        document.querySelector('.miniplayer video') ??
+        document.querySelector('ytd-player:not(.ytd-shorts) video')
+    );
 }

@@ -1,3 +1,4 @@
 node_modules/
 dist/
 scripts/
+vite.options.config.mts

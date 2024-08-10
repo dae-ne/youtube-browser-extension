@@ -10,91 +10,91 @@ type ActionTypes = 'cleanup' | 'disable' | 'setup';
  * A class that handles actions for features.
  */
 export default class ActionHandler {
-  /**
-   * The features to handle actions for.
-   */
-  private features: Feature[] = [];
+    /**
+     * The features to handle actions for.
+     */
+    private features: Feature[] = [];
 
-  /**
-   * The URL of the last page that was visited.
-   */
-  private lastUrl = window.location.href;
+    /**
+     * The URL of the last page that was visited.
+     */
+    private lastUrl = window.location.href;
 
-  /**
-   * The actions that have been handled for the current page.
-   */
-  private handledActions = new Set<string>();
+    /**
+     * The actions that have been handled for the current page.
+     */
+    private handledActions = new Set<string>();
 
-  /**
-   * Initializes the action handler with the specified features.
-   *
-   * @param features - The features to handle actions for.
-   */
-  public constructor(...features: Feature[]) {
-    this.features.push(...features);
-    this.lastUrl = window.location.href;
-  }
-
-  /**
-   * Handles the specified action for the features.
-   *
-   * @remarks
-   * The action is handled by finding the feature with the corresponding action name and calling
-   * the appropriate method. Already handled action names are stored in a set to prevent duplicate
-   * actions from being triggered for the same page.
-   *
-   * @param action - The action to handle
-   * @param force - Whether to force the action to be handled again even if it was already handled
-   *                for the current page
-   */
-  public handleAction = (action: string, force: boolean): void => {
-    if (!action) {
-      return;
+    /**
+     * Initializes the action handler with the specified features.
+     *
+     * @param features - The features to handle actions for.
+     */
+    public constructor(...features: Feature[]) {
+        this.features.push(...features);
+        this.lastUrl = window.location.href;
     }
 
-    const url = window.location.href;
-    const hasUrlChanged = this.lastUrl !== url;
-
-    if (!hasUrlChanged && this.handledActions.has(action) && !force) {
-      return;
-    }
-
-    if (hasUrlChanged) {
-      this.lastUrl = url;
-      this.handledActions.clear();
-    }
-
-    this.handledActions.add(action);
-    let type: ActionTypes | undefined;
-
-    const feature = this.features.find(
-      ({ setUpActionName, cleanUpActionName, disableActionName }) => {
-        switch (action) {
-          case setUpActionName:
-            type = 'setup';
-            return true;
-          case cleanUpActionName:
-            type = 'cleanup';
-            return true;
-          case disableActionName:
-            type = 'disable';
-            return true;
-          default:
-            return false;
+    /**
+     * Handles the specified action for the features.
+     *
+     * @remarks
+     * The action is handled by finding the feature with the corresponding action name and calling
+     * the appropriate method. Already handled action names are stored in a set to prevent duplicate
+     * actions from being triggered for the same page.
+     *
+     * @param action - The action to handle
+     * @param force - Whether to force the action to be handled again even if it was already handled
+     *                for the current page
+     */
+    public handleAction = (action: string, force: boolean): void => {
+        if (!action) {
+            return;
         }
-      }
-    );
 
-    if (!feature || !type) {
-      return;
-    }
+        const url = window.location.href;
+        const hasUrlChanged = this.lastUrl !== url;
 
-    const { setUp, cleanUp, disable } = feature;
+        if (!hasUrlChanged && this.handledActions.has(action) && !force) {
+            return;
+        }
 
-    ({
-      setup: (): void => handleRetries(setUp),
-      cleanup: cleanUp,
-      disable: disable
-    })[type]();
-  };
+        if (hasUrlChanged) {
+            this.lastUrl = url;
+            this.handledActions.clear();
+        }
+
+        this.handledActions.add(action);
+        let type: ActionTypes | undefined;
+
+        const feature = this.features.find(
+            ({ setUpActionName, cleanUpActionName, disableActionName }) => {
+                switch (action) {
+                    case setUpActionName:
+                        type = 'setup';
+                        return true;
+                    case cleanUpActionName:
+                        type = 'cleanup';
+                        return true;
+                    case disableActionName:
+                        type = 'disable';
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        );
+
+        if (!feature || !type) {
+            return;
+        }
+
+        const { setUp, cleanUp, disable } = feature;
+
+        ({
+            setup: (): void => handleRetries(setUp),
+            cleanup: cleanUp,
+            disable: disable
+        })[type]();
+    };
 }

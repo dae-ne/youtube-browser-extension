@@ -26,17 +26,17 @@ const DEFAULT_MAX_NUMBER_OF_RETRIES = 20;
  * The callback function type.
  */
 export type Callback = {
-  (params: object): Result;
+    (params: object): Result;
 };
 
 /**
  * The options for the retry logic.
  */
 export type RetryOptions = {
-  intervalMs?: number;
-  intervalMultiplayer?: number;
-  maxIntervalMs?: number;
-  maxRetries?: number;
+    intervalMs?: number;
+    intervalMultiplayer?: number;
+    maxIntervalMs?: number;
+    maxRetries?: number;
 };
 
 /**
@@ -49,32 +49,32 @@ export type RetryOptions = {
  * @param retries - The retry count.
  */
 export function handleRetries(
-  callback: Callback,
-  callbackParameters: object = {},
-  options: RetryOptions = {},
-  retries = 0
+    callback: Callback,
+    callbackParameters: object = {},
+    options: RetryOptions = {},
+    retries = 0
 ): void {
-  const {
-    intervalMs = DEFAULT_INITIAL_INTERVAL_MS,
-    intervalMultiplayer = DEFAULT_INTERVAL_MULTIPLIER,
-    maxIntervalMs = DEFAULT_MAX_INTERVAL_MS,
-    maxRetries = DEFAULT_MAX_NUMBER_OF_RETRIES
-  } = options;
+    const {
+        intervalMs = DEFAULT_INITIAL_INTERVAL_MS,
+        intervalMultiplayer = DEFAULT_INTERVAL_MULTIPLIER,
+        maxIntervalMs = DEFAULT_MAX_INTERVAL_MS,
+        maxRetries = DEFAULT_MAX_NUMBER_OF_RETRIES
+    } = options;
 
-  const { status, params } = callback(callbackParameters);
+    const { status, params } = callback(callbackParameters);
 
-  if (status === 'success' || retries >= maxRetries) {
-    return;
-  }
+    if (status === 'success' || retries >= maxRetries) {
+        return;
+    }
 
-  const newIntervalMs = intervalMs * intervalMultiplayer;
+    const newIntervalMs = intervalMs * intervalMultiplayer;
 
-  const newOptions = {
-    ...options,
-    intervalMs: newIntervalMs > maxIntervalMs ? maxIntervalMs : newIntervalMs
-  };
+    const newOptions = {
+        ...options,
+        intervalMs: newIntervalMs > maxIntervalMs ? maxIntervalMs : newIntervalMs
+    };
 
-  setTimeout(() => {
-    handleRetries(callback, params, newOptions, retries + 1);
-  }, intervalMs);
+    setTimeout(() => {
+        handleRetries(callback, params, newOptions, retries + 1);
+    }, intervalMs);
 }

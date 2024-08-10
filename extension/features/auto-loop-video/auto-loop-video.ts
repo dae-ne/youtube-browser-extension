@@ -10,41 +10,41 @@ import { type Result, results } from 'result';
  * the video in a new tab and automatically loops it if the shorts to video loop option is enabled.
  */
 export default class AutoLoopVideoFeature extends Feature {
-  /**
-   * Initializes the feature with action names.
-   */
-  public constructor() {
-    super({
-      setUpAction: Actions.AUTO_LOOP_VIDEO
-    });
-  }
-
-  /**
-   * Finds the video element and sets the loop property.
-   *
-   * @returns The status of the function and the parameters.
-   */
-  public setUp = (): Result => {
-    const { success, fail } = results;
-    const video = document.querySelector('video');
-
-    if (!video) {
-      return fail();
+    /**
+     * Initializes the feature with action names.
+     */
+    public constructor() {
+        super({
+            setUpAction: Actions.AUTO_LOOP_VIDEO
+        });
     }
 
-    video.loop = true;
-    return success();
-  };
+    /**
+     * Finds the video element and sets the loop property.
+     *
+     * @returns The status of the function and the parameters.
+     */
+    public setUp = (): Result => {
+        const { success, fail } = results;
+        const video = document.querySelector('video');
 
-  /**
-   * Not needed for this feature.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public cleanUp = (): void => {};
+        if (!video) {
+            return fail();
+        }
 
-  /**
-   * Not needed for this feature.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  public disable = (): void => {};
+        video.loop = true;
+        return success();
+    };
+
+    /**
+     * Not needed for this feature.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    public cleanUp = (): void => {};
+
+    /**
+     * Not needed for this feature.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    public disable = (): void => {};
 }

@@ -41,7 +41,7 @@ const loopVideoTabIds: number[] = [];
  * @param force - Whether to force the action to be executed.
  */
 function send(tabId: number, action: ActionTypes, force = false): void {
-  chrome.tabs.sendMessage(tabId, { action, force });
+    chrome.tabs.sendMessage(tabId, { action, force });
 }
 
 /**
@@ -52,51 +52,51 @@ function send(tabId: number, action: ActionTypes, force = false): void {
  * @param tabId - The ID of the tab.
  */
 function notifyContentScripts(url: string, tabId: number, force = false): void {
-  const {
-    showShortsToVideoButton,
-    loopShortsToVideo,
-    updateShortsUI,
-    autoSkipAds,
-    hideSponsoredShorts,
-    hideMastheadAds,
-    hideInFeedAds,
-    hidePlayerAds,
-    removeAdblockErrorMessage
-  }: Options = options;
+    const {
+        showShortsToVideoButton,
+        loopShortsToVideo,
+        updateShortsUI,
+        autoSkipAds,
+        hideSponsoredShorts,
+        hideMastheadAds,
+        hideInFeedAds,
+        hidePlayerAds,
+        removeAdblockErrorMessage
+    }: Options = options;
 
-  const isYouTubeTab = url.includes(YOUTUBE_BASE_URL);
-  const isYouTubeTvTab = url.includes(YOUTUBE_TV_BASE_URL);
+    const isYouTubeTab = url.includes(YOUTUBE_BASE_URL);
+    const isYouTubeTvTab = url.includes(YOUTUBE_TV_BASE_URL);
 
-  if (!isYouTubeTab || isYouTubeTvTab) {
-    return;
-  }
+    if (!isYouTubeTab || isYouTubeTvTab) {
+        return;
+    }
 
-  hideInFeedAds && send(tabId, Actions.HIDE_IN_FEED_ADS, force);
-  hideMastheadAds && send(tabId, Actions.HIDE_MASTHEAD_ADS, force);
-  hidePlayerAds && send(tabId, Actions.HIDE_PLAYER_ADS, force);
-  hideSponsoredShorts && send(tabId, Actions.HIDE_SPONSORED_SHORTS, force);
+    hideInFeedAds && send(tabId, Actions.HIDE_IN_FEED_ADS, force);
+    hideMastheadAds && send(tabId, Actions.HIDE_MASTHEAD_ADS, force);
+    hidePlayerAds && send(tabId, Actions.HIDE_PLAYER_ADS, force);
+    hideSponsoredShorts && send(tabId, Actions.HIDE_SPONSORED_SHORTS, force);
 
-  send(tabId, Actions.AUTO_SKIP_ADS_CLEANUP, force);
-  send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP, force);
-  send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP, force);
+    send(tabId, Actions.AUTO_SKIP_ADS_CLEANUP, force);
+    send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP, force);
+    send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP, force);
 
-  // Always triggered in case the video is opened in a miniplayer.
-  autoSkipAds && send(tabId, Actions.AUTO_SKIP_ADS, force);
-  removeAdblockErrorMessage && send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE, force);
+    // Always triggered in case the video is opened in a miniplayer.
+    autoSkipAds && send(tabId, Actions.AUTO_SKIP_ADS, force);
+    removeAdblockErrorMessage && send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE, force);
 
-  if (url.includes('shorts')) {
-    showShortsToVideoButton && send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON, force);
-    updateShortsUI && send(tabId, Actions.SHORTS_UI_TWEAKS, force);
-  }
+    if (url.includes('shorts')) {
+        showShortsToVideoButton && send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON, force);
+        updateShortsUI && send(tabId, Actions.SHORTS_UI_TWEAKS, force);
+    }
 
-  if (url.includes('watch') && loopVideoTabIds.includes(tabId)) {
-    loopShortsToVideo && send(tabId, Actions.AUTO_LOOP_VIDEO, force);
-    loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
-  }
+    if (url.includes('watch') && loopVideoTabIds.includes(tabId)) {
+        loopShortsToVideo && send(tabId, Actions.AUTO_LOOP_VIDEO, force);
+        loopVideoTabIds.splice(loopVideoTabIds.indexOf(tabId), 1);
+    }
 
-  if (!url.includes('shorts')) {
-    send(tabId, Actions.SHORTS_UI_TWEAKS_CLEANUP, force);
-  }
+    if (!url.includes('shorts')) {
+        send(tabId, Actions.SHORTS_UI_TWEAKS_CLEANUP, force);
+    }
 }
 
 /**
@@ -106,29 +106,29 @@ function notifyContentScripts(url: string, tabId: number, force = false): void {
  * @param tabId - The ID of the tab.
  */
 function disableFeatures(url: string, tabId: number): void {
-  const {
-    showShortsToVideoButton,
-    updateShortsUI,
-    autoSkipAds,
-    hideMastheadAds,
-    hideInFeedAds,
-    hidePlayerAds,
-    hideSponsoredShorts,
-    removeAdblockErrorMessage
-  }: Options = options;
+    const {
+        showShortsToVideoButton,
+        updateShortsUI,
+        autoSkipAds,
+        hideMastheadAds,
+        hideInFeedAds,
+        hidePlayerAds,
+        hideSponsoredShorts,
+        removeAdblockErrorMessage
+    }: Options = options;
 
-  if (!url.includes('youtube.com')) {
-    return;
-  }
+    if (!url.includes('youtube.com')) {
+        return;
+    }
 
-  autoSkipAds || send(tabId, Actions.AUTO_SKIP_ADS_DISABLE, true);
-  removeAdblockErrorMessage || send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE, true);
-  updateShortsUI || send(tabId, Actions.SHORTS_UI_TWEAKS_DISABLE, true);
-  hideMastheadAds || send(tabId, Actions.HIDE_MASTHEAD_ADS_DISABLE, true);
-  hideInFeedAds || send(tabId, Actions.HIDE_IN_FEED_ADS_DISABLE, true);
-  hidePlayerAds || send(tabId, Actions.HIDE_PLAYER_ADS_DISABLE, true);
-  hideSponsoredShorts || send(tabId, Actions.HIDE_SPONSORED_SHORTS_DISABLE, true);
-  showShortsToVideoButton || send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE, true);
+    autoSkipAds || send(tabId, Actions.AUTO_SKIP_ADS_DISABLE, true);
+    removeAdblockErrorMessage || send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE, true);
+    updateShortsUI || send(tabId, Actions.SHORTS_UI_TWEAKS_DISABLE, true);
+    hideMastheadAds || send(tabId, Actions.HIDE_MASTHEAD_ADS_DISABLE, true);
+    hideInFeedAds || send(tabId, Actions.HIDE_IN_FEED_ADS_DISABLE, true);
+    hidePlayerAds || send(tabId, Actions.HIDE_PLAYER_ADS_DISABLE, true);
+    hideSponsoredShorts || send(tabId, Actions.HIDE_SPONSORED_SHORTS_DISABLE, true);
+    showShortsToVideoButton || send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE, true);
 }
 
 /**
@@ -136,14 +136,14 @@ function disableFeatures(url: string, tabId: number): void {
  * exist in the storage, it will create them with the initial values.
  */
 chrome.storage.sync.get().then(data => {
-  const dataExists = Object.keys(data).length;
+    const dataExists = Object.keys(data).length;
 
-  if (dataExists) {
-    Object.assign(options, data);
-    return;
-  }
+    if (dataExists) {
+        Object.assign(options, data);
+        return;
+    }
 
-  chrome.storage.sync.set(options);
+    chrome.storage.sync.set(options);
 });
 
 /**
@@ -152,64 +152,64 @@ chrome.storage.sync.get().then(data => {
  * or disabled dynamically.
  */
 chrome.storage.onChanged.addListener(changes => {
-  for (const [name, { newValue }] of Object.entries(changes)) {
-    options[name as OptionsNames] = newValue;
-  }
+    for (const [name, { newValue }] of Object.entries(changes)) {
+        options[name as OptionsNames] = newValue;
+    }
 
-  chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
-    tabs.forEach(({ id, url }) => {
-      if (!url || !id) {
-        return;
-      }
+    chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
+        tabs.forEach(({ id, url }) => {
+            if (!url || !id) {
+                return;
+            }
 
-      notifyContentScripts(url, id, true);
-      disableFeatures(url, id);
+            notifyContentScripts(url, id, true);
+            disableFeatures(url, id);
+        });
     });
-  });
 });
 
 /**
  * Listens for tab updates and notifies the content scripts to update the features.
  */
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  const { url } = tab;
+    const { url } = tab;
 
-  if (changeInfo.status !== 'complete' || !url) {
-    return;
-  }
+    if (changeInfo.status !== 'complete' || !url) {
+        return;
+    }
 
-  notifyContentScripts(url, tabId);
+    notifyContentScripts(url, tabId);
 });
 
 /**
  * Reloads all YouTube tabs when the extension is installed or updated.
  */
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
-    // TODO: Check if it's a video page. Pause the videos and reload with the same time.
-    // eslint-disable-next-line @typescript-eslint/promise-function-async
-    tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
-  });
+    chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
+        // TODO: Check if it's a video page. Pause the videos and reload with the same time.
+        // eslint-disable-next-line @typescript-eslint/promise-function-async
+        tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
+    });
 });
 
 /**
  * Listens for content script messages and triggers the corresponding actions.
  */
 chrome.runtime.onMessage.addListener((request, sender) => {
-  if (!sender.tab) {
-    return;
-  }
+    if (!sender.tab) {
+        return;
+    }
 
-  if (request.action === Actions.OPEN_VIDEO_FROM_SHORTS) {
-    chrome.tabs.create(
-      {
-        url: request.url,
-        index: sender.tab.index + 1,
-        openerTabId: sender.tab.id
-      },
-      tab => tab.id && loopVideoTabIds.push(tab.id)
-    );
-  }
+    if (request.action === Actions.OPEN_VIDEO_FROM_SHORTS) {
+        chrome.tabs.create(
+            {
+                url: request.url,
+                index: sender.tab.index + 1,
+                openerTabId: sender.tab.id
+            },
+            tab => tab.id && loopVideoTabIds.push(tab.id)
+        );
+    }
 });
 
 /**
@@ -217,16 +217,16 @@ chrome.runtime.onMessage.addListener((request, sender) => {
  * If YouTube is already opened, it will open the options page.
  */
 chrome.action.onClicked.addListener(async tab => {
-  const { id, url, index } = tab;
+    const { id, url, index } = tab;
 
-  if (url?.includes(YOUTUBE_BASE_URL)) {
-    await chrome.runtime.openOptionsPage();
-    return;
-  }
+    if (url?.includes(YOUTUBE_BASE_URL)) {
+        await chrome.runtime.openOptionsPage();
+        return;
+    }
 
-  await chrome.tabs.create({
-    openerTabId: id,
-    index: index + 1,
-    url: YOUTUBE_BASE_URL
-  });
+    await chrome.tabs.create({
+        openerTabId: id,
+        index: index + 1,
+        url: YOUTUBE_BASE_URL
+    });
 });

@@ -7,14 +7,14 @@
  * That behavior could be changed, but it requires changes in the action handler.
  */
 export type Result = {
-  status: 'fail' | 'success';
-  params: object;
+    status: 'fail' | 'success';
+    params: object;
 };
 
 /**
  * Functions for simplifying the creation of feature setup results.
  */
 export const results = {
-  success: (params: object = {}): Result => ({ status: 'success', params }),
-  fail: (params: object = {}): Result => ({ status: 'fail', params })
+    success: (params: object = {}): Result => ({ status: 'success', params }),
+    fail: (params: object = {}): Result => ({ status: 'fail', params })
 };
