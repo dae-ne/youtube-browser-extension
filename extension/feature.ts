@@ -25,43 +25,6 @@ export type ActionsSetup = {
  */
 export default abstract class Feature {
   /**
-   * Initializes the feature with action names.
-   *
-   * @param actions - The action names to set up, clean up, and disable the feature.
-   */
-  protected constructor(private actions: ActionsSetup) {}
-
-  /**
-   * Returns the name of the action to set up the feature.
-   *
-   * @returns The name of the action to set up the feature.
-   */
-  public get setUpActionName() {
-    const { setUpAction } = this.actions;
-    return setUpAction;
-  }
-
-  /**
-   * Returns the name of the action to clean up the feature.
-   *
-   * @returns The name of the action to clean up the feature.
-   */
-  public get cleanUpActionName() {
-    const { cleanUpAction } = this.actions;
-    return cleanUpAction;
-  }
-
-  /**
-   * Returns the name of the action to disable the feature.
-   *
-   * @returns The name of the action to disable the feature.
-   */
-  public get disableActionName() {
-    const { disableAction } = this.actions;
-    return disableAction;
-  }
-
-  /**
    * The function that implements the feature, and returns the result of the setup.
    *
    * @remarks
@@ -90,4 +53,41 @@ export default abstract class Feature {
    * extension's options page.
    */
   public abstract disable: () => void;
+
+  /**
+   * Initializes the feature with action names.
+   *
+   * @param actions - The action names to set up, clean up, and disable the feature.
+   */
+  protected constructor(private actions: ActionsSetup) {}
+
+  /**
+   * Returns the name of the action to set up the feature.
+   *
+   * @returns The name of the action to set up the feature.
+   */
+  public get setUpActionName(): string {
+    const { setUpAction } = this.actions;
+    return setUpAction;
+  }
+
+  /**
+   * Returns the name of the action to clean up the feature.
+   *
+   * @returns The name of the action to clean up the feature.
+   */
+  public get cleanUpActionName(): string | undefined {
+    const { cleanUpAction } = this.actions;
+    return cleanUpAction;
+  }
+
+  /**
+   * Returns the name of the action to disable the feature.
+   *
+   * @returns The name of the action to disable the feature.
+   */
+  public get disableActionName(): string | undefined {
+    const { disableAction } = this.actions;
+    return disableAction;
+  }
 }

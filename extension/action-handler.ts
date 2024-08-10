@@ -4,7 +4,7 @@ import { handleRetries } from 'lib/retries';
 /**
  * The types of actions that can be handled.
  */
-type ActionTypes = 'setup' | 'cleanup' | 'disable';
+type ActionTypes = 'cleanup' | 'disable' | 'setup';
 
 /**
  * A class that handles actions for features.
@@ -47,7 +47,7 @@ export default class ActionHandler {
    * @param force - Whether to force the action to be handled again even if it was already handled
    *                for the current page
    */
-  public handleAction = (action: string, force: boolean) => {
+  public handleAction = (action: string, force: boolean): void => {
     if (!action) {
       return;
     }
@@ -92,7 +92,7 @@ export default class ActionHandler {
     const { setUp, cleanUp, disable } = feature;
 
     ({
-      setup: () => handleRetries(setUp),
+      setup: (): void => handleRetries(setUp),
       cleanup: cleanUp,
       disable: disable
     })[type]();

@@ -58,14 +58,14 @@ export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Cleans up the feature by removing the event listeners and the feature class from the body
    */
-  public cleanUp = () => {
+  public cleanUp = (): void => {
     this.controller?.abort();
   };
 
   /**
    * Removes the feature class from the body element and removes event listeners.
    */
-  public disable = () => {
+  public disable = (): void => {
     this.cleanUp();
     removeCssClass(CLASS_NAME);
     removeCssClass(`${CLASS_NAME}--flipped`);
@@ -77,7 +77,7 @@ export default class ShortsUiTweaksFeature extends Feature {
    *
    * @returns The status of the function.
    */
-  private handleUiChanges = (isWindowResized = false) => {
+  private handleUiChanges = (isWindowResized = false): boolean => {
     const shouldUiBeUpdated = this.shouldUiBeUpdated();
 
     if (!isWindowResized && shouldUiBeUpdated) {
@@ -99,7 +99,7 @@ export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Inverts the colors of the action buttons
    */
-  private invertButtonColors = () => {
+  private invertButtonColors = (): void => {
     if (!this.shouldUiBeUpdated()) {
       return;
     }
@@ -120,7 +120,7 @@ export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Reverts the color changes of the action buttons
    */
-  private revertColorChanges = () => {
+  private revertColorChanges = (): void => {
     const actionButtonLabels = this.getButtonLabels();
     const buttons = this.getButtons();
     const feedbackShapes = this.getFeedbackShapes();
@@ -137,7 +137,7 @@ export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Gets the button labels from the shorts UI
    */
-  private getButtonLabels = () => {
+  private getButtonLabels = (): NodeListOf<Element> => {
     return document.querySelectorAll(
       '.ytd-shorts .action-container .button-container:not(#pivot-button) label'
     );
@@ -146,7 +146,7 @@ export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Gets the buttons from the shorts UI
    */
-  private getButtons = () => {
+  private getButtons = (): NodeListOf<Element> => {
     return document.querySelectorAll(
       '.ytd-shorts .action-container .button-container:not(#pivot-button) button'
     );
@@ -155,7 +155,7 @@ export default class ShortsUiTweaksFeature extends Feature {
   /**
    * Gets the feedback shapes from the shorts UI
    */
-  private getFeedbackShapes = () => {
+  private getFeedbackShapes = (): NodeListOf<Element> => {
     return document.querySelectorAll(
       // eslint-disable-next-line max-len
       '.ytd-shorts .action-container .button-container:not(#pivot-button) .yt-spec-touch-feedback-shape'
@@ -167,7 +167,7 @@ export default class ShortsUiTweaksFeature extends Feature {
    *
    * @returns The status of the function.
    */
-  private shouldUiBeUpdated = () => {
+  private shouldUiBeUpdated = (): boolean => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 

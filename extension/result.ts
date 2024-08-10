@@ -7,7 +7,7 @@
  * That behavior could be changed, but it requires changes in the action handler.
  */
 export type Result = {
-  status: 'success' | 'fail';
+  status: 'fail' | 'success';
   params: object;
 };
 

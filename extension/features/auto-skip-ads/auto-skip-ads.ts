@@ -70,7 +70,7 @@ export default class AutoSkipAdsFeature extends Feature {
    * @param force - Whether to force the cleanup. If true, the observer will be disconnected even
    *                if a video is currently opened.
    */
-  public cleanUp = (force = false) => {
+  public cleanUp = (force = false): void => {
     if (!force && isVideoOpened()) {
       return;
     }
@@ -81,7 +81,7 @@ export default class AutoSkipAdsFeature extends Feature {
   /**
    * Disables the feature by disconnecting the mutation observer.
    */
-  public disable = () => {
+  public disable = (): void => {
     this.cleanUp(true);
   };
 

@@ -47,7 +47,7 @@ export function isShortsPage(): boolean {
  *
  * @param className - The name of the CSS class to remove.
  */
-export function removeCssClass(className: string) {
+export function removeCssClass(className: string): void {
   const elements = document.querySelectorAll(`.${className}`);
   elements.forEach(element => element.classList.remove(className));
 }
@@ -62,7 +62,9 @@ export function removeCssClass(className: string) {
  *
  * @param classNamePrefix - The class name prefix used to filter the elements.
  */
-export function removeCssClassesByClassNamePrefix(classNamePrefix = EXTENSION_CSS_CLASS_PREFIX) {
+export function removeCssClassesByClassNamePrefix(
+  classNamePrefix = EXTENSION_CSS_CLASS_PREFIX
+): void {
   const isExtensionClassName = classNamePrefix.startsWith(EXTENSION_CSS_CLASS_PREFIX);
 
   if (!isExtensionClassName) {

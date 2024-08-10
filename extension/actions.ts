@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/key-spacing */
 // prettier-ignore
 
 /**
@@ -25,7 +27,7 @@ export const Actions = {
   HIDE_PLAYER_ADS_DISABLE:              'hide-player-ads-disable',
   REMOVE_ADBLOCK_ERROR_MESSAGE:         'remove-adblock-error-message',
   REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP: 'remove-adblock-error-message-cleanup',
-  REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE: 'remove-adblock-error-message-disable',
+  REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE: 'remove-adblock-error-message-disable'
 };
 
 /**

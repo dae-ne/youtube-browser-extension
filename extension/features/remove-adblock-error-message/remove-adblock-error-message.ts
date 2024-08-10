@@ -114,7 +114,7 @@ export default class RemoveAdblockErrorMessageFeature extends Feature {
    * @param force - Whether to force the cleanup. If true, the observers will be disconnected even
    *                if a video is currently opened.
    */
-  public cleanUp = (force = false) => {
+  public cleanUp = (force = false): void => {
     if (!force && isVideoOpened()) {
       return;
     }
@@ -127,7 +127,7 @@ export default class RemoveAdblockErrorMessageFeature extends Feature {
    * Disables the feature by disconnecting the mutation observers and removing the global feature
    * class name.
    */
-  public disable = () => {
+  public disable = (): void => {
     this.cleanUp(true);
     removeCssClass(CLASS_NAME);
   };

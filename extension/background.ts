@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+
 import { Actions, ActionTypes } from 'actions';
 import { initialOptions, Options, OptionsNames } from 'options';
 
@@ -38,7 +40,7 @@ const loopVideoTabIds: number[] = [];
  * @param action - The action to send.
  * @param force - Whether to force the action to be executed.
  */
-function send(tabId: number, action: ActionTypes, force = false) {
+function send(tabId: number, action: ActionTypes, force = false): void {
   chrome.tabs.sendMessage(tabId, { action, force });
 }
 
@@ -49,7 +51,7 @@ function send(tabId: number, action: ActionTypes, force = false) {
  * @param url - The URL of the tab.
  * @param tabId - The ID of the tab.
  */
-function notifyContentScripts(url: string, tabId: number, force = false) {
+function notifyContentScripts(url: string, tabId: number, force = false): void {
   const {
     showShortsToVideoButton,
     loopShortsToVideo,
@@ -103,7 +105,7 @@ function notifyContentScripts(url: string, tabId: number, force = false) {
  * @param url - The URL of the tab.
  * @param tabId - The ID of the tab.
  */
-function disableFeatures(url: string, tabId: number) {
+function disableFeatures(url: string, tabId: number): void {
   const {
     showShortsToVideoButton,
     updateShortsUI,
@@ -134,7 +136,8 @@ function disableFeatures(url: string, tabId: number) {
  * exist in the storage, it will create them with the initial values.
  */
 chrome.storage.sync.get().then(data => {
-  const dataExists = data && Object.keys(data).length;
+  const dataExists = Object.keys(data).length;
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   dataExists ? Object.assign(options, data) : chrome.storage.sync.set(options);
 });
 
@@ -179,6 +182,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.runtime.onInstalled.addListener(() => {
   chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
     // TODO: Check if it's a video page. Pause the videos and reload with the same time.
+    // eslint-disable-next-line @typescript-eslint/promise-function-async
     tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
   });
 });
@@ -210,7 +214,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 chrome.action.onClicked.addListener(async tab => {
   const { id, url, index } = tab;
 
-  if (url && url.includes(YOUTUBE_BASE_URL)) {
+  if (url?.includes(YOUTUBE_BASE_URL)) {
     await chrome.runtime.openOptionsPage();
     return;
   }

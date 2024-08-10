@@ -37,7 +37,7 @@ if (data.length === 0) {
 data.forEach(({ name, title, description }) => {
   const clone = template.content.cloneNode(true) as HTMLElement;
   const titleElement = clone.querySelector('#option-title');
-  const inputElement = clone.querySelector('input[type="checkbox"]') as HTMLInputElement;
+  const inputElement = clone.querySelector('input[type="checkbox"]') as HTMLInputElement | null;
   const descriptionElement = clone.querySelector('#option-description');
 
   if (!titleElement || !inputElement || !descriptionElement) {
@@ -62,7 +62,7 @@ chrome.storage.sync.get().then(data => {
   Object.assign(options, data);
 
   for (const [name, value] of Object.entries(options)) {
-    const input = form.querySelector(`[name="${name}"]`) as HTMLInputElement;
+    const input = form.querySelector(`[name="${name}"]`) as HTMLInputElement | null;
 
     if (input) {
       input.checked = value;

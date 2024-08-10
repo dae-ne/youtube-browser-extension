@@ -75,6 +75,6 @@ export function handleRetries(
   };
 
   setTimeout(() => {
-    handleRetries(callback, params, newOptions, ++retries);
+    handleRetries(callback, params, newOptions, retries + 1);
   }, intervalMs);
 }

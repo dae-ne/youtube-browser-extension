@@ -2,6 +2,7 @@ import { Actions } from 'actions';
 import Feature from 'feature';
 import { isShortsPage } from 'lib/utils';
 import { Result, results } from 'result';
+
 import svgIcon from './button-icon.svg';
 
 /**
@@ -56,12 +57,12 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     const { renderer, actions } = this.getRendererAndActionsContainer();
 
-    if (!actions) {
+    if (!renderer || !actions) {
       return fail();
     }
 
     let newButtonContainer = actions.querySelector(`#${BUTTON_ID}`);
-    const shareButtonContainer = actions.querySelector('#share-button') as HTMLElement;
+    const shareButtonContainer = actions.querySelector('#share-button') as HTMLElement | null;
 
     this.cleanUp();
     this.controller = new AbortController();
@@ -102,7 +103,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
    * Disconnects the mutation observer used to watch for changes in the share button and removes
    * event listeners.
    */
-  public cleanUp = () => {
+  public cleanUp = (): void => {
     this.observer?.disconnect();
     this.controller?.abort();
   };
@@ -110,7 +111,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
   /**
    * Disables the feature by removing the button.
    */
-  public disable = () => {
+  public disable = (): void => {
     this.cleanUp();
     const buttons = document.querySelectorAll(`#${BUTTON_ID}`);
     buttons.forEach(button => button.remove());
@@ -179,7 +180,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
     renderer: HTMLElement,
     button: HTMLButtonElement,
     templateButtonContainer: HTMLElement
-  ) => {
+  ): void => {
     this.observer = this.createNewObserver();
     const label = templateButtonContainer.querySelector('label') as HTMLLabelElement;
 
@@ -190,10 +191,6 @@ export default class ShortsToVideoButtonFeature extends Feature {
       },
       { signal: this.controller?.signal }
     );
-
-    if (!this.observer) {
-      return;
-    }
 
     this.observer.observe(label, {
       attributes: true,
@@ -206,7 +203,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
    *
    * @param renderer The video renderer element.
    */
-  private handleButtonClick = (renderer: HTMLElement) => {
+  private handleButtonClick = (renderer: HTMLElement): void => {
     const currentUrl = window.location.href;
 
     if (!currentUrl.includes('youtube.com/shorts')) {
@@ -233,7 +230,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
    * @param container The container for the new button.
    * @param templateContainer The template container for the new button.
    */
-  private updateCssClasses = (container: HTMLElement, templateContainer: HTMLElement) => {
+  private updateCssClasses = (container: HTMLElement, templateContainer: HTMLElement): void => {
     const button = container.querySelector('button');
     const label = container.querySelector('label');
     const templateButton = templateContainer.querySelector('button');
@@ -256,7 +253,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
    * @param label The button label.
    * @param touchFeedback The touch feedback element.
    */
-  private handleUiChanges = (label: HTMLElement, touchFeedback: HTMLElement) => {
+  private handleUiChanges = (label: HTMLElement, touchFeedback: HTMLElement): void => {
     const buttonPressedClassName = 'yt-spec-touch-feedback-shape--down';
     const child = touchFeedback.firstChild as HTMLElement;
 
@@ -295,7 +292,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
       const { actions } = this.getRendererAndActionsContainer();
 
       if (!isShortsPage() || !actions) {
-        observer?.disconnect();
+        observer.disconnect();
         return;
       }
 
@@ -311,9 +308,12 @@ export default class ShortsToVideoButtonFeature extends Feature {
    *
    * @returns The actions container.
    */
-  private getRendererAndActionsContainer = () => {
-    const renderer = document.querySelector('ytd-shorts [is-active]') as HTMLElement;
-    const actions = renderer?.querySelector('#actions') as HTMLElement;
+  private getRendererAndActionsContainer = (): {
+    renderer: HTMLElement | null;
+    actions: HTMLElement | null;
+  } => {
+    const renderer = document.querySelector('ytd-shorts [is-active]') as HTMLElement | null;
+    const actions = renderer?.querySelector('#actions') as HTMLElement | null;
     return { renderer, actions };
   };
 }

@@ -39,10 +39,12 @@ export default class AutoLoopVideoFeature extends Feature {
   /**
    * Not needed for this feature.
    */
-  public cleanUp = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public cleanUp = (): void => {};
 
   /**
    * Not needed for this feature.
    */
-  public disable = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public disable = (): void => {};
 }

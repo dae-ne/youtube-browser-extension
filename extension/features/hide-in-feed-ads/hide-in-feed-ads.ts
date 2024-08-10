@@ -39,12 +39,13 @@ export default class HideInFeedAdsFeature extends Feature {
   /**
    * Not needed for this feature
    */
-  public cleanUp = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public cleanUp = (): void => {};
 
   /**
    * Removes the feature class from the body element.
    */
-  public disable = () => {
+  public disable = (): void => {
     removeCssClass(CLASS_NAME);
   };
 }
