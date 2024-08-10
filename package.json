@@ -6,7 +6,7 @@
     "lint": "run-s lint:*",
     "lint-staged": "lint-staged",
     "format": "prettier **/*.ts --write",
-    "build-options": "vite build extension/options/ --outDir=../../dist/options/ --base ./ --emptyOutDir --minify",
+    "build-options": "vite build --config vite.options.config.ts",
     "build:background": "node scripts/build/build-background.mjs",
     "build:content-scripts": "node scripts/build/build-content-scripts.mjs",
     "build:content-styles": "node scripts/build/build-content-styles.mjs",
