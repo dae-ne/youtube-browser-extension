@@ -3,7 +3,7 @@ import Feature from 'feature';
 import { isShortsPage } from 'lib/utils';
 import { type Result, results } from 'result';
 
-import svgIcon from './button-icon.svg';
+// import svgIcon from './button-icon.svg';
 
 /**
  * The ID of the button container to open the video from the shorts page.
@@ -152,7 +152,7 @@ export default class ShortsToVideoButtonFeature_Obsolete extends Feature {
 
     const icon = document.createElement('div');
     icon.classList.add('yte-shorts-actions-btn-icon');
-    icon.innerHTML = svgIcon;
+    // icon.innerHTML = svgIcon;
 
     newButton.appendChild(icon);
     newButtonLabel.appendChild(newButton);

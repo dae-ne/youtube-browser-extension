@@ -1,6 +1,5 @@
 <script lang="ts">
   export let id: string;
-  export let icon: string;
   export let overlayDark = false;
   export let onClick: () => void;
 
@@ -32,7 +31,7 @@
         on:mouseleave={handleMouseUp}
       >
         <div class="yt-spec-button-shape-next__icon" aria-hidden="true">
-          {@html icon}
+          <slot />
         </div>
         <div style="border-radius: inherit;">
           <div

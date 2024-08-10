@@ -3,9 +3,8 @@ import Feature from 'feature';
 import { isShortsPage } from 'lib/utils';
 import { type Result, results } from 'result';
 import { SvelteComponent } from 'svelte';
-import { ShortsActionButton } from 'ui/shorts';
 
-import svgIcon from './button-icon.svg';
+import ShortsToVideoButton from './shorts-to-video-button.svelte';
 
 /**
  * A feature that displays a button to open a shorts video on the watch page.
@@ -23,15 +22,13 @@ import svgIcon from './button-icon.svg';
  * @privateRemarks
  * The button is created by using a Svelte component from the `ui` directory. Also a mutation
  * observer is used to watch for changes in the default YouTube action buttons and update styles
- * in the new button accordingly.
+ * in the new button.
  */
 export default class ShortsToVideoButtonFeature extends Feature {
-  private readonly buttonId = 'yte-shorts-to-video-button';
-
-  private shortsActionButton?: SvelteComponent | null;
+  private button?: SvelteComponent | null;
 
   private observer = new MutationObserver((mutations, observer) => {
-    if (!isShortsPage() || !this.shortsActionButton) {
+    if (!isShortsPage() || !this.button) {
       observer.disconnect();
       return;
     }
@@ -42,7 +39,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
       }
 
       const templateButton = mutation.target as HTMLButtonElement;
-      this.shortsActionButton.$set({ overlayDark: this.isSecondaryButton(templateButton) });
+      this.button.$set({ overlayDark: this.isSecondaryButton(templateButton) });
     }
   });
 
@@ -76,12 +73,10 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
     this.cleanUp();
 
-    this.shortsActionButton = new ShortsActionButton({
+    this.button = new ShortsToVideoButton({
       target: actions,
       anchor: menuButton,
       props: {
-        id: this.buttonId,
-        icon: svgIcon,
         overlayDark: this.isSecondaryButton(templateButtonInner),
         onClick: this.handleButtonClick
       }
@@ -93,7 +88,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
 
   public cleanUp = (): void => {
     this.observer.disconnect();
-    this.shortsActionButton?.$destroy();
+    this.button?.$destroy();
   };
 
   public disable = (): void => {

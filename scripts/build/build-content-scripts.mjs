@@ -7,6 +7,5 @@ await esbuild.build({
   entryPoints: [resolveFilePath('extension', 'youtube-extension.ts')],
   outfile: resolveFilePath('dist', 'youtube-extension.js'),
   plugins: [sveltePlugin({ preprocess: sveltePreprocess() })],
-  loader: { '.svg': 'text' },
   bundle: true,
 });
