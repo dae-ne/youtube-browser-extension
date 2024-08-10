@@ -29,7 +29,7 @@ if (!container || !form || !template) {
 }
 
 if (data.length === 0) {
-  container.setAttribute('empty', '');
+  container.setAttribute('data-empty', '');
   throw new Error('The data array is empty.');
 }
 

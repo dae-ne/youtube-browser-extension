@@ -51,7 +51,7 @@ h1, p {
   text-align: center;
 }
 
-.yte-options-container[empty] {
+.yte-options-container[data-empty] {
   .yte-options-description {
     display: none;
   }
