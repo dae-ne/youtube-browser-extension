@@ -1,4 +1,4 @@
-import { initialOptions, OptionsNames } from '../options';
+import { initialOptions, type OptionsNames } from '../options';
 import data from './data';
 
 /**

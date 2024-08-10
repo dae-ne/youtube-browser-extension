@@ -1,8 +1,9 @@
 {
+  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "target": "ES6",
-    "module": "commonjs",
+    "module": "ES6",
     "strict": true,
     "baseUrl": "extension"
   },

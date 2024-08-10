@@ -1,7 +1,7 @@
 import { Actions } from 'actions';
 import Feature from 'feature';
 import { addCssClassToBody, getMainVideoElement, isVideoOpened, removeCssClass } from 'lib/utils';
-import { Result, results } from 'result';
+import { type Result, results } from 'result';
 
 /**
  * The class name for the feature, which is added to the body element.

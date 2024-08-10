@@ -1,6 +1,6 @@
 import { Actions } from 'actions';
 import Feature from 'feature';
-import { Result, results } from 'result';
+import { type Result, results } from 'result';
 
 /**
  * A feature that automatically loops the video.

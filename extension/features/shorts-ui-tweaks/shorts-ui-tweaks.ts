@@ -1,7 +1,7 @@
 import { Actions } from 'actions';
 import Feature from 'feature';
 import { addCssClassToBody, removeCssClass } from 'lib/utils';
-import { Result, results } from 'result';
+import { type Result, results } from 'result';
 
 /**
  * The class name to add to the body element.

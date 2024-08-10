@@ -12,9 +12,6 @@ import {
   ShortsUiTweaksFeature
 } from './features';
 
-/**
- * Creates a new action handler and initializes it with the features.
- */
 const handler = new ActionHandler(
   new AutoLoopVideoFeature(),
   new AutoSkipAdsFeature(),
@@ -28,6 +25,7 @@ const handler = new ActionHandler(
 );
 
 /**
- * Listens for messages from the background script and triggers a corresponding feature action.
+ * Listens for messages (actions) from the background script
+ * and triggers a corresponding feature action.
  */
 chrome.runtime.onMessage.addListener(({ action, force }) => handler.handleAction(action, force));

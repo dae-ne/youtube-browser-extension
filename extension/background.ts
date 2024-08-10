@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
-import { Actions, ActionTypes } from 'actions';
-import { initialOptions, Options, OptionsNames } from 'options';
+import { Actions, type ActionTypes } from 'actions';
+import { initialOptions, type Options, type OptionsNames } from 'options';
 
 /**
  * The base URL of the YouTube website.

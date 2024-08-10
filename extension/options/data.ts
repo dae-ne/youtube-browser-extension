@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import { OptionsNames } from '../options';
+import { type OptionsNames } from '../options';
 
 type DataType = {
   name: OptionsNames;
