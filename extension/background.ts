@@ -137,8 +137,13 @@ function disableFeatures(url: string, tabId: number): void {
  */
 chrome.storage.sync.get().then(data => {
   const dataExists = Object.keys(data).length;
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  dataExists ? Object.assign(options, data) : chrome.storage.sync.set(options);
+
+  if (dataExists) {
+    Object.assign(options, data);
+    return;
+  }
+
+  chrome.storage.sync.set(options);
 });
 
 /**

@@ -1,0 +1,50 @@
+.yte-switch {
+  position: relative;
+  display: inline-block;
+  height: var(--switch-height);
+  width: var(--switch-width);
+
+  input {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+}
+
+.yte-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  height: inherit;
+  width: inherit;
+  inset: 0;
+  background-color: var(--switch-color);
+  border-radius: 9999px;
+  box-shadow: inset 0 0 0 var(--border-width) var(--switch-toggle-color);
+  transition: all var(--transition-duration);
+
+  &::before {
+    position: absolute;
+    content: ' ';
+    height: calc(var(--switch-height) - 4px);
+    width: calc(var(--switch-height) - 4px);
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--switch-toggle-color);
+    border-radius: 50%;
+    transition: all var(--transition-duration);
+  }
+}
+
+input:checked + .yte-switch-slider {
+  background-color: var(--switch-checked-color);
+  box-shadow: none;
+
+  &::before {
+    background-color: var(--switch-checked-toggle-color);
+    transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+  }
+}
+
+input:not(:checked) + .yte-switch-slider::before {
+  transform: scale(0.7);
+}
