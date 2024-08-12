@@ -8,6 +8,7 @@
 
 <ShortsActionButton
   id="yte-shorts-to-video-button"
+  ariaLabel="Shorts to video"
   overlayDark={overlayDark}
   onClick={onClick}
 >

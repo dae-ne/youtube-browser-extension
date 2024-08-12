@@ -1,5 +1,6 @@
 <script lang="ts">
   export let id: string;
+  export let ariaLabel: string | undefined;
   export let overlayDark = false;
   export let onClick: () => void;
 
@@ -24,7 +25,7 @@
       <button
         class="yt-spec-button-shape-next yt-spec-button-shape-next--tonal yt-spec-button-shape-next--mono yt-spec-button-shape-next--size-l yt-spec-button-shape-next--icon-button"
         class:yt-spec-button-shape-next--overlay-dark={overlayDark}
-        aria-label="XD"
+        aria-label={ariaLabel}
         on:click={onClick}
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseUp}
