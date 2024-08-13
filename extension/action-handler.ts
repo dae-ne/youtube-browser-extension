@@ -2,31 +2,43 @@ import Feature from 'feature';
 import { handleRetries } from 'lib/retries';
 
 /**
- * The types of actions that can be handled.
+ * Action types that can be handled by the action handler.
+ *
+ * @remarks
+ * Every action type corresponds to a method in the feature class that should be called when the
+ * action is triggered.
  */
 type ActionTypes = 'cleanup' | 'disable' | 'setup';
 
 /**
- * A class that handles actions for features.
+ * A class for handing incoming actions from the background script.
+ *
+ * @remarks
+ * The action handler is created in the content script and is responsible for handling actions
+ * that are sent from the background script. The actions are used to trigger the setup, cleanup,
+ * and disable methods.
  */
 export default class ActionHandler {
     /**
-     * The features to handle actions for.
+     * Array of all registered features for the action handler.
      */
     private features: Feature[] = [];
 
     /**
-     * The URL of the last page that was visited.
+     * The URL of the last page that was visited. The handler keeps track of the last URL to
+     * determine if the page has changed. If it's handling the same action for the same page, it
+     * won't trigger the action again.
      */
     private lastUrl = window.location.href;
 
     /**
-     * The actions that have been handled for the current page.
+     * The actions that have been handled for the current page. This is used to prevent duplicate
+     * actions from being triggered.
      */
     private handledActions = new Set<string>();
 
     /**
-     * Initializes the action handler with the specified features.
+     * Initializes the action handler with features.
      *
      * @param features - The features to handle actions for.
      */
