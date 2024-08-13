@@ -9,7 +9,7 @@ if [ -z "$(git log --branches --not --remotes)" ]; then
   exit 0
 fi
 
-echo -e "\n🛠️  Building project..."
+echo -e "\n🔨 Building project..."
 
 npm run build
 
