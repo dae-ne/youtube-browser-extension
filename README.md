@@ -26,22 +26,13 @@
 - **Hide Player Ads** - hides *player ads* on the watch page.
 
 
-## Options
-
-You can toggle the features on and off on the options page. To access the options page, right-click the extension icon in the browser toolbar and select `Options`. You can also left-click the icon when on the YouTube page. For other pages, the icon will open the YouTube homepage in a new tab.
-
-<div align="center">
-  <img src="assets/options.png" alt="options">
-</div>
-
-
 ## Installation
 
-1. Open the latest release (e.g.: 0.1.2) and download the `youtube_extension_<VERSION>.zip`, where `<VERSION>` is the version number (e.g.: *youtube_extension_0.1.2.zip*).
+1. Open the [latest release][latest-release] and download the `youtube_extension_<VERSION>.zip` file.
 2. Unzip the downloaded file to a new directory.
 3. In Chrome, go to the `chrome://extensions/` page.
-4. Turn on the developer mode in the top right corner.
-5. Click the `Load unpacked` button and select the unzipped directory with the extension.
+4. Turn on the developer mode (top right corner).
+5. Click the `Load unpacked` button and select the unzipped directory.
 6. You can add the extension to the browser toolbar by clicking the `puzzle` icon in the top right corner and then clicking the `pin` icon next to the extension name.
 7. Right-click the extension icon in the toolbar and select `Options` to open the options page. Enable or disable the features as you wish.
 
@@ -53,10 +44,12 @@ You can toggle the features on and off on the options page. To access the option
 3. Install the dependencies using the `npm install` command.
 4. Build the project using the `npm run build` command.
 5. Open the Chrome browser and go to the `chrome://extensions/` page.
-6. Turn on the developer mode in the top right corner.
+6. Turn on the developer mode (top right corner).
 7. Click the `Load unpacked` button and select the `dist` directory from the cloned repository.
+8. Build the project after making changes to the source code using the `npm run build` command.
+9. Reload the extension on the `chrome://extensions/` page to make sure every change is applied.
 
-Build the project after making changes to the source code using the `npm run build` command. Reload the extension on the `chrome://extensions/` to make sure every change is applied.
+<!-- Build the project after making changes to the source code using the `npm run build` command. Reload the extension on the `chrome://extensions/` page to make sure every change is applied. -->
 
 
 ## License
