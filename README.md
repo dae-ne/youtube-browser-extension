@@ -49,13 +49,6 @@
 8. Build the project after making changes to the source code using the `npm run build` command.
 9. Reload the extension on the `chrome://extensions/` page to make sure every change is applied.
 
-<!-- Build the project after making changes to the source code using the `npm run build` command. Reload the extension on the `chrome://extensions/` page to make sure every change is applied. -->
-
-
-## License
-
-GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more information.
-
 
 <!-- Shields -->
 [release-shield]: https://img.shields.io/github/v/release/dae-ne/youtube-browser-extension
