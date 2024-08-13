@@ -26,6 +26,8 @@
     "svelte": "^4.2.18"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.6.2",
+    "@stylistic/eslint-plugin-ts": "^2.6.2",
     "@tsconfig/svelte": "^5.0.4",
     "@types/chrome": "^0.0.268",
     "@types/node": "^22.2.0",
