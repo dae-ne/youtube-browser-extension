@@ -89,9 +89,9 @@ export default class AutoSkipAdsFeature extends Feature {
      * Skips an ad on the current video.
      *
      * @remarks
-     * This function will skip ads by clicking the skip button if it exists, or by setting the video
-     * current time to the maximum value. Paused videos are not skipped unless they are close to the
-     * end (to avoid skipping the video itself and skip ads at the end of the video).
+     * This function will skip ads by setting the video current time to the maximum value.
+     * Paused videos are not skipped unless they are close to the end (to avoid skipping the video
+     * itself and skip ads at the end of the video).
      *
      * @returns Whether the function was successful.
      */
@@ -102,10 +102,11 @@ export default class AutoSkipAdsFeature extends Feature {
             document.querySelector('button[class*="-skip-"]');
         const isSkippable = !!skipButton;
 
-        if (isSkippable) {
-            skipButton.click();
-            return true;
-        }
+        // doesn't work enymore
+        // if (isSkippable) {
+        //     skipButton.click();
+        //     return true;
+        // }
 
         const video = getMainVideoElement();
 
@@ -117,7 +118,8 @@ export default class AutoSkipAdsFeature extends Feature {
         const canPausedVideoBeSkipped = video.currentTime > pausedSkippingTrheshold;
 
         if (
-            video.duration > MAX_NON_SKIPABLE_AD_DURATION ||
+            // skippable ads can be longer than 30 seconds
+            (!isSkippable && video.duration > MAX_NON_SKIPABLE_AD_DURATION) ||
             (video.paused && !canPausedVideoBeSkipped)
         ) {
             return true;
