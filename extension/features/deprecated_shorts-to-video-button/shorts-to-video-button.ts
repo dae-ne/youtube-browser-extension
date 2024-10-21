@@ -16,6 +16,8 @@ const BUTTON_ID = 'yte-shorts-to-video-button';
  * @remarks
  * This feature displays a new button on the action bar next to the shorts player. When clicked, it
  * opens the video page in a new tab.
+ *
+ * @deprecated A new version of this feature was created.
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention, camelcase
 export default class ShortsToVideoButtonFeature_Obsolete extends Feature {

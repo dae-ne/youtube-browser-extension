@@ -10,6 +10,8 @@ const CLASS_NAME = 'yte-f-remove-adblock-error-message';
 
 /**
  * A feature that removes the adblock error message after skipping ads.
+ *
+ * @deprecated Deprecated along with the auto-skip-ads feature.
  */
 export default class RemoveAdblockErrorMessageFeature extends Feature {
     /**

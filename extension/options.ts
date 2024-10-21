@@ -5,12 +5,12 @@ export const initialOptions = {
     showShortsToVideoButton: true,
     loopShortsToVideo: true,
     updateShortsUI: true,
-    autoSkipAds: true,
+    autoSkipAds: false,
     hideSponsoredShorts: true,
     hideMastheadAds: true,
     hideInFeedAds: true,
     hidePlayerAds: true,
-    removeAdblockErrorMessage: true
+    removeAdblockErrorMessage: false
 };
 
 /**

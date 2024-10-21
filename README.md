@@ -18,12 +18,15 @@
 - ***Shorts To Video* Button** - adds a button to the shorts page that allows you to watch the short as a standard video.
 - **Auto Loop Video** - sets the loop property of the video after clicking the *shorts to video* button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
-- **Auto Skip Ads** - automatically skips ads when they appear on a video.
-- **Remove AdBlock error message** - removes the error message that appears when an ad blocker is detected.
 - **Hide Sponsored Shorts** - hides sponsored shorts from the shorts page.
 - **Hide Masthead Ads** - hides the *masthead ads* on the homepage.
 - **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage, because it would break the layout).
 - **Hide Player Ads** - hides *player ads* on the watch page.
+
+<hr/>
+
+- **Auto Skip Ads** - [deprecated] automatically skips ads when they appear on a video. You can use the [uBlock Origin][ublock-origin] extension instead.
+- **Remove AdBlock error message** - [deprecated] removes the error message that appears when an ad blocker is detected.
 
 
 ## Installation
@@ -61,6 +64,7 @@
 [latest-commit]: https://github.com/dae-ne/youtube-browser-extension/compare/main^...main
 [discussions]: https://github.com/dae-ne/youtube-browser-extension/discussions
 [license-file]: LICENSE
+[ublock-origin]: https://github.com/gorhill/uBlock
 
 <!-- Issue templates -->
 [bug-report-template]: https://github.com/dae-ne/youtube-browser-extension/issues/new?labels=bug&template=bug_report.md

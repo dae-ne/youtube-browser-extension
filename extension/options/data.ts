@@ -26,12 +26,12 @@ const data: DataType[] = [
     },
     {
         name: 'autoSkipAds',
-        title: 'Automatically Skip Ads',
+        title: '[deprecated] Automatically Skip Ads',
         description: 'Automatically skip ads on the video player or mini player by auto-clicking the skip button or increasing playback speed for non-skippable ads.'
     },
     {
         name: 'removeAdblockErrorMessage',
-        title: 'Remove Adblock Error Message',
+        title: '[deprecated] Remove Adblock Error Message',
         description: 'Remove the error message that appears when an ad blocker is detected.'
     },
     {

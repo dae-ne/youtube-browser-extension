@@ -5,6 +5,8 @@ import { type Result, results } from 'result';
 
 /**
  * A feature that automatically skips ads on the current video.
+ *
+ * @deprecated Just use the uBlock Origin extension.
  */
 export default class AutoSkipAdsFeature extends Feature {
     /**
