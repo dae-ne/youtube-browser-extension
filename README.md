@@ -23,11 +23,6 @@
 - **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage, because it would break the layout).
 - **Hide Player Ads** - hides *player ads* on the watch page.
 
-<hr/>
-
-- **Auto Skip Ads** - [deprecated] automatically skips ads when they appear on a video. You can use the [uBlock Origin][ublock-origin] extension instead.
-- **Remove AdBlock error message** - [deprecated] removes the error message that appears when an ad blocker is detected.
-
 
 ## Installation
 
