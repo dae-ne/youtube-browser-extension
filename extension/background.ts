@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
 import { Actions, type ActionTypes } from 'actions';
+import { getDynamicRules } from 'dynamic-rules';
 import { initialOptions, type Options, type OptionsNames } from 'options';
 
 /**
@@ -56,12 +57,11 @@ function notifyContentScripts(url: string, tabId: number, force = false): void {
         showShortsToVideoButton,
         loopShortsToVideo,
         updateShortsUI,
-        autoSkipAds,
         hideSponsoredShorts,
         hideMastheadAds,
         hideInFeedAds,
         hidePlayerAds,
-        removeAdblockErrorMessage
+        smartTv
     }: Options = options;
 
     const isYouTubeTab = url.includes(YOUTUBE_BASE_URL);
@@ -75,14 +75,11 @@ function notifyContentScripts(url: string, tabId: number, force = false): void {
     hideMastheadAds && send(tabId, Actions.HIDE_MASTHEAD_ADS, force);
     hidePlayerAds && send(tabId, Actions.HIDE_PLAYER_ADS, force);
     hideSponsoredShorts && send(tabId, Actions.HIDE_SPONSORED_SHORTS, force);
+    smartTv && send(tabId, Actions.SMART_TV, force);
 
     send(tabId, Actions.AUTO_SKIP_ADS_CLEANUP, force);
     send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP, force);
     send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP, force);
-
-    // Always triggered in case the video is opened in a miniplayer.
-    autoSkipAds && send(tabId, Actions.AUTO_SKIP_ADS, force);
-    removeAdblockErrorMessage && send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE, force);
 
     if (url.includes('shorts')) {
         showShortsToVideoButton && send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON, force);
@@ -109,26 +106,24 @@ function disableFeatures(url: string, tabId: number): void {
     const {
         showShortsToVideoButton,
         updateShortsUI,
-        autoSkipAds,
         hideMastheadAds,
         hideInFeedAds,
         hidePlayerAds,
         hideSponsoredShorts,
-        removeAdblockErrorMessage
+        smartTv
     }: Options = options;
 
     if (!url.includes('youtube.com')) {
         return;
     }
 
-    autoSkipAds || send(tabId, Actions.AUTO_SKIP_ADS_DISABLE, true);
-    removeAdblockErrorMessage || send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE, true);
     updateShortsUI || send(tabId, Actions.SHORTS_UI_TWEAKS_DISABLE, true);
     hideMastheadAds || send(tabId, Actions.HIDE_MASTHEAD_ADS_DISABLE, true);
     hideInFeedAds || send(tabId, Actions.HIDE_IN_FEED_ADS_DISABLE, true);
     hidePlayerAds || send(tabId, Actions.HIDE_PLAYER_ADS_DISABLE, true);
     hideSponsoredShorts || send(tabId, Actions.HIDE_SPONSORED_SHORTS_DISABLE, true);
     showShortsToVideoButton || send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE, true);
+    smartTv || send(tabId, Actions.SMART_TV_DISABLE, true);
 }
 
 /**
@@ -190,6 +185,14 @@ chrome.runtime.onInstalled.addListener(() => {
         // eslint-disable-next-line @typescript-eslint/promise-function-async
         tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
     });
+});
+
+/**
+ * Modifies the current set of dynamic rules for the extension.
+ * Adds a User-Agent to enable Smart TV.
+ */
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.declarativeNetRequest.updateDynamicRules(getDynamicRules(1));
 });
 
 /**

@@ -25,16 +25,6 @@ const data: DataType[] = [
         description: 'Enhance the user interface for Shorts, particularly for vertical screens.'
     },
     {
-        name: 'autoSkipAds',
-        title: '[deprecated] Automatically Skip Ads',
-        description: 'Automatically skip ads on the video player or mini player by auto-clicking the skip button or increasing playback speed for non-skippable ads.'
-    },
-    {
-        name: 'removeAdblockErrorMessage',
-        title: '[deprecated] Remove Adblock Error Message',
-        description: 'Remove the error message that appears when an ad blocker is detected.'
-    },
-    {
         name: 'hideSponsoredShorts',
         title: 'Hide Sponsored Shorts',
         description: 'Hide sponsored Shorts on the Shorts page.'
@@ -53,6 +43,11 @@ const data: DataType[] = [
         name: 'hidePlayerAds',
         title: 'Hide Player Ads',
         description: 'Hide ads that appear on the video player page.'
+    },
+    {
+        name: 'smartTv',
+        title: 'Smart TV',
+        description: ''
     }
 ];
 

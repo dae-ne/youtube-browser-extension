@@ -27,7 +27,10 @@ export const Actions = {
     HIDE_PLAYER_ADS_DISABLE:              'hide-player-ads-disable',
     REMOVE_ADBLOCK_ERROR_MESSAGE:         'remove-adblock-error-message',
     REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP: 'remove-adblock-error-message-cleanup',
-    REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE: 'remove-adblock-error-message-disable'
+    REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE: 'remove-adblock-error-message-disable',
+    SMART_TV:                             'smart-tv',
+    SMART_TV_CLEANUP:                     'smart-tv-cleanup',
+    SMART_TV_DISABLE:                     'smart-tv-disable'
 };
 
 /**
