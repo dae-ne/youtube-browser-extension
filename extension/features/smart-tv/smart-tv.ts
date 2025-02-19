@@ -5,6 +5,7 @@ import { type Result, results } from 'result';
 import SmartTvButton from './smart-tv-button.svelte';
 
 const BUTTON_ID = 'yte-smart-tv-button';
+const MINI_BUTTON_ID = 'yte-smart-tv-mini-button';
 const SMART_TV_URL = 'https://www.youtube.com/tv';
 
 export default class SmartTvFeature extends Feature {
@@ -30,6 +31,7 @@ export default class SmartTvFeature extends Feature {
         );
 
         if (!target || !anchor) {
+            this.cleanUp();
             return fail();
         }
 
@@ -37,7 +39,30 @@ export default class SmartTvFeature extends Feature {
         new SmartTvButton({
             target,
             anchor,
-            props: { onClick: this.handleButtonClick }
+            props: {
+                id: BUTTON_ID,
+                onClick: this.handleButtonClick
+            }
+        });
+
+        const miniTarget = document.querySelector('#items.ytd-mini-guide-renderer');
+        // const mimiAnchor = document.querySelector(
+        //     '#items > ytd-guide-collapsible-section-entry-renderer'
+        // );
+
+        if (!miniTarget) {
+            this.cleanUp();
+            return fail();
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-new
+        new SmartTvButton({
+            target: miniTarget,
+            props: {
+                id: MINI_BUTTON_ID,
+                mini: true,
+                onClick: this.handleButtonClick
+            }
         });
 
         return success();
@@ -45,7 +70,9 @@ export default class SmartTvFeature extends Feature {
 
     public cleanUp = (): void => {
         const button = document.querySelector(`#${BUTTON_ID}`);
+        const miniButton = document.querySelector(`#${MINI_BUTTON_ID}`);
         button?.remove();
+        miniButton?.remove();
     };
 
     public disable = (): void => {
