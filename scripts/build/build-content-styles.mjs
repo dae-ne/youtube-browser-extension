@@ -21,7 +21,7 @@ createFile(resolveFilePath('dist', ENTRYPOINT_FILE_NAME), entrypointContent);
 
 await esbuild.build({
   entryPoints: [resolveFilePath('dist', ENTRYPOINT_FILE_NAME)],
-  outfile: resolveFilePath('dist', 'youtube-extension.css'),
+  outfile: resolveFilePath('dist', 'youtube-extension-main.css'),
   plugins: [sassPlugin()],
   bundle: true,
   minify: true,

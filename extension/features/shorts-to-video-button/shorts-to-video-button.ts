@@ -65,7 +65,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
         }
 
         const menuButton = actions.querySelector('#menu-button');
-        const templateButtonInner = menuButton?.previousElementSibling?.querySelector('button');
+        const templateButtonInner = actions.querySelector('#share-button button');
 
         if (!menuButton || !templateButtonInner) {
             return fail();
@@ -120,7 +120,7 @@ export default class ShortsToVideoButtonFeature extends Feature {
         });
     };
 
-    private isSecondaryButton = (button: HTMLButtonElement): boolean => {
+    private isSecondaryButton = (button: Element): boolean => {
         return Array.from(button.classList).some(className => className.includes('--overlay-dark'));
     };
 }

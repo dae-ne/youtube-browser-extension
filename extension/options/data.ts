@@ -25,26 +25,6 @@ const data: DataType[] = [
         description: 'Enhance the user interface for Shorts, particularly for vertical screens.'
     },
     {
-        name: 'hideSponsoredShorts',
-        title: 'Hide Sponsored Shorts',
-        description: 'Hide sponsored Shorts on the Shorts page.'
-    },
-    {
-        name: 'hideMastheadAds',
-        title: 'Hide Masthead Ads',
-        description: 'Hide masthead ads on the YouTube homepage.'
-    },
-    {
-        name: 'hideInFeedAds',
-        title: 'Hide In-Feed Ads',
-        description: 'Hide in-feed ads, except those that might disrupt the layout or leave blank spaces.'
-    },
-    {
-        name: 'hidePlayerAds',
-        title: 'Hide Player Ads',
-        description: 'Hide ads that appear on the video player page.'
-    },
-    {
         name: 'smartTv',
         title: 'Smart TV',
         description: ''

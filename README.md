@@ -18,10 +18,7 @@
 - ***Shorts To Video* Button** - adds a button to the shorts page that allows you to watch the short as a standard video.
 - **Auto Loop Video** - sets the loop property of the video after clicking the *shorts to video* button.
 - **Shorts UI Tweaks** - some UI improvements for the shorts page, especially for vertical screens.
-- **Hide Sponsored Shorts** - hides sponsored shorts from the shorts page.
-- **Hide Masthead Ads** - hides the *masthead ads* on the homepage.
-- **Hide In-Feed Ads** - hides *in-feed ads* (except for homepage, because it would break the layout).
-- **Hide Player Ads** - hides *player ads* on the watch page.
+- **Smart TV** - ?
 
 
 ## Installation

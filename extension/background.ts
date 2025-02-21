@@ -39,16 +39,8 @@ function send(tabId: number, action: ActionTypes, force = false): void {
  * @param tabId - The ID of the tab.
  */
 function notifyContentScripts(url: string, tabId: number, force = false): void {
-    const {
-        showShortsToVideoButton,
-        loopShortsToVideo,
-        updateShortsUI,
-        hideSponsoredShorts,
-        hideMastheadAds,
-        hideInFeedAds,
-        hidePlayerAds,
-        smartTv
-    }: Options = options;
+    const { showShortsToVideoButton, loopShortsToVideo, updateShortsUI, smartTv }: Options =
+        options;
 
     const isYouTubeTab = url.includes(YOUTUBE_BASE_URL);
     const isYouTubeTvTab = url.includes(YOUTUBE_TV_BASE_URL);
@@ -57,14 +49,7 @@ function notifyContentScripts(url: string, tabId: number, force = false): void {
         return;
     }
 
-    hideInFeedAds && send(tabId, Actions.HIDE_IN_FEED_ADS, force);
-    hideMastheadAds && send(tabId, Actions.HIDE_MASTHEAD_ADS, force);
-    hidePlayerAds && send(tabId, Actions.HIDE_PLAYER_ADS, force);
-    hideSponsoredShorts && send(tabId, Actions.HIDE_SPONSORED_SHORTS, force);
     smartTv && send(tabId, Actions.SMART_TV, force);
-
-    send(tabId, Actions.AUTO_SKIP_ADS_CLEANUP, force);
-    send(tabId, Actions.REMOVE_ADBLOCK_ERROR_MESSAGE_CLEANUP, force);
     send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_CLEANUP, force);
 
     if (url.includes('shorts')) {
@@ -89,25 +74,13 @@ function notifyContentScripts(url: string, tabId: number, force = false): void {
  * @param tabId - The ID of the tab.
  */
 function disableFeatures(url: string, tabId: number): void {
-    const {
-        showShortsToVideoButton,
-        updateShortsUI,
-        hideMastheadAds,
-        hideInFeedAds,
-        hidePlayerAds,
-        hideSponsoredShorts,
-        smartTv
-    }: Options = options;
+    const { showShortsToVideoButton, updateShortsUI, smartTv }: Options = options;
 
     if (!url.includes('youtube.com')) {
         return;
     }
 
     updateShortsUI || send(tabId, Actions.SHORTS_UI_TWEAKS_DISABLE, true);
-    hideMastheadAds || send(tabId, Actions.HIDE_MASTHEAD_ADS_DISABLE, true);
-    hideInFeedAds || send(tabId, Actions.HIDE_IN_FEED_ADS_DISABLE, true);
-    hidePlayerAds || send(tabId, Actions.HIDE_PLAYER_ADS_DISABLE, true);
-    hideSponsoredShorts || send(tabId, Actions.HIDE_SPONSORED_SHORTS_DISABLE, true);
     showShortsToVideoButton || send(tabId, Actions.SHORTS_TO_VIDEO_BUTTON_DISABLE, true);
     smartTv || send(tabId, Actions.SMART_TV_DISABLE, true);
 }

@@ -1,6 +1,0 @@
-body.yte-f-hide-sponsored-shorts {
-  ytd-reel-video-renderer:not(:has(.overlay > ytd-reel-player-overlay-renderer)),
-  ytd-reel-video-renderer:has(.overlay > ytd-ad-slot-renderer) {
-    display: none !important;
-  }
-}

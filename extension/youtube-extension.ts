@@ -2,10 +2,6 @@ import ActionHandler from 'action-handler';
 
 import {
     AutoLoopVideoFeature,
-    HideInFeedAdsFeature,
-    HideMastheadAdsFeature,
-    HidePlayerAdsFeature,
-    HideSponsoredShortsFeature,
     ShortsToVideoButtonFeature,
     ShortsUiTweaksFeature,
     SmartTvFeature
@@ -13,10 +9,6 @@ import {
 
 const handler = new ActionHandler(
     new AutoLoopVideoFeature(),
-    new HideInFeedAdsFeature(),
-    new HideMastheadAdsFeature(),
-    new HidePlayerAdsFeature(),
-    new HideSponsoredShortsFeature(),
     new ShortsToVideoButtonFeature(),
     new ShortsUiTweaksFeature(),
     new SmartTvFeature()

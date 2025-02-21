@@ -2,10 +2,6 @@ export const initialOptions = {
     showShortsToVideoButton: true,
     loopShortsToVideo: true,
     updateShortsUI: true,
-    hideSponsoredShorts: true,
-    hideMastheadAds: true,
-    hideInFeedAds: true,
-    hidePlayerAds: true,
     smartTv: true
 };
 

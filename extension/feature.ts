@@ -46,6 +46,8 @@ export default abstract class Feature {
      */
     public abstract disable: () => void;
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
     protected constructor(private actions: ActionsSetup) {}
 
     public get setUpActionName(): string {
