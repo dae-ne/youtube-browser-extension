@@ -24,9 +24,6 @@ export default class ShortsUiTweaksFeature extends Feature {
      */
     private controller: AbortController | null = null;
 
-    /**
-     * Initializes the feature with action names.
-     */
     public constructor() {
         super({
             setUpAction: Actions.SHORTS_UI_TWEAKS,
@@ -35,11 +32,6 @@ export default class ShortsUiTweaksFeature extends Feature {
         });
     }
 
-    /**
-     * Handles the setup of the feature by adding event listeners and the feature class to the body.
-     *
-     * @returns The status of the function and the parameters.
-     */
     public setUp = (): Result => {
         const { success, fail } = results;
         this.controller?.abort();
@@ -55,16 +47,10 @@ export default class ShortsUiTweaksFeature extends Feature {
         return updatedSuccessfully && addCssClassToBody(CLASS_NAME) ? success() : fail();
     };
 
-    /**
-     * Cleans up the feature by removing the event listeners and the feature class from the body
-     */
     public cleanUp = (): void => {
         this.controller?.abort();
     };
 
-    /**
-     * Removes the feature class from the body element and removes event listeners.
-     */
     public disable = (): void => {
         this.cleanUp();
         removeCssClass(CLASS_NAME);
@@ -96,9 +82,6 @@ export default class ShortsUiTweaksFeature extends Feature {
         return true;
     };
 
-    /**
-     * Inverts the colors of the action buttons
-     */
     private invertButtonColors = (): void => {
         if (!this.shouldUiBeUpdated()) {
             return;
@@ -117,9 +100,6 @@ export default class ShortsUiTweaksFeature extends Feature {
         );
     };
 
-    /**
-     * Reverts the color changes of the action buttons
-     */
     private revertColorChanges = (): void => {
         const actionButtonLabels = this.getButtonLabels();
         const buttons = this.getButtons();
@@ -136,27 +116,18 @@ export default class ShortsUiTweaksFeature extends Feature {
         );
     };
 
-    /**
-     * Gets the button labels from the shorts UI
-     */
     private getButtonLabels = (): NodeListOf<Element> => {
         return document.querySelectorAll(
             '.ytd-shorts .action-container .button-container:not(#pivot-button) label'
         );
     };
 
-    /**
-     * Gets the buttons from the shorts UI
-     */
     private getButtons = (): NodeListOf<Element> => {
         return document.querySelectorAll(
             '.ytd-shorts .action-container .button-container:not(#pivot-button) button'
         );
     };
 
-    /**
-     * Gets the feedback shapes from the shorts UI
-     */
     private getFeedbackShapes = (): NodeListOf<Element> => {
         return document.querySelectorAll(
             // eslint-disable-next-line max-len
@@ -164,11 +135,6 @@ export default class ShortsUiTweaksFeature extends Feature {
         );
     };
 
-    /**
-     * Checks if the UI should be updated based on the window size.
-     *
-     * @returns The status of the function.
-     */
     private shouldUiBeUpdated = (): boolean => {
         const width = window.innerWidth;
         const height = window.innerHeight;

@@ -1,27 +1,9 @@
 import { initialOptions, type OptionsNames } from '../options';
 import data from './data';
 
-/**
- * The options object that stores the user's preferences.
- *
- * @remarks
- * The initial options are overridden by the options stored in the storage.
- */
 const options = initialOptions;
-
-/**
- * The main container element.
- */
 const container = document.querySelector('main');
-
-/**
- * The form element that contains checkboxes for the options.
- */
 const form = document.querySelector('form');
-
-/**
- * The HTML template element for the option items.
- */
 const template = document.querySelector('template');
 
 if (!container || !form || !template) {

@@ -34,7 +34,4 @@ export const Actions = {
     OPEN_SMART_TV:                        'open-smart-tv'
 };
 
-/**
- * Type of actions used to communicate between the background script and content scripts.
- */
 export type ActionTypes = (typeof Actions)[keyof typeof Actions];

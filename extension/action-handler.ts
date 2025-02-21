@@ -1,13 +1,6 @@
 import Feature from 'feature';
 import { handleRetries } from 'lib/retries';
 
-/**
- * Action types that can be handled by the action handler.
- *
- * @remarks
- * Every action type corresponds to a method in the feature class that should be called when the
- * action is triggered.
- */
 type ActionTypes = 'cleanup' | 'disable' | 'setup';
 
 /**
