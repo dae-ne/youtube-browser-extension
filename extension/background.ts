@@ -4,23 +4,9 @@ import { Actions, type ActionTypes } from 'actions';
 import { getDynamicRules } from 'dynamic-rules';
 import { initialOptions, type Options, type OptionsNames } from 'options';
 
-/**
- * The base URL of the YouTube website.
- */
 const YOUTUBE_BASE_URL = 'https://www.youtube.com/';
-
-/**
- * The base URL of the YouTube TV website.
- *
- * @remarks
- * The YouTube TV is a simplified version of YouTube specifically designed for TVs (smart TVs).
- */
 const YOUTUBE_TV_BASE_URL = 'https://www.youtube.com/tv';
 
-/**
- * The options object that stores the features' preferences. The initial options are overridden
- * after being loaded from the storage.
- */
 const options = initialOptions;
 
 /**
@@ -212,6 +198,16 @@ chrome.runtime.onMessage.addListener((request, sender) => {
             },
             tab => tab.id && loopVideoTabIds.push(tab.id)
         );
+        return;
+    }
+
+    if (request.action === Actions.OPEN_SMART_TV) {
+        chrome.windows.create({
+            url: YOUTUBE_TV_BASE_URL,
+            type: 'popup',
+            state: 'fullscreen'
+        });
+        return;
     }
 });
 

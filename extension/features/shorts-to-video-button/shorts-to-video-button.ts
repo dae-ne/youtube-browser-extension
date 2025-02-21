@@ -12,7 +12,7 @@ import ShortsToVideoButton from './shorts-to-video-button.svelte';
  * @remarks
  * This feature displays a new button on the action bar next to the shorts player. When clicked, it
  * opens the video (watch) page in a new tab. A mutation observer is used to watch for changes in
- * default buttons on the page and update CSS classes accordingly.
+ * other buttons on the action bar and update CSS classes accordingly.
  *
  * Actions:
  * - {@link Actions.SHORTS_TO_VIDEO_BUTTON}

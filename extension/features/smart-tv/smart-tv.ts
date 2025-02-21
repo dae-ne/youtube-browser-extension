@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 import { Actions } from 'actions';
 import Feature from 'feature';
 import { type Result, results } from 'result';
@@ -6,7 +8,6 @@ import SmartTvButton from './smart-tv-button.svelte';
 
 const BUTTON_ID = 'yte-smart-tv-button';
 const MINI_BUTTON_ID = 'yte-smart-tv-mini-button';
-const SMART_TV_URL = 'https://www.youtube.com/tv';
 
 export default class SmartTvFeature extends Feature {
     public constructor() {
@@ -35,7 +36,6 @@ export default class SmartTvFeature extends Feature {
             return fail();
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-new
         new SmartTvButton({
             target,
             anchor,
@@ -46,16 +46,12 @@ export default class SmartTvFeature extends Feature {
         });
 
         const miniTarget = document.querySelector('#items.ytd-mini-guide-renderer');
-        // const mimiAnchor = document.querySelector(
-        //     '#items > ytd-guide-collapsible-section-entry-renderer'
-        // );
 
         if (!miniTarget) {
             this.cleanUp();
             return fail();
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-new
         new SmartTvButton({
             target: miniTarget,
             props: {
@@ -80,6 +76,6 @@ export default class SmartTvFeature extends Feature {
     };
 
     private handleButtonClick = (): void => {
-        window.open(SMART_TV_URL, '_blank')?.focus();
+        chrome.runtime.sendMessage({ action: Actions.OPEN_SMART_TV });
     };
 }

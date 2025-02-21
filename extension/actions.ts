@@ -30,7 +30,8 @@ export const Actions = {
     REMOVE_ADBLOCK_ERROR_MESSAGE_DISABLE: 'remove-adblock-error-message-disable',
     SMART_TV:                             'smart-tv',
     SMART_TV_CLEANUP:                     'smart-tv-cleanup',
-    SMART_TV_DISABLE:                     'smart-tv-disable'
+    SMART_TV_DISABLE:                     'smart-tv-disable',
+    OPEN_SMART_TV:                        'open-smart-tv'
 };
 
 /**
