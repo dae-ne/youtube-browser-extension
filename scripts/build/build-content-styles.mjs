@@ -1,30 +1,18 @@
 import * as esbuild from 'esbuild';
 import { sassPlugin } from 'esbuild-sass-plugin';
-import {
-  createDir,
-  createFile,
-  removeFile,
-  resolveFilePath,
-  searchFilesByExtension
-} from '../utils.mjs';
+import { createDir, resolveFilePath, searchFilesByExtension } from '../utils.mjs';
 
-const ENTRYPOINT_FILE_NAME = 'entrypoint.scss';
+const FEATURES_DIR_PATH = 'extension/features/';
 
-const filePaths = searchFilesByExtension(resolveFilePath('extension', 'features'), '.scss');
-const entrypointContent = filePaths.map((file) => {
-  const forwardSlashFilePath = file.replace(/\\/g, '/');
-  return `@import "../extension/features/${forwardSlashFilePath}";`
-}).join('\n');
+const filePaths = searchFilesByExtension(resolveFilePath('extension', 'features'), '.scss')
+  .map(f => `${FEATURES_DIR_PATH}${f.replace(/\\/g, '/')}`);
 
 createDir(resolveFilePath('dist'));
-createFile(resolveFilePath('dist', ENTRYPOINT_FILE_NAME), entrypointContent);
 
 await esbuild.build({
-  entryPoints: [resolveFilePath('dist', ENTRYPOINT_FILE_NAME)],
+  entryPoints: filePaths,
   outfile: resolveFilePath('dist', 'youtube-extension-main.css'),
   plugins: [sassPlugin()],
   bundle: true,
   minify: true,
 });
-
-removeFile(resolveFilePath('dist', ENTRYPOINT_FILE_NAME));

@@ -59,32 +59,3 @@ export function createDir(path) {
     fs.mkdirSync(path, { recursive: true });
   }
 }
-
-/**
- * Create a file with the specified content.
- *
- * @param {string} path The file path.
- * @param {string} content The file content.
- */
-export function createFile(path, content) {
-  fs.writeFileSync(path, content);
-}
-
-/**
- * Remove a file.
- *
- * @param {string} path The file path.
- */
-export function removeFile(path) {
-  fs.unlinkSync(path);
-}
-
-/**
- * Read a file and return its content as a JSON object.
- *
- * @param {string} path The file path.
- * @returns {object} The JSON object.
- */
-export function readJsonFile(path) {
-  return JSON.parse(fs.readFileSync(path, 'utf8'));
-}

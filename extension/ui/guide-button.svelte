@@ -12,22 +12,16 @@
   <button
     id="endpoint"
     on:click={onClick}
-    class={'yt-simple-endpoint ' + (mini
-      ? 'yte-mini-guide-entry ytd-mini-guide-entry-renderer'
-      : 'yte-guide-entry ytd-guide-entry-renderer')
-    }
+    class={`yt-simple-endpoint ${mini ? 'yte-mini-guide-entry ytd-mini-guide-entry-renderer' : 'yte-guide-entry ytd-guide-entry-renderer'}`}
   >
     <div
-      class={'guide-icon ' + (mini
-        ? 'ytd-mini-guide-entry-renderer'
-        : 'ytd-guide-entry-renderer')
-      }
+      class={`guide-icon ${mini ? 'ytd-mini-guide-entry-renderer' : 'ytd-guide-entry-renderer'}`}
     >
       <span class="yt-icon-shape yt-icon yt-spec-icon-shape">
         <slot />
       </span>
     </div>
-    <span class={'title ' + (mini ? 'ytd-mini-guide-entry-renderer' : 'ytd-guide-entry-renderer')}>
+    <span class={`title ${mini ? 'ytd-mini-guide-entry-renderer' : 'ytd-guide-entry-renderer'}`}>
       {label}
     </span>
   </button>
