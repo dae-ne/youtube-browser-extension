@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ShortsActionButton } from 'ui/shorts';
+  import { ShortsActionButton } from 'ui';
   import { IoLogoYouTube } from 'ui/icons';
 
   export let overlayDark = false;

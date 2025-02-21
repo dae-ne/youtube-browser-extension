@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let id: string;
-  export let ariaLabel: string | undefined;
+  export let id: string | undefined = undefined;
+  export let ariaLabel: string | undefined = undefined;
   export let overlayDark = false;
-  export let onClick: () => void;
+  export let onClick: (() => void) | undefined = undefined;
 
   let isMouseDown = false;
 
@@ -15,8 +15,8 @@
   }
 </script>
 
-<div id={id} class="button-container style-scope ytd-reel-player-overlay-renderer">
-  <div class="style-scope ytd-reel-player-overlay-renderer">
+<div id={id} class="button-container ytd-reel-player-overlay-renderer">
+  <div class="ytd-reel-player-overlay-renderer">
     <label
       class="yt-spec-button-shape-with-label"
       class:yt-spec-button-shape-with-label--is-overlay={overlayDark}
