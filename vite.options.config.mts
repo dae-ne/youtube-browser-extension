@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: './extension/options/',
+  root: './src/options/',
   base: './',
   build: {
     outDir: '../../dist/options/',

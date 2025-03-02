@@ -2,9 +2,9 @@ import * as esbuild from 'esbuild';
 import { sassPlugin } from 'esbuild-sass-plugin';
 import { createDir, resolveFilePath, searchFilesByExtension } from '../utils.mjs';
 
-const FEATURES_DIR_PATH = 'extension/features/';
+const FEATURES_DIR_PATH = 'src/features/';
 
-const filePaths = searchFilesByExtension(resolveFilePath('extension', 'features'), '.scss')
+const filePaths = searchFilesByExtension(resolveFilePath('src', 'features'), '.scss')
   .map(f => `${FEATURES_DIR_PATH}${f.replace(/\\/g, '/')}`);
 
 createDir(resolveFilePath('dist'));

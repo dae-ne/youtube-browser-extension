@@ -10,7 +10,7 @@
     "build:background": "node scripts/build/build-background.mjs",
     "build:content-scripts": "node scripts/build/build-content-scripts.mjs",
     "build:content-styles": "node scripts/build/build-content-styles.mjs",
-    "build:copy-manifest": "copyfiles -f ./extension/manifest.json ./dist",
+    "build:copy-manifest": "copyfiles -f ./src/manifest.json ./dist",
     "build:copy-icons": "copyfiles -f ./assets/icon* ./dist/assets",
     "build": "npm run clean && run-p build-* && run-p build:*",
     "clean": "rimraf dist",
