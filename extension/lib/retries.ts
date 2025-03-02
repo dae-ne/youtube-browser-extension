@@ -1,9 +1,9 @@
 import { type Result } from 'result';
 
 const DEFAULT_INITIAL_INTERVAL_MS = 50;
-const DEFAULT_INTERVAL_MULTIPLIER = 2;
-const DEFAULT_MAX_INTERVAL_MS = 1000;
-const DEFAULT_MAX_NUMBER_OF_RETRIES = 20;
+const DEFAULT_INTERVAL_MULTIPLIER = 3;
+const DEFAULT_MAX_INTERVAL_MS = 3000;
+const DEFAULT_MAX_NUMBER_OF_RETRIES = 10;
 
 export type Callback = {
     (params: object): Result;
