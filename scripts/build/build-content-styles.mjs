@@ -11,7 +11,7 @@ createDir(resolveFilePath('dist'));
 
 await esbuild.build({
   entryPoints: filePaths,
-  outfile: resolveFilePath('dist', 'youtube-extension-main.css'),
+  outfile: resolveFilePath('dist', 'yte-core.css'),
   plugins: [sassPlugin()],
   bundle: true,
   minify: true,

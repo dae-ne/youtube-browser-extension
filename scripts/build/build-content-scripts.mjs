@@ -4,8 +4,8 @@ import sveltePlugin from 'esbuild-svelte';
 import { sveltePreprocess } from 'svelte-preprocess';
 
 await esbuild.build({
-  entryPoints: [resolveFilePath('src', 'youtube-extension.ts')],
-  outfile: resolveFilePath('dist', 'youtube-extension.js'),
+  entryPoints: [resolveFilePath('src', 'yte.ts')],
+  outfile: resolveFilePath('dist', 'yte.js'),
   plugins: [sveltePlugin({ preprocess: sveltePreprocess() })],
   bundle: true,
 });

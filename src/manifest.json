@@ -28,10 +28,10 @@
     {
       "matches": ["https://*.youtube.com/*"],
       "exclude_matches": ["https://*.youtube.com/tv*"],
-      "js": ["youtube-extension.js"],
+      "js": ["yte.js"],
       "css": [
-        "youtube-extension-main.css",
-        "youtube-extension.css"
+        "yte-core.css",
+        "yte.css"
       ],
       "run_at": "document_start"
     }
