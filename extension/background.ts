@@ -7,7 +7,7 @@ import { initialOptions, type Options, type OptionsNames } from 'options';
 const YOUTUBE_BASE_URL = 'https://www.youtube.com/';
 const YOUTUBE_TV_BASE_URL = 'https://www.youtube.com/tv';
 
-const options = initialOptions;
+const options: Options = { ...initialOptions };
 
 /**
  * List of tab IDs to auto loop videos on the watch page.
@@ -135,22 +135,13 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     notifyContentScripts(url, tabId);
 });
 
-/**
- * Reloads all YouTube tabs when the extension is installed or updated.
- */
 chrome.runtime.onInstalled.addListener(() => {
     chrome.tabs.query({ url: `${YOUTUBE_BASE_URL}*` }, tabs => {
         // TODO: Check if it's a video page. Pause the videos and reload with the same time.
         // eslint-disable-next-line @typescript-eslint/promise-function-async
         tabs.forEach(({ id }) => id && chrome.tabs.reload(id));
     });
-});
 
-/**
- * Modifies the current set of dynamic rules for the extension.
- * Adds a User-Agent to enable Smart TV.
- */
-chrome.runtime.onInstalled.addListener(() => {
     chrome.declarativeNetRequest.updateDynamicRules(getDynamicRules(1));
 });
 
