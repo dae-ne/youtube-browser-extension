@@ -1,4 +1,4 @@
 node_modules/
 dist/
-src/options/data.ts
+src/options-ui/data.ts
 *.mts

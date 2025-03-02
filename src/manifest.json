@@ -21,7 +21,7 @@
     "128": "assets/icon-128.png"
   },
   "options_ui": {
-    "page": "options/index.html",
+    "page": "options-ui/index.html",
     "open_in_tab": false
   },
   "content_scripts": [

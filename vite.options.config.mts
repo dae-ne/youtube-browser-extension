@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: './src/options/',
+  root: './src/options-ui/',
   base: './',
   build: {
-    outDir: '../../dist/options/',
+    outDir: '../../dist/options-ui/',
     emptyOutDir: true,
     minify: true
   },

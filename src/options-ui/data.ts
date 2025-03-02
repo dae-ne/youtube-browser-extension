@@ -12,12 +12,14 @@ const data: DataType[] = [
     {
         name: 'showShortsToVideoButton',
         title: 'Enable Shorts to Video Button',
-        description: 'Display a button on Shorts pages that allows users to view the same video on the standard watch page.'
+        description:
+            'Display a button on Shorts pages that allows users to view the same video on the standard watch page.'
     },
     {
         name: 'loopShortsToVideo',
         title: 'Loop Shorts Video on Watch Page',
-        description: 'Automatically loop the video on the watch page if the original Shorts video is looped (after clicking the shorts to video button).'
+        description:
+            'Automatically loop the video on the watch page if the original Shorts video is looped (after clicking the shorts to video button).'
     },
     {
         name: 'updateShortsUI',
